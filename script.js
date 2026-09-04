@@ -144,66 +144,52 @@ const CHECKLISTS = {
 const BELONINGEN = [
 
     "🎉 YES! Goed gedaan!",
-
     "💪 KOP OP! Weer eentje geregeld!",
-
     "🌱 YES! Eén stap vooruit!",
-
     "🫶 Lekker! Je hebt goed voor jezelf gezorgd.",
-
     "⚓ YES! Weer een stukje verder.",
-
     "✨ Kijk jou! Dit heb je gewoon gedaan!",
-
     "🙌 Hoppa! Die zit!",
-
     "❤️ Goed bezig. Echt. Dit telt.",
-
     "🔥 YESSS! Lekker bezig!",
-
     "🌟 Trots op jezelf? Dat mag!",
-
     "💚 Kijk eens aan! Weer iets voor jezelf gedaan.",
-
     "🎊 Lekker hoor! Die kun je afvinken.",
-
     "😊 Goed zo! Je bent gewoon begonnen.",
-
     "💫 Bam! Weer een kleine overwinning.",
-
     "👏 YES! Dat heb je mooi geregeld.",
-
     "🌈 Eén vinkje tegelijk. Je komt er wel.",
-
     "⚡ Hoppa! Weer eentje gedaan!",
-
     "🧡 Dit telt. Echt waar.",
-
     "🎯 Check! Goed voor jezelf gezorgd.",
-
     "🥳 JAAA! Lekker bezig!",
-
     "🌿 Rustig aan, maar wel vooruit.",
-
     "💜 Goed gedaan! Daar mag je best blij mee zijn.",
-
     "🚀 Kijk jou gaan! Weer een stapje.",
-
     "☀️ YES! Fijn dat je dit voor jezelf hebt gedaan.",
-
     "🏆 Kleine actie. Grote winst.",
-
     "😎 Check. Geregeld. Lekker bezig.",
-
     "🎉 Dat is er weer eentje! Goed bezig.",
-
     "🫶 Eén ding gedaan. En dat is genoeg.",
-
     "💪 Zie je wel? Je kunt dit.",
-
     "⚓ Anker uitgegooid. Weer even stevig staan."
 
 ];
+
+
+// ======================================
+// DAGSTATUS
+// ======================================
+
+// Alleen de vinkjes van VANDAAG worden bewaard.
+// Zodra een nieuwe dag begint, wordt alles automatisch blanco.
+
+const OPSLAG_DAGSTATUS = "ankerDagstatus";
+
+let dagStatus = {
+    datum: "",
+    afgerond: {}
+};
 
 
 // ======================================
@@ -217,7 +203,7 @@ const basisScherm =
     document.getElementById("basisScherm");
 
 const moeilijkeDagScherm =
-    document.getElementById("moeilijkeDagScherm");
+    document.getElementById("moeilijkeDagScherm);
 
 const checklistScherm =
     document.getElementById("checklistScherm");
@@ -285,10 +271,176 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
 
+        dagStatusLaden();
+
         gebeurtenissenInstellen();
 
     }
 );
+
+
+// ======================================
+// DATUM VAN VANDAAG
+// ======================================
+
+function vandaag() {
+
+    const datum = new Date();
+
+    const jaar = datum.getFullYear();
+
+    const maand = String(
+        datum.getMonth() + 1
+    ).padStart(2, "0");
+
+    const dag = String(
+        datum.getDate()
+    ).padStart(2, "0");
+
+    return `${jaar}-${maand}-${dag}`;
+
+}
+
+
+// ======================================
+// DAGSTATUS LADEN
+// ======================================
+
+function dagStatusLaden() {
+
+    const datumVandaag = vandaag();
+
+    try {
+
+        const opgeslagen =
+            localStorage.getItem(
+                OPSLAG_DAGSTATUS
+            );
+
+        if (!opgeslagen) {
+
+            dagStatus = {
+                datum: datumVandaag,
+                afgerond: {}
+            };
+
+            dagStatusOpslaan();
+
+            return;
+        }
+
+
+        const gegevens =
+            JSON.parse(opgeslagen);
+
+
+        // Is dit een nieuwe dag?
+        if (
+            !gegevens ||
+            gegevens.datum !== datumVandaag
+        ) {
+
+            dagStatus = {
+                datum: datumVandaag,
+                afgerond: {}
+            };
+
+            dagStatusOpslaan();
+
+            return;
+        }
+
+
+        // Status van vandaag gebruiken
+
+        dagStatus = {
+            datum: datumVandaag,
+            afgerond:
+                gegevens.afgerond || {}
+        };
+
+    } catch (fout) {
+
+        // Bij een fout altijd veilig
+        // met een lege dag beginnen.
+
+        dagStatus = {
+            datum: datumVandaag,
+            afgerond: {}
+        };
+
+        dagStatusOpslaan();
+
+    }
+
+}
+
+
+// ======================================
+// DAGSTATUS OPSLAAN
+// ======================================
+
+function dagStatusOpslaan() {
+
+    try {
+
+        localStorage.setItem(
+            OPSLAG_DAGSTATUS,
+            JSON.stringify(dagStatus)
+        );
+
+    } catch (fout) {
+
+        console.warn(
+            "Dagstatus kon niet worden opgeslagen.",
+            fout
+        );
+
+    }
+
+}
+
+
+// ======================================
+// UNIEKE SLEUTEL VOOR EEN TAAK
+// ======================================
+
+// We bewaren niet alleen "Douchen",
+// maar bijvoorbeeld:
+//
+// zelfzorg::Douchen
+//
+// Hierdoor kunnen dezelfde taaknamen
+// veilig in verschillende checklists bestaan.
+
+function taakSleutel(
+    checklistNaam,
+    taak
+) {
+
+    return `${checklistNaam}::${taak}`;
+
+}
+
+
+// ======================================
+// CONTROLEREN OF TAAK AFGEROND IS
+// ======================================
+
+function taakIsAfgerond(
+    checklistNaam,
+    taak
+) {
+
+    const sleutel =
+        taakSleutel(
+            checklistNaam,
+            taak
+        );
+
+    return dagStatus.afgerond[sleutel] === true;
+
+}
 
 
 // ======================================
@@ -475,32 +627,59 @@ function checklistOpenen(blokNaam) {
     }
 
 
-    // Onthouden waar we vandaan kwamen
+    // ==================================
+    // DAGSTATUS CONTROLEREN
+    // ==================================
+
+    // Voor de zekerheid controleren we
+    // opnieuw of het nog dezelfde dag is.
+
+    const datumVandaag = vandaag();
+
+    if (dagStatus.datum !== datumVandaag) {
+
+        dagStatus = {
+            datum: datumVandaag,
+            afgerond: {}
+        };
+
+        dagStatusOpslaan();
+
+    }
+
+
+    // ==================================
+    // ONTHOUDEN WAAR WE VANDAAN KWAMEN
+    // ==================================
 
     vorigeScherm =
         huidigScherm;
-
 
     huidigeChecklist =
         blokNaam;
 
 
-    // Titel instellen
+    // ==================================
+    // TITEL INSTELLEN
+    // ==================================
 
     checklistTitel.textContent =
         gegevens.titel;
-
 
     checklistSubtitel.textContent =
         gegevens.subtitel;
 
 
-    // Oude inhoud verwijderen
+    // ==================================
+    // OUDE INHOUD VERWIJDEREN
+    // ==================================
 
     checklist.innerHTML = "";
 
 
-    // Oude beloning verwijderen
+    // ==================================
+    // OUDE BELONING VERWIJDEREN
+    // ==================================
 
     beloning.textContent = "";
 
@@ -528,7 +707,9 @@ function checklistOpenen(blokNaam) {
                 "checklist-item";
 
 
-            // Checkbox
+            // ==================================
+            // CHECKBOX
+            // ==================================
 
             const checkbox =
                 document.createElement(
@@ -541,7 +722,9 @@ function checklistOpenen(blokNaam) {
             checkbox.textContent = " ";
 
 
-            // Tekst
+            // ==================================
+            // TEKST
+            // ==================================
 
             const tekst =
                 document.createElement(
@@ -555,7 +738,29 @@ function checklistOpenen(blokNaam) {
                 taak;
 
 
-            // Onderdelen toevoegen
+            // ==================================
+            // EERDER AFGEROND?
+            // ==================================
+
+            if (
+                taakIsAfgerond(
+                    blokNaam,
+                    taak
+                )
+            ) {
+
+                item.classList.add(
+                    "afgerond"
+                );
+
+                checkbox.textContent = "✓";
+
+            }
+
+
+            // ==================================
+            // ONDERDELEN TOEVOEGEN
+            // ==================================
 
             item.appendChild(
                 checkbox
@@ -566,7 +771,9 @@ function checklistOpenen(blokNaam) {
             );
 
 
-            // Klikgebeurtenis
+            // ==================================
+            // KLIKGEbeurtenis
+            // ==================================
 
             item.addEventListener(
                 "click",
@@ -574,7 +781,9 @@ function checklistOpenen(blokNaam) {
 
                     taakAfvinken(
                         item,
-                        checkbox
+                        checkbox,
+                        blokNaam,
+                        taak
                     );
 
                 }
@@ -589,7 +798,9 @@ function checklistOpenen(blokNaam) {
     );
 
 
-    // Checklist tonen
+    // ==================================
+    // CHECKLIST TONEN
+    // ==================================
 
     schermTonen(
         "checklist"
@@ -604,12 +815,22 @@ function checklistOpenen(blokNaam) {
 
 function taakAfvinken(
     item,
-    checkbox
+    checkbox,
+    checklistNaam,
+    taak
 ) {
 
 
-    // Als de taak al klaar is:
-    // weer ongedaan maken.
+    const sleutel =
+        taakSleutel(
+            checklistNaam,
+            taak
+        );
+
+
+    // ==================================
+    // TAAK AL AFGEROND?
+    // ==================================
 
     if (
         item.classList.contains(
@@ -617,18 +838,30 @@ function taakAfvinken(
         )
     ) {
 
+        // Taak weer openzetten
+
         item.classList.remove(
             "afgerond"
         );
 
         checkbox.textContent = " ";
 
+
+        // Ook uit de dagstatus verwijderen
+
+        delete dagStatus.afgerond[sleutel];
+
+        dagStatusOpslaan();
+
+
         return;
 
     }
 
 
-    // Taak afronden
+    // ==================================
+    // TAAK AFRONDEN
+    // ==================================
 
     item.classList.add(
         "afgerond"
@@ -637,7 +870,16 @@ function taakAfvinken(
     checkbox.textContent = "✓";
 
 
-    // Positieve boodschap tonen
+    // In de dagstatus zetten
+
+    dagStatus.afgerond[sleutel] = true;
+
+    dagStatusOpslaan();
+
+
+    // ==================================
+    // POSITIEVE BOODSCHAP
+    // ==================================
 
     beloningTonen();
 
@@ -687,3 +929,4 @@ function beloningTonen() {
 // ======================================
 // EINDE
 // ======================================
+

@@ -662,41 +662,83 @@ footer {
 
 
 /* ======================================
-   BELONING
+   VROLIJKE FEEDBACK / BELONING
    ====================================== */
 
 .beloning {
-    min-height: 70px;
+    min-height: 104px;
 
     margin-top: 24px;
-    padding: 18px;
+    padding: 20px 18px;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    background: #4b4354;
+    background:
+        linear-gradient(
+            145deg,
+            #496d62 0%,
+            #5d7561 55%,
+            #6f765c 100%
+        );
 
-    border: 1px solid #71657a;
-    border-radius: 16px;
+    border: 2px solid #9eae79;
+    border-radius: 20px;
 
     text-align: center;
 
-    font-size: 14px;
-    font-weight: 650;
+    font-size: 18px;
+    font-weight: 800;
 
-    line-height: 1.45;
+    line-height: 1.4;
 
-    color: #eee7ef;
+    letter-spacing: 0.2px;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 10px 26px rgba(0, 0, 0, 0.20),
+        0 0 0 4px rgba(158, 174, 121, 0.08);
 
     opacity: 0;
 
+    transform: scale(0.92) translateY(8px);
+
     transition:
-        opacity 0.25s ease;
+        opacity 0.22s ease,
+        transform 0.28s cubic-bezier(0.2, 1.25, 0.4, 1);
 }
 
 .beloning.zichtbaar {
     opacity: 1;
+
+    transform: scale(1) translateY(0);
+
+    animation:
+        beloningPop 0.42s cubic-bezier(0.2, 1.25, 0.4, 1);
+}
+
+
+/* ======================================
+   FEEDBACK POP-ANIMATIE
+   ====================================== */
+
+@keyframes beloningPop {
+
+    0% {
+        transform: scale(0.88) translateY(10px);
+    }
+
+    55% {
+        transform: scale(1.04) translateY(-2px);
+    }
+
+    100% {
+        transform: scale(1) translateY(0);
+    }
+
 }
 
 
@@ -791,6 +833,17 @@ button:focus-visible {
 
     .blok-tekst small {
         font-size: 11px;
+    }
+
+
+    .beloning {
+        min-height: 96px;
+
+        margin-top: 20px;
+
+        padding: 18px 14px;
+
+        font-size: 16px;
     }
 
 }

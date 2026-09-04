@@ -1,0 +1,813 @@
+/* ======================================
+   ANKER
+   TERUG NAAR DE BASIS
+   ====================================== */
+
+
+/* ======================================
+   BASIS
+   ====================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            145deg,
+            #172f32 0%,
+            #1d3839 45%,
+            #253b3a 100%
+        );
+
+    color: #f4f1e9;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* ======================================
+   APP
+   ====================================== */
+
+.anker-app {
+    width: 100%;
+    max-width: 520px;
+    min-height: 100vh;
+
+    margin: 0 auto;
+
+    padding:
+        calc(24px + env(safe-area-inset-top))
+        20px
+        calc(24px + env(safe-area-inset-bottom));
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ======================================
+   SCHERMEN
+   ====================================== */
+
+.scherm {
+    display: none;
+    flex-direction: column;
+
+    width: 100%;
+    min-height: calc(
+        100vh
+        - 48px
+        - env(safe-area-inset-top)
+        - env(safe-area-inset-bottom)
+    );
+}
+
+.scherm.actief {
+    display: flex;
+}
+
+
+/* ======================================
+   HOOFDSCHERM
+   ====================================== */
+
+.app-header {
+    text-align: center;
+
+    padding-top: 30px;
+    margin-bottom: 46px;
+}
+
+
+/* ANKER SYMBOOL */
+
+.anker-symbool {
+    width: 76px;
+    height: 76px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #d8b878;
+
+    border-radius: 50%;
+
+    font-size: 40px;
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+
+/* TITEL */
+
+.app-header h1 {
+    margin: 0;
+
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: 5px;
+
+    color: #f7f3e9;
+}
+
+.app-header p {
+    margin: 10px 0 0;
+
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+
+    color: #c8d7d3;
+}
+
+
+/* ======================================
+   HOOFDKEUZES
+   ====================================== */
+
+.hoofdkeuzes {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+/* ======================================
+   HOOFDKEUZE KNOP
+   ====================================== */
+
+.hoofdkeuze {
+    width: 100%;
+    min-height: 120px;
+
+    padding: 22px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    border: 1px solid transparent;
+    border-radius: 20px;
+
+    font-family: inherit;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+}
+
+.hoofdkeuze:active {
+    transform: scale(0.98);
+}
+
+
+/* BASIS */
+
+.hoofdkeuze.basis {
+    background: #315b59;
+
+    border-color: #4f817d;
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+
+/* MOEILIJKE DAG */
+
+.hoofdkeuze.moeilijke-dag {
+    background: #4d435f;
+
+    border-color: #756582;
+
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+
+/* ======================================
+   HOOFDKEUZE ICOON
+   ====================================== */
+
+.keuze-icoon {
+    width: 58px;
+    height: 58px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border-radius: 16px;
+
+    font-size: 29px;
+}
+
+
+/* ======================================
+   HOOFDKEUZE TEKST
+   ====================================== */
+
+.keuze-tekst {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.keuze-tekst strong {
+    font-size: 20px;
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+
+    color: #ffffff;
+}
+
+.keuze-tekst small {
+    font-size: 13px;
+    font-weight: 500;
+
+    line-height: 1.4;
+
+    color: #d8e1dd;
+}
+
+
+/* ======================================
+   FOOTER
+   ====================================== */
+
+footer {
+    margin-top: auto;
+
+    padding-top: 40px;
+
+    text-align: center;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    color: #aebfba;
+}
+
+
+/* ======================================
+   PAGINA HEADER
+   ====================================== */
+
+.pagina-header {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 28px;
+}
+
+.pagina-header h2 {
+    margin: 0;
+
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    color: #f7f3e9;
+}
+
+.pagina-header p {
+    margin: 5px 0 0;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    color: #b9cbc6;
+}
+
+
+/* ======================================
+   TERUG KNOP
+   ====================================== */
+
+.terug-knop {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #304b4c;
+
+    border: 1px solid #55706f;
+    border-radius: 14px;
+
+    color: #f7f3e9;
+
+    font-family: inherit;
+    font-size: 25px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+.terug-knop:active {
+    transform: scale(0.94);
+}
+
+.terug-knop:hover {
+    background: #3a5959;
+}
+
+
+/* ======================================
+   BLOKKEN
+   ====================================== */
+
+.blokken {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+/* ======================================
+   BLOK
+   ====================================== */
+
+.blok {
+    width: 100%;
+    min-height: 82px;
+
+    padding: 14px 16px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    background: #304b4c;
+
+    border: 1px solid #4e6968;
+    border-radius: 17px;
+
+    color: #f7f3e9;
+
+    font-family: inherit;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.12s ease,
+        background 0.15s ease;
+}
+
+.blok:active {
+    transform: scale(0.98);
+}
+
+.blok:hover {
+    background: #375555;
+}
+
+
+/* ======================================
+   BLOK ICOON
+   ====================================== */
+
+.blok-icoon {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border-radius: 14px;
+
+    font-size: 25px;
+}
+
+
+/* ======================================
+   BLOK TEKST
+   ====================================== */
+
+.blok-tekst {
+    min-width: 0;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.blok-tekst strong {
+    font-size: 16px;
+    font-weight: 750;
+
+    color: #ffffff;
+}
+
+.blok-tekst small {
+    font-size: 12px;
+    font-weight: 500;
+
+    line-height: 1.35;
+
+    color: #b9cbc6;
+}
+
+
+/* ======================================
+   BLOK PIJL
+   ====================================== */
+
+.blok-pijl {
+    flex-shrink: 0;
+
+    font-size: 21px;
+    font-weight: 400;
+
+    color: #9fb6b1;
+}
+
+
+/* ======================================
+   MOEILIJKE DAG INTRO
+   ====================================== */
+
+.moeilijke-dag-intro {
+    margin-bottom: 22px;
+
+    padding: 17px 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    background: #514861;
+
+    border: 1px solid #716580;
+    border-radius: 16px;
+}
+
+.moeilijke-dag-intro > span {
+    flex-shrink: 0;
+
+    font-size: 25px;
+}
+
+.moeilijke-dag-intro p {
+    margin: 0;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    line-height: 1.5;
+
+    color: #e2dce8;
+}
+
+
+/* ======================================
+   MOEILIJKE DAG BLOKKEN
+   ====================================== */
+
+.moeilijke-blokken .blok {
+    background: #393246;
+
+    border-color: #5f536d;
+}
+
+.moeilijke-blokken .blok:hover {
+    background: #42394f;
+}
+
+
+/* ======================================
+   MOEILIJKE DAG AFSLUITING
+   ====================================== */
+
+.moeilijke-dag-afsluiting {
+    margin-top: auto;
+
+    padding-top: 32px;
+
+    text-align: center;
+}
+
+.moeilijke-dag-afsluiting p {
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #d8cfdc;
+}
+
+
+/* ======================================
+   CHECKLIST
+   ====================================== */
+
+.checklist {
+    display: flex;
+    flex-direction: column;
+
+    gap: 11px;
+}
+
+
+/* ======================================
+   CHECKLIST ITEM
+   ====================================== */
+
+.checklist-item {
+    width: 100%;
+    min-height: 66px;
+
+    padding: 14px 16px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    background: #304b4c;
+
+    border: 1px solid #4e6968;
+    border-radius: 15px;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.12s ease;
+}
+
+.checklist-item:active {
+    transform: scale(0.98);
+}
+
+
+/* ======================================
+   CHECKBOX
+   ====================================== */
+
+.checklist-checkbox {
+    width: 27px;
+    height: 27px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+
+    border: 2px solid #89aaa4;
+    border-radius: 9px;
+
+    font-size: 17px;
+
+    color: #ffffff;
+}
+
+
+/* ======================================
+   AFGESCHILDERD / AFGEROND
+   ====================================== */
+
+.checklist-item.afgerond {
+    background: #294441;
+
+    border-color: #668e87;
+}
+
+.checklist-item.afgerond .checklist-checkbox {
+    background: #668e87;
+
+    border-color: #668e87;
+}
+
+.checklist-item.afgerond .checklist-tekst {
+    color: #aebfba;
+
+    text-decoration: line-through;
+
+    text-decoration-thickness: 1px;
+}
+
+
+/* ======================================
+   CHECKLIST TEKST
+   ====================================== */
+
+.checklist-tekst {
+    font-size: 15px;
+    font-weight: 650;
+
+    line-height: 1.35;
+
+    color: #f7f3e9;
+}
+
+
+/* ======================================
+   BELONING
+   ====================================== */
+
+.beloning {
+    min-height: 70px;
+
+    margin-top: 24px;
+    padding: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #4b4354;
+
+    border: 1px solid #71657a;
+    border-radius: 16px;
+
+    text-align: center;
+
+    font-size: 14px;
+    font-weight: 650;
+
+    line-height: 1.45;
+
+    color: #eee7ef;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.25s ease;
+}
+
+.beloning.zichtbaar {
+    opacity: 1;
+}
+
+
+/* ======================================
+   TOEGANKELIJKHEID
+   ====================================== */
+
+button:focus-visible {
+    outline: 3px solid #d8b878;
+    outline-offset: 3px;
+}
+
+
+/* ======================================
+   KLEINE SCHERMEN
+   ====================================== */
+
+@media (max-width: 360px) {
+
+    .anker-app {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+
+    .app-header {
+        padding-top: 18px;
+        margin-bottom: 34px;
+    }
+
+
+    .anker-symbool {
+        width: 66px;
+        height: 66px;
+
+        font-size: 34px;
+    }
+
+
+    .app-header h1 {
+        font-size: 32px;
+        letter-spacing: 4px;
+    }
+
+
+    .hoofdkeuze {
+        min-height: 108px;
+
+        padding: 17px;
+
+        gap: 14px;
+    }
+
+
+    .keuze-icoon {
+        width: 50px;
+        height: 50px;
+
+        font-size: 25px;
+    }
+
+
+    .keuze-tekst strong {
+        font-size: 18px;
+    }
+
+
+    .pagina-header h2 {
+        font-size: 24px;
+    }
+
+
+    .blok {
+        min-height: 76px;
+
+        padding: 12px;
+    }
+
+
+    .blok-icoon {
+        width: 44px;
+        height: 44px;
+
+        font-size: 23px;
+    }
+
+
+    .blok-tekst strong {
+        font-size: 15px;
+    }
+
+
+    .blok-tekst small {
+        font-size: 11px;
+    }
+
+}
+
+
+/* ======================================
+   MINDER BEWEGING
+   ====================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+
+}

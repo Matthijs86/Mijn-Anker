@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#183b3d"
+    >
+
+    <meta
+        name="description"
+        content="Anker - Terug naar de basis."
+    >
+
+    <title>Anker</title>
+
+    <link
+        rel="manifest"
+        href="manifest.json"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="192x192"
+        href="anker-icon-192x192.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="anker-icon-192x192.png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="anker-app">
+
+
+        <!-- ==================================
+             HOOFDSCHERM
+             ================================== -->
+
+        <section
+            id="hoofdScherm"
+            class="scherm actief"
+        >
+
+            <header class="app-header">
+
+                <div class="anker-symbool">
+                    ⚓
+                </div>
+
+                <h1>ANKER</h1>
+
+                <p>
+                    Terug naar de basis.
+                </p>
+
+            </header>
+
+
+            <div class="hoofdkeuzes">
+
+                <button
+                    id="basisKnop"
+                    class="hoofdkeuze basis"
+                    type="button"
+                >
+
+                    <span class="keuze-icoon">
+                        🌱
+                    </span>
+
+                    <span class="keuze-tekst">
+
+                        <strong>
+                            BASIS
+                        </strong>
+
+                        <small>
+                            Mijn dagelijkse zelfzorg
+                        </small>
+
+                    </span>
+
+                </button>
+
+
+                <button
+                    id="moeilijkeDagKnop"
+                    class="hoofdkeuze moeilijke-dag"
+                    type="button"
+                >
+
+                    <span class="keuze-icoon">
+                        🫶
+                    </span>
+
+                    <span class="keuze-tekst">
+
+                        <strong>
+                            MOEILIJKE DAG
+                        </strong>
+
+                        <small>
+                            Alleen wat nu echt nodig is
+                        </small>
+
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <footer>
+
+                <span>
+                    Je hoeft niet alles te doen.
+                </span>
+
+            </footer>
+
+        </section>
+
+
+
+        <!-- ==================================
+             BASIS SCHERM
+             ================================== -->
+
+        <section
+            id="basisScherm"
+            class="scherm"
+        >
+
+            <header class="pagina-header">
+
+                <button
+                    id="basisTerugKnop"
+                    class="terug-knop"
+                    type="button"
+                    aria-label="Terug naar hoofdscherm"
+                >
+                    ←
+                </button>
+
+                <div>
+
+                    <h2>
+                        BASIS
+                    </h2>
+
+                    <p>
+                        Zorg goed voor jezelf.
+                    </p>
+
+                </div>
+
+            </header>
+
+
+            <div class="blokken">
+
+
+                <!-- ZELFZORG -->
+
+                <button
+                    class="blok"
+                    data-blok="zelfzorg"
+                    type="button"
+                >
+
+                    <span class="blok-icoon">
+                        🚿
+                    </span>
+
+                    <span class="blok-tekst">
+
+                        <strong>
+                            Zelfzorg
+                        </strong>
+
+                        <small>
+                            Je lichaam verzorgen
+                        </small>
+
+                    </span>
+
+                    <span class="blok-pijl">
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- ETEN & DRINKEN -->
+
+                <button
+                    class="blok"
+                    data-blok="eten"
+                    type="button"
+                >
+
+                    <span class="blok-icoon">
+                        🍽️
+                    </span>
+
+                    <span class="blok-tekst">
+
+                        <strong>
+                            Eten & drinken
+                        </strong>
+
+                        <small>
+                            Geef je lichaam wat het nodig heeft
+                        </small>
+
+                    </span>
+
+                    <span class="blok-pijl">
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- OMGEVING -->
+
+                <button
+                    class="blok"
+                    data-blok="omgeving"
+                    type="button"
+                >
+
+                    <span class="blok-icoon">
+                        🏠
+                    </span>
+
+                    <span class="blok-tekst">
+
+                        <strong>
+                            Omgeving
+                        </strong>
+
+                        <small>
+                            Een beetje orde om je heen
+                        </small>
+
+                    </span>
+
+                    <span class="blok-pijl">
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- BEWEGING -->
+
+                <button
+                    class="blok"
+                    data-blok="beweging"
+                    type="button"
+                >
+
+                    <span class="blok-icoon">
+                        🚶
+                    </span>
+
+                    <span class="blok-tekst">
+
+                        <strong>
+                            Beweging & buiten
+                        </strong>
+
+                        <small>
+                            Even bewegen of naar buiten
+                        </small>
+
+                    </span>
+
+                    <span class="blok-pijl">
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- HOOFD & ONTSPANNING -->
+
+                <button
+                    class="blok"
+                    data-blok="hoofd"
+                    type="button"
+                >
+
+                    <span class="blok-icoon">
+                        🎧
+                    </span>
+
+                    <span class="blok-tekst">
+
+                        <strong>
+                            Hoofd & ontspanning
+                        </strong>
+
+                        <small>
+                            Rust, plezier en ontspanning
+                        </small>
+
+                    </span>
+
+                    <span class="blok-pijl">
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- BORDEN -->
+
+                <button
+                    class="blok"
+                    data-blok="borden"
+                    type="button"
+                >
+
+                    <span class="blok-icoon">
+                        📌
+                    </span>
+
+                    <span class="blok-tekst">
+
+                        <strong>
+                            Check mijn borden
+                        </strong>
+
+                        <small>
+                            Misschien staat er iets voor vandaag
+                        </small>
+
+                    </span>
+
+                    <span class="blok-pijl">
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================================
+             MOEILIJKE DAG SCHERM
+             ================================== -->
+
+        <section
+            id="moeilijkeDagScherm"
+            class="scherm"
+        >
+
+            <header class="pagina-header">
+
+                <button
+                    id="moeilijkeDagTerugKnop"
+                    class="terug-knop"
+                    type="button"
+                    aria-label="Terug naar hoofdscherm"
+                >
+                    ←
+                </button>
+
+                <div>
+
+                    <h2>
+                        MOEILIJKE DAG
+                    </h2>
+
+                    <p>
+                        Vandaag alleen de basis.
+                    </p>
+
+                </div>
+
+            </header>
+
+
+            <div class="moeilijke-dag-intro">
+
+                <span>
+                    🫶
+                </span>
+
+                <p>
+                    Je hoeft vandaag niet alles te doen.
+                    Eén ding tegelijk is genoeg.
+                </p>
+
+            </div>
+
+
+            <div class="blokken moeilijke-blokken">
+
+
+                <!-- DRINKEN -->
+
+                <button
+                    class="blok"
+                    data-blok="moeilijk-drinken"
+                    type="button"
+                >
+
+                    <span class="blok-icoon">
+                        🥤
+                    </span>
+
+                    <span class="blok-tekst">
+
+                        <strong>
+                            Drinken
+                        </strong>
+
+                        <small>
+                            Iets drinken is goed
+                        </small>
+
+                    </span>
+
+                    <span class="blok-pijl">
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- ETEN -->
+
+                <button
+                    class="blok"
+                    data-blok="moeilijk-eten"
+                    type="button"
+                >
+
+                    <span class="blok-icoon">
+                        🍽️
+                    </span>
+
+                    <span class="blok-tekst">
+
+                        <strong>
+                            Eten
+                        </strong>
+
+                        <small>
+                            Iets eten is genoeg
+                        </small>
+
+                    </span>
+
+                    <span class="blok-pijl">
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- ZELFZORG -->
+
+                <button
+                    class="blok"
+                    data-blok="moeilijk-zelfzorg"
+                    type="button"
+                >
+
+                    <span class="blok-icoon">
+                        🚿
+                    </span>
+
+                    <span class="blok-tekst">
+
+                        <strong>
+                            Zelfzorg
+                        </strong>
+
+                        <small>
+                            Een beetje voor jezelf zorgen
+                        </small>
+
+                    </span>
+
+                    <span class="blok-pijl">
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- BEWEGING -->
+
+                <button
+                    class="blok"
+                    data-blok="moeilijk-beweging"
+                    type="button"
+                >
+
+                    <span class="blok-icoon">
+                        🚶
+                    </span>
+
+                    <span class="blok-tekst">
+
+                        <strong>
+                            Een beetje bewegen
+                        </strong>
+
+                        <small>
+                            Klein stukje is ook goed
+                        </small>
+
+                    </span>
+
+                    <span class="blok-pijl">
+                        →
+                    </span>
+
+                </button>
+
+
+                <!-- IETS PRETTIGS -->
+
+                <button
+                    class="blok"
+                    data-blok="moeilijk-prettig"
+                    type="button"
+                >
+
+                    <span class="blok-icoon">
+                        🎧
+                    </span>
+
+                    <span class="blok-tekst">
+
+                        <strong>
+                            Iets prettigs
+                        </strong>
+
+                        <small>
+                            Muziek, plezier of iets anders fijns
+                        </small>
+
+                    </span>
+
+                    <span class="blok-pijl">
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <div class="moeilijke-dag-afsluiting">
+
+                <p>
+                    Meer hoeft vandaag niet. ❤️
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================================
+             CHECKLIST SCHERM
+             ================================== -->
+
+        <section
+            id="checklistScherm"
+            class="scherm"
+        >
+
+            <header class="pagina-header">
+
+                <button
+                    id="checklistTerugKnop"
+                    class="terug-knop"
+                    type="button"
+                    aria-label="Terug"
+                >
+                    ←
+                </button>
+
+                <div>
+
+                    <h2 id="checklistTitel">
+                        Zelfzorg
+                    </h2>
+
+                    <p id="checklistSubtitel">
+                        Eén ding tegelijk.
+                    </p>
+
+                </div>
+
+            </header>
+
+
+            <div
+                id="checklist"
+                class="checklist"
+            >
+                <!--
+                    De checklist wordt door script.js gevuld.
+                -->
+            </div>
+
+
+            <div
+                id="beloning"
+                class="beloning"
+                aria-live="polite"
+            >
+                <!-- Random positieve boodschap -->
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

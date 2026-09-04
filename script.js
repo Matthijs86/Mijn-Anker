@@ -143,45 +143,65 @@ const CHECKLISTS = {
 
 const BELONINGEN = [
 
-    "💚 Lekker bezig!",
+    "🎉 YES! Goed gedaan!",
 
-    "🫶 Goed voor jezelf zorgen is óók iets doen.",
+    "💪 KOP OP! Weer eentje geregeld!",
 
-    "🌱 Eén ding gedaan. Dat telt.",
+    "🌱 YES! Eén stap vooruit!",
 
-    "✨ Kijk jou eens goed voor jezelf zorgen!",
+    "🫶 Lekker! Je hebt goed voor jezelf gezorgd.",
 
-    "💪 Bam! Weer eentje geregeld.",
+    "⚓ YES! Weer een stukje verder.",
 
-    "😎 Check. Lekker bezig.",
+    "✨ Kijk jou! Dit heb je gewoon gedaan!",
 
-    "🌟 Je hoeft niet alles te doen. Je hebt wél iets gedaan.",
+    "🙌 Hoppa! Die zit!",
 
-    "❤️ Goed gedaan. Echt.",
+    "❤️ Goed bezig. Echt. Dit telt.",
 
-    "🙌 Mooi! Weer een klein stukje verder.",
+    "🔥 YESSS! Lekker bezig!",
 
-    "🌿 Rustig aan. Je bent goed bezig.",
+    "🌟 Trots op jezelf? Dat mag!",
 
-    "⚓ Weer even goed voor jezelf gezorgd.",
+    "💚 Kijk eens aan! Weer iets voor jezelf gedaan.",
 
-    "😊 Kijk, dat heb je mooi gedaan.",
+    "🎊 Lekker hoor! Die kun je afvinken.",
 
-    "💫 Klein ding, mooi resultaat.",
+    "😊 Goed zo! Je bent gewoon begonnen.",
 
-    "🧡 Top. Dat mag je best even waarderen.",
+    "💫 Bam! Weer een kleine overwinning.",
 
-    "🎉 Yes! Geregeld.",
+    "👏 YES! Dat heb je mooi geregeld.",
 
-    "🌈 Eén vinkje tegelijk.",
+    "🌈 Eén vinkje tegelijk. Je komt er wel.",
 
-    "👏 Goed bezig. Ga zo door, op jouw tempo.",
+    "⚡ Hoppa! Weer eentje gedaan!",
 
-    "☀️ Fijn dat je even voor jezelf hebt gezorgd.",
+    "🧡 Dit telt. Echt waar.",
 
-    "💜 Dat telt.",
+    "🎯 Check! Goed voor jezelf gezorgd.",
 
-    "⚡ Hoppa! Eentje afgevinkt."
+    "🥳 JAAA! Lekker bezig!",
+
+    "🌿 Rustig aan, maar wel vooruit.",
+
+    "💜 Goed gedaan! Daar mag je best blij mee zijn.",
+
+    "🚀 Kijk jou gaan! Weer een stapje.",
+
+    "☀️ YES! Fijn dat je dit voor jezelf hebt gedaan.",
+
+    "🏆 Kleine actie. Grote winst.",
+
+    "😎 Check. Geregeld. Lekker bezig.",
+
+    "🎉 Dat is er weer eentje! Goed bezig.",
+
+    "🫶 Eén ding gedaan. En dat is genoeg.",
+
+    "💪 Zie je wel? Je kunt dit.",
+
+    "⚓ Anker uitgegooid. Weer even stevig staan."
 
 ];
 
@@ -643,6 +663,18 @@ function beloningTonen() {
 
     beloning.textContent =
         boodschap;
+
+
+    beloning.classList.remove(
+        "zichtbaar"
+    );
+
+
+    // Forceer een nieuwe animatie
+    // wanneer de gebruiker meerdere
+    // taken achter elkaar afvinkt.
+
+    void beloning.offsetWidth;
 
 
     beloning.classList.add(

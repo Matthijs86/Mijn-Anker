@@ -25,7 +25,6 @@ const CHECKLISTS = {
         ]
     },
 
-
     eten: {
         titel: "Eten & drinken",
         subtitel: "Geef je lichaam wat het nodig heeft.",
@@ -36,7 +35,6 @@ const CHECKLISTS = {
         ]
     },
 
-
     omgeving: {
         titel: "Omgeving",
         subtitel: "Een beetje orde om je heen.",
@@ -45,7 +43,6 @@ const CHECKLISTS = {
             "Even iets opruimen"
         ]
     },
-
 
     beweging: {
         titel: "Beweging & buiten",
@@ -57,7 +54,6 @@ const CHECKLISTS = {
         ]
     },
 
-
     hoofd: {
         titel: "Hoofd & ontspanning",
         subtitel: "Rust, plezier en ontspanning.",
@@ -67,7 +63,6 @@ const CHECKLISTS = {
             "Iets gedaan waar ik plezier aan beleef"
         ]
     },
-
 
     borden: {
         titel: "Check mijn borden",
@@ -92,7 +87,6 @@ const CHECKLISTS = {
         ]
     },
 
-
     "moeilijk-eten": {
         titel: "Eten",
         subtitel: "Iets eten is genoeg.",
@@ -100,7 +94,6 @@ const CHECKLISTS = {
             "Iets gegeten"
         ]
     },
-
 
     "moeilijk-zelfzorg": {
         titel: "Zelfzorg",
@@ -113,7 +106,6 @@ const CHECKLISTS = {
         ]
     },
 
-
     "moeilijk-beweging": {
         titel: "Een beetje bewegen",
         subtitel: "Een klein beetje is ook goed.",
@@ -123,7 +115,6 @@ const CHECKLISTS = {
             "Even bewogen"
         ]
     },
-
 
     "moeilijk-prettig": {
         titel: "Iets prettigs",
@@ -203,7 +194,7 @@ const basisScherm =
     document.getElementById("basisScherm");
 
 const moeilijkeDagScherm =
-    document.getElementById("moeilijkeDagScherm);
+    document.getElementById("moeilijkeDagScherm");
 
 const checklistScherm =
     document.getElementById("checklistScherm");
@@ -335,6 +326,7 @@ function dagStatusLaden() {
 
 
         // Is dit een nieuwe dag?
+
         if (
             !gegevens ||
             gegevens.datum !== datumVandaag
@@ -772,7 +764,7 @@ function checklistOpenen(blokNaam) {
 
 
             // ==================================
-            // KLIKGEbeurtenis
+            // KLIKGEBEURTENIS
             // ==================================
 
             item.addEventListener(

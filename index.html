@@ -80,8 +80,6 @@
 
         <div class="hoofdkeuzes">
 
-            <!-- BASIS -->
-
             <button
                 id="basisKnop"
                 class="hoofdkeuze basis"
@@ -106,8 +104,6 @@
 
             </button>
 
-
-            <!-- MOEILIJKE DAG -->
 
             <button
                 id="moeilijkKnop"
@@ -186,12 +182,8 @@
         <div class="blokken">
 
 
-            <!-- ==================================
-                 ZELFZORG
-                 ================================== -->
-
             <button
-                class="blok"
+                class="blok basis-blok"
                 data-blok="zelfzorg"
                 type="button"
             >
@@ -219,13 +211,8 @@
             </button>
 
 
-
-            <!-- ==================================
-                 ETEN & DRINKEN
-                 ================================== -->
-
             <button
-                class="blok"
+                class="blok basis-blok"
                 data-blok="eten"
                 type="button"
             >
@@ -253,13 +240,8 @@
             </button>
 
 
-
-            <!-- ==================================
-                 OMGEVING
-                 ================================== -->
-
             <button
-                class="blok"
+                class="blok basis-blok"
                 data-blok="omgeving"
                 type="button"
             >
@@ -287,13 +269,8 @@
             </button>
 
 
-
-            <!-- ==================================
-                 BEWEGING & BUITEN
-                 ================================== -->
-
             <button
-                class="blok"
+                class="blok basis-blok"
                 data-blok="beweging"
                 type="button"
             >
@@ -321,13 +298,8 @@
             </button>
 
 
-
-            <!-- ==================================
-                 HOOFD & ONTSPANNING
-                 ================================== -->
-
             <button
-                class="blok"
+                class="blok basis-blok"
                 data-blok="hoofd"
                 type="button"
             >
@@ -355,13 +327,8 @@
             </button>
 
 
-
-            <!-- ==================================
-                 BORDEN
-                 ================================== -->
-
             <button
-                class="blok"
+                class="blok basis-blok"
                 data-blok="borden"
                 type="button"
             >
@@ -443,13 +410,10 @@
         </div>
 
 
-
         <div class="blokken moeilijke-blokken">
 
 
-            <!-- ==================================
-                 DRINKEN
-                 ================================== -->
+            <!-- DRINKEN -->
 
             <section
                 class="blok moeilijk-blok"
@@ -488,15 +452,8 @@
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-iets-gedronken"
                     >
-
-                        <span>
-                            🥤
-                        </span>
-
-                        <span>
-                            Iets gedronken
-                        </span>
-
+                        <span>🥤</span>
+                        <span>Iets gedronken</span>
                     </button>
 
 
@@ -505,15 +462,8 @@
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-water"
                     >
-
-                        <span>
-                            💧
-                        </span>
-
-                        <span>
-                            Water gedronken
-                        </span>
-
+                        <span>💧</span>
+                        <span>Water gedronken</span>
                     </button>
 
                 </div>
@@ -522,9 +472,7 @@
 
 
 
-            <!-- ==================================
-                 ETEN
-                 ================================== -->
+            <!-- ETEN -->
 
             <section
                 class="blok moeilijk-blok moeilijk-persoonlijk-blok"
@@ -556,21 +504,15 @@
                 </div>
 
 
-                <!--
-                    Deze knop is eerst het enige
-                    wat zichtbaar is.
-                -->
-
                 <button
                     type="button"
                     id="moeilijkIetsGegeten"
                     class="activiteit-knop moeilijk-persoonlijk-trigger"
                     data-activiteit="moeilijk-iets-gegeten"
+                    aria-expanded="false"
                 >
 
-                    <span>
-                        🍽️
-                    </span>
+                    <span>🍽️</span>
 
                     <span>
                         Iets gegeten
@@ -582,11 +524,6 @@
 
                 </button>
 
-
-                <!--
-                    Persoonlijke opties verschijnen
-                    pas na klikken.
-                -->
 
                 <div
                     id="moeilijkEtenDetails"
@@ -602,22 +539,10 @@
 
                     <div class="persoonlijke-beheer">
 
-                        <button
-                            type="button"
+                        <div
                             id="etenOptieToevoegen"
-                            class="persoonlijke-beheer-knop"
-                        >
-                            ＋ Safe Food toevoegen
-                        </button>
-
-
-                        <button
-                            type="button"
-                            id="etenOptiesBeheren"
-                            class="persoonlijke-beheer-knop secundair"
-                        >
-                            ✎ Safe Foods aanpassen
-                        </button>
+                            class="persoonlijke-toevoegen"
+                        ></div>
 
                     </div>
 
@@ -627,9 +552,7 @@
 
 
 
-            <!-- ==================================
-                 ZELFZORG
-                 ================================== -->
+            <!-- ZELFZORG -->
 
             <section
                 class="blok moeilijk-blok"
@@ -668,15 +591,8 @@
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-douchen"
                     >
-
-                        <span>
-                            🚿
-                        </span>
-
-                        <span>
-                            Gedoucht
-                        </span>
-
+                        <span>🚿</span>
+                        <span>Gedoucht</span>
                     </button>
 
 
@@ -685,15 +601,8 @@
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-wassen"
                     >
-
-                        <span>
-                            🧼
-                        </span>
-
-                        <span>
-                            Gewassen
-                        </span>
-
+                        <span>🧼</span>
+                        <span>Gewassen</span>
                     </button>
 
 
@@ -702,15 +611,8 @@
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-tanden"
                     >
-
-                        <span>
-                            🪥
-                        </span>
-
-                        <span>
-                            Tanden gepoetst
-                        </span>
-
+                        <span>🪥</span>
+                        <span>Tanden gepoetst</span>
                     </button>
 
 
@@ -719,15 +621,8 @@
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-kleding"
                     >
-
-                        <span>
-                            👕
-                        </span>
-
-                        <span>
-                            Schone kleding aangetrokken
-                        </span>
-
+                        <span>👕</span>
+                        <span>Schone kleding aangetrokken</span>
                     </button>
 
                 </div>
@@ -736,9 +631,7 @@
 
 
 
-            <!-- ==================================
-                 BEWEGING
-                 ================================== -->
+            <!-- BEWEGING -->
 
             <section
                 class="blok moeilijk-blok"
@@ -777,15 +670,8 @@
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-blokje-om"
                     >
-
-                        <span>
-                            🚶
-                        </span>
-
-                        <span>
-                            Klein blokje om
-                        </span>
-
+                        <span>🚶</span>
+                        <span>Klein blokje om</span>
                     </button>
 
 
@@ -794,15 +680,8 @@
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-buiten"
                     >
-
-                        <span>
-                            🌳
-                        </span>
-
-                        <span>
-                            Even buiten geweest
-                        </span>
-
+                        <span>🌳</span>
+                        <span>Even buiten geweest</span>
                     </button>
 
 
@@ -811,15 +690,8 @@
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-bewegen"
                     >
-
-                        <span>
-                            🤸
-                        </span>
-
-                        <span>
-                            Even bewogen
-                        </span>
-
+                        <span>🤸</span>
+                        <span>Even bewogen</span>
                     </button>
 
                 </div>
@@ -828,9 +700,7 @@
 
 
 
-            <!-- ==================================
-                 IETS PRETTIGS
-                 ================================== -->
+            <!-- IETS PRETTIGS -->
 
             <section
                 class="blok moeilijk-blok moeilijk-persoonlijk-blok"
@@ -862,21 +732,15 @@
                 </div>
 
 
-                <!--
-                    Ook hier is eerst alleen de
-                    hoofdactie zichtbaar.
-                -->
-
                 <button
                     type="button"
                     id="moeilijkIetsPrettigs"
                     class="activiteit-knop moeilijk-persoonlijk-trigger"
                     data-activiteit="moeilijk-iets-prettigs"
+                    aria-expanded="false"
                 >
 
-                    <span>
-                        ❤️
-                    </span>
+                    <span>❤️</span>
 
                     <span>
                         Iets leuks gedaan
@@ -888,11 +752,6 @@
 
                 </button>
 
-
-                <!--
-                    Persoonlijke activiteiten
-                    verschijnen na klikken.
-                -->
 
                 <div
                     id="moeilijkPrettigDetails"
@@ -908,22 +767,10 @@
 
                     <div class="persoonlijke-beheer">
 
-                        <button
-                            type="button"
+                        <div
                             id="prettigOptieToevoegen"
-                            class="persoonlijke-beheer-knop"
-                        >
-                            ＋ Activiteit toevoegen
-                        </button>
-
-
-                        <button
-                            type="button"
-                            id="prettigOptiesBeheren"
-                            class="persoonlijke-beheer-knop secundair"
-                        >
-                            ✎ Activiteiten aanpassen
-                        </button>
+                            class="persoonlijke-toevoegen"
+                        ></div>
 
                     </div>
 
@@ -986,9 +833,7 @@
             class="activiteit-status"
         >
 
-            <span
-                id="activiteitStatusIcoon"
-            >
+            <span id="activiteitStatusIcoon">
                 🌱
             </span>
 
@@ -1010,8 +855,7 @@
         <div
             id="activiteitInhoud"
             class="activiteit-inhoud"
-        >
-        </div>
+        ></div>
 
 
         <button
@@ -1114,71 +958,6 @@
 
 
     <!-- ==================================
-         PERSOONLIJKE OPTIES BEHEREN
-         ================================== -->
-
-    <div
-        id="persoonlijkeOptiesContainer"
-        class="modal-overlay"
-        hidden
-    >
-
-        <div
-            class="modal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="persoonlijkeOptiesTitel"
-        >
-
-            <div class="modal-header">
-
-                <div>
-
-                    <h2 id="persoonlijkeOptiesTitel">
-                        Persoonlijke opties
-                    </h2>
-
-                    <p id="persoonlijkeOptiesUitleg">
-                        Pas je opties aan wanneer ze niet meer bij je passen.
-                    </p>
-
-                </div>
-
-
-                <button
-                    id="persoonlijkeOptiesSluiten"
-                    class="modal-sluit-knop"
-                    type="button"
-                    aria-label="Sluiten"
-                >
-                    ×
-                </button>
-
-            </div>
-
-
-            <div
-                id="persoonlijkeOptiesLijst"
-                class="persoonlijke-opties-beheer-lijst"
-            >
-            </div>
-
-
-            <button
-                id="persoonlijkeOptieNieuw"
-                class="primary-button"
-                type="button"
-            >
-                ＋ Nieuwe optie
-            </button>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- ==================================
          POSITIEVE FEEDBACK
          ================================== -->
 
@@ -1186,9 +965,7 @@
         id="beloning"
         class="beloning"
         aria-live="polite"
-    >
-    </div>
-
+    ></div>
 
 
 </main>

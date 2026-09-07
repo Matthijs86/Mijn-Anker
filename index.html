@@ -20,20 +20,7 @@
         content="Anker - Terug naar de basis."
     >
 
-    <meta
-        name="mobile-web-app-capable"
-        content="yes"
-    >
-
-    <meta
-        name="apple-mobile-web-app-capable"
-        content="yes"
-    >
-
-    <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="black-translucent"
-    >
+    <title>Anker</title>
 
     <link
         rel="manifest"
@@ -41,23 +28,33 @@
     >
 
     <link
+        rel="icon"
+        type="image/png"
+        sizes="192x192"
+        href="anker-icon-192x192.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="anker-icon-192x192.png"
+    >
+
+    <link
         rel="stylesheet"
         href="style.css"
     >
-
-    <title>Anker</title>
 
 </head>
 
 
 <body>
 
-<main id="app">
+<main class="anker-app">
 
 
-    <!-- =========================================================
+    <!-- ==================================
          HOOFDSCHERM
-         ========================================================= -->
+         ================================== -->
 
     <section
         id="hoofdScherm"
@@ -66,535 +63,330 @@
 
         <header class="app-header">
 
-            <div class="logo">
-
-                <span class="logo-icoon">⚓</span>
-
-                <div>
-
-                    <h1>Anker</h1>
-
-                    <p>Terug naar de basis.</p>
-
-                </div>
-
+            <div class="anker-symbool">
+                ⚓
             </div>
+
+            <h1>
+                ANKER
+            </h1>
+
+            <p>
+                Terug naar de basis.
+            </p>
 
         </header>
 
 
-        <div class="welkom">
+        <div class="hoofdkeuzes">
 
-            <h2>Hoe is het vandaag?</h2>
-
-            <p>Kies wat vandaag bij je past.</p>
-
-        </div>
-
-
-        <div class="modus-keuze">
+            <!-- BASIS -->
 
             <button
-                type="button"
                 id="basisKnop"
-                class="modus-knop basis-knop"
+                class="hoofdkeuze basis"
+                type="button"
             >
 
-                <span class="modus-icoon">⚓</span>
+                <span class="keuze-icoon">
+                    🌱
+                </span>
 
-                <span class="modus-tekst">
+                <span class="keuze-tekst">
 
-                    <strong>BASIS</strong>
+                    <strong>
+                        BASIS
+                    </strong>
 
-                    <small>Ik heb wat ruimte</small>
+                    <small>
+                        Mijn dagelijkse zelfzorg
+                    </small>
 
                 </span>
 
             </button>
 
 
+            <!-- MOEILIJKE DAG -->
+
             <button
-                type="button"
                 id="moeilijkKnop"
-                class="modus-knop moeilijk-knop"
+                class="hoofdkeuze moeilijke-dag"
+                type="button"
             >
 
-                <span class="modus-icoon">🌱</span>
+                <span class="keuze-icoon">
+                    🫶
+                </span>
 
-                <span class="modus-tekst">
+                <span class="keuze-tekst">
 
-                    <strong>MOEILIJKE DAG</strong>
+                    <strong>
+                        MOEILIJKE DAG
+                    </strong>
 
-                    <small>Alleen het hoognodige</small>
+                    <small>
+                        Alleen wat nu echt nodig is
+                    </small>
 
                 </span>
 
             </button>
 
         </div>
+
+
+        <footer>
+
+            <span>
+                Je hoeft niet alles te doen.
+            </span>
+
+        </footer>
 
     </section>
 
 
 
-    <!-- =========================================================
-         BASIS
-         ========================================================= -->
+    <!-- ==================================
+         BASIS SCHERM
+         ================================== -->
 
     <section
         id="basisScherm"
         class="scherm"
     >
 
-        <header class="scherm-header">
+        <header class="pagina-header">
 
             <button
-                type="button"
                 id="basisTerugKnop"
                 class="terug-knop"
-                aria-label="Terug"
+                type="button"
+                aria-label="Terug naar hoofdscherm"
             >
                 ←
             </button>
 
             <div>
 
-                <h2>BASIS</h2>
+                <h2>
+                    BASIS
+                </h2>
 
-                <p>Kleine dingen die helpen.</p>
+                <p>
+                    Zorg goed voor jezelf.
+                </p>
 
             </div>
 
         </header>
 
 
-        <div
-            id="basisCategorieen"
-            class="categorieen"
-        >
+        <div class="blokken">
 
-            <!-- Zelfzorg -->
 
-            <section
-                class="blok basis-blok"
+            <!-- ==================================
+                 ZELFZORG
+                 ================================== -->
+
+            <button
+                class="blok"
                 data-blok="zelfzorg"
+                type="button"
             >
 
-                <div class="blok-header">
+                <span class="blok-icoon">
+                    🧼
+                </span>
 
-                    <div class="blok-titel">
+                <span class="blok-tekst">
 
-                        <span class="blok-icoon">🧼</span>
+                    <strong>
+                        Zelfzorg
+                    </strong>
 
-                        <div>
+                    <small>
+                        Je lichaam verzorgen
+                    </small>
 
-                            <h3>Zelfzorg</h3>
+                </span>
 
-                            <p>Goed voor jezelf zorgen.</p>
+                <span class="blok-pijl">
+                    →
+                </span>
 
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="activiteiten"
-                    data-activiteiten="zelfzorg"
-                >
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="douchen"
-                        data-blok="zelfzorg"
-                    >
-                        <span>🚿</span>
-                        <span>Douchen</span>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="tanden-poetsen"
-                        data-blok="zelfzorg"
-                    >
-                        <span>🪥</span>
-                        <span>Tanden poetsen</span>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="deodorant"
-                        data-blok="zelfzorg"
-                    >
-                        <span>🧴</span>
-                        <span>Deodorant</span>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="schone-kleding"
-                        data-blok="zelfzorg"
-                    >
-                        <span>👕</span>
-                        <span>Schone kleding</span>
-                    </button>
-
-                </div>
-
-            </section>
+            </button>
 
 
 
-            <!-- Eten & drinken -->
+            <!-- ==================================
+                 ETEN & DRINKEN
+                 ================================== -->
 
-            <section
-                class="blok basis-blok"
-                data-blok="eten-drinken"
+            <button
+                class="blok"
+                data-blok="eten"
+                type="button"
             >
 
-                <div class="blok-header">
+                <span class="blok-icoon">
+                    🍽️
+                </span>
 
-                    <div class="blok-titel">
+                <span class="blok-tekst">
 
-                        <span class="blok-icoon">🍽️</span>
+                    <strong>
+                        Eten & drinken
+                    </strong>
 
-                        <div>
+                    <small>
+                        Geef je lichaam wat het nodig heeft
+                    </small>
 
-                            <h3>Eten & drinken</h3>
+                </span>
 
-                            <p>Je lichaam geven wat het nodig heeft.</p>
+                <span class="blok-pijl">
+                    →
+                </span>
 
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="activiteiten"
-                    data-activiteiten="eten-drinken"
-                >
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="ontbijt"
-                        data-blok="eten-drinken"
-                    >
-                        <span>🥣</span>
-                        <span>Ontbijt</span>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="lunch"
-                        data-blok="eten-drinken"
-                    >
-                        <span>🥪</span>
-                        <span>Lunch</span>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="diner"
-                        data-blok="eten-drinken"
-                    >
-                        <span>🍽️</span>
-                        <span>Diner</span>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="water"
-                        data-blok="eten-drinken"
-                    >
-                        <span>💧</span>
-                        <span>Water gedronken</span>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="ander-drinken"
-                        data-blok="eten-drinken"
-                    >
-                        <span>🥤</span>
-                        <span>Iets anders gedronken</span>
-                    </button>
-
-                </div>
-
-            </section>
+            </button>
 
 
 
-            <!-- Omgeving -->
+            <!-- ==================================
+                 OMGEVING
+                 ================================== -->
 
-            <section
-                class="blok basis-blok"
+            <button
+                class="blok"
                 data-blok="omgeving"
+                type="button"
             >
 
-                <div class="blok-header">
+                <span class="blok-icoon">
+                    🏠
+                </span>
 
-                    <div class="blok-titel">
+                <span class="blok-tekst">
 
-                        <span class="blok-icoon">🏠</span>
+                    <strong>
+                        Omgeving
+                    </strong>
 
-                        <div>
+                    <small>
+                        Een beetje orde om je heen
+                    </small>
 
-                            <h3>Omgeving</h3>
+                </span>
 
-                            <p>Een klein beetje orde om je heen.</p>
+                <span class="blok-pijl">
+                    →
+                </span>
 
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="activiteiten"
-                    data-activiteiten="omgeving"
-                >
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="afwas"
-                        data-blok="omgeving"
-                    >
-                        <span>🍽️</span>
-                        <span>Afwas / vaat</span>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="opruimen"
-                        data-blok="omgeving"
-                    >
-                        <span>🧹</span>
-                        <span>Even iets opruimen</span>
-                    </button>
-
-                </div>
-
-            </section>
+            </button>
 
 
 
-            <!-- Beweging & buiten -->
+            <!-- ==================================
+                 BEWEGING & BUITEN
+                 ================================== -->
 
-            <section
-                class="blok basis-blok"
-                data-blok="beweging-buiten"
+            <button
+                class="blok"
+                data-blok="beweging"
+                type="button"
             >
 
-                <div class="blok-header">
+                <span class="blok-icoon">
+                    🚶
+                </span>
 
-                    <div class="blok-titel">
+                <span class="blok-tekst">
 
-                        <span class="blok-icoon">🚶</span>
+                    <strong>
+                        Beweging & buiten
+                    </strong>
 
-                        <div>
+                    <small>
+                        Even bewegen of naar buiten
+                    </small>
 
-                            <h3>Beweging & buiten</h3>
+                </span>
 
-                            <p>Even in beweging komen.</p>
+                <span class="blok-pijl">
+                    →
+                </span>
 
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="activiteiten"
-                    data-activiteiten="beweging-buiten"
-                >
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="buiten"
-                        data-blok="beweging-buiten"
-                    >
-                        <span>🌳</span>
-                        <span>Even naar buiten</span>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="wandelen"
-                        data-blok="beweging-buiten"
-                    >
-                        <span>🚶</span>
-                        <span>Klein blokje om</span>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="bewegen"
-                        data-blok="beweging-buiten"
-                    >
-                        <span>🏃</span>
-                        <span>Even bewegen</span>
-                    </button>
-
-                </div>
-
-            </section>
+            </button>
 
 
 
-            <!-- Hoofd & ontspanning -->
+            <!-- ==================================
+                 HOOFD & ONTSPANNING
+                 ================================== -->
 
-            <section
-                class="blok basis-blok"
-                data-blok="hoofd-ontspanning"
+            <button
+                class="blok"
+                data-blok="hoofd"
+                type="button"
             >
 
-                <div class="blok-header">
+                <span class="blok-icoon">
+                    🧠
+                </span>
 
-                    <div class="blok-titel">
+                <span class="blok-tekst">
 
-                        <span class="blok-icoon">🧠</span>
+                    <strong>
+                        Hoofd & ontspanning
+                    </strong>
 
-                        <div>
+                    <small>
+                        Rust, plezier en ontspanning
+                    </small>
 
-                            <h3>Hoofd & ontspanning</h3>
+                </span>
 
-                            <p>Even ruimte maken in je hoofd.</p>
+                <span class="blok-pijl">
+                    →
+                </span>
 
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="activiteiten"
-                    data-activiteiten="hoofd-ontspanning"
-                >
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="rust"
-                        data-blok="hoofd-ontspanning"
-                    >
-                        <span>🛋️</span>
-                        <span>Even rust genomen</span>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="muziek"
-                        data-blok="hoofd-ontspanning"
-                    >
-                        <span>🎧</span>
-                        <span>Muziek geluisterd</span>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="plezier"
-                        data-blok="hoofd-ontspanning"
-                    >
-                        <span>😊</span>
-                        <span>Iets gedaan waar ik plezier aan beleef</span>
-                    </button>
-
-                </div>
-
-            </section>
+            </button>
 
 
 
-            <!-- Check mijn borden -->
+            <!-- ==================================
+                 BORDEN
+                 ================================== -->
 
-            <section
-                class="blok basis-blok"
+            <button
+                class="blok"
                 data-blok="borden"
+                type="button"
             >
 
-                <div class="blok-header">
+                <span class="blok-icoon">
+                    📋
+                </span>
 
-                    <div class="blok-titel">
+                <span class="blok-tekst">
 
-                        <span class="blok-icoon">📋</span>
+                    <strong>
+                        Check mijn borden
+                    </strong>
 
-                        <div>
+                    <small>
+                        Misschien staat er iets voor vandaag
+                    </small>
 
-                            <h3>Check mijn borden</h3>
+                </span>
 
-                            <p>Even kijken of er iets kleins nodig is.</p>
+                <span class="blok-pijl">
+                    →
+                </span>
 
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div
-                    class="activiteiten"
-                    data-activiteiten="borden"
-                >
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="borden-bekeken"
-                        data-blok="borden"
-                    >
-                        <span>📋</span>
-                        <span>Borden bekeken</span>
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="activiteit-knop"
-                        data-activiteit="klein-taakje"
-                        data-blok="borden"
-                    >
-                        <span>✅</span>
-                        <span>Een klein taakje gedaan</span>
-                    </button>
-
-                </div>
-
-            </section>
+            </button>
 
         </div>
 
@@ -602,44 +394,137 @@
 
 
 
-    <!-- =========================================================
+    <!-- ==================================
          MOEILIJKE DAG
-         ========================================================= -->
+         ================================== -->
 
     <section
         id="moeilijkScherm"
         class="scherm"
     >
 
-        <header class="scherm-header moeilijk-header">
+        <header class="pagina-header">
 
             <button
-                type="button"
                 id="moeilijkTerugKnop"
                 class="terug-knop"
-                aria-label="Terug"
+                type="button"
+                aria-label="Terug naar hoofdscherm"
             >
                 ←
             </button>
 
             <div>
 
-                <h2>MOEILIJKE DAG</h2>
+                <h2>
+                    MOEILIJKE DAG
+                </h2>
 
-                <p>Alleen wat vandaag echt nodig is.</p>
+                <p>
+                    Vandaag alleen de basis.
+                </p>
 
             </div>
 
         </header>
 
 
+        <div class="moeilijke-dag-intro">
 
-        <div class="moeilijk-categorieen">
+            <span>
+                🫶
+            </span>
+
+            <p>
+                Je hoeft vandaag niet alles te doen.
+                Eén ding tegelijk is genoeg.
+            </p>
+
+        </div>
 
 
-            <!-- =================================================
+
+        <div class="blokken moeilijke-blokken">
+
+
+            <!-- ==================================
+                 DRINKEN
+                 ================================== -->
+
+            <section
+                class="blok moeilijk-blok"
+                data-moeilijk-categorie="drinken"
+            >
+
+                <div class="blok-header">
+
+                    <div class="blok-titel">
+
+                        <span class="blok-icoon">
+                            🥤
+                        </span>
+
+                        <div>
+
+                            <h3>
+                                Drinken
+                            </h3>
+
+                            <p>
+                                Iets drinken is goed.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="moeilijk-activiteiten">
+
+                    <button
+                        type="button"
+                        class="activiteit-knop moeilijk-activiteit"
+                        data-activiteit="moeilijk-iets-gedronken"
+                    >
+
+                        <span>
+                            🥤
+                        </span>
+
+                        <span>
+                            Iets gedronken
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="activiteit-knop moeilijk-activiteit"
+                        data-activiteit="moeilijk-water"
+                    >
+
+                        <span>
+                            💧
+                        </span>
+
+                        <span>
+                            Water gedronken
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==================================
                  ETEN
-                 ================================================= -->
+                 ================================== -->
 
             <section
                 class="blok moeilijk-blok moeilijk-persoonlijk-blok"
@@ -650,13 +535,19 @@
 
                     <div class="blok-titel">
 
-                        <span class="blok-icoon">🍽️</span>
+                        <span class="blok-icoon">
+                            🍽️
+                        </span>
 
                         <div>
 
-                            <h3>Eten</h3>
+                            <h3>
+                                Eten
+                            </h3>
 
-                            <p>Kies iets makkelijks. Je hoeft niet te bedenken wat.</p>
+                            <p>
+                                Iets eten is genoeg.
+                            </p>
 
                         </div>
 
@@ -665,37 +556,70 @@
                 </div>
 
 
-                <div
-                    id="moeilijkEtenOpties"
-                    class="persoonlijke-opties"
+                <!--
+                    Deze knop is eerst het enige
+                    wat zichtbaar is.
+                -->
+
+                <button
+                    type="button"
+                    id="moeilijkIetsGegeten"
+                    class="activiteit-knop moeilijk-persoonlijk-trigger"
+                    data-activiteit="moeilijk-iets-gegeten"
                 >
 
-                    <!--
-                        Persoonlijke safe foods worden hier door
-                        script.js geplaatst.
-                    -->
+                    <span>
+                        🍽️
+                    </span>
 
-                </div>
+                    <span>
+                        Iets gegeten
+                    </span>
 
+                    <span class="persoonlijke-trigger-pijl">
+                        ↓
+                    </span>
 
-                <div class="persoonlijke-beheer">
-
-                    <button
-                        type="button"
-                        id="etenOptieToevoegen"
-                        class="persoonlijke-beheer-knop"
-                    >
-                        ＋ Safe food toevoegen
-                    </button>
+                </button>
 
 
-                    <button
-                        type="button"
-                        id="etenOptiesBeheren"
-                        class="persoonlijke-beheer-knop secundair"
-                    >
-                        ✎ Safe foods aanpassen
-                    </button>
+                <!--
+                    Persoonlijke opties verschijnen
+                    pas na klikken.
+                -->
+
+                <div
+                    id="moeilijkEtenDetails"
+                    class="moeilijk-persoonlijk-details"
+                    hidden
+                >
+
+                    <div
+                        id="moeilijkEtenOpties"
+                        class="persoonlijke-opties"
+                    ></div>
+
+
+                    <div class="persoonlijke-beheer">
+
+                        <button
+                            type="button"
+                            id="etenOptieToevoegen"
+                            class="persoonlijke-beheer-knop"
+                        >
+                            ＋ Safe Food toevoegen
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="etenOptiesBeheren"
+                            class="persoonlijke-beheer-knop secundair"
+                        >
+                            ✎ Safe Foods aanpassen
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -703,9 +627,9 @@
 
 
 
-            <!-- =================================================
+            <!-- ==================================
                  ZELFZORG
-                 ================================================= -->
+                 ================================== -->
 
             <section
                 class="blok moeilijk-blok"
@@ -716,13 +640,19 @@
 
                     <div class="blok-titel">
 
-                        <span class="blok-icoon">🧼</span>
+                        <span class="blok-icoon">
+                            🧼
+                        </span>
 
                         <div>
 
-                            <h3>Zelfzorg</h3>
+                            <h3>
+                                Zelfzorg
+                            </h3>
 
-                            <p>Een paar basisdingen zijn genoeg.</p>
+                            <p>
+                                Een beetje voor jezelf zorgen.
+                            </p>
 
                         </div>
 
@@ -731,16 +661,22 @@
                 </div>
 
 
-                <div class="activiteiten">
-
+                <div class="moeilijk-activiteiten">
 
                     <button
                         type="button"
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-douchen"
                     >
-                        <span>🚿</span>
-                        <span>Gedoucht</span>
+
+                        <span>
+                            🚿
+                        </span>
+
+                        <span>
+                            Gedoucht
+                        </span>
+
                     </button>
 
 
@@ -749,8 +685,15 @@
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-wassen"
                     >
-                        <span>🧼</span>
-                        <span>Gewassen</span>
+
+                        <span>
+                            🧼
+                        </span>
+
+                        <span>
+                            Gewassen
+                        </span>
+
                     </button>
 
 
@@ -759,8 +702,15 @@
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-tanden"
                     >
-                        <span>🪥</span>
-                        <span>Tanden gepoetst</span>
+
+                        <span>
+                            🪥
+                        </span>
+
+                        <span>
+                            Tanden gepoetst
+                        </span>
+
                     </button>
 
 
@@ -769,8 +719,15 @@
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-kleding"
                     >
-                        <span>👕</span>
-                        <span>Schone kleding aangetrokken</span>
+
+                        <span>
+                            👕
+                        </span>
+
+                        <span>
+                            Schone kleding aangetrokken
+                        </span>
+
                     </button>
 
                 </div>
@@ -779,9 +736,9 @@
 
 
 
-            <!-- =================================================
+            <!-- ==================================
                  BEWEGING
-                 ================================================= -->
+                 ================================== -->
 
             <section
                 class="blok moeilijk-blok"
@@ -792,13 +749,19 @@
 
                     <div class="blok-titel">
 
-                        <span class="blok-icoon">🚶</span>
+                        <span class="blok-icoon">
+                            🚶
+                        </span>
 
                         <div>
 
-                            <h3>Beweging</h3>
+                            <h3>
+                                Een beetje bewegen
+                            </h3>
 
-                            <p>Een klein beetje is al genoeg.</p>
+                            <p>
+                                Een klein stukje is ook goed.
+                            </p>
 
                         </div>
 
@@ -807,16 +770,22 @@
                 </div>
 
 
-                <div class="activiteiten">
-
+                <div class="moeilijk-activiteiten">
 
                     <button
                         type="button"
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-blokje-om"
                     >
-                        <span>🚶</span>
-                        <span>Klein blokje om</span>
+
+                        <span>
+                            🚶
+                        </span>
+
+                        <span>
+                            Klein blokje om
+                        </span>
+
                     </button>
 
 
@@ -825,8 +794,15 @@
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-buiten"
                     >
-                        <span>🌳</span>
-                        <span>Even buiten geweest</span>
+
+                        <span>
+                            🌳
+                        </span>
+
+                        <span>
+                            Even buiten geweest
+                        </span>
+
                     </button>
 
 
@@ -835,8 +811,15 @@
                         class="activiteit-knop moeilijk-activiteit"
                         data-activiteit="moeilijk-bewegen"
                     >
-                        <span>🏃</span>
-                        <span>Even bewogen</span>
+
+                        <span>
+                            🤸
+                        </span>
+
+                        <span>
+                            Even bewogen
+                        </span>
+
                     </button>
 
                 </div>
@@ -845,9 +828,9 @@
 
 
 
-            <!-- =================================================
+            <!-- ==================================
                  IETS PRETTIGS
-                 ================================================= -->
+                 ================================== -->
 
             <section
                 class="blok moeilijk-blok moeilijk-persoonlijk-blok"
@@ -858,13 +841,19 @@
 
                     <div class="blok-titel">
 
-                        <span class="blok-icoon">❤️</span>
+                        <span class="blok-icoon">
+                            ❤️
+                        </span>
 
                         <div>
 
-                            <h3>Iets prettigs</h3>
+                            <h3>
+                                Iets prettigs
+                            </h3>
 
-                            <p>Kies iets waarvan je weet dat het je kan helpen ontspannen.</p>
+                            <p>
+                                Muziek, plezier of iets anders fijns.
+                            </p>
 
                         </div>
 
@@ -873,37 +862,70 @@
                 </div>
 
 
-                <div
-                    id="moeilijkPrettigOpties"
-                    class="persoonlijke-opties"
+                <!--
+                    Ook hier is eerst alleen de
+                    hoofdactie zichtbaar.
+                -->
+
+                <button
+                    type="button"
+                    id="moeilijkIetsPrettigs"
+                    class="activiteit-knop moeilijk-persoonlijk-trigger"
+                    data-activiteit="moeilijk-iets-prettigs"
                 >
 
-                    <!--
-                        Persoonlijke activiteiten worden hier door
-                        script.js geplaatst.
-                    -->
+                    <span>
+                        ❤️
+                    </span>
 
-                </div>
+                    <span>
+                        Iets leuks gedaan
+                    </span>
 
+                    <span class="persoonlijke-trigger-pijl">
+                        ↓
+                    </span>
 
-                <div class="persoonlijke-beheer">
-
-                    <button
-                        type="button"
-                        id="prettigOptieToevoegen"
-                        class="persoonlijke-beheer-knop"
-                    >
-                        ＋ Activiteit toevoegen
-                    </button>
+                </button>
 
 
-                    <button
-                        type="button"
-                        id="prettigOptiesBeheren"
-                        class="persoonlijke-beheer-knop secundair"
-                    >
-                        ✎ Activiteiten aanpassen
-                    </button>
+                <!--
+                    Persoonlijke activiteiten
+                    verschijnen na klikken.
+                -->
+
+                <div
+                    id="moeilijkPrettigDetails"
+                    class="moeilijk-persoonlijk-details"
+                    hidden
+                >
+
+                    <div
+                        id="moeilijkPrettigOpties"
+                        class="persoonlijke-opties"
+                    ></div>
+
+
+                    <div class="persoonlijke-beheer">
+
+                        <button
+                            type="button"
+                            id="prettigOptieToevoegen"
+                            class="persoonlijke-beheer-knop"
+                        >
+                            ＋ Activiteit toevoegen
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="prettigOptiesBeheren"
+                            class="persoonlijke-beheer-knop secundair"
+                        >
+                            ✎ Activiteiten aanpassen
+                        </button>
+
+                    </div>
 
                 </div>
 
@@ -911,83 +933,12 @@
 
         </div>
 
-    </section>
 
+        <div class="moeilijke-dag-afsluiting">
 
-
-    <!-- =========================================================
-         ACTIVITEIT DETAIL
-         ========================================================= -->
-
-    <section
-        id="activiteitScherm"
-        class="scherm"
-    >
-
-        <header class="scherm-header">
-
-            <button
-                type="button"
-                id="activiteitTerugKnop"
-                class="terug-knop"
-                aria-label="Terug"
-            >
-                ←
-            </button>
-
-            <div>
-
-                <h2 id="activiteitTitel">Activiteit</h2>
-
-                <p id="activiteitSubtitel">Goed bezig.</p>
-
-            </div>
-
-        </header>
-
-
-        <div class="activiteit-detail">
-
-            <div
-                id="activiteitStatus"
-                class="activiteit-status"
-            >
-
-                <span
-                    id="activiteitStatusIcoon"
-                    class="activiteit-status-icoon"
-                >
-                    ✓
-                </span>
-
-                <div>
-
-                    <strong id="activiteitStatusTitel">
-                        Activiteit
-                    </strong>
-
-                    <span id="activiteitStatusTekst">
-                        Afgerond
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div
-                id="activiteitInhoud"
-                class="activiteit-inhoud"
-            ></div>
-
-
-            <button
-                type="button"
-                id="activiteitKlaarKnop"
-                class="activiteit-klaar-knop"
-            >
-                ✓ Klaar
-            </button>
+            <p>
+                Meer hoeft vandaag niet. ❤️
+            </p>
 
         </div>
 
@@ -995,42 +946,122 @@
 
 
 
-    <!-- =========================================================
+    <!-- ==================================
+         ACTIVITEIT SCHERM
+         ================================== -->
+
+    <section
+        id="activiteitScherm"
+        class="scherm"
+    >
+
+        <header class="pagina-header">
+
+            <button
+                id="activiteitTerugKnop"
+                class="terug-knop"
+                type="button"
+                aria-label="Terug"
+            >
+                ←
+            </button>
+
+            <div>
+
+                <h2 id="activiteitTitel">
+                    Activiteit
+                </h2>
+
+                <p id="activiteitSubtitel">
+                    Eén ding tegelijk.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <div
+            id="activiteitStatus"
+            class="activiteit-status"
+        >
+
+            <span
+                id="activiteitStatusIcoon"
+            >
+                🌱
+            </span>
+
+            <div>
+
+                <strong id="activiteitStatusTitel">
+                    Goed bezig.
+                </strong>
+
+                <p id="activiteitStatusTekst">
+                    Eén stap is genoeg.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="activiteitInhoud"
+            class="activiteit-inhoud"
+        >
+        </div>
+
+
+        <button
+            id="activiteitKlaarKnop"
+            class="activiteit-klaar-knop"
+            type="button"
+        >
+            ✓ Klaar
+        </button>
+
+    </section>
+
+
+
+    <!-- ==================================
          KORTE INVOER
-         ========================================================= -->
+         ================================== -->
 
     <div
         id="kortInvoerContainer"
-        class="kort-invoer-container"
+        class="modal-overlay"
         hidden
     >
 
         <div
-            class="kort-invoer-box"
+            class="modal"
             role="dialog"
             aria-modal="true"
             aria-labelledby="kortInvoerTitel"
         >
 
-            <div class="kort-invoer-header">
+            <div class="modal-header">
 
                 <div>
 
-                    <h3 id="kortInvoerTitel">
-                        Even invullen
-                    </h3>
+                    <h2 id="kortInvoerTitel">
+                        Iets toevoegen
+                    </h2>
 
                     <p id="kortInvoerUitleg">
-                        Een paar woorden is genoeg.
+                        Een korte aanvulling is genoeg.
                     </p>
 
                 </div>
 
 
                 <button
-                    type="button"
                     id="kortInvoerSluiten"
-                    class="klein-sluit-knop"
+                    class="modal-sluit-knop"
+                    type="button"
                     aria-label="Sluiten"
                 >
                     ×
@@ -1046,32 +1077,30 @@
                 Invoer
             </label>
 
-
             <input
-                type="text"
                 id="kortInvoer"
-                class="kort-invoer"
-                maxlength="80"
+                type="text"
                 autocomplete="off"
-                placeholder="Bijvoorbeeld: 5 km gelopen"
+                maxlength="120"
+                placeholder="Bijvoorbeeld: haar gewassen"
             >
 
 
-            <div class="kort-invoer-knoppen">
+            <div class="modal-acties">
 
                 <button
-                    type="button"
                     id="invoerAnnuleren"
-                    class="invoer-annuleren"
+                    class="secondary-button"
+                    type="button"
                 >
                     Annuleren
                 </button>
 
 
                 <button
-                    type="button"
                     id="invoerOpslaan"
-                    class="invoer-opslaan"
+                    class="primary-button"
+                    type="button"
                 >
                     Opslaan
                 </button>
@@ -1084,42 +1113,42 @@
 
 
 
-    <!-- =========================================================
-         BEHEER PERSOONLIJKE OPTIES
-         ========================================================= -->
+    <!-- ==================================
+         PERSOONLIJKE OPTIES BEHEREN
+         ================================== -->
 
     <div
         id="persoonlijkeOptiesContainer"
-        class="persoonlijke-opties-container"
+        class="modal-overlay"
         hidden
     >
 
         <div
-            class="persoonlijke-opties-box"
+            class="modal"
             role="dialog"
             aria-modal="true"
             aria-labelledby="persoonlijkeOptiesTitel"
         >
 
-            <div class="persoonlijke-opties-header">
+            <div class="modal-header">
 
                 <div>
 
-                    <h3 id="persoonlijkeOptiesTitel">
-                        Mijn opties
-                    </h3>
+                    <h2 id="persoonlijkeOptiesTitel">
+                        Persoonlijke opties
+                    </h2>
 
                     <p id="persoonlijkeOptiesUitleg">
-                        Pas je lijst aan wanneer iets niet meer werkt.
+                        Pas je opties aan wanneer ze niet meer bij je passen.
                     </p>
 
                 </div>
 
 
                 <button
-                    type="button"
                     id="persoonlijkeOptiesSluiten"
-                    class="klein-sluit-knop"
+                    class="modal-sluit-knop"
+                    type="button"
                     aria-label="Sluiten"
                 >
                     ×
@@ -1130,21 +1159,15 @@
 
             <div
                 id="persoonlijkeOptiesLijst"
-                class="persoonlijke-opties-lijst"
+                class="persoonlijke-opties-beheer-lijst"
             >
-
-                <!--
-                    Persoonlijke opties worden hier door script.js
-                    weergegeven en kunnen worden aangepast/verwijderd.
-                -->
-
             </div>
 
 
             <button
-                type="button"
                 id="persoonlijkeOptieNieuw"
-                class="persoonlijke-nieuw-knop"
+                class="primary-button"
+                type="button"
             >
                 ＋ Nieuwe optie
             </button>
@@ -1155,23 +1178,17 @@
 
 
 
-    <!-- =========================================================
-         BELONING / POSITIEVE FEEDBACK
-         ========================================================= -->
+    <!-- ==================================
+         POSITIEVE FEEDBACK
+         ================================== -->
 
     <div
         id="beloning"
         class="beloning"
         aria-live="polite"
-        hidden
     >
-
-        <div
-            id="beloningTekst"
-            class="beloning-tekst"
-        ></div>
-
     </div>
+
 
 
 </main>

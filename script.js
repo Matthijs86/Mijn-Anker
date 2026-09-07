@@ -1,617 +1,1348 @@
-// ======================================
-// ANKER
-// TERUG NAAR DE BASIS
-// ======================================
+/* =========================================================
+   ANKER
+   Terug naar de basis.
+   ========================================================= */
 
 
-// ======================================
-// BASIS STRUCTUUR
-// ======================================
-//
-// De structuur van BASIS wordt apart opgeslagen.
-// Hierdoor kunnen opties worden aangepast zonder
-// dat de dagelijkse vinkjes worden meegenomen.
-//
-// "invoer: true"
-// = bij aanklikken wordt gevraagd om een kort woord.
-//
-// "invoer: false"
-// = direct afvinken.
-//
+/* =========================================================
+   OPSLAG
+========================================================= */
 
-const BASIS_CHECKLISTS = {
-
-    zelfzorg: {
-        titel: "Zelfzorg",
-        subtitel: "Zorg goed voor jezelf.",
-        opties: [
-            {
-                id: "douchen",
-                tekst: "Douchen",
-                invoer: false
-            },
-            {
-                id: "tanden-poetsen",
-                tekst: "Tanden poetsen",
-                invoer: false
-            },
-            {
-                id: "deodorant",
-                tekst: "Deodorant",
-                invoer: false
-            },
-            {
-                id: "schone-kleding",
-                tekst: "Schone kleding",
-                invoer: false
-            }
-        ]
-    },
-
-    eten: {
-        titel: "Eten & drinken",
-        subtitel: "Geef je lichaam wat het nodig heeft.",
-        opties: [
-            {
-                id: "iets-gegeten",
-                tekst: "Iets gegeten",
-                invoer: true
-            },
-            {
-                id: "water-gedronken",
-                tekst: "Water gedronken",
-                invoer: false
-            },
-            {
-                id: "iets-anders-gedronken",
-                tekst: "Iets anders gedronken",
-                invoer: true
-            }
-        ]
-    },
-
-    omgeving: {
-        titel: "Omgeving",
-        subtitel: "Een beetje orde om je heen.",
-        opties: [
-            {
-                id: "afwas-vaat",
-                tekst: "Afwas / vaat",
-                invoer: false
-            },
-            {
-                id: "even-opruimen",
-                tekst: "Even iets opruimen",
-                invoer: false
-            }
-        ]
-    },
-
-    beweging: {
-        titel: "Beweging & buiten",
-        subtitel: "Even bewegen of naar buiten.",
-        opties: [
-            {
-                id: "naar-buiten",
-                tekst: "Even naar buiten",
-                invoer: false
-            },
-            {
-                id: "klein-blokje-om",
-                tekst: "Klein blokje om",
-                invoer: false
-            },
-            {
-                id: "even-bewegen",
-                tekst: "Even bewegen",
-                invoer: false
-            }
-        ]
-    },
-
-    hoofd: {
-        titel: "Hoofd & ontspanning",
-        subtitel: "Rust, plezier en ontspanning.",
-        opties: [
-            {
-                id: "rust-genomen",
-                tekst: "Even rust genomen",
-                invoer: false
-            },
-            {
-                id: "muziek-geluisterd",
-                tekst: "Muziek geluisterd",
-                invoer: false
-            },
-            {
-                id: "iets-leuks",
-                tekst: "Iets gedaan waar ik plezier aan beleef",
-                invoer: false
-            }
-        ]
-    },
-
-    borden: {
-        titel: "Check mijn borden",
-        subtitel: "Misschien staat er iets voor vandaag.",
-        opties: [
-            {
-                id: "borden-bekeken",
-                tekst: "Mijn borden bekeken",
-                invoer: false
-            },
-            {
-                id: "klein-taakje-bord",
-                tekst: "Een klein taakje van een bord gedaan",
-                invoer: false
-            }
-        ]
-    }
-
-};
-
-
-// ======================================
-// MOEILIJKE DAG
-// ======================================
-//
-// Deze structuur blijft bewust apart.
-// De gebruiker kan hier voorlopig niets
-// aanpassen.
-//
-
-const MOEILIJKE_DAG_CHECKLISTS = {
-
-    "moeilijk-drinken": {
-        titel: "Drinken",
-        subtitel: "Iets drinken is goed.",
-        taken: [
-            "Iets gedronken",
-            "Water gedronken"
-        ]
-    },
-
-    "moeilijk-eten": {
-        titel: "Eten",
-        subtitel: "Iets eten is genoeg.",
-        taken: [
-            "Iets gegeten"
-        ]
-    },
-
-    "moeilijk-zelfzorg": {
-        titel: "Zelfzorg",
-        subtitel: "Een beetje voor jezelf zorgen.",
-        taken: [
-            "Gedoucht",
-            "Gewassen",
-            "Tanden gepoetst",
-            "Schone kleding aangetrokken"
-        ]
-    },
-
-    "moeilijk-beweging": {
-        titel: "Een beetje bewegen",
-        subtitel: "Een klein beetje is ook goed.",
-        taken: [
-            "Klein blokje om",
-            "Even buiten geweest",
-            "Even bewogen"
-        ]
-    },
-
-    "moeilijk-prettig": {
-        titel: "Iets prettigs",
-        subtitel: "Doe iets wat fijn voelt.",
-        taken: [
-            "Muziek geluisterd",
-            "Iets leuks gedaan"
-        ]
-    }
-
-};
-
-
-// ======================================
-// OPSLAG BASIS STRUCTUUR
-// ======================================
-
-const OPSLAG_BASIS_STRUCTUUR =
-    "ankerBasisStructuur";
-
-
-// ======================================
-// OPSLAG DAGSTATUS
-// ======================================
-//
-// Alleen vandaag wordt bewaard.
-//
-
-const OPSLAG_DAGSTATUS =
-    "ankerDagstatus";
-
-
-let basisStructuur = {};
+const OPSLAG_DAGSTATUS = "ankerDagstatus";
 
 let dagStatus = {
     datum: "",
     afgerond: {},
-    invulling: {}
+    antwoorden: {}
 };
 
 
-// ======================================
-// POSITIEVE BOODSCHAPPEN
-// ======================================
+/* =========================================================
+   BASIS ACTIVITEITEN
+========================================================= */
+
+const BASIS_ACTIVITEITEN = {
+
+    zelfzorg: [
+        {
+            id: "douchen",
+            titel: "Douchen",
+            icoon: "🚿",
+            invoer: false,
+            extra: [
+                "Haar gewassen",
+                "Geschoren",
+                "Haar gekamd"
+            ]
+        },
+        {
+            id: "tanden-poetsen",
+            titel: "Tanden poetsen",
+            icoon: "🪥",
+            invoer: false
+        },
+        {
+            id: "deodorant",
+            titel: "Deodorant",
+            icoon: "🧴",
+            invoer: false
+        },
+        {
+            id: "schone-kleding",
+            titel: "Schone kleding",
+            icoon: "👕",
+            invoer: false
+        }
+    ],
+
+    eten: [
+        {
+            id: "ontbijt",
+            titel: "Ontbijt",
+            icoon: "🌅",
+            invoer: true,
+            placeholder: "Bijvoorbeeld: boterhammen met kaas"
+        },
+        {
+            id: "lunch",
+            titel: "Lunch",
+            icoon: "🥪",
+            invoer: true,
+            placeholder: "Bijvoorbeeld: broodje kip"
+        },
+        {
+            id: "diner",
+            titel: "Diner",
+            icoon: "🍽️",
+            invoer: true,
+            placeholder: "Bijvoorbeeld: pasta"
+        },
+        {
+            id: "water",
+            titel: "Water gedronken",
+            icoon: "💧",
+            invoer: true,
+            placeholder: "Bijvoorbeeld: 500 ml"
+        },
+        {
+            id: "anders-drinken",
+            titel: "Iets anders gedronken",
+            icoon: "🥤",
+            invoer: true,
+            placeholder: "Bijvoorbeeld: koffie, 2 koppen"
+        }
+    ],
+
+    omgeving: [
+        {
+            id: "afwas",
+            titel: "Afwas / vaat",
+            icoon: "🍽️",
+            invoer: false
+        },
+        {
+            id: "opruimen",
+            titel: "Even iets opruimen",
+            icoon: "🧹",
+            invoer: true,
+            placeholder: "Wat heb je opgeruimd?"
+        }
+    ],
+
+    beweging: [
+        {
+            id: "naar-buiten",
+            titel: "Even naar buiten",
+            icoon: "🌳",
+            invoer: true,
+            placeholder: "Bijvoorbeeld: 5 km gelopen"
+        },
+        {
+            id: "blokje-om",
+            titel: "Klein blokje om",
+            icoon: "🚶",
+            invoer: true,
+            placeholder: "Bijvoorbeeld: 20 minuten gewandeld"
+        },
+        {
+            id: "bewegen",
+            titel: "Even bewegen",
+            icoon: "💪",
+            invoer: true,
+            placeholder: "Bijvoorbeeld: fitness oefeningen gedaan"
+        }
+    ],
+
+    hoofd: [
+        {
+            id: "rust",
+            titel: "Even rust genomen",
+            icoon: "😌",
+            invoer: false
+        },
+        {
+            id: "muziek",
+            titel: "Muziek geluisterd",
+            icoon: "🎵",
+            invoer: true,
+            placeholder: "Bijvoorbeeld: Metallica"
+        },
+        {
+            id: "plezier",
+            titel: "Iets gedaan waar ik plezier aan beleef",
+            icoon: "✨",
+            invoer: true,
+            placeholder: "Wat heb je gedaan?"
+        }
+    ],
+
+    borden: [
+        {
+            id: "borden-bekeken",
+            titel: "Borden bekeken",
+            icoon: "👀",
+            invoer: false
+        },
+        {
+            id: "klein-taakje",
+            titel: "Een klein taakje gedaan",
+            icoon: "🧩",
+            invoer: true,
+            placeholder: "Wat heb je gedaan?"
+        }
+    ]
+};
+
+
+/* =========================================================
+   MOEILIJKE DAG
+   Deze blijft bewust eenvoudig.
+========================================================= */
+
+const MOEILIJKE_DAG = {
+
+    "moeilijk-drinken": [
+        {
+            id: "iets-gedronken",
+            titel: "Iets gedronken",
+            icoon: "🥤"
+        },
+        {
+            id: "water-gedronken",
+            titel: "Water gedronken",
+            icoon: "💧"
+        }
+    ],
+
+    "moeilijk-eten": [
+        {
+            id: "iets-gegeten",
+            titel: "Iets gegeten",
+            icoon: "🍽️"
+        }
+    ],
+
+    "moeilijk-zelfzorg": [
+        {
+            id: "gedoucht",
+            titel: "Gedoucht",
+            icoon: "🚿"
+        },
+        {
+            id: "gewassen",
+            titel: "Gewassen",
+            icoon: "🧼"
+        },
+        {
+            id: "tanden-gepoetst",
+            titel: "Tanden gepoetst",
+            icoon: "🪥"
+        },
+        {
+            id: "schone-kleding-moeilijk",
+            titel: "Schone kleding aangetrokken",
+            icoon: "👕"
+        }
+    ],
+
+    "moeilijk-beweging": [
+        {
+            id: "klein-blokje-moeilijk",
+            titel: "Klein blokje om",
+            icoon: "🚶"
+        },
+        {
+            id: "buiten-geweest",
+            titel: "Even buiten geweest",
+            icoon: "🌳"
+        },
+        {
+            id: "bewogen",
+            titel: "Even bewogen",
+            icoon: "💪"
+        }
+    ],
+
+    "moeilijk-prettig": [
+        {
+            id: "muziek-moeilijk",
+            titel: "Muziek geluisterd",
+            icoon: "🎵"
+        },
+        {
+            id: "iets-leuks",
+            titel: "Iets leuks gedaan",
+            icoon: "✨"
+        }
+    ]
+};
+
+
+/* =========================================================
+   POSITIEVE FEEDBACK
+========================================================= */
 
 const BELONINGEN = [
-
     "🎉 YES! Goed gedaan!",
     "💪 KOP OP! Weer eentje geregeld!",
     "🌱 YES! Eén stap vooruit!",
-    "🫶 Lekker! Je hebt goed voor jezelf gezorgd.",
-    "⚓ YES! Weer een stukje verder.",
     "✨ Kijk jou! Dit heb je gewoon gedaan!",
-    "🙌 Hoppa! Die zit!",
-    "❤️ Goed bezig. Echt. Dit telt.",
-    "🔥 YESSS! Lekker bezig!",
-    "🌟 Trots op jezelf? Dat mag!",
-    "💚 Kijk eens aan! Weer iets voor jezelf gedaan.",
-    "🎊 Lekker hoor! Die kun je afvinken.",
-    "😊 Goed zo! Je bent gewoon begonnen.",
-    "💫 Bam! Weer een kleine overwinning.",
-    "👏 YES! Dat heb je mooi geregeld.",
-    "🌈 Eén vinkje tegelijk. Je komt er wel.",
-    "⚡ Hoppa! Weer eentje gedaan!",
-    "🧡 Dit telt. Echt waar.",
-    "🎯 Check! Goed voor jezelf gezorgd.",
-    "🥳 JAAA! Lekker bezig!",
-    "🌿 Rustig aan, maar wel vooruit.",
-    "💜 Goed gedaan! Daar mag je best blij mee zijn.",
-    "🚀 Kijk jou gaan! Weer een stapje.",
-    "☀️ YES! Fijn dat je dit voor jezelf hebt gedaan.",
-    "🏆 Kleine actie. Grote winst.",
-    "😎 Check. Geregeld. Lekker bezig.",
-    "🎉 Dat is er weer eentje! Goed bezig.",
-    "🫶 Eén ding gedaan. En dat is genoeg.",
-    "💪 Zie je wel? Je kunt dit.",
-    "⚓ Anker uitgegooid. Weer even stevig staan."
-
+    "🙌 Lekker bezig!",
+    "⚓ Goed bezig. Weer een klein stukje verder.",
+    "💚 Mooi. Dit telt.",
+    "👏 Goed gedaan!",
+    "🌟 Kijk eens wat je alweer hebt gedaan!"
 ];
 
 
-// ======================================
-// SCHERMEN
-// ======================================
+/* =========================================================
+   HUIDIGE ACTIVITEIT
+========================================================= */
 
-const hoofdScherm =
-    document.getElementById("hoofdScherm");
-
-const basisScherm =
-    document.getElementById("basisScherm");
-
-const moeilijkScherm =
-    document.getElementById("moeilijkScherm");
-
-const checklistScherm =
-    document.getElementById("checklistScherm");
+let huidigeActiviteit = null;
+let huidigeBlok = null;
+let huidigeModus = null;
 
 
-// ======================================
-// HOOFDSCHERM KNOPPEN
-// ======================================
+/* =========================================================
+   DOM ELEMENTEN
+========================================================= */
 
-const basisKnop =
-    document.getElementById("basisKnop");
+const hoofdScherm = document.getElementById("hoofdScherm");
+const basisScherm = document.getElementById("basisScherm");
+const moeilijkScherm = document.getElementById("moeilijkScherm");
+const activiteitScherm = document.getElementById("activiteitScherm");
 
-const moeilijkKnop =
-    document.getElementById("moeilijkKnop");
+const basisKnop = document.getElementById("basisKnop");
+const moeilijkKnop = document.getElementById("moeilijkKnop");
 
+const basisTerugKnop = document.getElementById("basisTerugKnop");
+const moeilijkTerugKnop = document.getElementById("moeilijkTerugKnop");
+const activiteitTerugKnop = document.getElementById("activiteitTerugKnop");
 
-// ======================================
-// CHECKLIST ELEMENTEN
-// ======================================
+const activiteitTitel = document.getElementById("activiteitTitel");
+const activiteitSubtitel = document.getElementById("activiteitSubtitel");
+const activiteitStatus = document.getElementById("activiteitStatus");
+const activiteitStatusIcoon = document.getElementById("activiteitStatusIcoon");
+const activiteitStatusTitel = document.getElementById("activiteitStatusTitel");
+const activiteitStatusTekst = document.getElementById("activiteitStatusTekst");
+const activiteitInhoud = document.getElementById("activiteitInhoud");
+const activiteitKlaarKnop = document.getElementById("activiteitKlaarKnop");
 
-const checklist =
-    document.getElementById("checklist");
+const kortInvoerContainer = document.getElementById("kortInvoerContainer");
+const kortInvoerTitel = document.getElementById("kortInvoerTitel");
+const kortInvoerUitleg = document.getElementById("kortInvoerUitleg");
+const kortInvoer = document.getElementById("kortInvoer");
+const kortInvoerSluiten = document.getElementById("kortInvoerSluiten");
+const invoerAnnuleren = document.getElementById("invoerAnnuleren");
+const invoerOpslaan = document.getElementById("invoerOpslaan");
 
-const checklistTitel =
-    document.getElementById("checklistTitel");
-
-const checklistSubtitel =
-    document.getElementById("checklistSubtitel");
-
-const checklistLabel =
-    document.getElementById("checklistLabel");
-
-const checklistTerugKnop =
-    document.getElementById("checklistTerugKnop");
-
-
-// ======================================
-// BELONING
-// ======================================
-
-const beloning =
-    document.getElementById("beloning");
-
-const beloningTekst =
-    document.getElementById("beloningTekst");
+const beloning = document.getElementById("beloning");
+const beloningTekst = document.getElementById("beloningTekst");
 
 
-// ======================================
-// BASIS BEWERKEN
-// ======================================
+/* =========================================================
+   INITIALISATIE
+========================================================= */
 
-const basisBewerkContainer =
-    document.getElementById(
-        "basisBewerkContainer"
-    );
+document.addEventListener("DOMContentLoaded", () => {
 
-const basisBewerkKnop =
-    document.getElementById(
-        "basisBewerkKnop"
-    );
+    dagStatusLaden();
 
-const optiesBewerkScherm =
-    document.getElementById(
-        "optiesBewerkScherm"
-    );
+    eventListenersInstellen();
 
-const optiesBewerkSluiten =
-    document.getElementById(
-        "optiesBewerkSluiten"
-    );
+    activiteitKnoppenInstellen();
 
-const optiesEditor =
-    document.getElementById(
-        "optiesEditor"
-    );
+    moeilijkeDagKnoppenInstellen();
 
-const nieuweOptieNaam =
-    document.getElementById(
-        "nieuweOptieNaam"
-    );
+    serviceWorkerRegistreren();
 
-const nieuweOptieInvoer =
-    document.getElementById(
-        "nieuweOptieInvoer"
-    );
+    dagControle();
 
-const nieuweOptieToevoegen =
-    document.getElementById(
-        "nieuweOptieToevoegen"
-    );
+});
 
 
-// ======================================
-// KORTE INVOER
-// ======================================
+/* =========================================================
+   EVENT LISTENERS
+========================================================= */
 
-const kortInvoerContainer =
-    document.getElementById(
-        "kortInvoerContainer"
-    );
+function eventListenersInstellen() {
 
-const kortInvoer =
-    document.getElementById(
-        "kortInvoer"
-    );
-
-const kortInvoerTitel =
-    document.getElementById(
-        "kortInvoerTitel"
-    );
-
-const kortInvoerUitleg =
-    document.getElementById(
-        "kortInvoerUitleg"
-    );
-
-const kortInvoerAnnuleren =
-    document.getElementById(
-        "kortInvoerAnnuleren"
-    );
-
-const kortInvoerOpslaan =
-    document.getElementById(
-        "kortInvoerOpslaan"
-    );
+    if (basisKnop) {
+        basisKnop.addEventListener("click", () => {
+            schermTonen(basisScherm);
+        });
+    }
 
 
-// ======================================
-// HUIDIGE STAAT
-// ======================================
-
-let huidigScherm = "hoofd";
-
-let vorigeScherm = "hoofd";
-
-let huidigeChecklist = null;
-
-let huidigeOptieVoorInvoer = null;
+    if (moeilijkKnop) {
+        moeilijkKnop.addEventListener("click", () => {
+            schermTonen(moeilijkScherm);
+        });
+    }
 
 
-// ======================================
-// START
-// ======================================
+    if (basisTerugKnop) {
+        basisTerugKnop.addEventListener("click", () => {
+            schermTonen(hoofdScherm);
+        });
+    }
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
 
-        basisStructuurLaden();
+    if (moeilijkTerugKnop) {
+        moeilijkTerugKnop.addEventListener("click", () => {
+            schermTonen(hoofdScherm);
+        });
+    }
 
-        dagStatusLaden();
 
-        gebeurtenissenInstellen();
+    if (activiteitTerugKnop) {
+        activiteitTerugKnop.addEventListener("click", () => {
+            terugNaarVorigeScherm();
+        });
+    }
+
+
+    if (activiteitKlaarKnop) {
+        activiteitKlaarKnop.addEventListener("click", () => {
+
+            if (!huidigeActiviteit) {
+                return;
+            }
+
+            taakAfvinken(
+                huidigeBlok,
+                huidigeActiviteit.id,
+                huidigeModus
+            );
+        });
+    }
+
+
+    if (kortInvoerSluiten) {
+        kortInvoerSluiten.addEventListener("click", invoerSluiten);
+    }
+
+
+    if (invoerAnnuleren) {
+        invoerAnnuleren.addEventListener("click", invoerSluiten);
+    }
+
+
+    if (invoerOpslaan) {
+        invoerOpslaan.addEventListener("click", invoerOpslaanHandler);
+    }
+
+
+    if (kortInvoer) {
+        kortInvoer.addEventListener("keydown", (event) => {
+
+            if (event.key === "Enter") {
+                event.preventDefault();
+                invoerOpslaanHandler();
+            }
+
+            if (event.key === "Escape") {
+                invoerSluiten();
+            }
+
+        });
+    }
+
+
+    if (kortInvoerContainer) {
+
+        kortInvoerContainer.addEventListener("click", (event) => {
+
+            if (event.target === kortInvoerContainer) {
+                invoerSluiten();
+            }
+
+        });
 
     }
-);
-
-
-// ======================================
-// DATUM VAN VANDAAG
-// ======================================
-
-function vandaag() {
-
-    const datum = new Date();
-
-    const jaar =
-        datum.getFullYear();
-
-    const maand =
-        String(
-            datum.getMonth() + 1
-        ).padStart(2, "0");
-
-    const dag =
-        String(
-            datum.getDate()
-        ).padStart(2, "0");
-
-    return `${jaar}-${maand}-${dag}`;
-
 }
 
 
-// ======================================
-// BASIS STRUCTUUR LADEN
-// ======================================
+/* =========================================================
+   ACTIVITEIT KNOPPEN
+========================================================= */
 
-function basisStructuurLaden() {
+function activiteitKnoppenInstellen() {
 
-    const standaard =
-        structuredClone(
-            BASIS_CHECKLISTS
-        );
+    const knoppen = document.querySelectorAll(
+        ".basis-blok .activiteit-knop"
+    );
 
-    try {
+    knoppen.forEach((knop) => {
 
-        const opgeslagen =
-            localStorage.getItem(
-                OPSLAG_BASIS_STRUCTUUR
+        knop.addEventListener("click", () => {
+
+            const blok = knop.dataset.blok;
+            const activiteitId = knop.dataset.activiteit;
+
+            const activiteit = zoekBasisActiviteit(
+                blok,
+                activiteitId
             );
 
-        if (!opgeslagen) {
+            if (!activiteit) {
+                return;
+            }
 
-            basisStructuur =
-                standaard;
+            activiteitOpenen(
+                activiteit,
+                blok,
+                "basis"
+            );
 
-            basisStructuurOpslaan();
+        });
 
-            return;
+    });
+
+    basisKnoppenBijwerken();
+}
+
+
+/* =========================================================
+   MOEILIJKE DAG KNOPPEN
+========================================================= */
+
+function moeilijkeDagKnoppenInstellen() {
+
+    const knoppen = document.querySelectorAll(
+        ".moeilijk-activiteit"
+    );
+
+    knoppen.forEach((knop) => {
+
+        knop.addEventListener("click", () => {
+
+            const blok = knop.dataset.blok;
+            const activiteitId = knop.dataset.activiteit;
+
+            taakAfvinken(
+                blok,
+                activiteitId,
+                "moeilijk"
+            );
+
+        });
+
+    });
+
+    moeilijkeKnoppenBijwerken();
+}
+
+
+/* =========================================================
+   ACTIVITEIT OPENEN
+========================================================= */
+
+function activiteitOpenen(
+    activiteit,
+    blok,
+    modus
+) {
+
+    huidigeActiviteit = activiteit;
+    huidigeBlok = blok;
+    huidigeModus = modus;
+
+    activiteitTitel.textContent = activiteit.titel;
+
+    activiteitSubtitel.textContent =
+        activiteit.invoer
+            ? "Je kunt er iets korts bij zetten."
+            : "Goed bezig.";
+
+    activiteitStatusTitel.textContent =
+        activiteit.titel;
+
+    activiteitInhoud.innerHTML = "";
+
+
+    const sleutel = taakSleutel(
+        modus,
+        blok,
+        activiteit.id
+    );
+
+    const afgerond =
+        dagStatus.afgerond[sleutel] === true;
+
+    const antwoord =
+        dagStatus.antwoorden[sleutel] || "";
+
+
+    if (activiteit.extra && activiteit.extra.length > 0) {
+
+        extraOnderdelenTonen(
+            activiteit.extra,
+            sleutel
+        );
+
+    }
+
+
+    if (activiteit.invoer) {
+
+        const antwoordBlok =
+            document.createElement("div");
+
+        antwoordBlok.className =
+            "activiteit-antwoord-blok";
+
+
+        const antwoordLabel =
+            document.createElement("div");
+
+        antwoordLabel.className =
+            "activiteit-antwoord-label";
+
+        antwoordLabel.textContent =
+            antwoord
+                ? "Ingevuld:"
+                : "Nog niets ingevuld.";
+
+
+        antwoordBlok.appendChild(
+            antwoordLabel
+        );
+
+
+        if (antwoord) {
+
+            const antwoordTekst =
+                document.createElement("div");
+
+            antwoordTekst.className =
+                "activiteit-antwoord";
+
+            antwoordTekst.textContent =
+                antwoord;
+
+            antwoordBlok.appendChild(
+                antwoordTekst
+            );
 
         }
 
 
-        const gegevens =
-            JSON.parse(opgeslagen);
+        const invoerKnop =
+            document.createElement("button");
+
+        invoerKnop.type = "button";
+
+        invoerKnop.className =
+            "activiteit-invoer-knop";
+
+        invoerKnop.textContent =
+            antwoord
+                ? "✏️ Aanpassen"
+                : "＋ Iets invullen";
 
 
-        if (
-            !gegevens ||
-            typeof gegevens !== "object"
-        ) {
+        invoerKnop.addEventListener(
+            "click",
+            () => {
 
-            basisStructuur =
-                standaard;
-
-            basisStructuurOpslaan();
-
-            return;
-
-        }
-
-
-        basisStructuur =
-            gegevens;
-
-
-        /*
-         * Eventuele nieuwe standaardcategorieën
-         * worden toegevoegd zonder bestaande
-         * persoonlijke aanpassingen te verwijderen.
-         */
-
-        Object.keys(standaard).forEach(
-            (categorie) => {
-
-                if (
-                    !basisStructuur[categorie]
-                ) {
-
-                    basisStructuur[categorie] =
-                        standaard[categorie];
-
-                }
+                invoerOpenen(
+                    activiteit,
+                    sleutel
+                );
 
             }
         );
 
 
-        /*
-         * Oude opties die al bestonden blijven
-         * gewoon bestaan.
-         *
-         * We vervangen dus niets automatisch.
-         */
-
-        basisStructuurOpslaan();
-
-    } catch (fout) {
-
-        console.warn(
-            "Basisstructuur kon niet worden geladen.",
-            fout
+        antwoordBlok.appendChild(
+            invoerKnop
         );
 
-        basisStructuur =
-            standaard;
-
-        basisStructuurOpslaan();
-
+        activiteitInhoud.appendChild(
+            antwoordBlok
+        );
     }
 
+
+    activiteitStatusBijwerken(
+        afgerond
+    );
+
+
+    schermTonen(
+        activiteitScherm
+    );
 }
 
 
-// ======================================
-// BASIS STRUCTUUR OPSLAAN
-// ======================================
+/* =========================================================
+   EXTRA ONDERDELEN
+========================================================= */
 
-function basisStructuurOpslaan() {
+function extraOnderdelenTonen(
+    onderdelen,
+    sleutel
+) {
 
-    try {
+    const blok =
+        document.createElement("div");
 
-        localStorage.setItem(
-            OPSLAG_BASIS_STRUCTUUR,
-            JSON.stringify(
-                basisStructuur
-            )
-        );
+    blok.className =
+        "extra-onderdelen";
 
-    } catch (fout) {
 
-        console.warn(
-            "Basisstructuur kon niet worden opgeslagen.",
-            fout
+    const titel =
+        document.createElement("h3");
+
+    titel.textContent =
+        "Ook gedaan?";
+
+    blok.appendChild(titel);
+
+
+    const uitleg =
+        document.createElement("p");
+
+    uitleg.textContent =
+        "Tik aan wat je nog hebt gedaan.";
+
+    blok.appendChild(uitleg);
+
+
+    onderdelen.forEach(
+        (onderdeel, index) => {
+
+            const extraSleutel =
+                `${sleutel}::extra::${index}`;
+
+
+            const label =
+                document.createElement("label");
+
+            label.className =
+                "extra-onderdeel";
+
+
+            const checkbox =
+                document.createElement("input");
+
+            checkbox.type =
+                "checkbox";
+
+            checkbox.checked =
+                dagStatus.afgerond[
+                    extraSleutel
+                ] === true;
+
+
+            const tekst =
+                document.createElement("span");
+
+            tekst.textContent =
+                onderdeel;
+
+
+            checkbox.addEventListener(
+                "change",
+                () => {
+
+                    dagStatus.afgerond[
+                        extraSleutel
+                    ] = checkbox.checked;
+
+                    dagStatusOpslaan();
+
+                    if (checkbox.checked) {
+                        beloningTonen();
+                    }
+
+                }
+            );
+
+
+            label.appendChild(
+                checkbox
+            );
+
+            label.appendChild(
+                tekst
+            );
+
+            blok.appendChild(
+                label
+            );
+
+        }
+    );
+
+
+    activiteitInhoud.appendChild(
+        blok
+    );
+}
+
+
+/* =========================================================
+   KORTE INVOER OPENEN
+========================================================= */
+
+function invoerOpenen(
+    activiteit,
+    sleutel
+) {
+
+    if (!kortInvoerContainer) {
+        return;
+    }
+
+    huidigeActiviteit = activiteit;
+
+    kortInvoerTitel.textContent =
+        activiteit.titel;
+
+
+    kortInvoerUitleg.textContent =
+        "Een paar woorden is genoeg.";
+
+
+    kortInvoer.placeholder =
+        activiteit.placeholder ||
+        "Bijvoorbeeld: 5 km gelopen";
+
+
+    kortInvoer.value =
+        dagStatus.antwoorden[sleutel] ||
+        "";
+
+
+    kortInvoer.dataset.sleutel =
+        sleutel;
+
+
+    kortInvoerContainer.hidden =
+        false;
+
+
+    document.body.classList.add(
+        "invoer-open"
+    );
+
+
+    requestAnimationFrame(() => {
+
+        kortInvoer.focus();
+
+        kortInvoer.select();
+
+    });
+}
+
+
+/* =========================================================
+   INVOER OPSLAAN
+========================================================= */
+
+function invoerOpslaanHandler() {
+
+    if (!kortInvoer) {
+        return;
+    }
+
+
+    const sleutel =
+        kortInvoer.dataset.sleutel;
+
+
+    if (!sleutel) {
+        return;
+    }
+
+
+    const waarde =
+        kortInvoer.value.trim();
+
+
+    if (waarde) {
+
+        dagStatus.antwoorden[
+            sleutel
+        ] = waarde;
+
+    } else {
+
+        delete dagStatus.antwoorden[
+            sleutel
+        ];
+
+    }
+
+
+    dagStatus.afgerond[
+        sleutel
+    ] = true;
+
+
+    dagStatusOpslaan();
+
+
+    invoerSluiten();
+
+
+    if (
+        huidigeActiviteit &&
+        activiteitScherm &&
+        activiteitScherm.classList.contains("actief")
+    ) {
+
+        activiteitOpenen(
+            huidigeActiviteit,
+            huidigeBlok,
+            huidigeModus
         );
 
     }
 
+
+    beloningTonen();
 }
 
 
-// ======================================
-// DAGSTATUS LADEN
-// ======================================
+/* =========================================================
+   INVOER SLUITEN
+========================================================= */
+
+function invoerSluiten() {
+
+    if (!kortInvoerContainer) {
+        return;
+    }
+
+    kortInvoerContainer.hidden =
+        true;
+
+
+    document.body.classList.remove(
+        "invoer-open"
+    );
+
+
+    if (kortInvoer) {
+        kortInvoer.value = "";
+        kortInvoer.dataset.sleutel = "";
+    }
+}
+
+
+/* =========================================================
+   TAAK AFVINKEN
+========================================================= */
+
+function taakAfvinken(
+    blok,
+    activiteitId,
+    modus
+) {
+
+    const sleutel =
+        taakSleutel(
+            modus,
+            blok,
+            activiteitId
+        );
+
+
+    const wasAfgerond =
+        dagStatus.afgerond[sleutel] === true;
+
+
+    dagStatus.afgerond[sleutel] =
+        !wasAfgerond;
+
+
+    dagStatusOpslaan();
+
+
+    if (!wasAfgerond) {
+
+        beloningTonen();
+
+    }
+
+
+    if (modus === "basis") {
+
+        basisKnoppenBijwerken();
+
+        if (huidigeActiviteit) {
+
+            activiteitStatusBijwerken(
+                !wasAfgerond
+            );
+
+        }
+
+    } else {
+
+        moeilijkeKnoppenBijwerken();
+
+    }
+}
+
+
+/* =========================================================
+   ACTIVITEIT STATUS
+========================================================= */
+
+function activiteitStatusBijwerken(
+    afgerond
+) {
+
+    if (!activiteitStatus) {
+        return;
+    }
+
+
+    if (afgerond) {
+
+        activiteitStatus.classList.add(
+            "afgerond"
+        );
+
+
+        activiteitStatusIcoon.textContent =
+            "✓";
+
+
+        activiteitStatusTekst.textContent =
+            "Afgerond";
+
+
+        if (activiteitKlaarKnop) {
+
+            activiteitKlaarKnop.textContent =
+                "✓ Afgerond";
+
+            activiteitKlaarKnop.classList.add(
+                "afgerond"
+            );
+
+        }
+
+    } else {
+
+        activiteitStatus.classList.remove(
+            "afgerond"
+        );
+
+
+        activiteitStatusIcoon.textContent =
+            "○";
+
+
+        activiteitStatusTekst.textContent =
+            "Nog niet afgerond";
+
+
+        if (activiteitKlaarKnop) {
+
+            activiteitKlaarKnop.textContent =
+                "✓ Klaar";
+
+            activiteitKlaarKnop.classList.remove(
+                "afgerond"
+            );
+
+        }
+
+    }
+}
+
+
+/* =========================================================
+   BASIS KNOPPEN BIJWERKEN
+========================================================= */
+
+function basisKnoppenBijwerken() {
+
+    const knoppen =
+        document.querySelectorAll(
+            ".basis-blok .activiteit-knop"
+        );
+
+
+    knoppen.forEach((knop) => {
+
+        const blok =
+            knop.dataset.blok;
+
+        const activiteitId =
+            knop.dataset.activiteit;
+
+
+        const sleutel =
+            taakSleutel(
+                "basis",
+                blok,
+                activiteitId
+            );
+
+
+        const afgerond =
+            dagStatus.afgerond[
+                sleutel
+            ] === true;
+
+
+        knop.classList.toggle(
+            "afgerond",
+            afgerond
+        );
+
+
+        let antwoordElement =
+            knop.querySelector(
+                ".checklist-antwoord"
+            );
+
+
+        const antwoord =
+            dagStatus.antwoorden[
+                sleutel
+            ] || "";
+
+
+        if (antwoord) {
+
+            if (!antwoordElement) {
+
+                antwoordElement =
+                    document.createElement(
+                        "span"
+                    );
+
+                antwoordElement.className =
+                    "checklist-antwoord";
+
+                knop.appendChild(
+                    antwoordElement
+                );
+
+            }
+
+            antwoordElement.textContent =
+                antwoord;
+
+        } else if (antwoordElement) {
+
+            antwoordElement.remove();
+
+        }
+
+    });
+}
+
+
+/* =========================================================
+   MOEILIJKE DAG KNOPPEN BIJWERKEN
+========================================================= */
+
+function moeilijkeKnoppenBijwerken() {
+
+    const knoppen =
+        document.querySelectorAll(
+            ".moeilijk-activiteit"
+        );
+
+
+    knoppen.forEach((knop) => {
+
+        const blok =
+            knop.dataset.blok;
+
+        const activiteitId =
+            knop.dataset.activiteit;
+
+
+        const sleutel =
+            taakSleutel(
+                "moeilijk",
+                blok,
+                activiteitId
+            );
+
+
+        const afgerond =
+            dagStatus.afgerond[
+                sleutel
+            ] === true;
+
+
+        knop.classList.toggle(
+            "afgerond",
+            afgerond
+        );
+
+    });
+}
+
+
+/* =========================================================
+   ACTIVITEIT ZOEKEN
+========================================================= */
+
+function zoekBasisActiviteit(
+    blok,
+    activiteitId
+) {
+
+    const activiteiten =
+        BASIS_ACTIVITEITEN[blok];
+
+
+    if (!activiteiten) {
+        return null;
+    }
+
+
+    return activiteiten.find(
+        (activiteit) =>
+            activiteit.id === activiteitId
+    ) || null;
+}
+
+
+/* =========================================================
+   SLEUTEL
+========================================================= */
+
+function taakSleutel(
+    modus,
+    blok,
+    activiteitId
+) {
+
+    return `${modus}::${blok}::${activiteitId}`;
+}
+
+
+/* =========================================================
+   SCHERMEN
+========================================================= */
+
+function schermTonen(
+    scherm
+) {
+
+    const schermen =
+        document.querySelectorAll(
+            ".scherm"
+        );
+
+
+    schermen.forEach(
+        (item) => {
+
+            item.classList.remove(
+                "actief"
+            );
+
+        }
+    );
+
+
+    if (scherm) {
+
+        scherm.classList.add(
+            "actief"
+        );
+
+    }
+
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+
+    invoerSluiten();
+}
+
+
+/* =========================================================
+   TERUG NAAR VORIGE SCHERM
+========================================================= */
+
+function terugNaarVorigeScherm() {
+
+    if (huidigeModus === "moeilijk") {
+
+        schermTonen(
+            moeilijkScherm
+        );
+
+    } else {
+
+        schermTonen(
+            basisScherm
+        );
+
+    }
+
+
+    huidigeActiviteit = null;
+    huidigeBlok = null;
+}
+
+
+/* =========================================================
+   POSITIEVE FEEDBACK
+========================================================= */
+
+function beloningTonen() {
+
+    if (!beloning || !beloningTekst) {
+        return;
+    }
+
+
+    const willekeurig =
+        Math.floor(
+            Math.random() *
+            BELONINGEN.length
+        );
+
+
+    beloningTekst.textContent =
+        BELONINGEN[willekeurig];
+
+
+    beloning.hidden =
+        false;
+
+
+    beloning.classList.remove(
+        "beloningPop"
+    );
+
+
+    void beloning.offsetWidth;
+
+
+    beloning.classList.add(
+        "beloningPop"
+    );
+
+
+    clearTimeout(
+        beloning._timeout
+    );
+
+
+    beloning._timeout =
+        setTimeout(
+            () => {
+
+                beloning.hidden =
+                    true;
+
+            },
+            3000
+        );
+}
+
+
+/* =========================================================
+   DAGSTATUS LADEN
+========================================================= */
 
 function dagStatusLaden() {
 
-    const datumVandaag =
-        vandaag();
+    const vandaag =
+        vandaagDatum();
+
 
     try {
 
@@ -624,99 +1355,85 @@ function dagStatusLaden() {
         if (!opgeslagen) {
 
             dagStatus =
-                nieuweDagStatus(
-                    datumVandaag
+                nieuwDagStatus(
+                    vandaag
                 );
 
             dagStatusOpslaan();
 
             return;
-
         }
 
 
-        const gegevens =
-            JSON.parse(opgeslagen);
+        const data =
+            JSON.parse(
+                opgeslagen
+            );
 
-
-        /*
-         * Nieuwe dag?
-         *
-         * Dan ALLE dagelijkse vinkjes
-         * en korte antwoorden wissen.
-         */
 
         if (
-            !gegevens ||
-            gegevens.datum !== datumVandaag
+            !data ||
+            data.datum !== vandaag
         ) {
 
             dagStatus =
-                nieuweDagStatus(
-                    datumVandaag
+                nieuwDagStatus(
+                    vandaag
                 );
 
             dagStatusOpslaan();
 
             return;
-
         }
 
 
         dagStatus = {
-
-            datum: datumVandaag,
-
+            datum: vandaag,
             afgerond:
-                gegevens.afgerond || {},
-
-            invulling:
-                gegevens.invulling || {}
-
+                data.afgerond || {},
+            antwoorden:
+                data.antwoorden || {}
         };
 
 
-    } catch (fout) {
+    } catch (error) {
 
         console.warn(
-            "Dagstatus kon niet worden geladen.",
-            fout
+            "Anker: dagstatus kon niet worden geladen.",
+            error
         );
 
+
         dagStatus =
-            nieuweDagStatus(
-                datumVandaag
+            nieuwDagStatus(
+                vandaag
             );
 
         dagStatusOpslaan();
 
     }
-
 }
 
 
-// ======================================
-// NIEUWE DAGSTATUS
-// ======================================
+/* =========================================================
+   NIEUWE DAGSTATUS
+========================================================= */
 
-function nieuweDagStatus(datum) {
+function nieuwDagStatus(
+    datum
+) {
 
     return {
-
         datum: datum,
-
         afgerond: {},
-
-        invulling: {}
-
+        antwoorden: {}
     };
-
 }
 
 
-// ======================================
-// DAGSTATUS OPSLAAN
-// ======================================
+/* =========================================================
+   DAGSTATUS OPSLAAN
+========================================================= */
 
 function dagStatusOpslaan() {
 
@@ -729,2081 +1446,138 @@ function dagStatusOpslaan() {
             )
         );
 
-    } catch (fout) {
+    } catch (error) {
 
         console.warn(
-            "Dagstatus kon niet worden opgeslagen.",
-            fout
+            "Anker: dagstatus kon niet worden opgeslagen.",
+            error
         );
 
     }
-
 }
 
 
-// ======================================
-// DAGSTATUS CONTROLEREN
-// ======================================
+/* =========================================================
+   DATUM
+========================================================= */
 
-function dagStatusControleren() {
+function vandaagDatum() {
 
-    const datumVandaag =
-        vandaag();
+    const vandaag =
+        new Date();
+
+
+    const jaar =
+        vandaag.getFullYear();
+
+
+    const maand =
+        String(
+            vandaag.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const dag =
+        String(
+            vandaag.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    return `${jaar}-${maand}-${dag}`;
+}
+
+
+/* =========================================================
+   DAG CONTROLEREN
+========================================================= */
+
+function dagControle() {
+
+    const vandaag =
+        vandaagDatum();
+
 
     if (
-        dagStatus.datum !== datumVandaag
+        dagStatus.datum !==
+        vandaag
     ) {
 
         dagStatus =
-            nieuweDagStatus(
-                datumVandaag
+            nieuwDagStatus(
+                vandaag
             );
 
         dagStatusOpslaan();
 
     }
 
-}
 
+    basisKnoppenBijwerken();
 
-// ======================================
-// UNIEKE SLEUTEL
-// ======================================
-
-function taakSleutel(
-    checklistNaam,
-    optieId
-) {
-
-    return `${checklistNaam}::${optieId}`;
+    moeilijkeKnoppenBijwerken();
 
 }
 
 
-// ======================================
-// CONTROLEREN OF OPTIE AFGEROND IS
-// ======================================
-
-function optieIsAfgerond(
-    checklistNaam,
-    optieId
-) {
-
-    const sleutel =
-        taakSleutel(
-            checklistNaam,
-            optieId
-        );
-
-    return (
-        dagStatus.afgerond[sleutel] === true
-    );
-
-}
-
-
-// ======================================
-// INVULLING OPHALEN
-// ======================================
-
-function optieInvulling(
-    checklistNaam,
-    optieId
-) {
-
-    const sleutel =
-        taakSleutel(
-            checklistNaam,
-            optieId
-        );
-
-    return (
-        dagStatus.invulling[sleutel] || ""
-    );
-
-}
-
-
-// ======================================
-// GEBEURTENISSEN
-// ======================================
-
-function gebeurtenissenInstellen() {
-
-
-    // ==================================
-    // BASIS
-    // ==================================
-
-    if (basisKnop) {
-
-        basisKnop.addEventListener(
-            "click",
-            () => {
-
-                schermTonen(
-                    "basis"
-                );
-
-            }
-        );
-
-    }
-
-
-    // ==================================
-    // MOEILIJKE DAG
-    // ==================================
-
-    if (moeilijkKnop) {
-
-        moeilijkKnop.addEventListener(
-            "click",
-            () => {
-
-                schermTonen(
-                    "moeilijk"
-                );
-
-            }
-        );
-
-    }
-
-
-    // ==================================
-    // CHECKLIST TERUG
-    // ==================================
-
-    if (checklistTerugKnop) {
-
-        checklistTerugKnop.addEventListener(
-            "click",
-            () => {
-
-                optiesBewerkSluitenFunctie();
-
-                sluitKorteInvoer();
-
-                schermTonen(
-                    vorigeScherm
-                );
-
-            }
-        );
-
-    }
-
-
-    // ==================================
-    // BASIS CATEGORIEËN
-    // ==================================
-
-    const blokken =
-        document.querySelectorAll(
-            "#basisScherm .blok"
-        );
-
-
-    blokken.forEach(
-        (blok) => {
-
-            blok.addEventListener(
-                "click",
-                () => {
-
-                    const blokNaam =
-                        blok.dataset.blok;
-
-                    checklistOpenen(
-                        blokNaam
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    // ==================================
-    // MOEILIJKE DAG CATEGORIEËN
-    // ==================================
-
-    const moeilijkeBlokken =
-        document.querySelectorAll(
-            "#moeilijkScherm .blok"
-        );
-
-
-    moeilijkeBlokken.forEach(
-        (blok) => {
-
-            blok.addEventListener(
-                "click",
-                () => {
-
-                    const blokNaam =
-                        blok.dataset.blok;
-
-                    moeilijkeChecklistOpenen(
-                        blokNaam
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    // ==================================
-    // OPTIES AANPASSEN
-    // ==================================
-
-    if (basisBewerkKnop) {
-
-        basisBewerkKnop.addEventListener(
-            "click",
-            () => {
-
-                optiesBewerkOpenen();
-
-            }
-        );
-
-    }
-
-
-    if (optiesBewerkSluiten) {
-
-        optiesBewerkSluiten.addEventListener(
-            "click",
-            () => {
-
-                optiesBewerkSluitenFunctie();
-
-            }
-        );
-
-    }
-
-
-    // ==================================
-    // NIEUWE OPTIE
-    // ==================================
-
-    if (nieuweOptieToevoegen) {
-
-        nieuweOptieToevoegen.addEventListener(
-            "click",
-            () => {
-
-                nieuweOptieToevoegenFunctie();
-
-            }
-        );
-
-    }
-
-
-    // ==================================
-    // ENTER BIJ NIEUWE OPTIE
-    // ==================================
-
-    if (nieuweOptieNaam) {
-
-        nieuweOptieNaam.addEventListener(
-            "keydown",
-            (event) => {
-
-                if (
-                    event.key === "Enter"
-                ) {
-
-                    event.preventDefault();
-
-                    nieuweOptieToevoegenFunctie();
-
-                }
-
-            }
-        );
-
-    }
-
-
-    // ==================================
-    // KORTE INVOER OPSLAAN
-    // ==================================
-
-    if (kortInvoerOpslaan) {
-
-        kortInvoerOpslaan.addEventListener(
-            "click",
-            () => {
-
-                korteInvullingOpslaan();
-
-            }
-        );
-
-    }
-
-
-    // ==================================
-    // KORTE INVOER ANNULEREN
-    // ==================================
-
-    if (kortInvoerAnnuleren) {
-
-        kortInvoerAnnuleren.addEventListener(
-            "click",
-            () => {
-
-                sluitKorteInvoer();
-
-            }
-        );
-
-    }
-
-
-    // ==================================
-    // ENTER BIJ KORTE INVOER
-    // ==================================
-
-    if (kortInvoer) {
-
-        kortInvoer.addEventListener(
-            "keydown",
-            (event) => {
-
-                if (
-                    event.key === "Enter"
-                ) {
-
-                    event.preventDefault();
-
-                    korteInvullingOpslaan();
-
-                }
-
-                if (
-                    event.key === "Escape"
-                ) {
-
-                    event.preventDefault();
-
-                    sluitKorteInvoer();
-
-                }
-
-            }
-        );
-
-    }
-
-}
-
-
-// ======================================
-// SCHERM TONEN
-// ======================================
-
-function schermTonen(scherm) {
-
-    hoofdScherm.classList.remove(
-        "actief"
-    );
-
-    basisScherm.classList.remove(
-        "actief"
-    );
-
-    moeilijkScherm.classList.remove(
-        "actief"
-    );
-
-    checklistScherm.classList.remove(
-        "actief"
-    );
-
-
-    if (scherm === "hoofd") {
-
-        hoofdScherm.classList.add(
-            "actief"
-        );
-
-    }
-
-
-    if (scherm === "basis") {
-
-        basisScherm.classList.add(
-            "actief"
-        );
-
-    }
-
-
-    if (scherm === "moeilijk") {
-
-        moeilijkScherm.classList.add(
-            "actief"
-        );
-
-    }
-
-
-    if (scherm === "checklist") {
-
-        checklistScherm.classList.add(
-            "actief"
-        );
-
-    }
-
-
-    huidigScherm =
-        scherm;
-
-}
-
-
-// ======================================
-// BASIS CHECKLIST OPENEN
-// ======================================
-
-function checklistOpenen(
-    blokNaam
-) {
-
-    dagStatusControleren();
-
-
-    const gegevens =
-        basisStructuur[blokNaam];
-
-
-    if (!gegevens) {
-
-        return;
-
-    }
-
-
-    vorigeScherm =
-        "basis";
-
-    huidigeChecklist =
-        blokNaam;
-
-
-    checklistLabel.textContent =
-        "BASIS";
-
-
-    checklistTitel.textContent =
-        gegevens.titel;
-
-
-    checklistSubtitel.textContent =
-        gegevens.subtitel;
-
-
-    /*
-     * Bewerkknop alleen bij BASIS.
-     */
-
-    if (basisBewerkContainer) {
-
-        basisBewerkContainer.hidden =
-            false;
-
-    }
-
-
-    optiesBewerkScherm.hidden =
-        true;
-
-
-    checklist.innerHTML =
-        "";
-
-
-    beloningVerbergen();
-
-
-    gegevens.opties.forEach(
-        (optie) => {
-
-            const item =
-                checklistItemMaken(
-                    blokNaam,
-                    optie
-                );
-
-            checklist.appendChild(
-                item
-            );
-
-        }
-    );
-
-
-    schermTonen(
-        "checklist"
-    );
-
-}
-
-
-// ======================================
-// MOEILIJKE DAG CHECKLIST OPENEN
-// ======================================
-
-function moeilijkeChecklistOpenen(
-    blokNaam
-) {
-
-    dagStatusControleren();
-
-
-    const gegevens =
-        MOEILIJKE_DAG_CHECKLISTS[
-            blokNaam
-        ];
-
-
-    if (!gegevens) {
-
-        return;
-
-    }
-
-
-    vorigeScherm =
-        "moeilijk";
-
-
-    huidigeChecklist =
-        blokNaam;
-
-
-    checklistLabel.textContent =
-        "MOEILIJKE DAG";
-
-
-    checklistTitel.textContent =
-        gegevens.titel;
-
-
-    checklistSubtitel.textContent =
-        gegevens.subtitel;
-
-
-    /*
-     * Bewerkfunctie verbergen.
-     */
-
-    if (basisBewerkContainer) {
-
-        basisBewerkContainer.hidden =
-            true;
-
-    }
-
-
-    optiesBewerkScherm.hidden =
-        true;
-
-
-    checklist.innerHTML =
-        "";
-
-
-    beloningVerbergen();
-
-
-    gegevens.taken.forEach(
-        (taak) => {
-
-            const item =
-                moeilijkeTaakMaken(
-                    blokNaam,
-                    taak
-                );
-
-            checklist.appendChild(
-                item
-            );
-
-        }
-    );
-
-
-    schermTonen(
-        "checklist"
-    );
-
-}
-
-
-// ======================================
-// BASIS CHECKLIST ITEM MAKEN
-// ======================================
-
-function checklistItemMaken(
-    blokNaam,
-    optie
-) {
-
-    const item =
-        document.createElement(
-            "button"
-        );
-
-
-    item.type =
-        "button";
-
-
-    item.className =
-        "checklist-item";
-
-
-    const checkbox =
-        document.createElement(
-            "span"
-        );
-
-
-    checkbox.className =
-        "checklist-checkbox";
-
-
-    const tekst =
-        document.createElement(
-            "span"
-        );
-
-
-    tekst.className =
-        "checklist-tekst";
-
-
-    tekst.textContent =
-        optie.tekst;
-
-
-    const sleutel =
-        taakSleutel(
-            blokNaam,
-            optie.id
-        );
-
-
-    const afgerond =
-        dagStatus.afgerond[
-            sleutel
-        ] === true;
-
-
-    const invulling =
-        dagStatus.invulling[
-            sleutel
-        ] || "";
-
-
-    if (afgerond) {
-
-        item.classList.add(
-            "afgerond"
-        );
-
-        checkbox.textContent =
-            "✓";
-
-    } else {
-
-        checkbox.textContent =
-            "";
-
-    }
-
-
-    item.appendChild(
-        checkbox
-    );
-
-
-    item.appendChild(
-        tekst
-    );
-
-
-    /*
-     * Wanneer er vandaag een korte
-     * invulling is opgeslagen, tonen
-     * we die onder / naast de optie.
-     */
-
-    if (
-        afgerond &&
-        invulling
-    ) {
-
-        const antwoord =
-            document.createElement(
-                "span"
-            );
-
-
-        antwoord.className =
-            "checklist-antwoord";
-
-
-        antwoord.textContent =
-            invulling;
-
-
-        item.appendChild(
-            antwoord
-        );
-
-    }
-
-
-    item.addEventListener(
-        "click",
-        () => {
-
-            basisOptieKlik(
-                item,
-                checkbox,
-                blokNaam,
-                optie
-            );
-
-        }
-    );
-
-
-    return item;
-
-}
-
-
-// ======================================
-// MOEILIJKE DAG ITEM MAKEN
-// ======================================
-
-function moeilijkeTaakMaken(
-    blokNaam,
-    taak
-) {
-
-    const item =
-        document.createElement(
-            "button"
-        );
-
-
-    item.type =
-        "button";
-
-
-    item.className =
-        "checklist-item";
-
-
-    const checkbox =
-        document.createElement(
-            "span"
-        );
-
-
-    checkbox.className =
-        "checklist-checkbox";
-
-
-    const tekst =
-        document.createElement(
-            "span"
-        );
-
-
-    tekst.className =
-        "checklist-tekst";
-
-
-    tekst.textContent =
-        taak;
-
-
-    const sleutel =
-        taakSleutel(
-            blokNaam,
-            taak
-        );
-
-
-    if (
-        dagStatus.afgerond[sleutel]
-    ) {
-
-        item.classList.add(
-            "afgerond"
-        );
-
-        checkbox.textContent =
-            "✓";
-
-    }
-
-
-    item.appendChild(
-        checkbox
-    );
-
-
-    item.appendChild(
-        tekst
-    );
-
-
-    item.addEventListener(
-        "click",
-        () => {
-
-            moeilijkeTaakAfvinken(
-                item,
-                checkbox,
-                blokNaam,
-                taak
-            );
-
-        }
-    );
-
-
-    return item;
-
-}
-
-
-// ======================================
-// BASIS OPTIE KLIKKEN
-// ======================================
-
-function basisOptieKlik(
-    item,
-    checkbox,
-    blokNaam,
-    optie
-) {
-
-    const sleutel =
-        taakSleutel(
-            blokNaam,
-            optie.id
-        );
-
-
-    /*
-     * Staat hij al aan?
-     * Dan weer uitzetten.
-     */
-
-    if (
-        item.classList.contains(
-            "afgerond"
-        )
-    ) {
-
-        item.classList.remove(
-            "afgerond"
-        );
-
-        checkbox.textContent =
-            "";
-
-
-        delete dagStatus.afgerond[
-            sleutel
-        ];
-
-
-        delete dagStatus.invulling[
-            sleutel
-        ];
-
-
-        dagStatusOpslaan();
-
-
-        /*
-         * Opnieuw tekenen zodat een eventueel
-         * opgeslagen steekwoord verdwijnt.
-         */
-
-        checklistOpnieuwTekenen();
-
-
-        return;
-
-    }
-
-
-    /*
-     * Heeft deze optie een korte invoer?
-     */
-
-    if (optie.invoer) {
-
-        huidigeOptieVoorInvoer = {
-
-            blokNaam:
-                blokNaam,
-
-            optie:
-                optie,
-
-            item:
-                item,
-
-            checkbox:
-                checkbox
-
-        };
-
-
-        korteInvoerOpenen(
-            optie
-        );
-
-
-        return;
-
-    }
-
-
-    /*
-     * Gewoon afvinken.
-     */
-
-    item.classList.add(
-        "afgerond"
-    );
-
-    checkbox.textContent =
-        "✓";
-
-
-    dagStatus.afgerond[
-        sleutel
-    ] = true;
-
-
-    dagStatusOpslaan();
-
-
-    beloningTonen();
-
-}
-
-
-// ======================================
-// MOEILIJKE DAG AFVINKEN
-// ======================================
-
-function moeilijkeTaakAfvinken(
-    item,
-    checkbox,
-    blokNaam,
-    taak
-) {
-
-    const sleutel =
-        taakSleutel(
-            blokNaam,
-            taak
-        );
-
-
-    if (
-        item.classList.contains(
-            "afgerond"
-        )
-    ) {
-
-        item.classList.remove(
-            "afgerond"
-        );
-
-        checkbox.textContent =
-            "";
-
-
-        delete dagStatus.afgerond[
-            sleutel
-        ];
-
-
-        dagStatusOpslaan();
-
-
-        return;
-
-    }
-
-
-    item.classList.add(
-        "afgerond"
-    );
-
-
-    checkbox.textContent =
-        "✓";
-
-
-    dagStatus.afgerond[
-        sleutel
-    ] = true;
-
-
-    dagStatusOpslaan();
-
-
-    beloningTonen();
-
-}
-
-
-// ======================================
-// KORTE INVOER OPENEN
-// ======================================
-
-function korteInvoerOpenen(
-    optie
-) {
-
-    if (!kortInvoerContainer) {
-
-        return;
-
-    }
-
-
-    kortInvoerTitel.textContent =
-        optie.tekst;
-
-
-    kortInvoerUitleg.textContent =
-        "Eén kort woord is genoeg.";
-
-
-    kortInvoer.value =
-        "";
-
-
-    kortInvoerContainer.hidden =
-        false;
-
-
-    /*
-     * Kleine vertraging zodat de browser
-     * eerst het veld zichtbaar maakt.
-     */
-
-    setTimeout(
-        () => {
-
-            kortInvoer.focus();
-
-        },
-        50
-    );
-
-}
-
-
-// ======================================
-// KORTE INVOER SLUITEN
-// ======================================
-
-function sluitKorteInvoer() {
-
-    if (!kortInvoerContainer) {
-
-        return;
-
-    }
-
-
-    kortInvoerContainer.hidden =
-        true;
-
-
-    if (kortInvoer) {
-
-        kortInvoer.value =
-            "";
-
-    }
-
-
-    huidigeOptieVoorInvoer =
-        null;
-
-}
-
-
-// ======================================
-// KORTE INVULLING OPSLAAN
-// ======================================
-
-function korteInvullingOpslaan() {
-
-    if (
-        !huidigeOptieVoorInvoer
-    ) {
-
-        return;
-
-    }
-
-
-    const waarde =
-        kortInvoer.value.trim();
-
-
-    const blokNaam =
-        huidigeOptieVoorInvoer.blokNaam;
-
-
-    const optie =
-        huidigeOptieVoorInvoer.optie;
-
-
-    const sleutel =
-        taakSleutel(
-            blokNaam,
-            optie.id
-        );
-
-
-    /*
-     * Een leeg veld mag ook.
-     *
-     * Zo kan iemand alsnog gewoon aangeven:
-     * "dit heb ik gedaan", zonder verplicht
-     * iets te moeten invullen.
-     */
-
-    dagStatus.afgerond[
-        sleutel
-    ] = true;
-
-
-    if (waarde) {
-
-        dagStatus.invulling[
-            sleutel
-        ] = waarde;
-
-    } else {
-
-        delete dagStatus.invulling[
-            sleutel
-        ];
-
-    }
-
-
-    dagStatusOpslaan();
-
-
-    sluitKorteInvoer();
-
-
-    checklistOpnieuwTekenen();
-
-
-    beloningTonen();
-
-}
-
-
-// ======================================
-// CHECKLIST OPNIEUW TEKENEN
-// ======================================
-
-function checklistOpnieuwTekenen() {
-
-    if (!huidigeChecklist) {
-
-        return;
-
-    }
-
-
-    if (
-        basisStructuur[
-            huidigeChecklist
-        ]
-    ) {
-
-        const gegevens =
-            basisStructuur[
-                huidigeChecklist
-            ];
-
-
-        checklist.innerHTML =
-            "";
-
-
-        gegevens.opties.forEach(
-            (optie) => {
-
-                checklist.appendChild(
-                    checklistItemMaken(
-                        huidigeChecklist,
-                        optie
-                    )
-                );
-
-            }
-        );
-
-
-        return;
-
-    }
-
-
-    if (
-        MOEILIJKE_DAG_CHECKLISTS[
-            huidigeChecklist
-        ]
-    ) {
-
-        const gegevens =
-            MOEILIJKE_DAG_CHECKLISTS[
-                huidigeChecklist
-            ];
-
-
-        checklist.innerHTML =
-            "";
-
-
-        gegevens.taken.forEach(
-            (taak) => {
-
-                checklist.appendChild(
-                    moeilijkeTaakMaken(
-                        huidigeChecklist,
-                        taak
-                    )
-                );
-
-            }
-        );
-
-    }
-
-}
-
-
-// ======================================
-// OPTIES BEWERKEN OPENEN
-// ======================================
-
-function optiesBewerkOpenen() {
-
-    if (
-        !basisStructuur[
-            huidigeChecklist
-        ]
-    ) {
-
-        return;
-
-    }
-
-
-    optiesEditorVullen();
-
-
-    optiesBewerkScherm.hidden =
-        false;
-
-
-    if (nieuweOptieNaam) {
-
-        nieuweOptieNaam.value =
-            "";
-
-    }
-
-
-    if (nieuweOptieInvoer) {
-
-        nieuweOptieInvoer.checked =
-            false;
-
-    }
-
-
-    setTimeout(
-        () => {
-
-            if (nieuweOptieNaam) {
-
-                nieuweOptieNaam.focus();
-
-            }
-
-        },
-        50
-    );
-
-}
-
-
-// ======================================
-// OPTIES BEWERKEN SLUITEN
-// ======================================
-
-function optiesBewerkSluitenFunctie() {
-
-    if (!optiesBewerkScherm) {
-
-        return;
-
-    }
-
-
-    optiesBewerkScherm.hidden =
-        true;
-
-}
-
-
-// ======================================
-// OPTIES EDITOR VULLEN
-// ======================================
-
-function optiesEditorVullen() {
-
-    if (!optiesEditor) {
-
-        return;
-
-    }
-
-
-    const gegevens =
-        basisStructuur[
-            huidigeChecklist
-        ];
-
-
-    if (!gegevens) {
-
-        return;
-
-    }
-
-
-    optiesEditor.innerHTML =
-        "";
-
-
-    gegevens.opties.forEach(
-        (optie, index) => {
-
-            const rij =
-                document.createElement(
-                    "div"
-                );
-
-
-            rij.className =
-                "optie-editor-rij";
-
-
-            /*
-             * Nummer
-             */
-
-            const nummer =
-                document.createElement(
-                    "span"
-                );
-
-
-            nummer.className =
-                "optie-editor-nummer";
-
-
-            nummer.textContent =
-                `${index + 1}.`;
-
-
-            /*
-             * Inhoud
-             */
-
-            const inhoud =
-                document.createElement(
-                    "div"
-                );
-
-
-            inhoud.className =
-                "optie-editor-inhoud";
-
-
-            /*
-             * Naam
-             */
-
-            const input =
-                document.createElement(
-                    "input"
-                );
-
-
-            input.type =
-                "text";
-
-
-            input.className =
-                "optie-editor-input";
-
-
-            input.value =
-                optie.tekst;
-
-
-            input.maxLength =
-                60;
-
-
-            input.autocomplete =
-                "off";
-
-
-            input.setAttribute(
-                "aria-label",
-                "Naam van optie"
-            );
-
-
-            /*
-             * Kort antwoord
-             */
-
-            const invoerLabel =
-                document.createElement(
-                    "label"
-                );
-
-
-            invoerLabel.className =
-                "optie-editor-invoer";
-
-
-            const invoerCheckbox =
-                document.createElement(
-                    "input"
-                );
-
-
-            invoerCheckbox.type =
-                "checkbox";
-
-
-            invoerCheckbox.checked =
-                optie.invoer === true;
-
-
-            const invoerTekst =
-                document.createElement(
-                    "span"
-                );
-
-
-            invoerTekst.textContent =
-                "Kort antwoord vragen";
-
-
-            invoerLabel.appendChild(
-                invoerCheckbox
-            );
-
-
-            invoerLabel.appendChild(
-                invoerTekst
-            );
-
-
-            /*
-             * Opslaan knop
-             */
-
-            const opslaan =
-                document.createElement(
-                    "button"
-                );
-
-
-            opslaan.type =
-                "button";
-
-
-            opslaan.className =
-                "optie-opslaan-knop";
-
-
-            opslaan.textContent =
-                "Opslaan";
-
-
-            /*
-             * Verwijderen
-             */
-
-            const verwijderen =
-                document.createElement(
-                    "button"
-                );
-
-
-            verwijderen.type =
-                "button";
-
-
-            verwijderen.className =
-                "optie-verwijder-knop";
-
-
-            verwijderen.textContent =
-                "Verwijder";
-
-
-            /*
-             * Opslaan actie
-             */
-
-            opslaan.addEventListener(
-                "click",
-                () => {
-
-                    const nieuweNaam =
-                        input.value.trim();
-
-
-                    if (!nieuweNaam) {
-
-                        input.focus();
-
-                        return;
-
-                    }
-
-
-                    const oudeId =
-                        optie.id;
-
-
-                    optie.tekst =
-                        nieuweNaam;
-
-
-                    optie.invoer =
-                        invoerCheckbox.checked;
-
-
-                    /*
-                     * De ID blijft gelijk.
-                     *
-                     * Hierdoor blijven eventuele
-                     * dagelijkse gegevens technisch
-                     * gekoppeld aan dezelfde optie.
-                     */
-
-                    basisStructuurOpslaan();
-
-
-                    /*
-                     * Eventueel opgeslagen dagstatus
-                     * blijft behouden.
-                     */
-
-                    checklistOpnieuwTekenen();
-
-
-                    optiesEditorVullen();
-
-
-                }
-            );
-
-
-            /*
-             * Ook direct opslaan met Enter.
-             */
-
-            input.addEventListener(
-                "keydown",
-                (event) => {
-
-                    if (
-                        event.key === "Enter"
-                    ) {
-
-                        event.preventDefault();
-
-                        opslaan.click();
-
-                    }
-
-                }
-            );
-
-
-            /*
-             * Verwijderen
-             */
-
-            verwijderen.addEventListener(
-                "click",
-                () => {
-
-                    if (
-                        gegevens.opties.length <= 1
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    gegevens.opties =
-                        gegevens.opties.filter(
-                            (item) =>
-                                item.id !==
-                                optie.id
-                        );
-
-
-                    basisStructuurOpslaan();
-
-
-                    /*
-                     * Oude dagelijkse status
-                     * van deze optie opruimen.
-                     */
-
-                    verwijderDaggegevensVoorOptie(
-                        huidigeChecklist,
-                        oudeId
-                    );
-
-
-                    checklistOpnieuwTekenen();
-
-
-                    optiesEditorVullen();
-
-                }
-            );
-
-
-            inhoud.appendChild(
-                input
-            );
-
-
-            inhoud.appendChild(
-                invoerLabel
-            );
-
-
-            const acties =
-                document.createElement(
-                    "div"
-                );
-
-
-            acties.className =
-                "optie-editor-acties";
-
-
-            acties.appendChild(
-                opslaan
-            );
-
-
-            acties.appendChild(
-                verwijderen
-            );
-
-
-            rij.appendChild(
-                nummer
-            );
-
-
-            rij.appendChild(
-                inhoud
-            );
-
-
-            rij.appendChild(
-                acties
-            );
-
-
-            optiesEditor.appendChild(
-                rij
-            );
-
-        }
-    );
-
-}
-
-
-// ======================================
-// NIEUWE OPTIE TOEVOEGEN
-// ======================================
-
-function nieuweOptieToevoegenFunctie() {
-
-    if (!huidigeChecklist) {
-
-        return;
-
-    }
-
-
-    const gegevens =
-        basisStructuur[
-            huidigeChecklist
-        ];
-
-
-    if (!gegevens) {
-
-        return;
-
-    }
-
-
-    const naam =
-        nieuweOptieNaam.value.trim();
-
-
-    if (!naam) {
-
-        nieuweOptieNaam.focus();
-
-        return;
-
-    }
-
-
-    /*
-     * Unieke ID maken.
-     */
-
-    const id =
-        uniekeOptieId(
-            huidigeChecklist,
-            naam
-        );
-
-
-    gegevens.opties.push({
-
-        id: id,
-
-        tekst: naam,
-
-        invoer:
-            nieuweOptieInvoer.checked
-
-    });
-
-
-    basisStructuurOpslaan();
-
-
-    nieuweOptieNaam.value =
-        "";
-
-
-    nieuweOptieInvoer.checked =
-        false;
-
-
-    checklistOpnieuwTekenen();
-
-
-    optiesEditorVullen();
-
-
-    nieuweOptieNaam.focus();
-
-}
-
-
-// ======================================
-// UNIEKE OPTIE ID
-// ======================================
-
-function uniekeOptieId(
-    categorie,
-    tekst
-) {
-
-    let basis =
-        tekst
-            .toLowerCase()
-            .trim()
-            .replace(
-                /[^a-z0-9À-ÿ]+/gi,
-                "-"
-            )
-            .replace(
-                /^-+|-+$/g,
-                ""
-            );
-
-
-    if (!basis) {
-
-        basis =
-            "optie";
-
-    }
-
-
-    let id =
-        basis;
-
-    let teller =
-        2;
-
-
-    const bestaande =
-        basisStructuur[
-            categorie
-        ]?.opties || [];
-
-
-    while (
-        bestaande.some(
-            (optie) =>
-                optie.id === id
-        )
-    ) {
-
-        id =
-            `${basis}-${teller}`;
-
-        teller++;
-
-    }
-
-
-    return id;
-
-}
-
-
-// ======================================
-// DAGGEGEVENS VAN VERWIJDERDE OPTIE
-// OPRUIMEN
-// ======================================
-
-function verwijderDaggegevensVoorOptie(
-    categorie,
-    optieId
-) {
-
-    const sleutel =
-        taakSleutel(
-            categorie,
-            optieId
-        );
-
-
-    delete dagStatus.afgerond[
-        sleutel
-    ];
-
-
-    delete dagStatus.invulling[
-        sleutel
-    ];
-
-
-    dagStatusOpslaan();
-
-}
-
-
-// ======================================
-// POSITIEVE FEEDBACK TONEN
-// ======================================
-
-function beloningTonen() {
-
-    if (!beloning) {
-
-        return;
-
-    }
-
-
-    const index =
-        Math.floor(
-            Math.random() *
-            BELONINGEN.length
-        );
-
-
-    const boodschap =
-        BELONINGEN[index];
-
-
-    if (beloningTekst) {
-
-        beloningTekst.textContent =
-            boodschap;
-
-    } else {
-
-        beloning.textContent =
-            boodschap;
-
-    }
-
-
-    beloning.hidden =
-        false;
-
-
-    beloning.classList.remove(
-        "zichtbaar"
-    );
-
-
-    /*
-     * Forceer nieuwe animatie.
-     */
-
-    void beloning.offsetWidth;
-
-
-    beloning.classList.add(
-        "zichtbaar"
-    );
-
-
-    /*
-     * Feedback verdwijnt niet meteen.
-     *
-     * Hij blijft zichtbaar zodat het
-     * positieve moment echt even blijft staan.
-     */
-
-}
-
-
-// ======================================
-// POSITIEVE FEEDBACK VERBERGEN
-// ======================================
-
-function beloningVerbergen() {
-
-    if (!beloning) {
-
-        return;
-
-    }
-
-
-    beloning.classList.remove(
-        "zichtbaar"
-    );
-
-
-    beloning.hidden =
-        true;
-
-}
-
-
-// ======================================
-// SERVICE WORKER
-// ======================================
+/* =========================================================
+   SERVICE WORKER
+========================================================= */
 
 function serviceWorkerRegistreren() {
 
     if (
-        "serviceWorker" in navigator
+        !("serviceWorker" in navigator)
     ) {
-
-        navigator.serviceWorker
-            .register("sw.js")
-            .then(
-                () => {
-
-                    console.log(
-                        "Anker service worker geregistreerd."
-                    );
-
-                }
-            )
-            .catch(
-                (fout) => {
-
-                    console.warn(
-                        "Service worker kon niet worden geregistreerd.",
-                        fout
-                    );
-
-                }
-            );
-
+        return;
     }
 
+
+    window.addEventListener(
+        "load",
+        () => {
+
+            navigator.serviceWorker
+                .register(
+                    "sw.js"
+                )
+                .then(
+                    (registration) => {
+
+                        console.log(
+                            "Anker service worker actief:",
+                            registration.scope
+                        );
+
+                    }
+                )
+                .catch(
+                    (error) => {
+
+                        console.warn(
+                            "Anker service worker kon niet worden geregistreerd:",
+                            error
+                        );
+
+                    }
+                );
+
+        }
+    );
 }
 
 
-// ======================================
-// SERVICE WORKER STARTEN
-// ======================================
+/* =========================================================
+   MIDDERNACHT
+   Controleert automatisch of er een nieuwe dag is.
+========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        serviceWorkerRegistreren();
-
-    }
+setInterval(
+    dagControle,
+    60 * 1000
 );
-
-
-// ======================================
-// EINDE
-// ======================================

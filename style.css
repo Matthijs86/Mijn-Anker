@@ -4,16 +4,18 @@
    ========================================================= */
 
 :root {
-    --achtergrond: #f3f5f4;
+    --achtergrond: #eef2f0;
+    --achtergrond-donker: #e3e9e6;
+
     --kaart: #ffffff;
-    --kaart-border: #dfe5e2;
+    --kaart-border: #d8e1dd;
 
     --tekst: #183b3d;
-    --tekst-zacht: #607071;
+    --tekst-zacht: #667777;
 
     --groen: #3f7770;
     --groen-donker: #2e5d57;
-    --groen-licht: #e6f1ee;
+    --groen-licht: #e5f1ee;
 
     --blauw: #55758c;
     --blauw-licht: #e8eef2;
@@ -36,7 +38,7 @@
         0 6px 20px rgba(24, 59, 61, 0.10);
 
     --schaduw-groot:
-        0 16px 40px rgba(24, 59, 61, 0.18);
+        0 18px 45px rgba(24, 59, 61, 0.20);
 
     --radius-klein: 10px;
     --radius-midden: 16px;
@@ -61,7 +63,13 @@ body {
     margin: 0;
     min-height: 100vh;
 
-    background: var(--achtergrond);
+    background:
+        linear-gradient(
+            180deg,
+            #e9efec 0%,
+            var(--achtergrond) 280px
+        );
+
     color: var(--tekst);
 
     font-family:
@@ -74,18 +82,28 @@ body {
     line-height: 1.5;
 }
 
+button,
+input {
+    font-family: inherit;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
 
 /* =========================================================
    APP
    ========================================================= */
 
-.app {
+#app {
     width: 100%;
     min-height: 100vh;
 }
 
 .scherm {
     display: none;
+
     width: 100%;
     min-height: 100vh;
 }
@@ -96,137 +114,127 @@ body {
 
 
 /* =========================================================
-   ALGEMENE INHOUD
+   HOOFDSCHERM
    ========================================================= */
 
-.inhoud {
-    width: min(100% - 32px, 700px);
-    margin: 0 auto;
-    padding: 24px 0 40px;
-}
+.app-header {
+    width: 100%;
 
-h1,
-h2,
-h3,
-p {
-    margin-top: 0;
-}
-
-h2 {
-    margin-bottom: 8px;
-
-    font-size: 24px;
-    line-height: 1.2;
-}
-
-h3 {
-    margin-bottom: 0;
-}
-
-.tekst-uitleg {
-    margin-bottom: 22px;
-
-    color: var(--tekst-zacht);
-}
-
-
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-.header {
     padding:
-        calc(22px + env(safe-area-inset-top))
+        calc(24px + env(safe-area-inset-top))
         20px
-        20px;
+        24px;
 
     background: var(--tekst);
     color: white;
 
-    text-align: center;
+    box-shadow:
+        0 4px 18px rgba(24, 59, 61, 0.15);
 }
 
-.header h1 {
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.logo-icoon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 54px;
+    height: 54px;
+
+    border-radius: 17px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    font-size: 31px;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.logo h1 {
     margin: 0;
 
-    font-size: 28px;
-    font-weight: 800;
-    letter-spacing: -0.5px;
+    font-size: 30px;
+    line-height: 1;
+
+    font-weight: 850;
+    letter-spacing: -0.6px;
 }
 
-.header p {
-    margin: 4px 0 0;
+.logo p {
+    margin: 5px 0 0;
 
-    color: rgba(255, 255, 255, 0.78);
+    color: rgba(255, 255, 255, 0.72);
 
     font-size: 14px;
 }
 
 
 /* =========================================================
-   TERUG-KNOP
+   WELKOM
    ========================================================= */
 
-.terug-knop {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
+.welkom {
+    width: min(100% - 32px, 700px);
 
-    margin-bottom: 20px;
-    padding: 9px 14px;
+    margin: 0 auto;
 
-    border: 1px solid var(--kaart-border);
-    border-radius: 999px;
-
-    background: var(--kaart);
-    color: var(--tekst);
-
-    font: inherit;
-    font-size: 14px;
-    font-weight: 650;
-
-    cursor: pointer;
-
-    box-shadow: var(--schaduw-klein);
-
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease,
-        background 0.15s ease;
+    padding:
+        34px 0
+        22px;
 }
 
-.terug-knop:hover {
-    background: var(--groen-licht);
+.welkom h2 {
+    margin: 0 0 7px;
+
+    font-size: 25px;
+    line-height: 1.2;
+
+    letter-spacing: -0.3px;
 }
 
-.terug-knop:active {
-    transform: scale(0.97);
+.welkom p {
+    margin: 0;
+
+    color: var(--tekst-zacht);
+
+    font-size: 15px;
 }
 
 
 /* =========================================================
-   HOOFDSCHERM
+   MODUS KEUZE
    ========================================================= */
 
-.start-keuze {
+.modus-keuze {
     display: grid;
     gap: 16px;
 
-    margin-top: 30px;
+    width: min(100% - 32px, 700px);
+
+    margin: 0 auto;
+
+    padding-bottom: 40px;
 }
 
-
-/*
-   Grote hoofdknoppen van Anker.
-*/
-
-.start-knop {
-    display: block;
+.modus-knop {
+    display: flex;
+    align-items: center;
+    gap: 18px;
 
     width: 100%;
-    min-height: 120px;
+    min-height: 118px;
 
-    padding: 24px;
+    padding: 22px;
 
     border: 1px solid var(--kaart-border);
     border-radius: var(--radius-groot);
@@ -234,7 +242,6 @@ h3 {
     background: var(--kaart);
     color: var(--tekst);
 
-    font: inherit;
     text-align: left;
 
     cursor: pointer;
@@ -247,38 +254,108 @@ h3 {
         border-color 0.15s ease;
 }
 
-.start-knop:hover {
-    transform: translateY(-2px);
+.modus-knop:hover {
+    transform: translateY(-3px);
 
-    border-color: #cbdad7;
+    border-color: #c4d5d0;
 
     box-shadow: var(--schaduw-groot);
 }
 
-.start-knop:active {
-    transform: scale(0.98);
+.modus-knop:active {
+    transform: scale(0.985);
 }
 
-.start-knop .icoon {
-    display: block;
 
-    margin-bottom: 10px;
+/* BASIS */
 
-    font-size: 34px;
-    line-height: 1;
+.basis-knop {
+    border-left: 5px solid var(--groen);
 }
 
-.start-knop .titel {
-    display: block;
-
-    font-size: 21px;
-    font-weight: 800;
+.basis-knop .modus-icoon {
+    background: var(--groen-licht);
 }
 
-.start-knop .uitleg {
-    display: block;
 
-    margin-top: 4px;
+/* MOEILIJKE DAG */
+
+.moeilijk-knop {
+    border-left: 5px solid var(--oranje);
+}
+
+.moeilijk-knop .modus-icoon {
+    background: var(--oranje-licht);
+}
+
+
+/* Iconen */
+
+.modus-icoon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 64px;
+    min-width: 64px;
+    height: 64px;
+
+    border-radius: 19px;
+
+    font-size: 32px;
+}
+
+.modus-tekst {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.modus-tekst strong {
+    font-size: 20px;
+    font-weight: 850;
+
+    letter-spacing: 0.2px;
+}
+
+.modus-tekst small {
+    color: var(--tekst-zacht);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   SCHERM HEADERS
+   ========================================================= */
+
+.scherm-header {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    width: min(100% - 32px, 700px);
+
+    margin: 0 auto;
+
+    padding:
+        calc(20px + env(safe-area-inset-top))
+        0
+        22px;
+}
+
+.scherm-header h2 {
+    margin: 0;
+
+    font-size: 23px;
+    line-height: 1.15;
+
+    letter-spacing: -0.3px;
+}
+
+.scherm-header p {
+    margin: 4px 0 0;
 
     color: var(--tekst-zacht);
 
@@ -287,30 +364,73 @@ h3 {
 
 
 /* =========================================================
-   BASIS SCHERM
+   TERUG-KNOP
    ========================================================= */
 
-#basisScherm .inhoud {
-    padding-top: 22px;
+.terug-knop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+
+    padding: 0;
+
+    border: 1px solid var(--kaart-border);
+    border-radius: 50%;
+
+    background: var(--kaart);
+    color: var(--tekst);
+
+    font-size: 24px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    box-shadow: var(--schaduw-klein);
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.terug-knop:hover {
+    background: var(--groen-licht);
+
+    box-shadow: var(--schaduw);
+}
+
+.terug-knop:active {
+    transform: scale(0.93);
 }
 
 
 /* =========================================================
-   BASIS CATEGORIEËN
+   CATEGORIEËN
    ========================================================= */
 
-.basis-categorieen {
+.categorieen,
+.moeilijk-categorieen {
     display: grid;
     gap: 18px;
+
+    width: min(100% - 32px, 700px);
+
+    margin: 0 auto;
+
+    padding-bottom:
+        calc(40px + env(safe-area-inset-bottom));
 }
 
 
-/*
-   Categoriekaart.
-   De hele kaart is NIET klikbaar.
-*/
+/* =========================================================
+   BLOKKEN
+   ========================================================= */
 
-.basis-blok {
+.blok {
     width: 100%;
 
     padding: 18px;
@@ -323,15 +443,17 @@ h3 {
     box-shadow: var(--schaduw-klein);
 }
 
-.basis-blok-header {
+.blok-header {
+    margin-bottom: 15px;
+}
+
+.blok-titel {
     display: flex;
     align-items: center;
     gap: 12px;
-
-    margin-bottom: 14px;
 }
 
-.basis-blok-icoon {
+.blok-icoon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -344,12 +466,24 @@ h3 {
 
     background: var(--groen-licht);
 
-    font-size: 24px;
+    font-size: 23px;
 }
 
-.basis-blok-titel {
+.blok-titel h3 {
+    margin: 0;
+
     font-size: 18px;
+    line-height: 1.2;
+
     font-weight: 800;
+}
+
+.blok-titel p {
+    margin: 3px 0 0;
+
+    color: var(--tekst-zacht);
+
+    font-size: 13px;
 }
 
 
@@ -359,15 +493,12 @@ h3 {
 
 .activiteiten {
     display: grid;
-    gap: 9px;
+    gap: 8px;
 }
 
-
-/*
-   Iedere activiteit is een eigen knop.
-*/
-
 .activiteit-knop {
+    position: relative;
+
     display: flex;
     align-items: center;
     gap: 12px;
@@ -375,7 +506,7 @@ h3 {
     width: 100%;
     min-height: 56px;
 
-    padding: 11px 14px;
+    padding: 10px 14px;
 
     border: 1px solid var(--kaart-border);
     border-radius: var(--radius-midden);
@@ -384,14 +515,12 @@ h3 {
     color: var(--tekst);
 
     font: inherit;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 650;
 
     text-align: left;
 
     cursor: pointer;
-
-    box-shadow: none;
 
     transition:
         background 0.15s ease,
@@ -403,7 +532,7 @@ h3 {
 .activiteit-knop:hover {
     background: var(--groen-licht);
 
-    border-color: #c6dad5;
+    border-color: #c2d7d1;
 
     box-shadow: var(--schaduw-klein);
 }
@@ -413,9 +542,7 @@ h3 {
 }
 
 
-/*
-   Icoon van de activiteit.
-*/
+/* Activiteit icoon */
 
 .activiteit-knop > span:first-child {
     display: flex;
@@ -435,25 +562,36 @@ h3 {
 }
 
 
-/*
-   Afgeronde hoofdactiviteit.
-*/
+/* =========================================================
+   AFGERONDE BASIS ACTIVITEIT
+   ========================================================= */
 
 .activiteit-knop.afgerond {
-    background: #edf5f2;
+    background: var(--groen-licht);
 
-    border-color: #bfd5cf;
+    border-color: #b9d3cc;
+
+    color: var(--groen-donker);
 }
 
 .activiteit-knop.afgerond > span:first-child {
     background: var(--groen);
+
     color: white;
 }
 
 
 /* =========================================================
-   MOEILIJKE DAG - ACTIVITEITEN
+   MOEILIJKE DAG
    ========================================================= */
+
+.moeilijk-blok {
+    background: #ffffff;
+}
+
+.moeilijk-blok .blok-icoon {
+    background: var(--oranje-licht);
+}
 
 .moeilijk-activiteit {
     background: #fffdf9;
@@ -461,58 +599,84 @@ h3 {
 
 .moeilijk-activiteit:hover {
     background: var(--oranje-licht);
-    border-color: #e7c69e;
+
+    border-color: #e6c69e;
 }
 
-.moeilijk-activiteit.afgerond {
-    background: #fff5e7;
 
-    border-color: #edcfab;
+/*
+   Afgevinkt op moeilijke dag.
+
+   De knop krijgt een duidelijke groene achtergrond
+   én een vinkje aan de rechterkant.
+*/
+
+.moeilijk-activiteit.afgerond {
+    background: #e7f3ef;
+
+    border-color: #a9cfc5;
+
+    color: var(--groen-donker);
+
+    padding-right: 52px;
 }
 
 .moeilijk-activiteit.afgerond > span:first-child {
-    background: var(--oranje);
+    background: var(--groen);
+
     color: white;
 }
 
+.moeilijk-activiteit.afgerond::after {
+    content: "✓";
+
+    position: absolute;
+
+    right: 14px;
+    top: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+
+    transform: translateY(-50%);
+
+    border-radius: 50%;
+
+    background: var(--groen);
+
+    color: white;
+
+    font-size: 17px;
+    font-weight: 900;
+
+    box-shadow:
+        0 2px 6px rgba(24, 59, 61, 0.15);
+}
+
 
 /* =========================================================
-   ACTIVITEIT SCHERM
+   ACTIVITEIT DETAIL SCHERM
    ========================================================= */
-
-#activiteitScherm .inhoud {
-    padding-top: 22px;
-}
 
 .activiteit-detail {
-    margin-top: 4px;
+    width: min(100% - 32px, 700px);
+
+    margin: 0 auto;
+
+    padding-bottom:
+        calc(40px + env(safe-area-inset-bottom));
 }
-
-.activiteit-detail-header {
-    margin-bottom: 20px;
-}
-
-.activiteit-detail-header h2 {
-    margin-bottom: 5px;
-}
-
-.activiteit-detail-header p {
-    margin: 0;
-
-    color: var(--tekst-zacht);
-}
-
-
-/* =========================================================
-   ACTIVITEIT STATUS
-   ========================================================= */
 
 .activiteit-status {
     display: flex;
     align-items: center;
     gap: 13px;
 
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     padding: 16px;
 
     border: 1px solid var(--kaart-border);
@@ -536,14 +700,24 @@ h3 {
 
     background: var(--groen-licht);
 
-    font-size: 23px;
-}
+    color: var(--groen-donker);
 
-.activiteit-status-titel {
+    font-size: 22px;
     font-weight: 800;
 }
 
-.activiteit-status-tekst {
+#activiteitStatusTitel {
+    display: block;
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+#activiteitStatusTekst {
+    display: block;
+
+    margin-top: 2px;
+
     color: var(--tekst-zacht);
 
     font-size: 14px;
@@ -551,17 +725,17 @@ h3 {
 
 
 /* =========================================================
-   ACTIVITEIT INHOUD
+   DETAIL INHOUD
    ========================================================= */
 
 .activiteit-inhoud {
     display: grid;
-    gap: 12px;
+    gap: 10px;
 }
 
 
 /* =========================================================
-   EXTRA ONDERDELEN / TOEVOEGINGEN
+   EXTRA ONDERDELEN
    ========================================================= */
 
 .extra-onderdelen {
@@ -569,17 +743,11 @@ h3 {
     gap: 9px;
 }
 
-
-/*
-   Eén losse toevoeging.
-*/
-
 .extra-onderdeel {
     display: flex;
     align-items: center;
     gap: 11px;
 
-    width: 100%;
     min-height: 60px;
 
     padding: 9px 10px 9px 12px;
@@ -593,14 +761,13 @@ h3 {
 
     transition:
         background 0.15s ease,
-        border-color 0.15s ease,
-        opacity 0.2s ease;
+        border-color 0.15s ease;
 }
 
 
-/*
-   Het ronde vinkje.
-*/
+/* =========================================================
+   EXTRA VINKJE
+   ========================================================= */
 
 .extra-vink {
     display: flex;
@@ -613,11 +780,11 @@ h3 {
 
     padding: 0;
 
-    border: 2px solid #b8c9c5;
+    border: 2px solid #b7c9c4;
     border-radius: 50%;
 
     background: white;
-    color: white;
+    color: transparent;
 
     font: inherit;
     font-size: 20px;
@@ -628,13 +795,14 @@ h3 {
     transition:
         background 0.15s ease,
         border-color 0.15s ease,
+        color 0.15s ease,
         transform 0.15s ease;
 }
 
 .extra-vink:hover {
     border-color: var(--groen);
 
-    transform: scale(1.06);
+    transform: scale(1.05);
 }
 
 .extra-vink:active {
@@ -642,20 +810,20 @@ h3 {
 }
 
 
-/*
-   Afgevinkt extra onderdeel.
-*/
+/* Afgevinkt extra onderdeel */
 
 .extra-onderdeel.afgerond {
     background: var(--groen-licht);
 
-    border-color: #bfd8d1;
+    border-color: #b9d5ce;
 }
 
 .extra-onderdeel.afgerond .extra-vink {
     border-color: var(--groen);
 
     background: var(--groen);
+
+    color: white;
 }
 
 .extra-onderdeel.afgerond .extra-tekst {
@@ -666,9 +834,9 @@ h3 {
 }
 
 
-/*
-   Tekst.
-*/
+/* =========================================================
+   EXTRA TEKST
+   ========================================================= */
 
 .extra-tekst {
     flex: 1;
@@ -684,9 +852,9 @@ h3 {
 }
 
 
-/*
-   Verwijderen.
-*/
+/* =========================================================
+   VERWIJDEREN
+   ========================================================= */
 
 .extra-verwijder {
     display: flex;
@@ -715,34 +883,9 @@ h3 {
 }
 
 .extra-verwijder:hover {
-    background: #f8e8e8;
+    background: #f9e8e8;
 
     color: var(--fout);
-}
-
-.extra-verwijder:active {
-    transform: scale(0.92);
-}
-
-
-/* =========================================================
-   ACTIVITEIT ANTWOORD / STATUSREGEL
-   ========================================================= */
-
-.activiteit-antwoord {
-    display: inline-flex;
-    align-items: center;
-
-    margin-left: auto;
-    padding: 3px 9px;
-
-    border-radius: 999px;
-
-    background: var(--groen-licht);
-    color: var(--groen-donker);
-
-    font-size: 12px;
-    font-weight: 750;
 }
 
 
@@ -761,7 +904,7 @@ h3 {
 
     margin-top: 4px;
 
-    border: 2px dashed #b9cbc7;
+    border: 2px dashed #b8cbc6;
     border-radius: var(--radius-midden);
 
     background: transparent;
@@ -791,14 +934,14 @@ h3 {
 
 
 /* =========================================================
-   KLAAR-KNOP
+   KLAAR
    ========================================================= */
 
 .activiteit-klaar-knop {
     width: 100%;
     min-height: 60px;
 
-    margin-top: 22px;
+    margin-top: 20px;
 
     border: 0;
     border-radius: var(--radius-midden);
@@ -832,11 +975,12 @@ h3 {
 
 
 /* =========================================================
-   KORTE INVOER - POP-UP
+   KORTE INVOER POP-UP
    ========================================================= */
 
-#kortInvoerContainer {
+.kort-invoer-container {
     position: fixed;
+
     inset: 0;
 
     z-index: 1000;
@@ -847,24 +991,19 @@ h3 {
 
     padding: 20px;
 
-    background: rgba(24, 59, 61, 0.42);
+    background: rgba(24, 59, 61, 0.46);
 
     backdrop-filter: blur(5px);
 }
 
-#kortInvoerContainer[hidden] {
+.kort-invoer-container[hidden] {
     display: none;
 }
 
+.kort-invoer-box {
+    width: min(100%, 450px);
 
-/*
-   De daadwerkelijke popup.
-*/
-
-#kortInvoerContainer > div {
-    width: min(100%, 430px);
-
-    padding: 24px;
+    padding: 22px;
 
     border: 1px solid var(--kaart-border);
     border-radius: var(--radius-groot);
@@ -879,28 +1018,38 @@ h3 {
 @keyframes invoerBinnen {
     from {
         opacity: 0;
-        transform: translateY(10px) scale(0.97);
+
+        transform:
+            translateY(12px)
+            scale(0.96);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+
+        transform:
+            translateY(0)
+            scale(1);
     }
 }
 
+.kort-invoer-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
 
-/*
-   Titel en uitleg van de popup.
-*/
+    margin-bottom: 18px;
+}
 
-#kortInvoerTitel {
-    margin-bottom: 6px;
+.kort-invoer-header h3 {
+    margin: 0 0 5px;
 
     font-size: 21px;
 }
 
-#kortInvoerUitleg {
-    margin-bottom: 18px;
+.kort-invoer-header p {
+    margin: 0;
 
     color: var(--tekst-zacht);
 
@@ -908,23 +1057,60 @@ h3 {
 }
 
 
-/*
-   Invoerveld.
-*/
+/* Sluiten */
+
+.klein-sluit-knop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #eef2f0;
+    color: var(--tekst);
+
+    font-size: 25px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.12s ease;
+}
+
+.klein-sluit-knop:hover {
+    background: var(--groen-licht);
+}
+
+.klein-sluit-knop:active {
+    transform: scale(0.92);
+}
+
+
+/* =========================================================
+   INPUT
+   ========================================================= */
 
 #kortInvoer {
     width: 100%;
-    min-height: 54px;
+    min-height: 56px;
 
-    padding: 12px 14px;
+    padding: 13px 15px;
 
-    border: 2px solid #cbd8d5;
+    border: 2px solid #c7d5d1;
     border-radius: var(--radius-midden);
 
     background: #fbfcfc;
     color: var(--tekst);
 
-    font: inherit;
     font-size: 16px;
 
     outline: none;
@@ -932,6 +1118,10 @@ h3 {
     transition:
         border-color 0.15s ease,
         box-shadow 0.15s ease;
+}
+
+#kortInvoer::placeholder {
+    color: #8b9998;
 }
 
 #kortInvoer:focus {
@@ -943,18 +1133,18 @@ h3 {
 
 
 /* =========================================================
-   INVOER KNOPPEN
+   INPUT KNOPPEN
    ========================================================= */
 
-.invoer-knoppen {
+.kort-invoer-knoppen {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 
-    margin-top: 14px;
+    margin-top: 13px;
 }
 
-.invoer-knoppen button {
+.kort-invoer-knoppen button {
     min-height: 50px;
 
     border-radius: var(--radius-midden);
@@ -963,55 +1153,59 @@ h3 {
     font-weight: 750;
 
     cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.12s ease;
 }
 
-#invoerAnnuleren {
+.kort-invoer-knoppen button:active {
+    transform: scale(0.98);
+}
+
+.invoer-annuleren {
     border: 1px solid var(--kaart-border);
 
-    background: #f5f7f6;
+    background: #f4f7f5;
     color: var(--tekst);
 }
 
-#invoerAnnuleren:hover {
-    background: #edf1ef;
+.invoer-annuleren:hover {
+    background: #eaf0ed;
 }
 
-#invoerOpslaan {
+.invoer-opslaan {
     border: 0;
 
     background: var(--groen);
     color: white;
 }
 
-#invoerOpslaan:hover {
+.invoer-opslaan:hover {
     background: var(--groen-donker);
 }
 
 
 /* =========================================================
-   MOEILIJKE DAG
+   VISUEEL VERBORGEN
    ========================================================= */
 
-.moeilijk-activiteiten {
-    display: grid;
-    gap: 18px;
-}
+.visueel-verborgen {
+    position: absolute;
 
-.moeilijk-blok {
-    padding: 18px;
+    width: 1px;
+    height: 1px;
 
-    border: 1px solid var(--kaart-border);
-    border-radius: var(--radius-groot);
+    padding: 0;
+    margin: -1px;
 
-    background: var(--kaart);
+    overflow: hidden;
 
-    box-shadow: var(--schaduw-klein);
-}
+    clip: rect(0, 0, 0, 0);
 
-.moeilijk-blok h3 {
-    margin-bottom: 12px;
+    white-space: nowrap;
 
-    font-size: 18px;
+    border: 0;
 }
 
 
@@ -1020,11 +1214,11 @@ h3 {
    ========================================================= */
 
 /*
-   De feedback komt bovenop de app te staan.
-   Hierdoor hoeft de gebruiker NOOIT naar beneden te scrollen.
+   De feedback komt midden over het scherm.
+   Niet onderaan de pagina.
 */
 
-#beloning {
+.beloning {
     position: fixed;
 
     top: 50%;
@@ -1042,9 +1236,9 @@ h3 {
     background:
         linear-gradient(
             135deg,
-            #dff7ef 0%,
-            #fff4bd 48%,
-            #ffe1ea 100%
+            #d9f6ec 0%,
+            #fff1a9 48%,
+            #ffdce6 100%
         );
 
     color: var(--tekst);
@@ -1053,15 +1247,16 @@ h3 {
 
     box-shadow:
         0 24px 70px rgba(24, 59, 61, 0.30),
-        0 0 0 9px rgba(255, 255, 255, 0.75);
-
-    opacity: 0;
-    pointer-events: none;
+        0 0 0 9px rgba(255, 255, 255, 0.78);
 
     transform:
         translate(-50%, -50%)
         scale(0.65)
         rotate(-3deg);
+
+    opacity: 0;
+
+    pointer-events: none;
 
     transition:
         opacity 0.18s ease,
@@ -1070,10 +1265,12 @@ h3 {
 
 
 /*
-   Deze class wordt door de JavaScript gebruikt.
+   BELANGRIJK:
+   hidden wordt door JavaScript gebruikt.
+   Wanneer de JS hidden=false maakt, wordt de box zichtbaar.
 */
 
-#beloning.toon {
+.beloning:not([hidden]) {
     opacity: 1;
 
     transform:
@@ -1087,7 +1284,7 @@ h3 {
    Grote feest-emoji.
 */
 
-#beloning::before {
+.beloning::before {
     content: "🎉";
 
     display: block;
@@ -1102,32 +1299,39 @@ h3 {
 
 @keyframes feestEmoji {
     0% {
-        transform: scale(0.2) rotate(-20deg);
+        transform:
+            scale(0.2)
+            rotate(-20deg);
     }
 
     55% {
-        transform: scale(1.3) rotate(10deg);
+        transform:
+            scale(1.3)
+            rotate(10deg);
     }
 
     75% {
-        transform: scale(0.92) rotate(-4deg);
+        transform:
+            scale(0.92)
+            rotate(-4deg);
     }
 
     100% {
-        transform: scale(1) rotate(0);
+        transform:
+            scale(1)
+            rotate(0);
     }
 }
 
 
-/*
-   De daadwerkelijke positieve tekst.
-*/
+/* =========================================================
+   FEEDBACK TEKST
+   ========================================================= */
 
-#beloningTekst {
-    margin: 0;
+.beloning-tekst {
+    font-size: 29px;
+    line-height: 1.15;
 
-    font-size: 28px;
-    line-height: 1.18;
     font-weight: 900;
 
     letter-spacing: -0.5px;
@@ -1135,10 +1339,10 @@ h3 {
 
 
 /*
-   Extra vrolijk detail.
+   Extra feestelijke onderregel.
 */
 
-#beloning::after {
+.beloning::after {
     content: "✨   💪   ✨";
 
     display: block;
@@ -1146,84 +1350,125 @@ h3 {
     margin-top: 16px;
 
     font-size: 23px;
+
     letter-spacing: 4px;
 }
 
 
 /* =========================================================
-   FOCUS / TOEGANKELIJKHEID
+   FOCUS
    ========================================================= */
 
 button:focus-visible,
 input:focus-visible {
     outline: 3px solid rgba(63, 119, 112, 0.35);
+
     outline-offset: 3px;
 }
 
 
 /* =========================================================
-   RESPONSIVE - TELEFOON
+   MOBIEL
    ========================================================= */
 
 @media (max-width: 480px) {
 
-    .inhoud {
-        width: calc(100% - 24px);
-
-        padding-top: 20px;
-        padding-bottom: 32px;
-    }
-
-    .header {
+    .app-header {
         padding-left: 16px;
         padding-right: 16px;
     }
 
-    .header h1 {
-        font-size: 25px;
+    .logo-icoon {
+        width: 50px;
+        height: 50px;
+
+        font-size: 28px;
     }
 
-    .start-keuze {
-        margin-top: 22px;
+    .logo h1 {
+        font-size: 27px;
     }
 
-    .start-knop {
-        min-height: 110px;
+    .welkom {
+        width: calc(100% - 24px);
 
-        padding: 20px;
+        padding-top: 28px;
     }
 
-    .start-knop .icoon {
-        font-size: 31px;
+    .welkom h2 {
+        font-size: 23px;
     }
 
-    .start-knop .titel {
-        font-size: 20px;
+    .modus-keuze {
+        width: calc(100% - 24px);
+
+        padding-bottom: 28px;
     }
 
-    .basis-blok,
-    .moeilijk-blok {
+    .modus-knop {
+        min-height: 108px;
+
+        padding: 18px;
+    }
+
+    .modus-icoon {
+        width: 56px;
+        min-width: 56px;
+        height: 56px;
+
+        font-size: 28px;
+    }
+
+    .modus-tekst strong {
+        font-size: 18px;
+    }
+
+    .scherm-header {
+        width: calc(100% - 24px);
+
+        padding-top:
+            calc(16px + env(safe-area-inset-top));
+    }
+
+    .categorieen,
+    .moeilijk-categorieen {
+        width: calc(100% - 24px);
+
+        gap: 14px;
+    }
+
+    .blok {
         padding: 15px;
     }
 
-    .basis-blok-icoon {
+    .blok-icoon {
         width: 42px;
         min-width: 42px;
         height: 42px;
 
-        font-size: 22px;
+        font-size: 21px;
+    }
+
+    .blok-titel h3 {
+        font-size: 17px;
     }
 
     .activiteit-knop {
         min-height: 54px;
 
-        padding: 10px 12px;
+        padding: 9px 12px;
+
+        font-size: 15px;
     }
 
     .activiteit-knop > span:first-child {
         width: 34px;
         min-width: 34px;
         height: 34px;
+    }
+
+    .activiteit-detail {
+        width: calc(100% - 24px);
     }
 
     .extra-onderdeel {
@@ -1242,37 +1487,36 @@ input:focus-visible {
         font-size: 15px;
     }
 
-    #kortInvoerContainer {
+    .kort-invoer-container {
         padding: 16px;
     }
 
-    #kortInvoerContainer > div {
-        padding: 21px;
+    .kort-invoer-box {
+        padding: 20px;
     }
 
     /*
-       Feedback op telefoon:
-       groot genoeg om meteen op te vallen,
-       maar niet zo groot dat hij het hele scherm vult.
+       Feedback op mobiel:
+       groot en onmogelijk om te missen.
     */
 
-    #beloning {
-        width: calc(100vw - 32px);
+    .beloning {
+        width: calc(100vw - 30px);
 
-        padding: 32px 20px;
+        padding: 31px 18px;
 
-        border-radius: 28px;
+        border-radius: 29px;
     }
 
-    #beloning::before {
+    .beloning::before {
         font-size: 58px;
     }
 
-    #beloningTekst {
-        font-size: 24px;
+    .beloning-tekst {
+        font-size: 25px;
     }
 
-    #beloning::after {
+    .beloning::after {
         font-size: 20px;
     }
 }
@@ -1284,12 +1528,12 @@ input:focus-visible {
 
 @media (min-width: 701px) {
 
-    .start-keuze {
+    .modus-keuze {
         grid-template-columns: 1fr 1fr;
     }
 
-    .start-knop {
-        min-height: 150px;
+    .modus-knop {
+        min-height: 145px;
     }
 }
 

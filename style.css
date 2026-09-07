@@ -3,86 +3,62 @@
    Terug naar de basis.
    ========================================================= */
 
-
 /* =========================================================
    KLEUREN
    ========================================================= */
 
 :root {
-
     /* WARME GROENE BASIS */
-
-    --achtergrond: #668c72;
-    --achtergrond-donker: #54765f;
-    --achtergrond-licht: #7aa084;
-
+    --achtergrond: #5f8b70;
+    --achtergrond-donker: #4b725c;
+    --achtergrond-licht: #79a487;
 
     /* WARME BLAUWE BLOKKEN */
-
-    --kaart: #4f8090;
-    --kaart-licht: #5d8fa0;
-    --kaart-donker: #3f6977;
-
+    --kaart: #4d8295;
+    --kaart-licht: #6096a8;
+    --kaart-donker: #3d6d7e;
 
     /* GROEN */
-
-    --groen: #43805b;
-    --groen-donker: #315f45;
-    --groen-licht: #d7e8da;
-
+    --groen: #438a61;
+    --groen-donker: #316847;
+    --groen-licht: #d8eadc;
 
     /* BLAUW */
-
-    --blauw: #3d788d;
-    --blauw-donker: #2e5e6f;
-    --blauw-licht: #d6e7eb;
-
+    --blauw: #3f7f96;
+    --blauw-donker: #2e6276;
+    --blauw-licht: #d8e9ee;
 
     /* HOUT */
-
     --hout: #b47b47;
-    --hout-licht: #ca9766;
+    --hout-licht: #cf9965;
     --hout-donker: #7d5533;
-    --hout-zacht: #b98757;
-
+    --hout-zacht: #bd8958;
 
     /* WARM GRIJS */
+    --tekst: #42483f;
+    --tekst-zacht: #60675f;
+    --tekst-licht: #777c74;
 
-    --tekst: #44463f;
-    --tekst-zacht: #60635b;
-    --tekst-licht: #777970;
-
-
-    /* WARME LICHTE VLAKKEN */
-
-    --warm-wit: #f1ece2;
-    --warm-wit-donker: #e1d8ca;
-    --gebroken-wit: #f8f4eb;
-
+    /* LICHT */
+    --warm-wit: #f4eee3;
+    --warm-wit-donker: #e2d9ca;
+    --gebroken-wit: #faf6ed;
 
     /* ORANJE */
-
     --oranje: #c77a3d;
     --oranje-donker: #96572d;
     --oranje-licht: #edd6bf;
 
-
-    /* WIT */
-
     --wit: #ffffff;
 
-
     /* SCHADUWEN */
-
     --schaduw:
         0 5px 14px rgba(42, 58, 47, 0.20);
 
     --schaduw-groot:
-        0 9px 25px rgba(42, 58, 47, 0.27);
+        0 10px 28px rgba(42, 58, 47, 0.27);
 
-
-    /* RONDE HOEKEN */
-
+    /* HOEKEN */
     --radius: 18px;
     --radius-klein: 13px;
 }
@@ -96,24 +72,20 @@
     box-sizing: border-box;
 }
 
-
 html {
     min-height: 100%;
 }
 
-
 body {
-
     margin: 0;
-
     min-height: 100vh;
 
     background:
         linear-gradient(
             145deg,
-            #71977c 0%,
-            #668c72 48%,
-            #5b8067 100%
+            #79a487 0%,
+            #668f75 45%,
+            #557d65 100%
         );
 
     color: var(--tekst);
@@ -128,26 +100,29 @@ body {
         sans-serif;
 
     -webkit-font-smoothing: antialiased;
-
     text-rendering: optimizeLegibility;
 }
-
 
 button,
 input {
     font: inherit;
 }
 
-
 button {
     -webkit-tap-highlight-color: transparent;
 }
-
 
 button:focus-visible,
 input:focus-visible {
     outline: 3px solid var(--hout-licht);
     outline-offset: 3px;
+}
+
+/* BELANGRIJK:
+   Native HTML [hidden] moet altijd echt verborgen blijven.
+   Dit voorkomt dat het uitrolmenu onderaan terechtkomt. */
+[hidden] {
+    display: none !important;
 }
 
 
@@ -156,11 +131,8 @@ input:focus-visible {
    ========================================================= */
 
 #app {
-
     width: 100%;
-
     max-width: 760px;
-
     min-height: 100vh;
 
     margin: 0 auto;
@@ -180,19 +152,16 @@ input:focus-visible {
     display: none;
 }
 
-
 .scherm.actief {
     display: block;
 
     animation:
         schermBinnen
-        0.28s
+        0.25s
         ease-out;
 }
 
-
 @keyframes schermBinnen {
-
     from {
         opacity: 0;
         transform: translateY(8px);
@@ -206,153 +175,89 @@ input:focus-visible {
 
 
 /* =========================================================
-   APP HEADER
+   HOOFDPAGINA
    ========================================================= */
 
 .app-header {
-
     padding:
-        10px
-        4px
-        24px;
-}
-
-
-.logo {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-}
-
-
-.logo-icoon {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 58px;
-    height: 58px;
-
-    border-radius: 17px;
-
-    background: var(--warm-wit);
-
-    border: 3px solid var(--hout);
-
-    box-shadow: var(--schaduw);
-
-    font-size: 31px;
-
-    flex-shrink: 0;
-}
-
-
-.logo h1 {
-
-    margin: 0;
-
-    color: var(--warm-wit);
-
-    font-size: 30px;
-
-    line-height: 1.05;
-
-    letter-spacing: -0.5px;
-}
-
-
-.logo p {
-
-    margin:
-        5px
-        0
-        0;
-
-    color: rgba(255, 255, 255, 0.86);
-
-    font-size: 14px;
-}
-
-
-/* =========================================================
-   WELKOM
-   ========================================================= */
-
-.welkom {
-
-    margin:
-        4px
+        8px
         4px
         22px;
 }
 
+.anker-symbool {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.welkom h2 {
+    width: 64px;
+    height: 64px;
 
+    margin-bottom: 13px;
+
+    border-radius: 19px;
+    border: 3px solid var(--hout);
+
+    background: var(--warm-wit);
+
+    box-shadow: var(--schaduw);
+
+    font-size: 34px;
+}
+
+.app-header h1 {
     margin: 0;
 
     color: var(--warm-wit);
 
-    font-size: 25px;
+    font-size: 31px;
+    line-height: 1.05;
 
-    line-height: 1.2;
+    letter-spacing: 0.5px;
 }
 
-
-.welkom p {
-
+.app-header p {
     margin:
-        7px
+        6px
         0
         0;
 
-    color: rgba(255, 255, 255, 0.82);
+    color: rgba(255, 255, 255, 0.88);
 
     font-size: 15px;
 }
 
 
 /* =========================================================
-   MODUS KEUZE
+   HOOFDKEUZES
    ========================================================= */
 
-.modus-keuze {
-
+.hoofdkeuzes {
     display: flex;
-
     flex-direction: column;
-
     gap: 15px;
 }
 
-
-.modus-knop {
-
+.hoofdkeuze {
     width: 100%;
 
     display: flex;
-
     align-items: center;
 
     gap: 16px;
 
-    padding: 19px;
+    padding: 20px;
 
     border: 3px solid var(--hout);
-
     border-radius: var(--radius);
+
+    background: var(--warm-wit);
+
+    color: var(--tekst);
 
     cursor: pointer;
 
     text-align: left;
-
-    color: var(--tekst);
 
     box-shadow: var(--schaduw);
 
@@ -362,108 +267,94 @@ input:focus-visible {
         filter 0.16s ease;
 }
 
-
-.modus-knop:hover {
-
+.hoofdkeuze:hover {
     transform: translateY(-2px);
 
     box-shadow: var(--schaduw-groot);
 
-    filter: brightness(1.03);
+    filter: brightness(1.04);
 }
 
-
-.modus-knop:active {
-
+.hoofdkeuze:active {
     transform: translateY(1px);
 
     box-shadow:
-        0
-        3px
-        8px
+        0 3px 8px
         rgba(42, 58, 47, 0.18);
 }
 
-
-.basis-knop {
-
+.hoofdkeuze:first-child {
     background:
         linear-gradient(
             145deg,
-            #f5eee2,
+            #f7f0e4,
             #e9dfd0
         );
 }
 
+.hoofdkeuze:last-child {
+    background:
+        linear-gradient(
+            145deg,
+            #e9f0eb,
+            #dce8e0
+        );
+}
 
-.moeilijk-knop {
+.keuze-icoon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 56px;
+    height: 56px;
+
+    flex-shrink: 0;
+
+    border-radius: 16px;
 
     background:
         linear-gradient(
             145deg,
-            #e8eee6,
-            #dce6dc
+            var(--hout-licht),
+            var(--hout)
         );
+
+    color: white;
+
+    font-size: 28px;
+
+    box-shadow:
+        0 3px 8px
+        rgba(42, 58, 47, 0.15);
 }
 
-
-.modus-icoon {
-
+.keuze-tekst {
     display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    width: 55px;
-    height: 55px;
-
-    border-radius: 16px;
-
-    background: var(--hout);
-
-    color: var(--warm-wit);
-
-    font-size: 27px;
-
-    flex-shrink: 0;
-}
-
-
-.modus-tekst {
-
-    display: flex;
-
     flex-direction: column;
-
     gap: 4px;
+
+    min-width: 0;
 }
 
-
-.modus-tekst strong {
-
+.keuze-tekst strong {
     font-size: 18px;
-
-    letter-spacing: 0.3px;
+    line-height: 1.2;
 }
 
-
-.modus-tekst small {
-
+.keuze-tekst small {
     color: var(--tekst-zacht);
-
     font-size: 14px;
+    line-height: 1.35;
 }
 
 
 /* =========================================================
-   SCHERM HEADER
+   PAGINA HEADERS
    ========================================================= */
 
-.scherm-header {
-
+.pagina-header {
     display: flex;
-
     align-items: center;
 
     gap: 13px;
@@ -472,49 +363,37 @@ input:focus-visible {
         2px
         0
         20px;
-
-    padding-bottom: 5px;
 }
 
-
-.scherm-header > div {
+.pagina-header > div {
     min-width: 0;
 }
 
-
-.scherm-header h2 {
-
+.pagina-header h2 {
     margin: 0;
 
     color: var(--warm-wit);
 
     font-size: 24px;
-
     line-height: 1.15;
-
-    letter-spacing: 0.2px;
 }
 
-
-.scherm-header p {
-
+.pagina-header p {
     margin:
         5px
         0
         0;
 
-    color: rgba(255, 255, 255, 0.82);
+    color:
+        rgba(255, 255, 255, 0.84);
 
     font-size: 14px;
+    line-height: 1.35;
 }
 
-
 .terug-knop {
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     width: 44px;
@@ -523,7 +402,6 @@ input:focus-visible {
     flex-shrink: 0;
 
     border: 2px solid var(--hout);
-
     border-radius: 13px;
 
     background: var(--warm-wit);
@@ -533,7 +411,6 @@ input:focus-visible {
     cursor: pointer;
 
     font-size: 25px;
-
     line-height: 1;
 
     box-shadow: var(--schaduw);
@@ -543,14 +420,11 @@ input:focus-visible {
         background 0.15s ease;
 }
 
-
 .terug-knop:hover {
-
     background: var(--gebroken-wit);
 
     transform: translateX(-2px);
 }
-
 
 .terug-knop:active {
     transform: translateX(-1px);
@@ -561,23 +435,18 @@ input:focus-visible {
    BLOKKEN
    ========================================================= */
 
-.categorieen,
-.moeilijk-categorieen {
-
+.blokken {
     display: flex;
-
     flex-direction: column;
-
     gap: 15px;
 }
 
-
 .blok {
+    width: 100%;
 
     overflow: hidden;
 
     border: 3px solid var(--hout);
-
     border-radius: var(--radius);
 
     box-shadow: var(--schaduw);
@@ -588,55 +457,99 @@ input:focus-visible {
    BASIS BLOKKEN
    ========================================================= */
 
-.basis-blok:nth-child(odd) {
+.basis-blok {
+    width: 100%;
 
+    padding: 0;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    font-family: inherit;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        filter 0.15s ease;
+}
+
+.basis-blok:hover {
+    transform: translateY(-2px);
+
+    box-shadow: var(--schaduw-groot);
+
+    filter: brightness(1.04);
+}
+
+.basis-blok:active {
+    transform: translateY(1px);
+}
+
+.basis-blok:nth-child(odd) {
     background:
         linear-gradient(
             145deg,
-            #61917b,
-            #548171
+            #61977e,
+            #54836f
         );
 }
 
-
 .basis-blok:nth-child(even) {
-
     background:
         linear-gradient(
             145deg,
-            #56889a,
-            #4d7b8a
+            #578da0,
+            #4d7e8f
         );
 }
 
 
 /* =========================================================
-   MOEILIJKE DAG BLOKKEN
+   MOEILIJKE DAG
    ========================================================= */
 
-.moeilijk-blok {
+.moeilijke-dag-intro {
+    margin:
+        0
+        2px
+        18px;
 
+    padding:
+        14px
+        16px;
+
+    border-left: 5px solid var(--hout);
+    border-radius: 0 var(--radius-klein) var(--radius-klein) 0;
+
+    background:
+        rgba(248, 244, 235, 0.90);
+
+    color: var(--tekst);
+
+    font-size: 14px;
+    line-height: 1.45;
+
+    box-shadow:
+        0 3px 10px
+        rgba(42, 58, 47, 0.12);
+}
+
+.moeilijk-blok {
     background:
         linear-gradient(
             145deg,
-            #edf0e8,
-            #e3e9e1
+            #f0f2eb,
+            #e4ebe4
         );
 }
 
-
-/*
-   Het persoonlijke eten-blok krijgt een heel lichte
-   warme groen/blauwe tint zodat het herkenbaar is.
-*/
-
 .moeilijk-persoonlijk-blok {
-
     background:
         linear-gradient(
             145deg,
-            #eef0e7,
-            #e1e9e3
+            #edf1e9,
+            #e0eae3
         );
 }
 
@@ -646,91 +559,75 @@ input:focus-visible {
    ========================================================= */
 
 .blok-header {
-
     padding:
         18px
         18px
         12px;
 }
 
-
 .blok-titel {
-
     display: flex;
-
     align-items: center;
 
     gap: 13px;
 }
 
-
 .blok-icoon {
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     width: 45px;
     height: 45px;
 
+    flex-shrink: 0;
+
     border-radius: 13px;
 
-    background: rgba(255, 255, 255, 0.86);
+    background:
+        rgba(255, 255, 255, 0.88);
 
     border: 2px solid var(--hout);
 
     font-size: 23px;
-
-    flex-shrink: 0;
 }
 
-
 .blok-titel h3 {
-
     margin: 0;
 
     font-size: 18px;
-
     line-height: 1.2;
 }
 
-
 .blok-titel p {
-
     margin:
         4px
         0
         0;
 
     font-size: 13px;
-
     line-height: 1.35;
 }
 
 
-/* Basis blok tekst */
+/* BASIS TEKST */
 
 .basis-blok .blok-titel h3,
 .basis-blok .blok-titel p {
-
     color: var(--warm-wit);
 }
 
-
 .basis-blok .blok-titel p {
-
-    color: rgba(255, 255, 255, 0.80);
+    color:
+        rgba(255, 255, 255, 0.82);
 }
 
 
-/* Moeilijke dag tekst */
+/* MOEILIJKE DAG TEKST */
 
 .moeilijk-blok .blok-titel h3 {
     color: var(--tekst);
 }
-
 
 .moeilijk-blok .blok-titel p {
     color: var(--tekst-zacht);
@@ -741,10 +638,9 @@ input:focus-visible {
    ACTIVITEITEN
    ========================================================= */
 
-.activiteiten {
-
+.activiteiten,
+.moeilijk-activiteiten {
     display: flex;
-
     flex-direction: column;
 
     gap: 8px;
@@ -755,13 +651,10 @@ input:focus-visible {
         16px;
 }
 
-
 .activiteit-knop {
-
     width: 100%;
 
     display: flex;
-
     align-items: center;
 
     gap: 11px;
@@ -772,7 +665,8 @@ input:focus-visible {
         11px
         13px;
 
-    border: 2px solid rgba(126, 85, 51, 0.48);
+    border: 2px solid
+        rgba(126, 85, 51, 0.48);
 
     border-radius: var(--radius-klein);
 
@@ -785,9 +679,7 @@ input:focus-visible {
     text-align: left;
 
     box-shadow:
-        0
-        2px
-        6px
+        0 2px 6px
         rgba(42, 58, 47, 0.09);
 
     transition:
@@ -797,9 +689,7 @@ input:focus-visible {
         box-shadow 0.14s ease;
 }
 
-
 .activiteit-knop:hover {
-
     background: var(--gebroken-wit);
 
     border-color: var(--hout);
@@ -807,19 +697,13 @@ input:focus-visible {
     transform: translateX(2px);
 }
 
-
 .activiteit-knop:active {
-
     transform: translateX(1px);
 }
 
-
 .activiteit-knop > span:first-child {
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     width: 27px;
@@ -829,9 +713,7 @@ input:focus-visible {
     font-size: 20px;
 }
 
-
 .activiteit-knop > span:last-child {
-
     flex: 1;
 
     line-height: 1.3;
@@ -839,11 +721,33 @@ input:focus-visible {
 
 
 /* =========================================================
-   AFGERONDE ACTIVITEIT
+   MOEILIJKE DAG ACTIVITEITEN
+   ========================================================= */
+
+.moeilijk-activiteit {
+    background: #f7f2e8;
+
+    border-color: var(--hout);
+}
+
+.moeilijk-activiteit:hover {
+    background: #fffaf0;
+}
+
+.moeilijk-activiteit.afgerond {
+    background: var(--groen-licht);
+
+    border-color: var(--groen);
+
+    color: var(--groen-donker);
+}
+
+
+/* =========================================================
+   AFGEROND
    ========================================================= */
 
 .activiteit-knop.afgerond {
-
     background: var(--groen-licht);
 
     border-color: var(--groen);
@@ -853,9 +757,7 @@ input:focus-visible {
     box-shadow: none;
 }
 
-
 .activiteit-knop.afgerond > span:last-child {
-
     text-decoration: line-through;
 
     opacity: 0.75;
@@ -863,63 +765,146 @@ input:focus-visible {
 
 
 /* =========================================================
-   MOEILIJKE DAG ACTIVITEITEN
+   PERSOONLIJK UITROL-MENU
    ========================================================= */
 
-.moeilijk-activiteit {
+/*
+   Dit is het belangrijkste nieuwe gedeelte.
 
-    background: #f6f2e9;
+   De details blijven IN hetzelfde blok en komen
+   direct onder de knop te staan.
 
-    border-color: var(--hout);
-}
+   [hidden] zorgt ervoor dat ze volledig verdwijnen
+   wanneer het menu gesloten is.
+*/
 
-
-.moeilijk-activiteit:hover {
-
-    background: #fffaf0;
-}
-
-
-.moeilijk-activiteit.afgerond {
-
-    background: var(--groen-licht);
-
-    border-color: var(--groen);
-
-    color: var(--groen-donker);
-}
-
-
-/* =========================================================
-   PERSOONLIJKE OPTIES
-   ========================================================= */
-
-.persoonlijke-opties {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 8px;
-
-    padding:
+.moeilijk-persoonlijk-trigger {
+    margin:
         5px
         14px
-        12px;
+        14px;
+
+    width: calc(100% - 28px);
+
+    min-height: 54px;
+
+    padding:
+        12px
+        14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f7f1e6,
+            #ece3d5
+        );
+
+    border: 2px solid var(--hout);
+
+    border-radius: var(--radius-klein);
+
+    font-weight: 750;
+
+    box-shadow:
+        0 3px 8px
+        rgba(42, 58, 47, 0.11);
+
+    transition:
+        margin 0.2s ease,
+        border-radius 0.2s ease,
+        background 0.15s ease;
+}
+
+.moeilijk-persoonlijk-trigger:hover {
+    background:
+        linear-gradient(
+            145deg,
+            #fff8eb,
+            #eee5d7
+        );
+}
+
+.moeilijk-persoonlijk-trigger.afgerond {
+    background: var(--groen-licht);
+    border-color: var(--groen);
+}
+
+.persoonlijke-trigger-pijl {
+    flex: 0 0 auto !important;
+
+    width: auto !important;
+
+    margin-left: auto;
+
+    color: var(--groen-donker);
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    text-decoration: none !important;
 }
 
 
 /*
-   Dit zijn de persoonlijke safe foods en prettige
-   activiteiten.
+   Het daadwerkelijke uitrolgebied.
 */
 
-.persoonlijke-optie {
+.moeilijk-persoonlijk-details {
+    margin:
+        -5px
+        14px
+        16px;
 
+    padding:
+        12px;
+
+    border:
+        2px solid
+        rgba(63, 127, 150, 0.55);
+
+    border-radius:
+        0
+        0
+        15px
+        15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #dcebef,
+            #e8eee8
+        );
+
+    box-shadow:
+        inset 0 2px 5px
+        rgba(42, 58, 47, 0.08);
+}
+
+
+/*
+   Persoonlijke opties staan dus binnen dit
+   uitrolgebied en niet meer onderaan de pagina.
+*/
+
+.persoonlijke-opties {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    padding: 0;
+}
+
+
+/* =========================================================
+   PERSOONLIJKE OPTIE
+   ========================================================= */
+
+.persoonlijke-optie {
     width: 100%;
 
     display: flex;
-
     align-items: center;
 
     gap: 10px;
@@ -943,9 +928,7 @@ input:focus-visible {
     text-align: left;
 
     box-shadow:
-        0
-        2px
-        6px
+        0 2px 6px
         rgba(42, 58, 47, 0.09);
 
     transition:
@@ -954,27 +937,21 @@ input:focus-visible {
         border-color 0.14s ease;
 }
 
-
 .persoonlijke-optie:hover {
-
     background: var(--gebroken-wit);
+
+    border-color: var(--hout-licht);
 
     transform: translateX(2px);
 }
 
-
 .persoonlijke-optie:active {
-
     transform: translateX(1px);
 }
 
-
 .persoonlijke-optie-icoon {
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     width: 30px;
@@ -984,21 +961,17 @@ input:focus-visible {
     font-size: 21px;
 }
 
-
 .persoonlijke-optie-tekst {
-
     flex: 1;
 
-    font-weight: 600;
+    min-width: 0;
+
+    font-weight: 650;
 
     line-height: 1.3;
 }
 
-
-/* Afgevinkte persoonlijke optie */
-
 .persoonlijke-optie.afgerond {
-
     background: var(--groen-licht);
 
     border-color: var(--groen);
@@ -1006,10 +979,8 @@ input:focus-visible {
     color: var(--groen-donker);
 }
 
-
 .persoonlijke-optie.afgerond
 .persoonlijke-optie-tekst {
-
     text-decoration: line-through;
 
     opacity: 0.72;
@@ -1017,26 +988,21 @@ input:focus-visible {
 
 
 /* =========================================================
-   BEHEERKNOPPEN PERSOONLIJKE OPTIES
+   BEHEER PERSOONLIJKE OPTIES
    ========================================================= */
 
 .persoonlijke-beheer {
-
     display: flex;
-
     flex-direction: column;
 
     gap: 7px;
 
-    padding:
-        2px
-        14px
-        16px;
+    margin-top: 10px;
+
+    padding: 0;
 }
 
-
 .persoonlijke-beheer-knop {
-
     width: 100%;
 
     min-height: 43px;
@@ -1050,7 +1016,7 @@ input:focus-visible {
     border-radius: var(--radius-klein);
 
     background:
-        rgba(255, 255, 255, 0.75);
+        rgba(255, 255, 255, 0.78);
 
     color: var(--groen-donker);
 
@@ -1065,23 +1031,17 @@ input:focus-visible {
         transform 0.14s ease;
 }
 
-
 .persoonlijke-beheer-knop:hover {
-
     background: var(--warm-wit);
 
     transform: translateY(-1px);
 }
 
-
 .persoonlijke-beheer-knop:active {
-
     transform: translateY(1px);
 }
 
-
 .persoonlijke-beheer-knop.secundair {
-
     background: transparent;
 
     border-color:
@@ -1092,11 +1052,9 @@ input:focus-visible {
     font-weight: 600;
 }
 
-
 .persoonlijke-beheer-knop.secundair:hover {
-
     background:
-        rgba(255, 255, 255, 0.48);
+        rgba(255, 255, 255, 0.50);
 
     color: var(--tekst);
 }
@@ -1107,15 +1065,11 @@ input:focus-visible {
    ========================================================= */
 
 .activiteit-detail {
-
     padding: 4px 0;
 }
 
-
 .activiteit-status {
-
     display: flex;
-
     align-items: center;
 
     gap: 13px;
@@ -1133,13 +1087,9 @@ input:focus-visible {
     box-shadow: var(--schaduw);
 }
 
-
 .activiteit-status-icoon {
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     width: 46px;
@@ -1156,17 +1106,13 @@ input:focus-visible {
     flex-shrink: 0;
 }
 
-
 .activiteit-status strong {
-
     display: block;
 
     font-size: 17px;
 }
 
-
 .activiteit-status span:not(.activiteit-status-icoon) {
-
     display: block;
 
     margin-top: 3px;
@@ -1176,15 +1122,11 @@ input:focus-visible {
     font-size: 13px;
 }
 
-
 .activiteit-inhoud {
-
     margin-bottom: 15px;
 }
 
-
 .activiteit-klaar-knop {
-
     width: 100%;
 
     min-height: 56px;
@@ -1215,28 +1157,23 @@ input:focus-visible {
         filter 0.15s ease;
 }
 
-
 .activiteit-klaar-knop:hover {
-
     filter: brightness(1.08);
 
     transform: translateY(-2px);
 }
 
-
 .activiteit-klaar-knop:active {
-
     transform: translateY(1px);
 }
 
 
 /* =========================================================
-   KORTE INVOER
+   KORTE INVOER / MODALS
    ========================================================= */
 
 .kort-invoer-container,
 .persoonlijke-opties-container {
-
     position: fixed;
 
     inset: 0;
@@ -1246,32 +1183,29 @@ input:focus-visible {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     padding: 20px;
 
     background:
-        rgba(42, 58, 47, 0.48);
+        rgba(42, 58, 47, 0.50);
 
     backdrop-filter: blur(4px);
 }
 
-
 .kort-invoer-container[hidden],
 .persoonlijke-opties-container[hidden] {
-    display: none;
+    display: none !important;
 }
-
 
 .kort-invoer-box,
 .persoonlijke-opties-box {
-
     width: 100%;
 
     max-width: 480px;
 
-    max-height: calc(100vh - 40px);
+    max-height:
+        calc(100vh - 40px);
 
     overflow-y: auto;
 
@@ -1291,28 +1225,34 @@ input:focus-visible {
         ease-out;
 }
 
-
 @keyframes vensterBinnen {
-
     from {
         opacity: 0;
-        transform: translateY(10px) scale(0.98);
+
+        transform:
+            translateY(10px)
+            scale(0.98);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+
+        transform:
+            translateY(0)
+            scale(1);
     }
 }
 
 
+/* =========================================================
+   MODAL HEADERS
+   ========================================================= */
+
 .kort-invoer-header,
 .persoonlijke-opties-header {
-
     display: flex;
 
     align-items: flex-start;
-
     justify-content: space-between;
 
     gap: 15px;
@@ -1320,19 +1260,15 @@ input:focus-visible {
     margin-bottom: 16px;
 }
 
-
 .kort-invoer-header h3,
 .persoonlijke-opties-header h3 {
-
     margin: 0;
 
     font-size: 20px;
 }
 
-
 .kort-invoer-header p,
 .persoonlijke-opties-header p {
-
     margin:
         5px
         0
@@ -1345,13 +1281,10 @@ input:focus-visible {
     line-height: 1.4;
 }
 
-
 .klein-sluit-knop {
-
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     width: 38px;
@@ -1375,8 +1308,11 @@ input:focus-visible {
 }
 
 
-.kort-invoer {
+/* =========================================================
+   INVOER
+   ========================================================= */
 
+.kort-invoer {
     width: 100%;
 
     min-height: 50px;
@@ -1396,9 +1332,7 @@ input:focus-visible {
     outline: none;
 }
 
-
 .kort-invoer:focus {
-
     border-color: var(--groen);
 
     box-shadow:
@@ -1406,12 +1340,10 @@ input:focus-visible {
         0
         0
         3px
-        rgba(67, 128, 91, 0.15);
+        rgba(67, 138, 97, 0.15);
 }
 
-
 .kort-invoer-knoppen {
-
     display: flex;
 
     gap: 9px;
@@ -1419,10 +1351,8 @@ input:focus-visible {
     margin-top: 13px;
 }
 
-
 .invoer-annuleren,
 .invoer-opslaan {
-
     flex: 1;
 
     min-height: 46px;
@@ -1434,9 +1364,7 @@ input:focus-visible {
     font-weight: 700;
 }
 
-
 .invoer-annuleren {
-
     border: 2px solid var(--hout);
 
     background: transparent;
@@ -1444,9 +1372,7 @@ input:focus-visible {
     color: var(--tekst);
 }
 
-
 .invoer-opslaan {
-
     border: 2px solid var(--groen-donker);
 
     background: var(--groen);
@@ -1456,13 +1382,11 @@ input:focus-visible {
 
 
 /* =========================================================
-   BEHEERLIJST PERSOONLIJKE OPTIES
+   BEHEERLIJST
    ========================================================= */
 
 .persoonlijke-opties-lijst {
-
     display: flex;
-
     flex-direction: column;
 
     gap: 8px;
@@ -1470,9 +1394,7 @@ input:focus-visible {
     margin-bottom: 13px;
 }
 
-
 .persoonlijke-beheer-rij {
-
     display: flex;
 
     align-items: center;
@@ -1483,16 +1405,15 @@ input:focus-visible {
         8px
         9px;
 
-    border: 2px solid rgba(126, 85, 51, 0.55);
+    border: 2px solid
+        rgba(126, 85, 51, 0.55);
 
     border-radius: var(--radius-klein);
 
     background: var(--gebroken-wit);
 }
 
-
 .persoonlijke-beheer-naam {
-
     flex: 1;
 
     min-width: 0;
@@ -1504,14 +1425,11 @@ input:focus-visible {
     overflow-wrap: anywhere;
 }
 
-
 .persoonlijke-bewerk-knop,
 .persoonlijke-verwijder-knop {
-
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     width: 38px;
@@ -1526,9 +1444,7 @@ input:focus-visible {
     font-size: 17px;
 }
 
-
 .persoonlijke-bewerk-knop {
-
     border: 2px solid var(--hout);
 
     background: var(--warm-wit);
@@ -1536,9 +1452,7 @@ input:focus-visible {
     color: var(--tekst);
 }
 
-
 .persoonlijke-verwijder-knop {
-
     border: 2px solid #b96b55;
 
     background: #f4dfd8;
@@ -1546,9 +1460,7 @@ input:focus-visible {
     color: #8c4535;
 }
 
-
 .persoonlijke-nieuw-knop {
-
     width: 100%;
 
     min-height: 47px;
@@ -1583,7 +1495,6 @@ input:focus-visible {
    ========================================================= */
 
 .beloning {
-
     position: fixed;
 
     left: 50%;
@@ -1596,7 +1507,8 @@ input:focus-visible {
 
     z-index: 200;
 
-    width: calc(100% - 32px);
+    width:
+        calc(100% - 32px);
 
     max-width: 500px;
 
@@ -1606,9 +1518,7 @@ input:focus-visible {
     pointer-events: none;
 }
 
-
 .beloning-tekst {
-
     padding:
         17px
         20px;
@@ -1623,8 +1533,8 @@ input:focus-visible {
     background:
         linear-gradient(
             145deg,
-            #f8f0dc,
-            #efe2c9
+            #fff3d7,
+            #f0dfc1
         );
 
     color: var(--tekst);
@@ -1649,11 +1559,8 @@ input:focus-visible {
         ease-out;
 }
 
-
 @keyframes beloningBinnen {
-
     0% {
-
         opacity: 0;
 
         transform:
@@ -1662,14 +1569,12 @@ input:focus-visible {
     }
 
     70% {
-
         transform:
             translateY(-3px)
             scale(1.02);
     }
 
     100% {
-
         opacity: 1;
 
         transform:
@@ -1680,11 +1585,10 @@ input:focus-visible {
 
 
 /* =========================================================
-   EXTRA INVOER / TOEVOEGINGEN
+   EXTRA INVOER
    ========================================================= */
 
 .activiteit-invoer-knop {
-
     width: 100%;
 
     min-height: 43px;
@@ -1709,18 +1613,14 @@ input:focus-visible {
         transform 0.14s ease;
 }
 
-
 .activiteit-invoer-knop:hover {
-
     background:
         rgba(255, 255, 255, 0.75);
 
     transform: translateY(-1px);
 }
 
-
 .extra-rij {
-
     display: flex;
 
     align-items: center;
@@ -1733,7 +1633,8 @@ input:focus-visible {
         7px
         9px;
 
-    border: 2px solid rgba(126, 85, 51, 0.45);
+    border: 2px solid
+        rgba(126, 85, 51, 0.45);
 
     border-radius: var(--radius-klein);
 
@@ -1741,13 +1642,10 @@ input:focus-visible {
         rgba(255, 255, 255, 0.75);
 }
 
-
 .extra-vink {
-
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     width: 30px;
@@ -1766,9 +1664,7 @@ input:focus-visible {
     cursor: pointer;
 }
 
-
 .extra-rij.afgerond .extra-vink {
-
     background: var(--groen);
 
     border-color: var(--groen-donker);
@@ -1776,9 +1672,7 @@ input:focus-visible {
     color: white;
 }
 
-
 .extra-tekst {
-
     flex: 1;
 
     min-width: 0;
@@ -1786,21 +1680,16 @@ input:focus-visible {
     overflow-wrap: anywhere;
 }
 
-
 .extra-rij.afgerond .extra-tekst {
-
     text-decoration: line-through;
 
     opacity: 0.65;
 }
 
-
 .extra-verwijder {
-
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     width: 30px;
@@ -1827,7 +1716,6 @@ input:focus-visible {
    ========================================================= */
 
 .activiteit-antwoord {
-
     margin-top: 4px;
 
     padding:
@@ -1847,7 +1735,6 @@ input:focus-visible {
    ========================================================= */
 
 .visueel-verborgen {
-
     position: absolute;
 
     width: 1px;
@@ -1873,59 +1760,45 @@ input:focus-visible {
 @media (min-width: 600px) {
 
     #app {
-
         padding:
             30px
             22px
             50px;
     }
 
-
     .app-header {
-
         padding-top: 5px;
     }
 
-
-    .modus-knop {
-
+    .hoofdkeuze {
         padding: 21px;
     }
 
-
     .blok-header {
-
         padding:
             20px
             20px
             13px;
     }
 
-
-    .activiteiten {
-
+    .activiteiten,
+    .moeilijk-activiteiten {
         padding:
             5px
             16px
             18px;
     }
 
+    .moeilijk-persoonlijk-trigger {
+        margin-left: 16px;
+        margin-right: 16px;
 
-    .persoonlijke-opties {
-
-        padding:
-            5px
-            16px
-            13px;
+        width: calc(100% - 32px);
     }
 
-
-    .persoonlijke-beheer {
-
-        padding:
-            2px
-            16px
-            18px;
+    .moeilijk-persoonlijk-details {
+        margin-left: 16px;
+        margin-right: 16px;
     }
 }
 
@@ -1937,76 +1810,57 @@ input:focus-visible {
 @media (max-width: 380px) {
 
     #app {
-
         padding:
             15px
             12px
             30px;
     }
 
+    .anker-symbool {
+        width: 55px;
+        height: 55px;
 
-    .logo-icoon {
-
-        width: 52px;
-        height: 52px;
-
-        font-size: 27px;
+        font-size: 29px;
     }
 
-
-    .logo h1 {
-
-        font-size: 27px;
+    .app-header h1 {
+        font-size: 28px;
     }
 
-
-    .welkom h2 {
-
-        font-size: 22px;
-    }
-
-
-    .modus-knop {
-
+    .hoofdkeuze {
         padding: 15px;
 
         gap: 12px;
     }
 
-
-    .modus-icoon {
-
+    .keuze-icoon {
         width: 48px;
         height: 48px;
 
         font-size: 24px;
     }
 
-
-    .modus-tekst strong {
-
+    .keuze-tekst strong {
         font-size: 16px;
     }
 
-
     .blok-titel {
-
         gap: 10px;
     }
 
-
     .blok-icoon {
-
         width: 41px;
         height: 41px;
 
         font-size: 21px;
     }
 
-
     .blok-titel h3 {
-
         font-size: 17px;
+    }
+
+    .moeilijk-persoonlijk-details {
+        padding: 10px;
     }
 }
 
@@ -2020,13 +1874,15 @@ input:focus-visible {
     *,
     *::before,
     *::after {
-
         scroll-behavior: auto !important;
 
-        animation-duration: 0.01ms !important;
+        animation-duration:
+            0.01ms !important;
 
-        animation-iteration-count: 1 !important;
+        animation-iteration-count:
+            1 !important;
 
-        transition-duration: 0.01ms !important;
+        transition-duration:
+            0.01ms !important;
     }
 }

@@ -1,22 +1,25 @@
-// ======================================
-// ANKER - JAVASCRIPT
-// Terug naar de basis.
-// ======================================
+/* =========================================================
+   ANKER
+   Terug naar de basis.
+   ========================================================= */
 
 
-// ======================================
-// OPSLAG
-// ======================================
+/* =========================================================
+   OPSLAG
+   ========================================================= */
 
 const OPSLAG_DAGSTATUS = "ankerDagstatus";
-const OPSLAG_SAFEFOODS = "ankerSafeFoods";
+
+const OPSLAG_SAFEFOODS =
+    "ankerSafeFoods";
+
 const OPSLAG_PRETTIGE_ACTIVITEITEN =
     "ankerPrettigeActiviteiten";
 
 
-// ======================================
-// STANDAARD PERSOONLIJKE OPTIES
-// ======================================
+/* =========================================================
+   STANDAARD PERSOONLIJKE OPTIES
+   ========================================================= */
 
 const STANDAARD_SAFEFOODS = [
     {
@@ -66,9 +69,9 @@ const STANDAARD_PRETTIGE_ACTIVITEITEN = [
 ];
 
 
-// ======================================
-// DAGSTATUS
-// ======================================
+/* =========================================================
+   DAGSTATUS
+   ========================================================= */
 
 let dagStatus = {
     datum: "",
@@ -77,31 +80,43 @@ let dagStatus = {
 };
 
 
+/* =========================================================
+   PERSOONLIJKE OPTIES
+   ========================================================= */
+
 let safeFoods = [];
 let prettigeActiviteiten = [];
 
 
-// ======================================
-// HUIDIGE STAAT
-// ======================================
+/* =========================================================
+   APP STATUS
+   ========================================================= */
 
 let huidigScherm = "hoofdScherm";
-
 let huidigeActiviteit = null;
 let huidigeBlok = null;
 
-let huidigeBeheerCategorie = null;
-let huidigeBewerkOptie = null;
+let inlineBewerking = null;
+
+let beloningTimeout = null;
 
 
-// ======================================
-// ELEMENTEN
-// ======================================
-
-// Hoofdscherm
+/* =========================================================
+   ELEMENTEN
+   ========================================================= */
 
 const hoofdScherm =
     document.getElementById("hoofdScherm");
+
+const basisScherm =
+    document.getElementById("basisScherm");
+
+const moeilijkeScherm =
+    document.getElementById("moeilijkScherm");
+
+const activiteitScherm =
+    document.getElementById("activiteitScherm");
+
 
 const basisKnop =
     document.getElementById("basisKnop");
@@ -110,65 +125,15 @@ const moeilijkKnop =
     document.getElementById("moeilijkKnop");
 
 
-// Basis
-
-const basisScherm =
-    document.getElementById("basisScherm");
-
 const basisTerugKnop =
     document.getElementById("basisTerugKnop");
-
-
-// Moeilijke dag
-
-const moeilijkScherm =
-    document.getElementById("moeilijkScherm");
 
 const moeilijkTerugKnop =
     document.getElementById("moeilijkTerugKnop");
 
-
-// Moeilijke dag - persoonlijke onderdelen
-
-const moeilijkIetsGegeten =
-    document.getElementById("moeilijkIetsGegeten");
-
-const moeilijkEtenDetails =
-    document.getElementById("moeilijkEtenDetails");
-
-const moeilijkEtenOpties =
-    document.getElementById("moeilijkEtenOpties");
-
-const etenOptieToevoegen =
-    document.getElementById("etenOptieToevoegen");
-
-const etenOptiesBeheren =
-    document.getElementById("etenOptiesBeheren");
-
-
-const moeilijkIetsPrettigs =
-    document.getElementById("moeilijkIetsPrettigs");
-
-const moeilijkPrettigDetails =
-    document.getElementById("moeilijkPrettigDetails");
-
-const moeilijkPrettigOpties =
-    document.getElementById("moeilijkPrettigOpties");
-
-const prettigOptieToevoegen =
-    document.getElementById("prettigOptieToevoegen");
-
-const prettigOptiesBeheren =
-    document.getElementById("prettigOptiesBeheren");
-
-
-// Activiteit
-
-const activiteitScherm =
-    document.getElementById("activiteitScherm");
-
 const activiteitTerugKnop =
     document.getElementById("activiteitTerugKnop");
+
 
 const activiteitTitel =
     document.getElementById("activiteitTitel");
@@ -195,8 +160,6 @@ const activiteitKlaarKnop =
     document.getElementById("activiteitKlaarKnop");
 
 
-// Korte invoer
-
 const kortInvoerContainer =
     document.getElementById("kortInvoerContainer");
 
@@ -209,15 +172,8 @@ const kortInvoerUitleg =
 const kortInvoer =
     document.getElementById("kortInvoer");
 
-
-// BELANGRIJK:
-// Deze naam is bewust anders dan de functie
-// kortInvoerSluiten().
-// Zo ontstaat geen JavaScript naamconflict.
-
 const kortInvoerSluitenKnop =
     document.getElementById("kortInvoerSluiten");
-
 
 const invoerAnnuleren =
     document.getElementById("invoerAnnuleren");
@@ -226,48 +182,209 @@ const invoerOpslaan =
     document.getElementById("invoerOpslaan");
 
 
-// Persoonlijke opties beheren
+const moeilijkIetsGegeten =
+    document.getElementById("moeilijkIetsGegeten");
 
-const persoonlijkeOptiesContainer =
-    document.getElementById(
-        "persoonlijkeOptiesContainer"
-    );
+const moeilijkEtenDetails =
+    document.getElementById("moeilijkEtenDetails");
 
-const persoonlijkeOptiesTitel =
-    document.getElementById(
-        "persoonlijkeOptiesTitel"
-    );
+const moeilijkEtenOpties =
+    document.getElementById("moeilijkEtenOpties");
 
-const persoonlijkeOptiesUitleg =
-    document.getElementById(
-        "persoonlijkeOptiesUitleg"
-    );
-
-const persoonlijkeOptiesSluiten =
-    document.getElementById(
-        "persoonlijkeOptiesSluiten"
-    );
-
-const persoonlijkeOptiesLijst =
-    document.getElementById(
-        "persoonlijkeOptiesLijst"
-    );
-
-const persoonlijkeOptieNieuw =
-    document.getElementById(
-        "persoonlijkeOptieNieuw"
-    );
+const etenOptieToevoegen =
+    document.getElementById("etenOptieToevoegen");
 
 
-// Feedback
+const moeilijkIetsPrettigs =
+    document.getElementById("moeilijkIetsPrettigs");
+
+const moeilijkPrettigDetails =
+    document.getElementById("moeilijkPrettigDetails");
+
+const moeilijkPrettigOpties =
+    document.getElementById("moeilijkPrettigOpties");
+
+const prettigOptieToevoegen =
+    document.getElementById("prettigOptieToevoegen");
+
 
 const beloning =
     document.getElementById("beloning");
 
 
-// ======================================
-// INITIALISATIE
-// ======================================
+/* =========================================================
+   BASIS CATEGORIEËN
+   ========================================================= */
+
+const basisBlokken = {
+
+    zelfzorg: {
+        titel: "Zelfzorg",
+        icoon: "🧼",
+        activiteiten: [
+            {
+                id: "douchen",
+                tekst: "Douchen",
+                icoon: "🚿",
+                details: "Even schoon en verzorgd worden."
+            },
+            {
+                id: "tanden",
+                tekst: "Tanden poetsen",
+                icoon: "🪥",
+                details: "Een frisse mond is genoeg."
+            },
+            {
+                id: "deodorant",
+                tekst: "Deodorant",
+                icoon: "🧴",
+                details: "Even opfrissen."
+            },
+            {
+                id: "schone-kleding",
+                tekst: "Schone kleding",
+                icoon: "👕",
+                details: "Iets schoons aantrekken."
+            }
+        ]
+    },
+
+
+    eten: {
+        titel: "Eten & drinken",
+        icoon: "🍽️",
+        activiteiten: [
+            {
+                id: "ontbijt",
+                tekst: "Ontbijt",
+                icoon: "🥣",
+                details: "Iets eten in de ochtend."
+            },
+            {
+                id: "lunch",
+                tekst: "Lunch",
+                icoon: "🥪",
+                details: "Iets eten rond de middag."
+            },
+            {
+                id: "diner",
+                tekst: "Diner",
+                icoon: "🍽️",
+                details: "Iets eten in de avond."
+            },
+            {
+                id: "water",
+                tekst: "Water gedronken",
+                icoon: "💧",
+                details: "Een glas water telt."
+            },
+            {
+                id: "ander-drinken",
+                tekst: "Iets anders gedronken",
+                icoon: "🥤",
+                details: "Ook iets anders drinken telt."
+            }
+        ]
+    },
+
+
+    omgeving: {
+        titel: "Omgeving",
+        icoon: "🏠",
+        activiteiten: [
+            {
+                id: "afwas",
+                tekst: "Afwas / vaat",
+                icoon: "🍽️",
+                details: "Een beetje vaat wegwerken."
+            },
+            {
+                id: "opruimen",
+                tekst: "Even iets opruimen",
+                icoon: "🧹",
+                details: "Eén klein stukje is genoeg."
+            }
+        ]
+    },
+
+
+    beweging: {
+        titel: "Beweging & buiten",
+        icoon: "🚶",
+        activiteiten: [
+            {
+                id: "buiten",
+                tekst: "Even naar buiten",
+                icoon: "🌳",
+                details: "Even frisse lucht."
+            },
+            {
+                id: "blokje-om",
+                tekst: "Klein blokje om",
+                icoon: "🚶",
+                details: "Een klein rondje telt."
+            },
+            {
+                id: "bewegen",
+                tekst: "Even bewegen",
+                icoon: "🤸",
+                details: "Een beetje bewegen is genoeg."
+            }
+        ]
+    },
+
+
+    hoofd: {
+        titel: "Hoofd & ontspanning",
+        icoon: "🧠",
+        activiteiten: [
+            {
+                id: "rust",
+                tekst: "Even rust genomen",
+                icoon: "🫶",
+                details: "Even niets hoeven."
+            },
+            {
+                id: "muziek",
+                tekst: "Muziek geluisterd",
+                icoon: "🎧",
+                details: "Even luisteren naar iets fijns."
+            },
+            {
+                id: "plezier",
+                tekst: "Iets gedaan waar ik plezier aan beleef",
+                icoon: "❤️",
+                details: "Iets doen dat prettig voelt."
+            }
+        ]
+    },
+
+
+    borden: {
+        titel: "Check mijn borden",
+        icoon: "📋",
+        activiteiten: [
+            {
+                id: "borden-bekeken",
+                tekst: "Borden bekeken",
+                icoon: "📋",
+                details: "Even kijken wat er ligt."
+            },
+            {
+                id: "klein-taakje",
+                tekst: "Een klein taakje gedaan",
+                icoon: "✓",
+                details: "Eén klein taakje is genoeg."
+            }
+        ]
+    }
+
+};
+
+
+/* =========================================================
+   START
+   ========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -287,355 +404,320 @@ document.addEventListener(
 
         serviceWorkerRegistreren();
 
+        gebeurtenissenInstellen();
     }
 );
 
 
-// ======================================
-// DATUM
-// ======================================
+/* =========================================================
+   GEBEURTENISSEN
+   ========================================================= */
 
-function vandaagDatum() {
+function gebeurtenissenInstellen() {
 
-    const vandaag =
-        new Date();
+    basisKnop?.addEventListener(
+        "click",
+        naarBasis
+    );
 
-    const jaar =
-        vandaag.getFullYear();
+    moeilijkKnop?.addEventListener(
+        "click",
+        naarMoeilijkeDag
+    );
 
-    const maand =
-        String(
-            vandaag.getMonth() + 1
-        ).padStart(2, "0");
+    basisTerugKnop?.addEventListener(
+        "click",
+        () => schermTonen("hoofdScherm")
+    );
 
-    const dag =
-        String(
-            vandaag.getDate()
-        ).padStart(2, "0");
+    moeilijkTerugKnop?.addEventListener(
+        "click",
+        () => schermTonen("hoofdScherm")
+    );
 
-    return `${jaar}-${maand}-${dag}`;
-}
+    activiteitTerugKnop?.addEventListener(
+        "click",
+        () => {
+
+            if (huidigScherm === "activiteitScherm") {
+
+                if (huidigeBlok) {
+
+                    basisBlokOpenen(huidigeBlok);
+
+                } else {
+
+                    schermTonen("hoofdScherm");
+
+                }
+
+            }
+
+        }
+    );
 
 
-// ======================================
-// DAGSTATUS LADEN
-// ======================================
+    document
+        .querySelectorAll(".basis-blok")
+        .forEach(
+            knop => {
 
-function dagStatusLaden() {
+                knop.addEventListener(
+                    "click",
+                    () => {
 
-    const vandaag =
-        vandaagDatum();
+                        const blok =
+                            knop.dataset.blok;
 
-    try {
+                        basisBlokOpenen(blok);
+                    }
+                );
+            }
+        );
 
-        const opgeslagen =
-            localStorage.getItem(
-                OPSLAG_DAGSTATUS
+
+    document
+        .querySelectorAll(".moeilijk-activiteit")
+        .forEach(
+            knop => {
+
+                knop.addEventListener(
+                    "click",
+                    () => {
+
+                        const activiteit =
+                            knop.dataset.activiteit;
+
+                        moeilijkeActiviteitAfronden(
+                            activiteit
+                        );
+                    }
+                );
+            }
+        );
+
+
+    moeilijkIetsGegeten?.addEventListener(
+        "click",
+        () => {
+
+            persoonlijkeSectieOpenen(
+                moeilijkEtenDetails,
+                moeilijkIetsGegeten
             );
 
-        if (opgeslagen) {
+        }
+    );
 
-            const gegevens =
-                JSON.parse(opgeslagen);
+
+    moeilijkIetsPrettigs?.addEventListener(
+        "click",
+        () => {
+
+            persoonlijkeSectieOpenen(
+                moeilijkPrettigDetails,
+                moeilijkIetsPrettigs
+            );
+
+        }
+    );
+
+
+    kortInvoerSluitenKnop?.addEventListener(
+        "click",
+        kortInvoerSluiten
+    );
+
+    invoerAnnuleren?.addEventListener(
+        "click",
+        kortInvoerSluiten
+    );
+
+    invoerOpslaan?.addEventListener(
+        "click",
+        kortInvoerOpslaan
+    );
+
+
+    kortInvoer?.addEventListener(
+        "keydown",
+        event => {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                kortInvoerOpslaan();
+            }
+
+            if (event.key === "Escape") {
+
+                event.preventDefault();
+
+                kortInvoerSluiten();
+            }
+
+        }
+    );
+
+
+    activiteitKlaarKnop?.addEventListener(
+        "click",
+        () => {
+
+            if (huidigeActiviteit) {
+
+                activiteitAfronden(
+                    huidigeActiviteit
+                );
+
+            }
+
+        }
+    );
+
+
+    etenOptieToevoegen?.addEventListener(
+        "click",
+        event => {
+
+            const knop =
+                event.target.closest(
+                    ".persoonlijke-toevoegen-knop"
+                );
+
+            if (!knop) return;
+
+            const invoer =
+                etenOptieToevoegen.querySelector(
+                    ".persoonlijke-toevoegen-invoer"
+                );
+
+            persoonlijkeOptieToevoegen(
+                "eten",
+                invoer
+            );
+
+        }
+    );
+
+
+    prettigOptieToevoegen?.addEventListener(
+        "click",
+        event => {
+
+            const knop =
+                event.target.closest(
+                    ".persoonlijke-toevoegen-knop"
+                );
+
+            if (!knop) return;
+
+            const invoer =
+                prettigOptieToevoegen.querySelector(
+                    ".persoonlijke-toevoegen-invoer"
+                );
+
+            persoonlijkeOptieToevoegen(
+                "prettig",
+                invoer
+            );
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        event => {
 
             if (
-                gegevens &&
-                gegevens.datum === vandaag
+                event.key === "Escape" &&
+                kortInvoerContainer &&
+                !kortInvoerContainer.hidden
             ) {
 
-                dagStatus = {
-                    datum: vandaag,
-                    afgerond:
-                        gegevens.afgerond || {},
-                    toevoegingen:
-                        gegevens.toevoegingen || {}
-                };
-
-                return;
+                kortInvoerSluiten();
 
             }
 
         }
-
-    } catch (fout) {
-
-        console.error(
-            "Fout bij laden dagstatus:",
-            fout
-        );
-
-    }
-
-
-    // Nieuwe dag:
-    // alles wat dagelijks is begint opnieuw.
-
-    dagStatus = {
-        datum: vandaag,
-        afgerond: {},
-        toevoegingen: {}
-    };
-
-    dagStatusOpslaan();
+    );
 }
 
 
-// ======================================
-// DAGSTATUS OPSLAAN
-// ======================================
+/* =========================================================
+   SCHERMEN
+   ========================================================= */
 
-function dagStatusOpslaan() {
-
-    try {
-
-        localStorage.setItem(
-            OPSLAG_DAGSTATUS,
-            JSON.stringify(dagStatus)
-        );
-
-    } catch (fout) {
-
-        console.error(
-            "Fout bij opslaan dagstatus:",
-            fout
-        );
-
-    }
-}
-
-
-// ======================================
-// PERSOONLIJKE OPTIES LADEN
-// ======================================
-
-function persoonlijkeOptiesLaden() {
-
-    try {
-
-        const opgeslagenSafeFoods =
-            localStorage.getItem(
-                OPSLAG_SAFEFOODS
-            );
-
-        if (opgeslagenSafeFoods) {
-
-            const gegevens =
-                JSON.parse(
-                    opgeslagenSafeFoods
-                );
-
-            if (Array.isArray(gegevens)) {
-
-                safeFoods =
-                    gegevens;
-
-            }
-
-        }
-
-
-        const opgeslagenPrettig =
-            localStorage.getItem(
-                OPSLAG_PRETTIGE_ACTIVITEITEN
-            );
-
-        if (opgeslagenPrettig) {
-
-            const gegevens =
-                JSON.parse(
-                    opgeslagenPrettig
-                );
-
-            if (Array.isArray(gegevens)) {
-
-                prettigeActiviteiten =
-                    gegevens;
-
-            }
-
-        }
-
-    } catch (fout) {
-
-        console.error(
-            "Fout bij laden persoonlijke opties:",
-            fout
-        );
-
-    }
-
-
-    // Alleen bij een echt lege opslag
-    // vullen we de standaardopties.
-
-    if (!safeFoods.length) {
-
-        safeFoods =
-            STANDAARD_SAFEFOODS.map(
-                optie => ({ ...optie })
-            );
-
-        persoonlijkeOptiesOpslaan(
-            "eten"
-        );
-
-    }
-
-
-    if (!prettigeActiviteiten.length) {
-
-        prettigeActiviteiten =
-            STANDAARD_PRETTIGE_ACTIVITEITEN.map(
-                optie => ({ ...optie })
-            );
-
-        persoonlijkeOptiesOpslaan(
-            "prettig"
-        );
-
-    }
-
-}
-
-
-// ======================================
-// PERSOONLIJKE OPTIES OPSLAAN
-// ======================================
-
-function persoonlijkeOptiesOpslaan(
-    categorie
-) {
-
-    try {
-
-        if (categorie === "eten") {
-
-            localStorage.setItem(
-                OPSLAG_SAFEFOODS,
-                JSON.stringify(
-                    safeFoods
-                )
-            );
-
-        }
-
-
-        if (categorie === "prettig") {
-
-            localStorage.setItem(
-                OPSLAG_PRETTIGE_ACTIVITEITEN,
-                JSON.stringify(
-                    prettigeActiviteiten
-                )
-            );
-
-        }
-
-    } catch (fout) {
-
-        console.error(
-            "Fout bij opslaan persoonlijke opties:",
-            fout
-        );
-
-    }
-
-}
-
-
-// ======================================
-// SCHERM TONEN
-// ======================================
-
-function schermTonen(
-    schermId
-) {
+function schermTonen(id) {
 
     document
         .querySelectorAll(".scherm")
         .forEach(
             scherm => {
-
-                scherm.classList.remove(
-                    "actief"
-                );
-
+                scherm.classList.remove("actief");
             }
         );
 
 
     const scherm =
-        document.getElementById(
-            schermId
-        );
+        document.getElementById(id);
 
-    if (!scherm) {
+    if (!scherm) return;
 
-        console.error(
-            "Scherm niet gevonden:",
-            schermId
-        );
+    scherm.classList.add("actief");
 
-        return;
+    huidigScherm = id;
 
-    }
-
-
-    scherm.classList.add(
-        "actief"
-    );
-
-    huidigScherm =
-        schermId;
-
-
-    window.scrollTo(
-        {
-            top: 0,
-            behavior: "instant"
-        }
-    );
-
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
-// ======================================
-// HOOFDPAGINA
-// ======================================
+/* =========================================================
+   NAVIGATIE
+   ========================================================= */
 
 function naarBasis() {
 
-    schermTonen(
-        "basisScherm"
-    );
+    huidigeBlok = null;
+
+    schermTonen("basisScherm");
 
     basisStatusBijwerken();
-
 }
 
 
 function naarMoeilijkeDag() {
 
-    schermTonen(
-        "moeilijkScherm"
-    );
+    if (
+        moeilijkEtenDetails &&
+        !moeilijkEtenDetails.hidden
+    ) {
 
-    // Persoonlijke onderdelen altijd
-    // gesloten openen.
+        moeilijkEtenDetails.hidden = true;
 
-    if (moeilijkEtenDetails) {
-
-        moeilijkEtenDetails.hidden =
-            true;
-
+        persoonlijkePijlBijwerken(
+            moeilijkIetsGegeten,
+            false
+        );
     }
 
 
-    if (moeilijkPrettigDetails) {
+    if (
+        moeilijkPrettigDetails &&
+        !moeilijkPrettigDetails.hidden
+    ) {
 
-        moeilijkPrettigDetails.hidden =
-            true;
+        moeilijkPrettigDetails.hidden = true;
 
+        persoonlijkePijlBijwerken(
+            moeilijkIetsPrettigs,
+            false
+        );
     }
 
 
@@ -643,468 +725,48 @@ function naarMoeilijkeDag() {
 
     moeilijkeStatusBijwerken();
 
+    schermTonen("moeilijkScherm");
 }
 
 
-// ======================================
-// TERUG
-// ======================================
+/* =========================================================
+   BASIS BLOK OPENEN
+   ========================================================= */
 
-function naarHoofdscherm() {
+function basisBlokOpenen(blokId) {
 
-    schermTonen(
-        "hoofdScherm"
-    );
+    const blok =
+        basisBlokken[blokId];
 
-}
+    if (!blok) return;
 
+    huidigeBlok = blokId;
 
-function basisTerug() {
-
-    naarHoofdscherm();
-
-}
-
-
-function moeilijkTerug() {
-
-    naarHoofdscherm();
-
-}
-
-
-function activiteitTerug() {
-
-    schermTonen(
-        "basisScherm"
-    );
-
-    basisStatusBijwerken();
-
-}
-
-
-// ======================================
-// BASIS STATUS
-// ======================================
-
-function basisStatusBijwerken() {
-
-    document
-        .querySelectorAll(
-            ".activiteit-knop[data-activiteit]"
-        )
-        .forEach(
-            knop => {
-
-                const activiteit =
-                    knop.dataset.activiteit;
-
-                const sleutel =
-                    activiteitSleutel(
-                        "basis",
-                        activiteit
-                    );
-
-                if (
-                    isAfgerond(
-                        sleutel
-                    )
-                ) {
-
-                    knop.classList.add(
-                        "afgerond"
-                    );
-
-                } else {
-
-                    knop.classList.remove(
-                        "afgerond"
-                    );
-
-                }
-
-            }
-        );
-
-}
-
-
-// ======================================
-// SLEUTEL MAKEN
-// ======================================
-
-function activiteitSleutel(
-    soort,
-    activiteit
-) {
-
-    return `${soort}:${activiteit}`;
-
-}
-
-
-// ======================================
-// CHECK OF AFGEROND
-// ======================================
-
-function isAfgerond(
-    sleutel
-) {
-
-    return Boolean(
-        dagStatus.afgerond[
-            sleutel
-        ]
-    );
-
-}
-
-
-// ======================================
-// ACTIVITEIT AFVINKEN
-// ======================================
-
-function activiteitAfronden(
-    sleutel,
-    feedback
-) {
-
-    if (
-        isAfgerond(
-            sleutel
-        )
-    ) {
-
-        return false;
-
-    }
-
-
-    dagStatus.afgerond[
-        sleutel
-    ] = true;
-
-
-    dagStatusOpslaan();
-
-
-    if (feedback) {
-
-        beloningTonen(
-            feedback
-        );
-
-    }
-
-
-    return true;
-
-}
-
-
-// ======================================
-// FEEDBACK
-// ======================================
-
-function beloningTonen(
-    tekst
-) {
-
-    if (!beloning) {
-
-        return;
-
-    }
-
-
-    beloning.textContent =
-        tekst;
-
-
-    beloning.classList.remove(
-        "toon"
-    );
-
-
-    // Forceer opnieuw starten van animatie.
-
-    void beloning.offsetWidth;
-
-
-    beloning.classList.add(
-        "toon"
-    );
-
-
-    setTimeout(
-        () => {
-
-            beloning.classList.remove(
-                "toon"
-            );
-
-        },
-        2800
-    );
-
-}
-
-
-// ======================================
-// BASIS BLOKKEN
-// ======================================
-
-const basisBlokken = {
-
-    zelfzorg: {
-
-        titel: "Zelfzorg",
-
-        subtitel:
-            "Een beetje goed voor jezelf zorgen.",
-
-        activiteiten: [
-
-            {
-                id: "douchen",
-                tekst: "Douchen",
-                icoon: "🚿"
-            },
-
-            {
-                id: "tanden-poetsen",
-                tekst: "Tanden poetsen",
-                icoon: "🪥"
-            },
-
-            {
-                id: "deodorant",
-                tekst: "Deodorant",
-                icoon: "🧴"
-            },
-
-            {
-                id: "schone-kleding",
-                tekst: "Schone kleding",
-                icoon: "👕"
-            }
-
-        ]
-
-    },
-
-
-    eten: {
-
-        titel: "Eten & drinken",
-
-        subtitel:
-            "Geef je lichaam wat het nodig heeft.",
-
-        activiteiten: [
-
-            {
-                id: "ontbijt",
-                tekst: "Ontbijt",
-                icoon: "🍳"
-            },
-
-            {
-                id: "lunch",
-                tekst: "Lunch",
-                icoon: "🥪"
-            },
-
-            {
-                id: "diner",
-                tekst: "Diner",
-                icoon: "🍽️"
-            },
-
-            {
-                id: "water",
-                tekst: "Water gedronken",
-                icoon: "💧",
-                meervoudig: true
-            },
-
-            {
-                id: "iets-gedronken",
-                tekst: "Iets anders gedronken",
-                icoon: "🥤",
-                meervoudig: true
-            }
-
-        ]
-
-    },
-
-
-    omgeving: {
-
-        titel: "Omgeving",
-
-        subtitel:
-            "Een beetje orde om je heen.",
-
-        activiteiten: [
-
-            {
-                id: "afwas",
-                tekst: "Afwas / vaat",
-                icoon: "🍽️"
-            },
-
-            {
-                id: "opruimen",
-                tekst: "Even iets opruimen",
-                icoon: "🧹"
-            }
-
-        ]
-
-    },
-
-
-    beweging: {
-
-        titel: "Beweging & buiten",
-
-        subtitel:
-            "Even bewegen of naar buiten.",
-
-        activiteiten: [
-
-            {
-                id: "buiten",
-                tekst: "Even naar buiten",
-                icoon: "🌳"
-            },
-
-            {
-                id: "blokje-om",
-                tekst: "Klein blokje om",
-                icoon: "🚶"
-            },
-
-            {
-                id: "bewegen",
-                tekst: "Even bewegen",
-                icoon: "🤸"
-            }
-
-        ]
-
-    },
-
-
-    hoofd: {
-
-        titel: "Hoofd & ontspanning",
-
-        subtitel:
-            "Rust, plezier en ontspanning.",
-
-        activiteiten: [
-
-            {
-                id: "rust",
-                tekst: "Even rust genomen",
-                icoon: "🧘"
-            },
-
-            {
-                id: "muziek",
-                tekst: "Muziek geluisterd",
-                icoon: "🎧"
-            },
-
-            {
-                id: "plezier",
-                tekst:
-                    "Iets gedaan waar ik plezier aan beleef",
-                icoon: "❤️"
-            }
-
-        ]
-
-    },
-
-
-    borden: {
-
-        titel: "Check mijn borden",
-
-        subtitel:
-            "Misschien staat er iets voor vandaag.",
-
-        activiteiten: [
-
-            {
-                id: "borden-bekeken",
-                tekst: "Borden bekeken",
-                icoon: "📋"
-            },
-
-            {
-                id: "klein-taakje",
-                tekst: "Een klein taakje gedaan",
-                icoon: "✓"
-            }
-
-        ]
-
-    }
-
-};
-
-
-// ======================================
-// BASIS BLOK OPENEN
-// ======================================
-
-function basisBlokOpenen(
-    blok
-) {
-
-    const gegevens =
-        basisBlokken[
-            blok
-        ];
-
-    if (!gegevens) {
-
-        return;
-
-    }
-
-
-    huidigeBlok =
-        blok;
-
+    huidigeActiviteit = null;
 
     activiteitTitel.textContent =
-        gegevens.titel;
+        blok.titel;
 
     activiteitSubtitel.textContent =
-        gegevens.subtitel;
+        "Kies één ding dat je wilt doen.";
+
+    activiteitInhoud.innerHTML = "";
 
 
-    activiteitInhoud.innerHTML =
-        "";
+    const lijst =
+        document.createElement("div");
+
+    lijst.className =
+        "activiteiten";
 
 
-    gegevens.activiteiten.forEach(
+    blok.activiteiten.forEach(
         activiteit => {
 
             const knop =
-                document.createElement(
-                    "button"
-                );
+                document.createElement("button");
 
-            knop.type =
-                "button";
+            knop.type = "button";
 
             knop.className =
                 "activiteit-knop";
@@ -1112,28 +774,30 @@ function basisBlokOpenen(
             knop.dataset.activiteit =
                 activiteit.id;
 
-            knop.innerHTML = `
-                <span>
-                    ${activiteit.icoon}
-                </span>
+            const icoon =
+                document.createElement("span");
 
-                <span>
-                    ${activiteit.tekst}
-                </span>
+            icoon.textContent =
+                activiteit.icoon;
 
-                <span class="activiteit-pijl">
-                    →
-                </span>
-            `;
+            const tekst =
+                document.createElement("span");
+
+            tekst.textContent =
+                activiteit.tekst;
+
+            knop.append(
+                icoon,
+                tekst
+            );
+
+
+            const sleutel =
+                `basis:${blokId}:${activiteit.id}`;
 
 
             if (
-                isAfgerond(
-                    activiteitSleutel(
-                        "basis",
-                        activiteit.id
-                    )
-                )
+                dagStatus.afgerond[sleutel]
             ) {
 
                 knop.classList.add(
@@ -1148,6 +812,7 @@ function basisBlokOpenen(
                 () => {
 
                     basisActiviteitOpenen(
+                        blokId,
                         activiteit
                     );
 
@@ -1155,11 +820,13 @@ function basisBlokOpenen(
             );
 
 
-            activiteitInhoud.appendChild(
-                knop
-            );
-
+            lijst.appendChild(knop);
         }
+    );
+
+
+    activiteitInhoud.appendChild(
+        lijst
     );
 
 
@@ -1167,400 +834,398 @@ function basisBlokOpenen(
         "activiteitScherm"
     );
 
-
     activiteitStatusBijwerken(
-        gegevens.activiteiten
+        `basis:${blokId}`,
+        blok.icoon,
+        blok.titel
     );
-
 }
 
 
-// ======================================
-// BASIS ACTIVITEIT OPENEN
-// ======================================
+/* =========================================================
+   BASIS ACTIVITEIT OPENEN
+   ========================================================= */
 
 function basisActiviteitOpenen(
+    blokId,
     activiteit
 ) {
 
+    huidigeBlok = blokId;
+
     huidigeActiviteit =
-        activiteit;
+        `basis:${blokId}:${activiteit.id}`;
 
 
     activiteitTitel.textContent =
         activiteit.tekst;
 
-
     activiteitSubtitel.textContent =
-        "Eén ding tegelijk is genoeg.";
+        basisBlokken[blokId].titel;
+
+    activiteitStatusIcoon.textContent =
+        activiteit.icoon;
+
+    activiteitStatusTitel.textContent =
+        dagStatus.afgerond[huidigeActiviteit]
+            ? "Goed gedaan."
+            : "Eén stap tegelijk.";
+
+    activiteitStatusTekst.textContent =
+        dagStatus.afgerond[huidigeActiviteit]
+            ? "Deze heb je vandaag al gedaan."
+            : activiteit.details;
 
 
-    activiteitInhoud.innerHTML =
-        "";
+    activiteitInhoud.innerHTML = "";
 
 
-    const uitleg =
-        document.createElement(
-            "div"
-        );
+    const invoerKnop =
+        document.createElement("button");
 
-    uitleg.className =
-        "activiteit-uitleg";
+    invoerKnop.type = "button";
 
+    invoerKnop.className =
+        "activiteit-invoer-knop";
 
-    uitleg.innerHTML = `
-        <p>
-            ${activiteit.icoon}
-            Je hoeft hier alleen maar
-            ${activiteit.tekst.toLowerCase()}
-            te doen.
-        </p>
-    `;
-
-
-    activiteitInhoud.appendChild(
-        uitleg
-    );
-
-
-    // Extra details kunnen worden
-    // toegevoegd bij activiteiten.
-
-    const details =
-        document.createElement(
-            "div"
-        );
-
-    details.className =
-        "activiteit-details";
-
-
-    const detailsTitel =
-        document.createElement(
-            "h3"
-        );
-
-    detailsTitel.textContent =
-        "Wil je iets extra's noteren?";
-
-
-    details.appendChild(
-        detailsTitel
-    );
-
-
-    const detailsUitleg =
-        document.createElement(
-            "p"
-        );
-
-    detailsUitleg.textContent =
-        "Bijvoorbeeld bij douchen: haar gewassen of geschoren.";
-
-
-    details.appendChild(
-        detailsUitleg
-    );
-
-
-    const toevoegenKnop =
-        document.createElement(
-            "button"
-        );
-
-    toevoegenKnop.type =
-        "button";
-
-    toevoegenKnop.className =
-        "secondary-button";
-
-    toevoegenKnop.textContent =
+    invoerKnop.textContent =
         "＋ Iets toevoegen";
 
-
-    toevoegenKnop.addEventListener(
+    invoerKnop.addEventListener(
         "click",
         () => {
 
             kortInvoerOpenen(
-                activiteit
+                huidigeActiviteit,
+                activiteit.tekst
             );
 
         }
     );
 
 
-    details.appendChild(
-        toevoegenKnop
-    );
+    const extraLijst =
+        document.createElement("div");
+
+    extraLijst.className =
+        "extra-lijst";
 
 
     const toevoegingen =
         dagStatus.toevoegingen[
-            activiteitSleutel(
-                "basis",
-                activiteit.id
-            )
+            huidigeActiviteit
         ] || [];
 
 
-    if (toevoegingen.length) {
+    toevoegingen.forEach(
+        (item, index) => {
 
-        const lijst =
-            document.createElement(
-                "div"
-            );
+            const rij =
+                document.createElement("div");
 
-        lijst.className =
-            "activiteit-toevoegingen";
+            rij.className =
+                "extra-rij";
 
 
-        toevoegingen.forEach(
-            tekst => {
+            if (item.afgerond) {
 
-                const regel =
-                    document.createElement(
-                        "div"
-                    );
-
-                regel.className =
-                    "toevoeging";
-
-                regel.textContent =
-                    `✓ ${tekst}`;
-
-                lijst.appendChild(
-                    regel
+                rij.classList.add(
+                    "afgerond"
                 );
 
             }
-        );
 
 
-        details.appendChild(
-            lijst
-        );
+            const vink =
+                document.createElement("button");
 
-    }
+            vink.type = "button";
+
+            vink.className =
+                "extra-vink";
+
+            vink.textContent =
+                "✓";
+
+            vink.setAttribute(
+                "aria-label",
+                "Aanvulling afvinken"
+            );
 
 
-    activiteitInhoud.appendChild(
-        details
+            vink.addEventListener(
+                "click",
+                () => {
+
+                    item.afgerond =
+                        !item.afgerond;
+
+                    dagStatusOpslaan();
+
+                    basisActiviteitOpenen(
+                        blokId,
+                        activiteit
+                    );
+
+                }
+            );
+
+
+            const tekst =
+                document.createElement("span");
+
+            tekst.className =
+                "extra-tekst";
+
+            tekst.textContent =
+                item.tekst;
+
+
+            const verwijderen =
+                document.createElement("button");
+
+            verwijderen.type = "button";
+
+            verwijderen.className =
+                "extra-verwijder";
+
+            verwijderen.textContent =
+                "×";
+
+            verwijderen.setAttribute(
+                "aria-label",
+                "Verwijder aanvulling"
+            );
+
+
+            verwijderen.addEventListener(
+                "click",
+                () => {
+
+                    toevoegingen.splice(
+                        index,
+                        1
+                    );
+
+                    dagStatusOpslaan();
+
+                    basisActiviteitOpenen(
+                        blokId,
+                        activiteit
+                    );
+
+                }
+            );
+
+
+            rij.append(
+                vink,
+                tekst,
+                verwijderen
+            );
+
+            extraLijst.appendChild(
+                rij
+            );
+        }
     );
 
 
+    activiteitInhoud.appendChild(
+        extraLijst
+    );
+
+    activiteitInhoud.appendChild(
+        invoerKnop
+    );
+
+
+    activiteitStatusBijwerken(
+        huidigeActiviteit,
+        activiteit.icoon,
+        activiteit.tekst
+    );
+}
+
+
+/* =========================================================
+   BASIS STATUS
+   ========================================================= */
+
+function basisStatusBijwerken() {
+
+    // De status wordt direct opgebouwd
+    // wanneer een blok wordt geopend.
+
+}
+
+
+/* =========================================================
+   ACTIVITEIT AFRONDEN
+   ========================================================= */
+
+function activiteitAfronden(
+    sleutel
+) {
+
     if (
-        isAfgerond(
-            activiteitSleutel(
-                "basis",
-                activiteit.id
-            )
-        )
+        dagStatus.afgerond[sleutel]
     ) {
 
-        activiteitKlaarKnop.textContent =
-            "✓ Klaar";
+        return;
+    }
 
-    } else {
 
-        activiteitKlaarKnop.textContent =
-            "✓ Klaar";
+    dagStatus.afgerond[sleutel] =
+        true;
 
+
+    dagStatusOpslaan();
+
+
+    const basisMatch =
+        sleutel.match(
+            /^basis:([^:]+):(.+)$/
+        );
+
+
+    if (basisMatch) {
+
+        const blokId =
+            basisMatch[1];
+
+        const activiteitId =
+            basisMatch[2];
+
+        const activiteit =
+            basisBlokken[
+                blokId
+            ]?.activiteiten.find(
+                item =>
+                    item.id === activiteitId
+            );
+
+
+        if (activiteit) {
+
+            activiteitStatusBijwerken(
+                sleutel,
+                activiteit.icoon,
+                activiteit.tekst
+            );
+
+            beloningTonen(
+                "YES! Goed gedaan! 🎉",
+                "Dit heb je gewoon gedaan! 💪"
+            );
+
+            basisBlokOpenen(
+                blokId
+            );
+
+            return;
+        }
     }
 
 
     activiteitStatusBijwerken(
-        [activiteit]
+        sleutel,
+        "🌱",
+        "Goed gedaan."
     );
 
+
+    beloningTonen(
+        "YES! Goed gedaan! 🎉",
+        "Dit heb je gewoon gedaan! 💪"
+    );
 }
 
 
-// ======================================
-// ACTIVITEIT STATUS
-// ======================================
+/* =========================================================
+   ACTIVITEIT STATUS
+   ========================================================= */
 
 function activiteitStatusBijwerken(
-    activiteiten
+    sleutel,
+    icoon,
+    titel
 ) {
 
-    if (
-        !activiteiten ||
-        !activiteiten.length
-    ) {
-
-        return;
-
-    }
+    if (!activiteitStatus) return;
 
 
-    const activiteit =
-        huidigeActiviteit ||
-        activiteiten[0];
+    activiteitStatusIcoon.textContent =
+        icoon || "🌱";
 
 
-    if (!activiteit) {
-
-        return;
-
-    }
-
-
-    const sleutel =
-        activiteitSleutel(
-            "basis",
-            activiteit.id
-        );
+    activiteitStatusTitel.textContent =
+        dagStatus.afgerond[sleutel]
+            ? "Goed gedaan."
+            : "Eén stap tegelijk.";
 
 
-    if (
-        isAfgerond(
-            sleutel
-        )
-    ) {
-
-        activiteitStatusIcoon.textContent =
-            "🎉";
-
-        activiteitStatusTitel.textContent =
-            "Goed gedaan!";
-
-        activiteitStatusTekst.textContent =
-            "Dit heb je vandaag gedaan.";
-
-        activiteitStatus.classList.add(
-            "afgerond"
-        );
-
-    } else {
-
-        activiteitStatusIcoon.textContent =
-            activiteit.icoon || "🌱";
-
-        activiteitStatusTitel.textContent =
-            "Eén stap is genoeg.";
-
-        activiteitStatusTekst.textContent =
-            "Je hoeft niet meer te doen dan dit.";
-
-        activiteitStatus.classList.remove(
-            "afgerond"
-        );
-
-    }
-
+    activiteitStatusTekst.textContent =
+        dagStatus.afgerond[sleutel]
+            ? "Deze heb je vandaag gedaan."
+            : titel || "Eén stap is genoeg.";
 }
 
 
-// ======================================
-// BASIS ACTIVITEIT KLAAR
-// ======================================
+/* =========================================================
+   KORTE INVOER
+   ========================================================= */
 
-function basisActiviteitKlaar() {
+let huidigeInvoerSleutel = null;
 
-    if (
-        !huidigeActiviteit
-    ) {
-
-        return;
-
-    }
-
-
-    const sleutel =
-        activiteitSleutel(
-            "basis",
-            huidigeActiviteit.id
-        );
-
-
-    const nieuw =
-        activiteitAfronden(
-            sleutel,
-            "Yes! Dit heb je gedaan. 💚"
-        );
-
-
-    if (nieuw) {
-
-        activiteitStatusBijwerken(
-            [huidigeActiviteit]
-        );
-
-        basisStatusBijwerken();
-
-    }
-
-}
-
-
-// ======================================
-// KORTE INVOER OPENEN
-// ======================================
 
 function kortInvoerOpenen(
-    activiteit
+    sleutel,
+    activiteitNaam
 ) {
 
-    huidigeActiviteit =
-        activiteit;
-
-
-    huidigeBewerkOptie =
-        null;
+    huidigeInvoerSleutel =
+        sleutel;
 
 
     kortInvoerTitel.textContent =
-        activiteit.tekst;
-
+        activiteitNaam;
 
     kortInvoerUitleg.textContent =
-        "Voeg eventueel iets kleins toe.";
+        "Een korte aanvulling is genoeg.";
 
-
-    kortInvoer.value =
-        "";
-
+    kortInvoer.value = "";
 
     kortInvoerContainer.hidden =
         false;
 
 
-    setTimeout(
+    requestAnimationFrame(
         () => {
-
             kortInvoer.focus();
-
-        },
-        50
+        }
     );
-
 }
 
-
-// ======================================
-// KORTE INVOER SLUITEN
-// ======================================
 
 function kortInvoerSluiten() {
 
-    kortInvoerContainer.hidden =
-        true;
-
-    kortInvoer.value =
-        "";
-
-    huidigeBewerkOptie =
+    huidigeInvoerSleutel =
         null;
 
+    kortInvoer.value = "";
+
+    kortInvoerContainer.hidden =
+        true;
 }
 
 
-// ======================================
-// KORTE INVOER OPSLAAN
-// ======================================
-
 function kortInvoerOpslaan() {
+
+    if (!huidigeInvoerSleutel) {
+        return;
+    }
+
 
     const tekst =
         kortInvoer.value.trim();
@@ -1571,81 +1236,147 @@ function kortInvoerOpslaan() {
         kortInvoer.focus();
 
         return;
-
     }
 
 
     if (
-        huidigeBeheerCategorie &&
-        huidigeBewerkOptie
-    ) {
-
-        persoonlijkeOptieOpslaan();
-
-        return;
-
-    }
-
-
-    if (
-        !huidigeActiviteit
-    ) {
-
-        return;
-
-    }
-
-
-    const sleutel =
-        activiteitSleutel(
-            "basis",
-            huidigeActiviteit.id
-        );
-
-
-    if (
-        !Array.isArray(
-            dagStatus.toevoegingen[
-                sleutel
-            ]
-        )
+        !dagStatus.toevoegingen[
+            huidigeInvoerSleutel
+        ]
     ) {
 
         dagStatus.toevoegingen[
-            sleutel
+            huidigeInvoerSleutel
         ] = [];
 
     }
 
 
     dagStatus.toevoegingen[
-        sleutel
-    ].push(
-        tekst
-    );
+        huidigeInvoerSleutel
+    ].push({
+        tekst,
+        afgerond: false
+    });
 
 
     dagStatusOpslaan();
 
 
+    const match =
+        huidigeInvoerSleutel.match(
+            /^basis:([^:]+):(.+)$/
+        );
+
+
     kortInvoerSluiten();
 
 
-    basisActiviteitOpenen(
-        huidigeActiviteit
-    );
+    if (match) {
 
+        const blokId =
+            match[1];
 
-    beloningTonen(
-        "Mooi. Ook dit kleine ding telt mee. 🌱"
-    );
+        const activiteitId =
+            match[2];
 
+        const activiteit =
+            basisBlokken[
+                blokId
+            ]?.activiteiten.find(
+                item =>
+                    item.id === activiteitId
+            );
+
+        if (activiteit) {
+
+            basisActiviteitOpenen(
+                blokId,
+                activiteit
+            );
+
+        }
+
+    }
 }
 
 
-// ======================================
-// MOEILIJKE DAG STATUS
-// ======================================
+/* =========================================================
+   MOEILIJKE DAG
+   ========================================================= */
+
+function moeilijkeActiviteitAfronden(
+    activiteit
+) {
+
+    if (
+        dagStatus.afgerond[activiteit]
+    ) {
+
+        return;
+    }
+
+
+    dagStatus.afgerond[activiteit] =
+        true;
+
+
+    dagStatusOpslaan();
+
+    moeilijkeStatusBijwerken();
+
+
+    beloningTonen(
+        "YES! Goed gedaan! 🎉",
+        moeilijkeFeedback(
+            activiteit
+        )
+    );
+}
+
+
+function moeilijkeFeedback(
+    activiteit
+) {
+
+    const feedback = {
+
+        "moeilijk-iets-gedronken":
+            "Iets drinken is al genoeg. 💧",
+
+        "moeilijk-water":
+            "Je hebt water gedronken. 💧",
+
+        "moeilijk-douchen":
+            "Je hebt voor jezelf gezorgd. 🚿",
+
+        "moeilijk-wassen":
+            "Een beetje zelfzorg telt. 🧼",
+
+        "moeilijk-tanden":
+            "Tanden gepoetst. 🪥",
+
+        "moeilijk-kleding":
+            "Schone kleding aan. 👕",
+
+        "moeilijk-blokje-om":
+            "Lekker. Even naar buiten geweest. 🚶",
+
+        "moeilijk-buiten":
+            "Je bent even buiten geweest. 🌳",
+
+        "moeilijk-bewegen":
+            "Je hebt even bewogen. 🤸"
+
+    };
+
+
+    return (
+        feedback[activiteit] ||
+        "Dit telt mee. 💚"
+    );
+}
+
 
 function moeilijkeStatusBijwerken() {
 
@@ -1656,358 +1387,56 @@ function moeilijkeStatusBijwerken() {
         .forEach(
             knop => {
 
-                const activiteit =
+                const id =
                     knop.dataset.activiteit;
 
-                const sleutel =
-                    activiteitSleutel(
-                        "moeilijk",
-                        activiteit
-                    );
-
-
-                if (
-                    isAfgerond(
-                        sleutel
-                    )
-                ) {
-
-                    knop.classList.add(
-                        "afgerond"
-                    );
-
-                } else {
-
-                    knop.classList.remove(
-                        "afgerond"
-                    );
-
-                }
+                knop.classList.toggle(
+                    "afgerond",
+                    !!dagStatus.afgerond[id]
+                );
 
             }
         );
 
 
-    if (moeilijkIetsGegeten) {
-
-        const afgerond =
-            isAfgerond(
-                "moeilijk:moeilijk-iets-gegeten"
-            );
+    if (
+        moeilijkIetsGegeten
+    ) {
 
         moeilijkIetsGegeten.classList.toggle(
             "afgerond",
-            afgerond
+            !!dagStatus.afgerond[
+                "moeilijk-iets-gegeten"
+            ]
         );
-
     }
 
 
-    if (moeilijkIetsPrettigs) {
-
-        const afgerond =
-            isAfgerond(
-                "moeilijk:moeilijk-iets-prettigs"
-            );
+    if (
+        moeilijkIetsPrettigs
+    ) {
 
         moeilijkIetsPrettigs.classList.toggle(
             "afgerond",
-            afgerond
+            !!dagStatus.afgerond[
+                "moeilijk-iets-prettigs"
+            ]
         );
-
     }
-
 }
 
 
-// ======================================
-// MOEILIJKE ACTIVITEIT
-// ======================================
-
-function moeilijkeActiviteitKlik(
-    knop
-) {
-
-    const activiteit =
-        knop.dataset.activiteit;
-
-
-    const sleutel =
-        activiteitSleutel(
-            "moeilijk",
-            activiteit
-        );
-
-
-    const feedback =
-        moeilijkeFeedback(
-            activiteit
-        );
-
-
-    activiteitAfronden(
-        sleutel,
-        feedback
-    );
-
-
-    moeilijkeStatusBijwerken();
-
-}
-
-
-// ======================================
-// FEEDBACK MOEILIJKE DAG
-// ======================================
-
-function moeilijkeFeedback(
-    activiteit
-) {
-
-    const feedback = {
-
-        "moeilijk-iets-gedronken":
-            "Goed. Iets drinken is al genoeg. 💧",
-
-        "moeilijk-water":
-            "Yes. Je hebt water gedronken. 💧",
-
-        "moeilijk-douchen":
-            "Yes. Je hebt voor jezelf gezorgd. 🚿",
-
-        "moeilijk-wassen":
-            "Goed gedaan. Een beetje zelfzorg telt. 🧼",
-
-        "moeilijk-tanden":
-            "Yes. Tanden gepoetst. 🪥",
-
-        "moeilijk-kleding":
-            "Schone kleding aan. Goed bezig. 👕",
-
-        "moeilijk-blokje-om":
-            "Lekker. Even naar buiten geweest. 🚶",
-
-        "moeilijk-buiten":
-            "Goed. Je bent even buiten geweest. 🌳",
-
-        "moeilijk-bewegen":
-            "Yes. Je hebt even bewogen. 🤸"
-
-    };
-
-
-    return (
-        feedback[activiteit] ||
-        "Goed gedaan. Dit telt mee. 💚"
-    );
-
-}
-
-
-// ======================================
-// PERSOONLIJKE OPTIES WEERGEVEN
-// ======================================
-
-function moeilijkeOptiesWeergeven() {
-
-    if (moeilijkEtenOpties) {
-
-        moeilijkEtenOpties.innerHTML =
-            "";
-
-
-        safeFoods.forEach(
-            optie => {
-
-                moeilijkEtenOpties.appendChild(
-                    persoonlijkeOptieKnop(
-                        optie,
-                        "eten"
-                    )
-                );
-
-            }
-        );
-
-    }
-
-
-    if (moeilijkPrettigOpties) {
-
-        moeilijkPrettigOpties.innerHTML =
-            "";
-
-
-        prettigeActiviteiten.forEach(
-            optie => {
-
-                moeilijkPrettigOpties.appendChild(
-                    persoonlijkeOptieKnop(
-                        optie,
-                        "prettig"
-                    )
-                );
-
-            }
-        );
-
-    }
-
-}
-
-
-// ======================================
-// PERSOONLIJKE OPTIE KNOP
-// ======================================
-
-function persoonlijkeOptieKnop(
-    optie,
-    categorie
-) {
-
-    const knop =
-        document.createElement(
-            "button"
-        );
-
-
-    knop.type =
-        "button";
-
-
-    knop.className =
-        "activiteit-knop persoonlijke-optie";
-
-
-    const sleutel =
-        `persoonlijk:${categorie}:${optie.id}`;
-
-
-    if (
-        isAfgerond(
-            sleutel
-        )
-    ) {
-
-        knop.classList.add(
-            "afgerond"
-        );
-
-    }
-
-
-    knop.innerHTML = `
-        <span>
-            ${optie.icoon || "•"}
-        </span>
-
-        <span>
-            ${escapeHtml(
-                optie.tekst
-            )}
-        </span>
-
-        <span class="activiteit-pijl">
-            ✓
-        </span>
-    `;
-
-
-    knop.addEventListener(
-        "click",
-        () => {
-
-            persoonlijkeOptieKlik(
-                optie,
-                categorie
-            );
-
-        }
-    );
-
-
-    return knop;
-
-}
-
-
-// ======================================
-// PERSOONLIJKE OPTIE KLIKKEN
-// ======================================
-
-function persoonlijkeOptieKlik(
-    optie,
-    categorie
-) {
-
-    const sleutel =
-        `persoonlijk:${categorie}:${optie.id}`;
-
-
-    const nieuw =
-        activiteitAfronden(
-            sleutel,
-            categorie === "eten"
-                ? `Yes! ${optie.tekst} gegeten. 🍽️`
-                : `Mooi. ${optie.tekst}. ❤️`
-        );
-
-
-    // Het hoofditem is ook afgerond.
-    // Bijvoorbeeld: een Safe Food kiezen
-    // betekent automatisch "Iets gegeten".
-
-    if (categorie === "eten") {
-
-        activiteitAfronden(
-            "moeilijk:moeilijk-iets-gegeten"
-        );
-
-    }
-
-
-    if (categorie === "prettig") {
-
-        activiteitAfronden(
-            "moeilijk:moeilijk-iets-prettigs"
-        );
-
-    }
-
-
-    moeilijkeStatusBijwerken();
-
-
-    moeilijkeOptiesWeergeven();
-
-
-    if (
-        !nieuw
-    ) {
-
-        return;
-
-    }
-
-}
-
-
-// ======================================
-// PERSOONLIJKE SECTIE OPENEN
-// ======================================
+/* =========================================================
+   PERSOONLIJKE SECTIE OPENEN
+   ========================================================= */
 
 function persoonlijkeSectieOpenen(
     details,
     trigger
 ) {
 
-    if (
-        !details ||
-        !trigger
-    ) {
-
+    if (!details || !trigger) {
         return;
-
     }
 
 
@@ -2019,959 +1448,1315 @@ function persoonlijkeSectieOpenen(
         !openen;
 
 
-    trigger
-        .querySelector(
-            ".persoonlijke-trigger-pijl"
-        )
-        ?.replaceChildren(
-            document.createTextNode(
-                openen
-                    ? "↑"
-                    : "↓"
-            )
-        );
-
-
-    if (!openen) {
-
-        return;
-
-    }
-
-
-    const activiteit =
-        trigger.dataset.activiteit;
-
-
-    const sleutel =
-        activiteitSleutel(
-            "moeilijk",
-            activiteit
-        );
-
-
-    if (
-        !isAfgerond(
-            sleutel
-        )
-    ) {
-
-        const feedback =
-            activiteit ===
-            "moeilijk-iets-gegeten"
-
-                ? "Goed. Je hebt iets gegeten. 🍽️"
-
-                : "Yes. Je hebt iets leuks gedaan. ❤️";
-
-
-        activiteitAfronden(
-            sleutel,
-            feedback
-        );
-
-    }
-
-
-    moeilijkeStatusBijwerken();
-
-}
-
-
-// ======================================
-// PERSOONLIJKE OPTIE TOEVOEGEN
-// ======================================
-
-function persoonlijkeOptieToevoegen(
-    categorie
-) {
-
-    huidigeBeheerCategorie =
-        categorie;
-
-    huidigeBewerkOptie =
-        null;
-
-
-    kortInvoerTitel.textContent =
-        categorie === "eten"
-            ? "Safe Food toevoegen"
-            : "Activiteit toevoegen";
-
-
-    kortInvoerUitleg.textContent =
-        categorie === "eten"
-            ? "Voeg iets toe dat makkelijk voor je is om te eten."
-            : "Voeg iets toe waar je op een moeilijke dag plezier aan beleeft.";
-
-
-    kortInvoer.value =
-        "";
-
-
-    kortInvoerContainer.hidden =
-        false;
-
-
-    setTimeout(
-        () => {
-
-            kortInvoer.focus();
-
-        },
-        50
+    persoonlijkePijlBijwerken(
+        trigger,
+        openen
     );
 
+
+    if (openen) {
+
+        if (
+            trigger ===
+            moeilijkIetsGegeten
+        ) {
+
+            persoonlijkeOptiesWeergeven(
+                "eten"
+            );
+
+        } else if (
+            trigger ===
+            moeilijkIetsPrettigs
+        ) {
+
+            persoonlijkeOptiesWeergeven(
+                "prettig"
+            );
+
+        }
+    }
 }
 
 
-// ======================================
-// PERSOONLIJKE OPTIES BEHEREN
-// ======================================
+function persoonlijkePijlBijwerken(
+    trigger,
+    open
+) {
 
-function persoonlijkeOptiesBeheren(
+    const pijl =
+        trigger.querySelector(
+            ".persoonlijke-trigger-pijl"
+        );
+
+    if (!pijl) return;
+
+    pijl.textContent =
+        open ? "↑" : "↓";
+
+
+    trigger.setAttribute(
+        "aria-expanded",
+        String(open)
+    );
+}
+
+
+/* =========================================================
+   PERSOONLIJKE OPTIES WEERGEVEN
+   ========================================================= */
+
+function moeilijkeOptiesWeergeven() {
+
+    persoonlijkeOptiesWeergeven(
+        "eten"
+    );
+
+    persoonlijkeOptiesWeergeven(
+        "prettig"
+    );
+}
+
+
+function persoonlijkeOptiesWeergeven(
     categorie
 ) {
 
-    huidigeBeheerCategorie =
-        categorie;
+    const isEten =
+        categorie === "eten";
 
 
-    persoonlijkeOptiesTitel.textContent =
-        categorie === "eten"
-            ? "Safe Foods aanpassen"
-            : "Prettige activiteiten aanpassen";
+    const lijst =
+        isEten
+            ? moeilijkEtenOpties
+            : moeilijkPrettigOpties;
 
 
-    persoonlijkeOptiesUitleg.textContent =
-        categorie === "eten"
-            ? "Deze opties blijven staan totdat jij ze verandert."
-            : "Deze activiteiten blijven staan totdat jij ze verandert.";
-
-
-    persoonlijkeOptiesLijst.innerHTML =
-        "";
+    const toevoegContainer =
+        isEten
+            ? etenOptieToevoegen
+            : prettigOptieToevoegen;
 
 
     const opties =
-        categorie === "eten"
+        isEten
             ? safeFoods
             : prettigeActiviteiten;
 
 
-    if (!opties.length) {
-
-        const leeg =
-            document.createElement(
-                "p"
-            );
-
-        leeg.textContent =
-            "Er zijn nog geen opties.";
-
-        persoonlijkeOptiesLijst.appendChild(
-            leeg
-        );
-
+    if (!lijst || !toevoegContainer) {
+        return;
     }
+
+
+    lijst.innerHTML = "";
 
 
     opties.forEach(
         optie => {
 
-            const regel =
-                document.createElement(
-                    "div"
+            const rij =
+                persoonlijkeOptieKnop(
+                    optie,
+                    categorie
                 );
 
-            regel.className =
-                "persoonlijke-beheer-regel";
+            lijst.appendChild(rij);
+        }
+    );
 
 
-            const tekst =
-                document.createElement(
-                    "div"
-                );
-
-            tekst.className =
-                "persoonlijke-beheer-tekst";
-
-            tekst.innerHTML = `
-                <span>
-                    ${optie.icoon || "•"}
-                </span>
-
-                <strong>
-                    ${escapeHtml(
-                        optie.tekst
-                    )}
-                </strong>
-            `;
+    persoonlijkeToevoegRijMaken(
+        categorie,
+        toevoegContainer
+    );
+}
 
 
-            const acties =
-                document.createElement(
-                    "div"
-                );
+/* =========================================================
+   PERSOONLIJKE OPTIE REGEL
+   ========================================================= */
 
-            acties.className =
-                "persoonlijke-beheer-acties";
+function persoonlijkeOptieKnop(
+    optie,
+    categorie
+) {
 
+    const rij =
+        document.createElement("div");
 
-            const bewerken =
-                document.createElement(
-                    "button"
-                );
-
-            bewerken.type =
-                "button";
-
-            bewerken.className =
-                "secondary-button";
-
-            bewerken.textContent =
-                "✎";
+    rij.className =
+        "persoonlijke-optie-regel";
 
 
-            bewerken.addEventListener(
-                "click",
-                () => {
-
-                    persoonlijkeOptieBewerken(
-                        categorie,
-                        optie
-                    );
-
-                }
-            );
+    const sleutel =
+        `persoonlijk:${categorie}:${optie.id}`;
 
 
-            const verwijderen =
-                document.createElement(
-                    "button"
-                );
-
-            verwijderen.type =
-                "button";
-
-            verwijderen.className =
-                "danger-button";
-
-            verwijderen.textContent =
-                "🗑️";
+    const afgerond =
+        !!dagStatus.afgerond[sleutel];
 
 
-            verwijderen.addEventListener(
-                "click",
-                () => {
+    if (afgerond) {
 
-                    persoonlijkeOptieVerwijderen(
-                        categorie,
-                        optie
-                    );
-
-                }
-            );
+        rij.classList.add(
+            "afgerond"
+        );
+    }
 
 
-            acties.appendChild(
-                bewerken
-            );
+    const knop =
+        document.createElement("button");
 
-            acties.appendChild(
-                verwijderen
-            );
+    knop.type = "button";
 
+    knop.className =
+        "persoonlijke-optie-knop";
 
-            regel.appendChild(
-                tekst
-            );
-
-            regel.appendChild(
-                acties
-            );
+    knop.setAttribute(
+        "aria-label",
+        optie.tekst
+    );
 
 
-            persoonlijkeOptiesLijst.appendChild(
-                regel
+    const icoon =
+        document.createElement("span");
+
+    icoon.className =
+        "persoonlijke-optie-icoon";
+
+    icoon.textContent =
+        optie.icoon || "🍽️";
+
+
+    const tekst =
+        document.createElement("span");
+
+    tekst.className =
+        "persoonlijke-optie-tekst";
+
+    tekst.textContent =
+        optie.tekst;
+
+
+    knop.append(
+        icoon,
+        tekst
+    );
+
+
+    knop.addEventListener(
+        "click",
+        () => {
+
+            persoonlijkeOptieKlik(
+                categorie,
+                optie
             );
 
         }
     );
 
 
-    persoonlijkeOptiesContainer.hidden =
-        false;
+    const bewerk =
+        document.createElement("button");
 
+    bewerk.type = "button";
+
+    bewerk.className =
+        "persoonlijke-optie-bewerk";
+
+    bewerk.textContent =
+        "✎";
+
+    bewerk.setAttribute(
+        "aria-label",
+        `${optie.tekst} bewerken`
+    );
+
+
+    bewerk.addEventListener(
+        "click",
+        event => {
+
+            event.stopPropagation();
+
+            persoonlijkeOptieBewerkenInline(
+                categorie,
+                optie
+            );
+
+        }
+    );
+
+
+    rij.append(
+        knop,
+        bewerk
+    );
+
+
+    return rij;
 }
 
 
-// ======================================
-// PERSOONLIJKE OPTIE BEWERKEN
-// ======================================
+/* =========================================================
+   PERSOONLIJKE OPTIE AFVINKEN
+   ========================================================= */
 
-function persoonlijkeOptieBewerken(
+function persoonlijkeOptieKlik(
     categorie,
     optie
 ) {
 
-    huidigeBeheerCategorie =
-        categorie;
-
-    huidigeBewerkOptie =
-        optie;
+    const sleutel =
+        `persoonlijk:${categorie}:${optie.id}`;
 
 
-    kortInvoerTitel.textContent =
-        categorie === "eten"
-            ? "Safe Food aanpassen"
-            : "Activiteit aanpassen";
+    if (
+        dagStatus.afgerond[sleutel]
+    ) {
+
+        return;
+    }
 
 
-    kortInvoerUitleg.textContent =
-        "Pas de naam aan.";
-
-
-    kortInvoer.value =
-        optie.tekst;
-
-
-    persoonlijkeOptiesContainer.hidden =
+    dagStatus.afgerond[sleutel] =
         true;
 
 
-    kortInvoerContainer.hidden =
-        false;
+    if (categorie === "eten") {
+
+        dagStatus.afgerond[
+            "moeilijk-iets-gegeten"
+        ] = true;
+
+        beloningTonen(
+            "YES! Goed gedaan! 🎉",
+            `${optie.tekst} gegeten. 🍽️`
+        );
+
+    } else {
+
+        dagStatus.afgerond[
+            "moeilijk-iets-prettigs"
+        ] = true;
+
+        beloningTonen(
+            "YES! Goed gedaan! 🎉",
+            `${optie.tekst}! ❤️`
+        );
+    }
 
 
-    setTimeout(
-        () => {
+    dagStatusOpslaan();
 
-            kortInvoer.focus();
+    moeilijkeOptiesWeergeven();
 
-            kortInvoer.select();
-
-        },
-        50
-    );
-
+    moeilijkeStatusBijwerken();
 }
 
 
-// ======================================
-// PERSOONLIJKE OPTIE OPSLAAN
-// ======================================
+/* =========================================================
+   TOEVOEGEN
+   ========================================================= */
 
-function persoonlijkeOptieOpslaan() {
+function persoonlijkeToevoegRijMaken(
+    categorie,
+    container
+) {
+
+    container.innerHTML = "";
+
+
+    const rij =
+        document.createElement("div");
+
+    rij.className =
+        "persoonlijke-toevoegen-rij";
+
+
+    const invoer =
+        document.createElement("input");
+
+    invoer.type = "text";
+
+    invoer.className =
+        "persoonlijke-toevoegen-invoer";
+
+    invoer.maxLength = 120;
+
+    invoer.autocomplete = "off";
+
+
+    if (categorie === "eten") {
+
+        invoer.placeholder =
+            "Nieuwe Safe Food...";
+
+        invoer.setAttribute(
+            "aria-label",
+            "Nieuwe Safe Food"
+        );
+
+    } else {
+
+        invoer.placeholder =
+            "Nieuwe leuke activiteit...";
+
+        invoer.setAttribute(
+            "aria-label",
+            "Nieuwe leuke activiteit"
+        );
+    }
+
+
+    const knop =
+        document.createElement("button");
+
+    knop.type = "button";
+
+    knop.className =
+        "persoonlijke-toevoegen-knop";
+
+    knop.textContent =
+        "＋";
+
+    knop.setAttribute(
+        "aria-label",
+        "Toevoegen"
+    );
+
+
+    knop.addEventListener(
+        "click",
+        () => {
+
+            persoonlijkeOptieToevoegen(
+                categorie,
+                invoer
+            );
+
+        }
+    );
+
+
+    invoer.addEventListener(
+        "keydown",
+        event => {
+
+            if (event.key !== "Enter") {
+                return;
+            }
+
+            event.preventDefault();
+
+            persoonlijkeOptieToevoegen(
+                categorie,
+                invoer
+            );
+        }
+    );
+
+
+    rij.append(
+        invoer,
+        knop
+    );
+
+
+    container.appendChild(
+        rij
+    );
+}
+
+
+function persoonlijkeOptieToevoegen(
+    categorie,
+    invoer
+) {
+
+    if (!invoer) return;
+
 
     const tekst =
-        kortInvoer.value.trim();
+        invoer.value.trim();
 
 
     if (!tekst) {
 
-        kortInvoer.focus();
+        invoer.focus();
 
         return;
-
     }
 
 
-    const categorie =
-        huidigeBeheerCategorie;
+    const lijst =
+        categorie === "eten"
+            ? safeFoods
+            : prettigeActiviteiten;
 
 
-    if (
-        !categorie
-    ) {
+    const nieuweOptie = {
 
-        return;
+        id:
+            persoonlijkeOptieIdMaken(
+                tekst
+            ),
 
-    }
+        tekst,
 
-
-    if (
-        huidigeBewerkOptie
-    ) {
-
-        huidigeBewerkOptie.tekst =
-            tekst;
-
-    } else {
-
-        const nieuweOptie = {
-
-            id:
-                uniekeId(),
-
-            tekst:
-                tekst,
-
-            icoon:
-                categorie === "eten"
-                    ? "🍽️"
-                    : "❤️"
-
-        };
-
-
-        if (
+        icoon:
             categorie === "eten"
-        ) {
-
-            safeFoods.push(
-                nieuweOptie
-            );
-
-        } else {
-
-            prettigeActiviteiten.push(
-                nieuweOptie
-            );
-
-        }
-
-    }
+                ? "🍽️"
+                : "❤️"
+    };
 
 
-    persoonlijkeOptiesOpslaan(
+    lijst.push(
+        nieuweOptie
+    );
+
+
+    persoonlijkeOptiesOpslaan();
+
+
+    invoer.value = "";
+
+
+    persoonlijkeOptiesWeergeven(
         categorie
     );
 
 
-    huidigeBewerkOptie =
-        null;
+    invoer =
+        categorie === "eten"
+            ? etenOptieToevoegen.querySelector(
+                ".persoonlijke-toevoegen-invoer"
+            )
+            : prettigOptieToevoegen.querySelector(
+                ".persoonlijke-toevoegen-invoer"
+            );
 
 
-    huidigeBeheerCategorie =
-        null;
-
-
-    kortInvoerSluiten();
-
-
-    moeilijkeOptiesWeergeven();
-
-
-    persoonlijkeOptiesBeheren(
-        categorie
-    );
-
-
-    beloningTonen(
-        "Opgeslagen. Je kunt dit later altijd veranderen. 🌱"
-    );
-
+    invoer?.focus();
 }
 
 
-// ======================================
-// PERSOONLIJKE OPTIE VERWIJDEREN
-// ======================================
+function persoonlijkeOptieIdMaken(
+    tekst
+) {
+
+    const basis =
+        tekst
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(
+                /[\u0300-\u036f]/g,
+                ""
+            )
+            .replace(
+                /[^a-z0-9]+/g,
+                "-"
+            )
+            .replace(
+                /^-+|-+$/g,
+                ""
+            )
+            .slice(
+                0,
+                40
+            ) || "optie";
+
+
+    return `${basis}-${Date.now()}-${Math.random()
+        .toString(36)
+        .slice(2, 7)}`;
+}
+
+
+/* =========================================================
+   INLINE BEWERKEN
+   ========================================================= */
+
+function persoonlijkeOptieBewerkenInline(
+    categorie,
+    optie
+) {
+
+    const lijst =
+        categorie === "eten"
+            ? moeilijkEtenOpties
+            : moeilijkPrettigOpties;
+
+
+    const rijen =
+        Array.from(
+            lijst.children
+        );
+
+
+    const index =
+        Array.from(
+            categorie === "eten"
+                ? moeilijkEtenOpties.children
+                : moeilijkPrettigOpties.children
+        ).findIndex(
+            rij => {
+
+                const tekst =
+                    rij.querySelector(
+                        ".persoonlijke-optie-tekst"
+                    );
+
+                return (
+                    tekst &&
+                    tekst.textContent ===
+                    optie.tekst
+                );
+            }
+        );
+
+
+    if (index < 0) {
+        return;
+    }
+
+
+    const oudeRij =
+        rijen[index];
+
+
+    const bewerkRij =
+        document.createElement("div");
+
+    bewerkRij.className =
+        "persoonlijke-optie-bewerk-regel";
+
+
+    const icoon =
+        document.createElement("span");
+
+    icoon.className =
+        "persoonlijke-bewerk-icoon";
+
+    icoon.textContent =
+        optie.icoon || "🍽️";
+
+
+    const invoer =
+        document.createElement("input");
+
+    invoer.type = "text";
+
+    invoer.className =
+        "persoonlijke-bewerk-invoer";
+
+    invoer.value =
+        optie.tekst;
+
+    invoer.maxLength = 120;
+
+    invoer.autocomplete =
+        "off";
+
+
+    const opslaan =
+        document.createElement("button");
+
+    opslaan.type = "button";
+
+    opslaan.className =
+        "persoonlijke-inline-knop persoonlijke-bewerk-opslaan";
+
+    opslaan.textContent =
+        "✓";
+
+    opslaan.setAttribute(
+        "aria-label",
+        "Wijziging opslaan"
+    );
+
+
+    const annuleren =
+        document.createElement("button");
+
+    annuleren.type = "button";
+
+    annuleren.className =
+        "persoonlijke-inline-knop persoonlijke-bewerk-annuleren";
+
+    annuleren.textContent =
+        "×";
+
+    annuleren.setAttribute(
+        "aria-label",
+        "Annuleren"
+    );
+
+
+    const verwijderen =
+        document.createElement("button");
+
+    verwijderen.type = "button";
+
+    verwijderen.className =
+        "persoonlijke-inline-knop persoonlijke-bewerk-verwijderen";
+
+    verwijderen.textContent =
+        "🗑️";
+
+    verwijderen.setAttribute(
+        "aria-label",
+        "Verwijderen"
+    );
+
+
+    bewerkRij.append(
+        icoon,
+        invoer,
+        opslaan,
+        annuleren,
+        verwijderen
+    );
+
+
+    oudeRij.replaceWith(
+        bewerkRij
+    );
+
+
+    requestAnimationFrame(
+        () => {
+
+            invoer.focus();
+
+            invoer.select();
+        }
+    );
+
+
+    function opslaanWijziging() {
+
+        const nieuweTekst =
+            invoer.value.trim();
+
+
+        if (!nieuweTekst) {
+
+            invoer.focus();
+
+            return;
+        }
+
+
+        optie.tekst =
+            nieuweTekst;
+
+
+        persoonlijkeOptiesOpslaan();
+
+        persoonlijkeOptiesWeergeven(
+            categorie
+        );
+
+        inlineBewerking = null;
+    }
+
+
+    opslaan.addEventListener(
+        "click",
+        opslaanWijziging
+    );
+
+
+    annuleren.addEventListener(
+        "click",
+        () => {
+
+            persoonlijkeOptiesWeergeven(
+                categorie
+            );
+
+            inlineBewerking = null;
+        }
+    );
+
+
+    invoer.addEventListener(
+        "keydown",
+        event => {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                opslaanWijziging();
+            }
+
+            if (event.key === "Escape") {
+
+                event.preventDefault();
+
+                persoonlijkeOptiesWeergeven(
+                    categorie
+                );
+            }
+        }
+    );
+
+
+    verwijderen.addEventListener(
+        "click",
+        () => {
+
+            verwijderBevestigingTonen(
+                categorie,
+                optie,
+                bewerkRij
+            );
+
+        }
+    );
+
+
+    inlineBewerking = {
+        categorie,
+        id: optie.id
+    };
+}
+
+
+/* =========================================================
+   VERWIJDEREN
+   ========================================================= */
+
+function verwijderBevestigingTonen(
+    categorie,
+    optie,
+    huidigeRij
+) {
+
+    const bevestiging =
+        document.createElement("div");
+
+    bevestiging.className =
+        "persoonlijke-verwijder-bevestiging";
+
+
+    const tekst =
+        document.createElement("div");
+
+    tekst.className =
+        "persoonlijke-verwijder-tekst";
+
+    tekst.textContent =
+        `Deze optie verwijderen?`;
+
+
+    const acties =
+        document.createElement("div");
+
+    acties.className =
+        "persoonlijke-verwijder-acties";
+
+
+    const ja =
+        document.createElement("button");
+
+    ja.type = "button";
+
+    ja.className =
+        "persoonlijke-verwijder-ja";
+
+    ja.textContent =
+        "Ja, verwijderen";
+
+
+    const nee =
+        document.createElement("button");
+
+    nee.type = "button";
+
+    nee.className =
+        "persoonlijke-verwijder-nee";
+
+    nee.textContent =
+        "Annuleren";
+
+
+    acties.append(
+        ja,
+        nee
+    );
+
+    bevestiging.append(
+        tekst,
+        acties
+    );
+
+
+    huidigeRij.replaceChildren(
+        bevestiging
+    );
+
+
+    ja.addEventListener(
+        "click",
+        () => {
+
+            persoonlijkeOptieVerwijderen(
+                categorie,
+                optie
+            );
+
+        }
+    );
+
+
+    nee.addEventListener(
+        "click",
+        () => {
+
+            persoonlijkeOptieBewerkenInline(
+                categorie,
+                optie
+            );
+
+        }
+    );
+}
+
 
 function persoonlijkeOptieVerwijderen(
     categorie,
     optie
 ) {
 
-    const bevestigen =
-        confirm(
-            `Wil je "${optie.tekst}" verwijderen?`
-        );
-
-
-    if (!bevestigen) {
-
-        return;
-
-    }
-
-
-    if (
+    const lijst =
         categorie === "eten"
-    ) {
-
-        safeFoods =
-            safeFoods.filter(
-                item =>
-                    item.id !== optie.id
-            );
+            ? safeFoods
+            : prettigeActiviteiten;
 
 
-        persoonlijkeOptiesOpslaan(
-            "eten"
+    const index =
+        lijst.findIndex(
+            item =>
+                item.id === optie.id
         );
 
-    } else {
 
-        prettigeActiviteiten =
-            prettigeActiviteiten.filter(
-                item =>
-                    item.id !== optie.id
-            );
+    if (index >= 0) {
 
-
-        persoonlijkeOptiesOpslaan(
-            "prettig"
+        lijst.splice(
+            index,
+            1
         );
-
     }
 
 
-    // Dagstatus van deze optie verwijderen.
+    const sleutel =
+        `persoonlijk:${categorie}:${optie.id}`;
+
 
     delete dagStatus.afgerond[
-        `persoonlijk:${categorie}:${optie.id}`
+        sleutel
     ];
 
 
+    persoonlijkeOptiesOpslaan();
+
     dagStatusOpslaan();
 
-
-    moeilijkeOptiesWeergeven();
-
-
-    persoonlijkeOptiesBeheren(
+    persoonlijkeOptiesWeergeven(
         categorie
     );
 
-
-    beloningTonen(
-        "Verwijderd. Je kunt altijd iets nieuws toevoegen. 🌱"
-    );
-
+    moeilijkeStatusBijwerken();
 }
 
 
-// ======================================
-// NIEUWE UNIEKE ID
-// ======================================
+/* =========================================================
+   PERSOONLIJKE OPSLAG
+   ========================================================= */
 
-function uniekeId() {
+function persoonlijkeOptiesLaden() {
 
-    return (
-        Date.now().toString(36) +
-        Math.random()
-            .toString(36)
-            .substring(2, 8)
-    );
+    try {
 
+        const opgeslagenSafeFoods =
+            JSON.parse(
+                localStorage.getItem(
+                    OPSLAG_SAFEFOODS
+                )
+            );
+
+
+        if (
+            Array.isArray(
+                opgeslagenSafeFoods
+            )
+        ) {
+
+            safeFoods =
+                opgeslagenSafeFoods;
+
+        } else {
+
+            safeFoods =
+                [...STANDAARD_SAFEFOODS];
+
+        }
+
+
+        const opgeslagenPrettig =
+            JSON.parse(
+                localStorage.getItem(
+                    OPSLAG_PRETTIGE_ACTIVITEITEN
+                )
+            );
+
+
+        if (
+            Array.isArray(
+                opgeslagenPrettig
+            )
+        ) {
+
+            prettigeActiviteiten =
+                opgeslagenPrettig;
+
+        } else {
+
+            prettigeActiviteiten =
+                [
+                    ...STANDAARD_PRETTIGE_ACTIVITEITEN
+                ];
+
+        }
+
+
+        persoonlijkeOptiesOpslaan();
+
+    } catch (fout) {
+
+        console.warn(
+            "Persoonlijke opties konden niet worden geladen.",
+            fout
+        );
+
+        safeFoods =
+            [
+                ...STANDAARD_SAFEFOODS
+            ];
+
+        prettigeActiviteiten =
+            [
+                ...STANDAARD_PRETTIGE_ACTIVITEITEN
+            ];
+    }
 }
 
 
-// ======================================
-// HTML VEILIG MAKEN
-// ======================================
+function persoonlijkeOptiesOpslaan() {
 
-function escapeHtml(
-    tekst
+    try {
+
+        localStorage.setItem(
+            OPSLAG_SAFEFOODS,
+            JSON.stringify(
+                safeFoods
+            )
+        );
+
+
+        localStorage.setItem(
+            OPSLAG_PRETTIGE_ACTIVITEITEN,
+            JSON.stringify(
+                prettigeActiviteiten
+            )
+        );
+
+    } catch (fout) {
+
+        console.warn(
+            "Persoonlijke opties konden niet worden opgeslagen.",
+            fout
+        );
+    }
+}
+
+
+/* =========================================================
+   DAGSTATUS LADEN
+   ========================================================= */
+
+function vandaagDatum() {
+
+    const nu =
+        new Date();
+
+    const jaar =
+        nu.getFullYear();
+
+    const maand =
+        String(
+            nu.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const dag =
+        String(
+            nu.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    return `${jaar}-${maand}-${dag}`;
+}
+
+
+function dagStatusLaden() {
+
+    const vandaag =
+        vandaagDatum();
+
+
+    try {
+
+        const opgeslagen =
+            JSON.parse(
+                localStorage.getItem(
+                    OPSLAG_DAGSTATUS
+                )
+            );
+
+
+        if (
+            opgeslagen &&
+            opgeslagen.datum === vandaag
+        ) {
+
+            dagStatus = {
+
+                datum: vandaag,
+
+                afgerond:
+                    opgeslagen.afgerond &&
+                    typeof opgeslagen.afgerond === "object"
+                        ? opgeslagen.afgerond
+                        : {},
+
+                toevoegingen:
+                    opgeslagen.toevoegingen &&
+                    typeof opgeslagen.toevoegingen === "object"
+                        ? opgeslagen.toevoegingen
+                        : {}
+
+            };
+
+            return;
+        }
+
+    } catch (fout) {
+
+        console.warn(
+            "Dagstatus kon niet worden geladen.",
+            fout
+        );
+    }
+
+
+    dagStatus = {
+
+        datum: vandaag,
+
+        afgerond: {},
+
+        toevoegingen: {}
+    };
+
+
+    dagStatusOpslaan();
+}
+
+
+/* =========================================================
+   DAGSTATUS OPSLAAN
+   ========================================================= */
+
+function dagStatusOpslaan() {
+
+    try {
+
+        localStorage.setItem(
+            OPSLAG_DAGSTATUS,
+            JSON.stringify(
+                dagStatus
+            )
+        );
+
+    } catch (fout) {
+
+        console.warn(
+            "Dagstatus kon niet worden opgeslagen.",
+            fout
+        );
+    }
+}
+
+
+/* =========================================================
+   POSITIEVE FEEDBACK
+   ========================================================= */
+
+function beloningTonen(
+    hoofdtekst,
+    subtekst
 ) {
 
-    const div =
-        document.createElement(
-            "div"
+    if (!beloning) {
+        return;
+    }
+
+
+    if (beloningTimeout) {
+
+        clearTimeout(
+            beloningTimeout
         );
 
-    div.textContent =
-        tekst;
+        beloningTimeout =
+            null;
+    }
 
-    return div.innerHTML;
 
+    beloning.innerHTML = "";
+
+
+    const ballon =
+        document.createElement("div");
+
+    ballon.className =
+        "beloning-ballon";
+
+
+    const decoratie =
+        document.createElement("div");
+
+    decoratie.className =
+        "beloning-decoratie";
+
+    decoratie.textContent =
+        "📣 ✨ ☀️ 🎉";
+
+
+    const hoofd =
+        document.createElement("div");
+
+    hoofd.className =
+        "beloning-hoofdtekst";
+
+    hoofd.textContent =
+        hoofdtekst;
+
+
+    const sub =
+        document.createElement("div");
+
+    sub.className =
+        "beloning-subtekst";
+
+    sub.textContent =
+        subtekst ||
+        "Dit telt mee. 💚";
+
+
+    ballon.append(
+        decoratie,
+        hoofd,
+        sub
+    );
+
+
+    beloning.appendChild(
+        ballon
+    );
+
+
+    beloning.classList.remove(
+        "toon"
+    );
+
+
+    void beloning.offsetWidth;
+
+
+    beloning.classList.add(
+        "toon"
+    );
+
+
+    beloningTimeout =
+        setTimeout(
+            () => {
+
+                beloning.classList.remove(
+                    "toon"
+                );
+
+                beloningTimeout =
+                    null;
+
+            },
+            3500
+        );
 }
 
 
-// ======================================
-// EVENT LISTENERS
-// ======================================
-
-
-// Hoofdpagina
-
-basisKnop?.addEventListener(
-    "click",
-    naarBasis
-);
-
-
-moeilijkKnop?.addEventListener(
-    "click",
-    naarMoeilijkeDag
-);
-
-
-// Terug
-
-basisTerugKnop?.addEventListener(
-    "click",
-    basisTerug
-);
-
-
-moeilijkTerugKnop?.addEventListener(
-    "click",
-    moeilijkTerug
-);
-
-
-activiteitTerugKnop?.addEventListener(
-    "click",
-    activiteitTerug
-);
-
-
-// Activiteit klaar
-
-activiteitKlaarKnop?.addEventListener(
-    "click",
-    basisActiviteitKlaar
-);
-
-
-// Korte invoer
-
-kortInvoerSluitenKnop?.addEventListener(
-    "click",
-    kortInvoerSluiten
-);
-
-
-invoerAnnuleren?.addEventListener(
-    "click",
-    () => {
-
-        kortInvoerSluiten();
-
-    }
-);
-
-
-invoerOpslaan?.addEventListener(
-    "click",
-    kortInvoerOpslaan
-);
-
-
-// Enter in invoerveld
-
-kortInvoer?.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key === "Enter"
-        ) {
-
-            event.preventDefault();
-
-            kortInvoerOpslaan();
-
-        }
-
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            event.preventDefault();
-
-            kortInvoerSluiten();
-
-        }
-
-    }
-);
-
-
-// Persoonlijke opties sluiten
-
-persoonlijkeOptiesSluiten?.addEventListener(
-    "click",
-    () => {
-
-        persoonlijkeOptiesContainer.hidden =
-            true;
-
-    }
-);
-
-
-// Nieuwe persoonlijke optie
-
-persoonlijkeOptieNieuw?.addEventListener(
-    "click",
-    () => {
-
-        persoonlijkeOptiesContainer.hidden =
-            true;
-
-
-        persoonlijkeOptieToevoegen(
-            huidigeBeheerCategorie
-        );
-
-    }
-);
-
-
-// Safe Food toevoegen
-
-etenOptieToevoegen?.addEventListener(
-    "click",
-    () => {
-
-        persoonlijkeOptieToevoegen(
-            "eten"
-        );
-
-    }
-);
-
-
-// Safe Foods beheren
-
-etenOptiesBeheren?.addEventListener(
-    "click",
-    () => {
-
-        persoonlijkeOptiesBeheren(
-            "eten"
-        );
-
-    }
-);
-
-
-// Prettige activiteit toevoegen
-
-prettigOptieToevoegen?.addEventListener(
-    "click",
-    () => {
-
-        persoonlijkeOptieToevoegen(
-            "prettig"
-        );
-
-    }
-);
-
-
-// Prettige activiteiten beheren
-
-prettigOptiesBeheren?.addEventListener(
-    "click",
-    () => {
-
-        persoonlijkeOptiesBeheren(
-            "prettig"
-        );
-
-    }
-);
-
-
-// Iets gegeten
-
-moeilijkIetsGegeten?.addEventListener(
-    "click",
-    () => {
-
-        persoonlijkeSectieOpenen(
-            moeilijkEtenDetails,
-            moeilijkIetsGegeten
-        );
-
-    }
-);
-
-
-// Iets leuks gedaan
-
-moeilijkIetsPrettigs?.addEventListener(
-    "click",
-    () => {
-
-        persoonlijkeSectieOpenen(
-            moeilijkPrettigDetails,
-            moeilijkIetsPrettigs
-        );
-
-    }
-);
-
-
-// Alle standaard moeilijke-dag activiteiten
-
-document
-    .querySelectorAll(
-        ".moeilijk-activiteit"
-    )
-    .forEach(
-        knop => {
-
-            knop.addEventListener(
-                "click",
-                () => {
-
-                    moeilijkeActiviteitKlik(
-                        knop
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-// BASIS blokken
-
-document
-    .querySelectorAll(
-        ".blok[data-blok]"
-    )
-    .forEach(
-        knop => {
-
-            knop.addEventListener(
-                "click",
-                () => {
-
-                    basisBlokOpenen(
-                        knop.dataset.blok
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-// ======================================
-// MODALS SLUITEN BIJ OVERLAY-KLIK
-// ======================================
-
-kortInvoerContainer?.addEventListener(
-    "click",
-    event => {
-
-        if (
-            event.target ===
-            kortInvoerContainer
-        ) {
-
-            kortInvoerSluiten();
-
-        }
-
-    }
-);
-
-
-persoonlijkeOptiesContainer?.addEventListener(
-    "click",
-    event => {
-
-        if (
-            event.target ===
-            persoonlijkeOptiesContainer
-        ) {
-
-            persoonlijkeOptiesContainer.hidden =
-                true;
-
-        }
-
-    }
-);
-
-
-// ======================================
-// ESCAPE OM MODAL TE SLUITEN
-// ======================================
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key !== "Escape"
-        ) {
-
-            return;
-
-        }
-
-
-        if (
-            !kortInvoerContainer.hidden
-        ) {
-
-            kortInvoerSluiten();
-
-            return;
-
-        }
-
-
-        if (
-            !persoonlijkeOptiesContainer.hidden
-        ) {
-
-            persoonlijkeOptiesContainer.hidden =
-                true;
-
-        }
-
-    }
-);
-
-
-// ======================================
-// SERVICE WORKER
-// ======================================
+/* =========================================================
+   SERVICE WORKER
+   ========================================================= */
 
 function serviceWorkerRegistreren() {
 
     if (
-        !("serviceWorker" in navigator)
+        "serviceWorker" in navigator
     ) {
 
-        return;
+        window.addEventListener(
+            "load",
+            () => {
+
+                navigator.serviceWorker
+                    .register("sw.js")
+                    .then(
+                        registratie => {
+
+                            console.log(
+                                "Anker service worker actief:",
+                                registratie.scope
+                            );
+
+                        }
+                    )
+                    .catch(
+                        fout => {
+
+                            console.warn(
+                                "Service worker kon niet worden geregistreerd.",
+                                fout
+                            );
+
+                        }
+                    );
+
+            }
+        );
 
     }
-
-
-    window.addEventListener(
-        "load",
-        () => {
-
-            navigator.serviceWorker
-                .register(
-                    "sw.js"
-                )
-                .then(
-                    registratie => {
-
-                        console.log(
-                            "Anker service worker actief:",
-                            registratie.scope
-                        );
-
-                    }
-                )
-                .catch(
-                    fout => {
-
-                        console.error(
-                            "Anker service worker fout:",
-                            fout
-                        );
-
-                    }
-                );
-
-        }
-    );
-
 }

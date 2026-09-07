@@ -1,48 +1,62 @@
 /* =========================================================
    ANKER
    Terug naar de basis.
-   Warme combinatie van groen, blauw, grijs en hout
+   Warm groen • warm blauw • hout • warm grijs
    ========================================================= */
 
 :root {
-    --achtergrond: #dfe5e1;
-    --achtergrond-donker: #cfd8d3;
+    /* WARME BASIS */
+    --achtergrond: #6f8275;
+    --achtergrond-donker: #596c60;
+    --achtergrond-licht: #829486;
 
-    --kaart: #f7f5f0;
-    --kaart-warm: #eee9df;
-    --kaart-groen: #dce8e2;
-    --kaart-blauw: #dce5ea;
+    /* BLOKKEN - WARM BLAUW */
+    --kaart: #6f8791;
+    --kaart-licht: #8199a2;
+    --kaart-donker: #5e7782;
 
-    --tekst: #183b3d;
-    --tekst-zacht: #526467;
-    --tekst-licht: #718080;
+    /* GROEN */
+    --groen: #496f5b;
+    --groen-donker: #355744;
+    --groen-licht: #d6e1d8;
 
-    --groen: #477b70;
-    --groen-donker: #315e58;
-    --groen-licht: #dcebe5;
+    /* BLAUW */
+    --blauw: #456879;
+    --blauw-donker: #314f5e;
+    --blauw-licht: #d6e1e5;
 
-    --blauw: #42677a;
-    --blauw-donker: #294d60;
-    --blauw-licht: #dce7ed;
+    /* HOUT */
+    --hout: #a97b4f;
+    --hout-licht: #c39a70;
+    --hout-donker: #795535;
+    --hout-zacht: #b58b61;
 
-    --hout: #b58a5a;
-    --hout-donker: #91683e;
-    --hout-licht: #eadbc7;
+    /* WARME GRIJZE TEKST */
+    --tekst: #393c38;
+    --tekst-zacht: #555953;
+    --tekst-licht: #777a72;
 
-    --grijs: #7b8583;
-    --grijs-licht: #e5e7e4;
+    /* WARME LICHTE VLAKKEN */
+    --warm-wit: #f1eee6;
+    --warm-wit-donker: #e4dfd4;
+    --gebroken-wit: #f7f4ed;
 
-    --oranje: #c47b42;
-    --oranje-donker: #9e5d2e;
-    --oranje-licht: #f3e1d0;
+    /* ORANJE */
+    --oranje: #b87543;
+    --oranje-donker: #8f5730;
+    --oranje-licht: #ead6c2;
 
     --wit: #ffffff;
 
-    --schaduw: 0 4px 14px rgba(24, 59, 61, 0.10);
-    --schaduw-groot: 0 8px 24px rgba(24, 59, 61, 0.13);
+    /* SCHADUWEN */
+    --schaduw:
+        0 5px 14px rgba(47, 55, 49, 0.18);
+
+    --schaduw-groot:
+        0 9px 25px rgba(47, 55, 49, 0.24);
 
     --radius: 18px;
-    --radius-klein: 12px;
+    --radius-klein: 13px;
 }
 
 
@@ -56,7 +70,7 @@
 
 html {
     min-height: 100%;
-    background: var(--achtergrond);
+    background: var(--achtergrond-donker);
 }
 
 body {
@@ -65,10 +79,10 @@ body {
 
     background:
         linear-gradient(
-            135deg,
-            #dfe7e2 0%,
-            #d9e2df 45%,
-            #d7e0e4 100%
+            145deg,
+            #718579 0%,
+            #667b6e 48%,
+            #5d7469 100%
         );
 
     color: var(--tekst);
@@ -97,7 +111,7 @@ button {
 
 button:focus-visible,
 input:focus-visible {
-    outline: 3px solid rgba(66, 103, 122, 0.35);
+    outline: 3px solid rgba(169, 123, 79, 0.45);
     outline-offset: 3px;
 }
 
@@ -110,8 +124,13 @@ input:focus-visible {
     width: 100%;
     max-width: 760px;
     min-height: 100vh;
+
     margin: 0 auto;
-    padding: 18px 16px 40px;
+
+    padding:
+        18px
+        16px
+        40px;
 }
 
 
@@ -139,6 +158,7 @@ input:focus-visible {
 .logo {
     display: flex;
     align-items: center;
+
     gap: 14px;
 }
 
@@ -155,33 +175,37 @@ input:focus-visible {
     background:
         linear-gradient(
             145deg,
-            var(--groen-donker),
-            var(--blauw-donker)
+            #365846,
+            #3f6170
         );
 
-    color: var(--wit);
+    border: 2px solid var(--hout);
+
+    color: var(--warm-wit);
 
     font-size: 31px;
 
     box-shadow:
-        0 5px 14px rgba(24, 59, 61, 0.20);
+        0 5px 15px rgba(42, 52, 45, 0.25);
 }
 
 .logo h1 {
     margin: 0;
 
-    color: var(--tekst);
+    color: #f2eee5;
 
     font-size: 30px;
     line-height: 1;
+
     font-weight: 800;
+
     letter-spacing: -0.5px;
 }
 
 .logo p {
     margin: 6px 0 0;
 
-    color: var(--tekst-zacht);
+    color: #dce2d9;
 
     font-size: 14px;
     font-weight: 500;
@@ -199,17 +223,18 @@ input:focus-visible {
 .welkom h2 {
     margin: 0 0 7px;
 
-    color: var(--tekst);
+    color: #f3efe7;
 
     font-size: 24px;
     line-height: 1.2;
+
     font-weight: 750;
 }
 
 .welkom p {
     margin: 0;
 
-    color: var(--tekst-zacht);
+    color: #d8dfd7;
 
     font-size: 15px;
 }
@@ -221,6 +246,7 @@ input:focus-visible {
 
 .modus-keuze {
     display: grid;
+
     gap: 14px;
 }
 
@@ -234,7 +260,7 @@ input:focus-visible {
 
     padding: 20px;
 
-    border: 2px solid transparent;
+    border: 2px solid var(--hout);
     border-radius: var(--radius);
 
     text-align: left;
@@ -255,6 +281,7 @@ input:focus-visible {
 
 .modus-knop:hover {
     transform: translateY(-2px);
+
     box-shadow: var(--schaduw-groot);
 }
 
@@ -276,12 +303,14 @@ input:focus-visible {
 .modus-tekst {
     display: flex;
     flex-direction: column;
+
     gap: 5px;
 }
 
 .modus-tekst strong {
     font-size: 17px;
     font-weight: 800;
+
     letter-spacing: 0.3px;
 }
 
@@ -291,53 +320,55 @@ input:focus-visible {
 }
 
 
-/* BASIS KNOP */
+/* BASIS */
 
 .basis-knop {
     background:
         linear-gradient(
             135deg,
-            #d9e9e2,
-            #cbded8
+            #527765,
+            #466a5a
         );
 
-    border-color: #aac7bd;
-
-    color: var(--groen-donker);
+    color: #f3eee4;
 }
 
 .basis-knop .modus-icoon {
-    background: var(--groen);
-    color: var(--wit);
+    background: #365b48;
+
+    border: 2px solid var(--hout-licht);
+
+    color: #f4eee3;
 }
 
 .basis-knop small {
-    color: #52716b;
+    color: #d7e0d7;
 }
 
 
-/* MOEILIJKE DAG KNOP */
+/* MOEILIJKE DAG */
 
 .moeilijk-knop {
     background:
         linear-gradient(
             135deg,
-            #e5e8e7,
-            #d8e0df
+            #657f89,
+            #57717d
         );
 
-    border-color: #bbc7c5;
-
-    color: var(--blauw-donker);
+    color: #f2eee6;
 }
 
 .moeilijk-knop .modus-icoon {
-    background: var(--blauw);
-    color: var(--wit);
+    background: #3e5e6b;
+
+    border: 2px solid var(--hout-licht);
+
+    color: #f4eee3;
 }
 
 .moeilijk-knop small {
-    color: #607275;
+    color: #dce3e3;
 }
 
 
@@ -361,10 +392,11 @@ input:focus-visible {
 .scherm-header h2 {
     margin: 0;
 
-    color: var(--tekst);
+    color: #f1eee7;
 
     font-size: 22px;
     line-height: 1.15;
+
     font-weight: 800;
 
     letter-spacing: 0.3px;
@@ -373,7 +405,7 @@ input:focus-visible {
 .scherm-header p {
     margin: 5px 0 0;
 
-    color: var(--tekst-zacht);
+    color: #d5ddd6;
 
     font-size: 14px;
 }
@@ -390,19 +422,20 @@ input:focus-visible {
 
     padding: 0;
 
-    border: 1px solid #aebbb8;
+    border: 2px solid var(--hout);
     border-radius: 14px;
 
-    background: rgba(247, 245, 240, 0.90);
+    background: #718579;
 
-    color: var(--tekst);
+    color: #f2eee6;
 
     font-size: 25px;
     line-height: 1;
 
     cursor: pointer;
 
-    box-shadow: 0 3px 9px rgba(24, 59, 61, 0.08);
+    box-shadow:
+        0 3px 9px rgba(43, 51, 46, 0.18);
 
     transition:
         transform 0.15s ease,
@@ -410,7 +443,7 @@ input:focus-visible {
 }
 
 .terug-knop:hover {
-    background: var(--wit);
+    background: #829487;
 }
 
 .terug-knop:active {
@@ -425,6 +458,7 @@ input:focus-visible {
 .categorieen,
 .moeilijk-categorieen {
     display: grid;
+
     gap: 16px;
 }
 
@@ -436,40 +470,48 @@ input:focus-visible {
 .blok {
     overflow: hidden;
 
-    border: 1px solid rgba(77, 103, 98, 0.18);
+    border: 3px solid var(--hout);
     border-radius: var(--radius);
 
     background: var(--kaart);
 
-    box-shadow: var(--schaduw);
+    box-shadow:
+        0 6px 16px rgba(40, 49, 43, 0.22);
 }
 
 
-/* BASIS BLOKKEN */
+/* =========================================================
+   WARME BLAUWE BASISBLOKKEN
+   ========================================================= */
 
 .basis-blok:nth-child(odd) {
     background:
         linear-gradient(
-            135deg,
-            #e0ebe5,
-            #d6e4df
+            145deg,
+            #78939d,
+            #6c8791
         );
 }
 
 .basis-blok:nth-child(even) {
     background:
         linear-gradient(
-            135deg,
-            #e0e8ec,
-            #d8e2e6
+            145deg,
+            #708b96,
+            #637f8a
         );
 }
 
 
-/* BLOK HEADER */
+/* =========================================================
+   BLOK HEADER
+   ========================================================= */
 
 .blok-header {
-    padding: 17px 18px 13px;
+    padding:
+        17px
+        18px
+        13px;
 }
 
 .blok-titel {
@@ -491,28 +533,36 @@ input:focus-visible {
 
     border-radius: 13px;
 
-    background: rgba(255, 255, 255, 0.65);
+    background:
+        linear-gradient(
+            145deg,
+            #e9e2d5,
+            #ddd5c6
+        );
+
+    border: 2px solid var(--hout);
 
     font-size: 23px;
 
     box-shadow:
-        inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+        0 3px 8px rgba(48, 57, 51, 0.13);
 }
 
 .blok-titel h3 {
     margin: 0;
 
-    color: var(--tekst);
+    color: #f4f0e8;
 
     font-size: 17px;
     line-height: 1.2;
+
     font-weight: 800;
 }
 
 .blok-titel p {
     margin: 4px 0 0;
 
-    color: var(--tekst-zacht);
+    color: #dce3e2;
 
     font-size: 13px;
     line-height: 1.3;
@@ -525,9 +575,13 @@ input:focus-visible {
 
 .activiteiten {
     display: grid;
+
     gap: 8px;
 
-    padding: 0 12px 13px;
+    padding:
+        0
+        12px
+        13px;
 }
 
 .activiteit-knop {
@@ -542,12 +596,15 @@ input:focus-visible {
 
     min-height: 50px;
 
-    padding: 12px 14px;
+    padding:
+        12px
+        14px;
 
-    border: 1px solid rgba(77, 103, 98, 0.16);
+    border: 1px solid rgba(121, 85, 53, 0.55);
     border-radius: var(--radius-klein);
 
-    background: rgba(247, 245, 240, 0.82);
+    background:
+        rgba(241, 238, 230, 0.92);
 
     color: var(--tekst);
 
@@ -562,8 +619,9 @@ input:focus-visible {
 }
 
 .activiteit-knop:hover {
-    background: rgba(255, 255, 255, 0.95);
-    border-color: rgba(63, 119, 112, 0.32);
+    background: #f7f3ea;
+
+    border-color: var(--hout-donker);
 }
 
 .activiteit-knop:active {
@@ -576,39 +634,47 @@ input:focus-visible {
     width: 27px;
 
     font-size: 20px;
+
     text-align: center;
 }
 
 .activiteit-knop > span:nth-child(2) {
     flex: 1;
 
+    color: var(--tekst);
+
     font-size: 15px;
-    font-weight: 600;
+
+    font-weight: 650;
 }
 
 
-/* AFGEROND */
+/* =========================================================
+   AFGEROND
+   ========================================================= */
 
 .activiteit-knop.afgerond {
     background:
         linear-gradient(
             135deg,
-            #cfe4d9,
-            #c5ddd3
+            #d4e2d7,
+            #c8dbcf
         );
 
-    border-color: #8fb8a9;
+    border-color: var(--groen-donker);
 
-    color: var(--groen-donker);
+    color: #345541;
 }
 
 .activiteit-knop.afgerond > span:nth-child(2) {
+    color: #355744;
+
     font-weight: 750;
 }
 
 
 /* =========================================================
-   ANTWOORD / TOEVOEGINGSTELLER
+   ANTWOORD / TOEVOEGING
    ========================================================= */
 
 .activiteit-antwoord {
@@ -616,10 +682,11 @@ input:focus-visible {
 
     margin-top: 3px;
 
-    color: var(--groen-donker);
+    color: var(--hout-donker);
 
     font-size: 12px;
-    font-weight: 700;
+
+    font-weight: 750;
 }
 
 
@@ -634,9 +701,9 @@ input:focus-visible {
 .moeilijk-blok {
     background:
         linear-gradient(
-            135deg,
-            #e5e9e7,
-            #dce4e2
+            145deg,
+            #708a94,
+            #627e89
         );
 }
 
@@ -650,19 +717,20 @@ input:focus-visible {
     background:
         linear-gradient(
             135deg,
-            #d4e3dd,
-            #cadcd6
+            #d4e2d7,
+            #c7dacf
         );
 
-    border-color: #9bb8af;
+    border-color: var(--groen-donker);
 
-    color: var(--groen-donker);
+    color: #355744;
 }
 
 .moeilijk-activiteit.afgerond::after {
     content: "✓";
 
     position: absolute;
+
     right: 13px;
     top: 50%;
 
@@ -679,12 +747,15 @@ input:focus-visible {
 
     background: var(--groen);
 
+    border: 2px solid var(--hout);
+
     color: white;
 
     font-size: 17px;
     font-weight: 800;
 
-    box-shadow: 0 2px 6px rgba(47, 94, 88, 0.22);
+    box-shadow:
+        0 2px 6px rgba(47, 94, 88, 0.22);
 }
 
 
@@ -695,21 +766,25 @@ input:focus-visible {
 .activiteit-detail {
     padding: 18px;
 
-    border: 1px solid rgba(77, 103, 98, 0.16);
+    border: 3px solid var(--hout);
+
     border-radius: var(--radius);
 
     background:
         linear-gradient(
             145deg,
-            #edf1ed,
-            #e3e9e7
+            #78929b,
+            #69858f
         );
 
-    box-shadow: var(--schaduw);
+    box-shadow:
+        0 7px 18px rgba(40, 49, 43, 0.22);
 }
 
 
-/* STATUS */
+/* =========================================================
+   STATUS
+   ========================================================= */
 
 .activiteit-status {
     display: flex;
@@ -735,11 +810,13 @@ input:focus-visible {
     background:
         linear-gradient(
             145deg,
-            var(--groen),
-            var(--blauw)
+            var(--groen-donker),
+            var(--blauw-donker)
         );
 
-    color: var(--wit);
+    border: 2px solid var(--hout-licht);
+
+    color: #f5f0e7;
 
     font-size: 24px;
     font-weight: 800;
@@ -748,7 +825,7 @@ input:focus-visible {
 .activiteit-status strong {
     display: block;
 
-    color: var(--tekst);
+    color: #f4f0e8;
 
     font-size: 17px;
 }
@@ -758,7 +835,7 @@ input:focus-visible {
 
     margin-top: 3px;
 
-    color: var(--tekst-zacht);
+    color: #dce3e2;
 
     font-size: 13px;
 }
@@ -770,16 +847,20 @@ input:focus-visible {
 
 .activiteit-inhoud {
     display: grid;
+
     gap: 9px;
 
     margin-bottom: 14px;
 }
 
 
-/* EXTRA ONDERDELEN */
+/* =========================================================
+   EXTRA ONDERDELEN
+   ========================================================= */
 
 .extra-onderdelen {
     display: grid;
+
     gap: 8px;
 }
 
@@ -789,12 +870,14 @@ input:focus-visible {
 
     gap: 10px;
 
-    padding: 11px 12px;
+    padding:
+        11px
+        12px;
 
-    border: 1px solid #c7d0cd;
+    border: 1px solid rgba(121, 85, 53, 0.55);
     border-radius: var(--radius-klein);
 
-    background: rgba(247, 245, 240, 0.85);
+    background: var(--warm-wit);
 }
 
 .extra-vink {
@@ -807,7 +890,7 @@ input:focus-visible {
     align-items: center;
     justify-content: center;
 
-    border: 2px solid #8b9b97;
+    border: 2px solid #8d938b;
     border-radius: 8px;
 
     background: transparent;
@@ -820,7 +903,8 @@ input:focus-visible {
 
 .extra-onderdeel.afgerond {
     background: var(--groen-licht);
-    border-color: #9dbdb2;
+
+    border-color: var(--groen);
 }
 
 .extra-onderdeel.afgerond .extra-vink {
@@ -842,6 +926,7 @@ input:focus-visible {
 
 .extra-onderdeel.afgerond .extra-tekst {
     color: var(--groen-donker);
+
     font-weight: 650;
 }
 
@@ -860,7 +945,7 @@ input:focus-visible {
 
     background: transparent;
 
-    color: var(--grijs);
+    color: var(--tekst-licht);
 
     font-size: 18px;
 
@@ -868,13 +953,14 @@ input:focus-visible {
 }
 
 .extra-verwijder:hover {
-    background: var(--kaart-warm);
-    color: var(--oranje-donker);
+    background: var(--hout-licht);
+
+    color: var(--hout-donker);
 }
 
 
 /* =========================================================
-   TOEVOEGEN KNOP
+   TOEVOEGEN
    ========================================================= */
 
 .activiteit-invoer-knop {
@@ -882,17 +968,22 @@ input:focus-visible {
 
     min-height: 46px;
 
-    padding: 10px 14px;
+    padding:
+        10px
+        14px;
 
-    border: 1px dashed #9eb1ac;
+    border: 2px dashed var(--hout);
+
     border-radius: var(--radius-klein);
 
-    background: rgba(255, 255, 255, 0.45);
+    background:
+        rgba(241, 238, 230, 0.70);
 
-    color: var(--groen-donker);
+    color: var(--hout-donker);
 
     font-size: 14px;
-    font-weight: 700;
+
+    font-weight: 750;
 
     cursor: pointer;
 
@@ -902,14 +993,14 @@ input:focus-visible {
 }
 
 .activiteit-invoer-knop:hover {
-    background: rgba(255, 255, 255, 0.75);
+    background: #f5efe4;
 
-    border-color: var(--groen);
+    border-color: var(--hout-donker);
 }
 
 
 /* =========================================================
-   KLAAR KNOP
+   KLAAR
    ========================================================= */
 
 .activiteit-klaar-knop {
@@ -917,9 +1008,12 @@ input:focus-visible {
 
     min-height: 54px;
 
-    padding: 13px 18px;
+    padding:
+        13px
+        18px;
 
-    border: 0;
+    border: 2px solid var(--hout-licht);
+
     border-radius: 15px;
 
     background:
@@ -929,15 +1023,16 @@ input:focus-visible {
             var(--blauw-donker)
         );
 
-    color: white;
+    color: #f7f2e9;
 
     font-size: 16px;
+
     font-weight: 800;
 
     cursor: pointer;
 
     box-shadow:
-        0 5px 13px rgba(41, 77, 96, 0.22);
+        0 5px 13px rgba(41, 77, 96, 0.24);
 
     transition:
         transform 0.15s ease,
@@ -948,7 +1043,7 @@ input:focus-visible {
     transform: translateY(-1px);
 
     box-shadow:
-        0 7px 17px rgba(41, 77, 96, 0.28);
+        0 7px 17px rgba(41, 77, 96, 0.30);
 }
 
 .activiteit-klaar-knop:active {
@@ -962,6 +1057,7 @@ input:focus-visible {
 
 #kortInvoerContainer {
     position: fixed;
+
     inset: 0;
 
     z-index: 100;
@@ -972,7 +1068,8 @@ input:focus-visible {
 
     padding: 18px;
 
-    background: rgba(24, 59, 61, 0.48);
+    background:
+        rgba(42, 54, 47, 0.58);
 
     backdrop-filter: blur(4px);
 }
@@ -986,18 +1083,19 @@ input:focus-visible {
 
     padding: 20px;
 
-    border: 1px solid rgba(145, 104, 62, 0.24);
+    border: 3px solid var(--hout);
+
     border-radius: 20px;
 
     background:
         linear-gradient(
             145deg,
-            #f8f5ef,
-            #eee9df
+            #f3eee5,
+            #e7dfd2
         );
 
     box-shadow:
-        0 15px 45px rgba(24, 59, 61, 0.24);
+        0 15px 45px rgba(35, 44, 38, 0.30);
 }
 
 .kort-invoer-header {
@@ -1038,12 +1136,13 @@ input:focus-visible {
 
     padding: 0;
 
-    border: 0;
+    border: 2px solid var(--hout);
+
     border-radius: 11px;
 
-    background: #ded9cf;
+    background: var(--hout-licht);
 
-    color: var(--tekst);
+    color: var(--hout-donker);
 
     font-size: 25px;
     line-height: 1;
@@ -1052,23 +1151,28 @@ input:focus-visible {
 }
 
 .klein-sluit-knop:hover {
-    background: #d3cbbf;
+    background: #cfaa80;
 }
 
 
-/* INPUT */
+/* =========================================================
+   INPUT
+   ========================================================= */
 
 .kort-invoer {
     width: 100%;
 
     min-height: 52px;
 
-    padding: 13px 15px;
+    padding:
+        13px
+        15px;
 
-    border: 2px solid #b8c6c1;
+    border: 2px solid var(--hout);
+
     border-radius: 13px;
 
-    background: #fbfaf7;
+    background: #faf7f0;
 
     color: var(--tekst);
 
@@ -1082,21 +1186,24 @@ input:focus-visible {
 }
 
 .kort-invoer::placeholder {
-    color: #8b9693;
+    color: #898b82;
 }
 
 .kort-invoer:focus {
     border-color: var(--blauw);
 
     box-shadow:
-        0 0 0 4px rgba(66, 103, 122, 0.12);
+        0 0 0 4px rgba(69, 104, 121, 0.14);
 }
 
 
-/* MODAL KNOPPEN */
+/* =========================================================
+   MODAL KNOPPEN
+   ========================================================= */
 
 .kort-invoer-knoppen {
     display: grid;
+
     grid-template-columns: 1fr 1fr;
 
     gap: 10px;
@@ -1111,25 +1218,26 @@ input:focus-visible {
     border-radius: 13px;
 
     font-size: 14px;
+
     font-weight: 750;
 
     cursor: pointer;
 }
 
 .invoer-annuleren {
-    border: 1px solid #b7c0bd;
+    border: 2px solid var(--hout);
 
-    background: #e3e5e2;
+    background: var(--warm-wit-donker);
 
     color: var(--tekst-zacht);
 }
 
 .invoer-annuleren:hover {
-    background: #daddda;
+    background: #ddd5c8;
 }
 
 .invoer-opslaan {
-    border: 0;
+    border: 2px solid var(--hout-licht);
 
     background:
         linear-gradient(
@@ -1141,11 +1249,11 @@ input:focus-visible {
     color: white;
 
     box-shadow:
-        0 4px 10px rgba(63, 119, 112, 0.18);
+        0 4px 10px rgba(63, 119, 112, 0.20);
 }
 
 .invoer-opslaan:hover {
-    filter: brightness(1.04);
+    filter: brightness(1.05);
 }
 
 
@@ -1191,16 +1299,20 @@ input:focus-visible {
 
     transform: translateX(-50%);
 
-    padding: 20px 20px 18px;
+    padding:
+        20px
+        20px
+        18px;
 
-    border: 2px solid rgba(255, 255, 255, 0.65);
+    border: 3px solid var(--hout-licht);
+
     border-radius: 22px;
 
     background:
         linear-gradient(
             135deg,
-            #477b70,
-            #42677a
+            #47765d,
+            #42697a
         );
 
     color: white;
@@ -1208,7 +1320,7 @@ input:focus-visible {
     text-align: center;
 
     box-shadow:
-        0 12px 35px rgba(24, 59, 61, 0.30);
+        0 12px 35px rgba(35, 46, 39, 0.35);
 
     overflow: hidden;
 
@@ -1243,6 +1355,7 @@ input:focus-visible {
     margin-top: 8px;
 
     font-size: 17px;
+
     letter-spacing: 4px;
 
     opacity: 0.9;
@@ -1256,12 +1369,20 @@ input:focus-visible {
 
     font-size: 18px;
     line-height: 1.3;
+
     font-weight: 850;
 }
 
+
+/* =========================================================
+   FEEDBACK ANIMATIES
+   ========================================================= */
+
 @keyframes beloningBinnen {
+
     from {
         opacity: 0;
+
         transform:
             translateX(-50%)
             translateY(25px)
@@ -1270,6 +1391,7 @@ input:focus-visible {
 
     to {
         opacity: 1;
+
         transform:
             translateX(-50%)
             translateY(0)
@@ -1278,22 +1400,32 @@ input:focus-visible {
 }
 
 @keyframes beloningEmoji {
+
     0% {
-        transform: scale(0.4) rotate(-15deg);
+        transform:
+            scale(0.4)
+            rotate(-15deg);
+
         opacity: 0;
     }
 
     70% {
-        transform: scale(1.15) rotate(5deg);
+        transform:
+            scale(1.15)
+            rotate(5deg);
     }
 
     100% {
-        transform: scale(1) rotate(0);
+        transform:
+            scale(1)
+            rotate(0);
+
         opacity: 1;
     }
 }
 
 @keyframes beloningZweef {
+
     0%,
     100% {
         margin-bottom: 0;
@@ -1315,7 +1447,9 @@ input:focus-visible {
         padding:
             15px
             14px
-            calc(30px + env(safe-area-inset-bottom));
+            calc(
+                30px + env(safe-area-inset-bottom)
+            );
     }
 
     .app-header {
@@ -1347,17 +1481,25 @@ input:focus-visible {
     }
 
     .blok-header {
-        padding: 15px 15px 11px;
+        padding:
+            15px
+            15px
+            11px;
     }
 
     .activiteiten {
-        padding: 0 10px 11px;
+        padding:
+            0
+            10px
+            11px;
     }
 
     .activiteit-knop {
         min-height: 48px;
 
-        padding: 11px 12px;
+        padding:
+            11px
+            12px;
     }
 
     .activiteit-detail {
@@ -1386,6 +1528,7 @@ input:focus-visible {
 
     .modus-knop {
         gap: 12px;
+
         padding: 15px;
     }
 
@@ -1417,7 +1560,9 @@ input:focus-visible {
     *::before,
     *::after {
         animation-duration: 0.01ms !important;
+
         animation-iteration-count: 1 !important;
+
         transition-duration: 0.01ms !important;
     }
 }

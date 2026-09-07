@@ -8,6 +8,7 @@
    ========================================================= */
 
 :root {
+
     /* WARME GROENE BASIS */
     --achtergrond: #5f8b70;
     --achtergrond-donker: #4b725c;
@@ -118,9 +119,8 @@ input:focus-visible {
     outline-offset: 3px;
 }
 
-/* BELANGRIJK:
-   Native HTML [hidden] moet altijd echt verborgen blijven.
-   Dit voorkomt dat het uitrolmenu onderaan terechtkomt. */
+
+/* Native hidden moet echt verborgen blijven */
 [hidden] {
     display: none !important;
 }
@@ -162,6 +162,7 @@ input:focus-visible {
 }
 
 @keyframes schermBinnen {
+
     from {
         opacity: 0;
         transform: translateY(8px);
@@ -182,7 +183,7 @@ input:focus-visible {
     padding:
         8px
         4px
-        22px;
+        24px;
 }
 
 .anker-symbool {
@@ -212,7 +213,6 @@ input:focus-visible {
 
     font-size: 31px;
     line-height: 1.05;
-
     letter-spacing: 0.5px;
 }
 
@@ -235,21 +235,33 @@ input:focus-visible {
 .hoofdkeuzes {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+
+    gap: 18px;
+
+    margin-top: 4px;
 }
 
 .hoofdkeuze {
     width: 100%;
 
+    min-height: 125px;
+
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
 
-    gap: 16px;
+    gap: 11px;
 
-    padding: 20px;
+    padding:
+        24px
+        20px;
 
-    border: 3px solid var(--hout);
-    border-radius: var(--radius);
+    border:
+        3px solid
+        var(--hout);
+
+    border-radius: 22px;
 
     background: var(--warm-wit);
 
@@ -257,7 +269,7 @@ input:focus-visible {
 
     cursor: pointer;
 
-    text-align: left;
+    text-align: center;
 
     box-shadow: var(--schaduw);
 
@@ -306,12 +318,12 @@ input:focus-visible {
     align-items: center;
     justify-content: center;
 
-    width: 56px;
-    height: 56px;
+    width: 62px;
+    height: 62px;
 
     flex-shrink: 0;
 
-    border-radius: 16px;
+    border-radius: 18px;
 
     background:
         linear-gradient(
@@ -322,30 +334,109 @@ input:focus-visible {
 
     color: white;
 
-    font-size: 28px;
+    font-size: 30px;
 
     box-shadow:
-        0 3px 8px
-        rgba(42, 58, 47, 0.15);
+        0 4px 9px
+        rgba(42, 58, 47, 0.16);
 }
 
 .keuze-tekst {
     display: flex;
     flex-direction: column;
+    align-items: center;
+
     gap: 4px;
 
     min-width: 0;
+
+    width: 100%;
+
+    text-align: center;
 }
 
 .keuze-tekst strong {
-    font-size: 18px;
+    font-size: 19px;
     line-height: 1.2;
 }
 
 .keuze-tekst small {
     color: var(--tekst-zacht);
+
     font-size: 14px;
-    line-height: 1.35;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   TEKST ONDER HOOFDKEUZES
+   ========================================================= */
+
+/*
+   Deze styling geldt voor de korte begeleidende tekst
+   op de hoofdpagina.
+*/
+
+.hoofdkeuzes + p {
+    margin:
+        24px
+        12px
+        0;
+
+    color:
+        rgba(255, 255, 255, 0.92);
+
+    text-align: center;
+
+    font-size: 15px;
+    line-height: 1.5;
+
+    font-weight: 600;
+
+    text-shadow:
+        0 1px 2px
+        rgba(42, 58, 47, 0.18);
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    margin:
+        42px
+        0
+        8px;
+
+    padding:
+        16px
+        10px
+        4px;
+
+    text-align: center;
+
+    color:
+        rgba(255, 255, 255, 0.78);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer small {
+    display: block;
+
+    color:
+        rgba(255, 255, 255, 0.70);
+
+    font-size: 12px;
+
+    letter-spacing: 0.2px;
 }
 
 
@@ -401,7 +492,10 @@ input:focus-visible {
 
     flex-shrink: 0;
 
-    border: 2px solid var(--hout);
+    border:
+        2px solid
+        var(--hout);
+
     border-radius: 13px;
 
     background: var(--warm-wit);
@@ -438,6 +532,7 @@ input:focus-visible {
 .blokken {
     display: flex;
     flex-direction: column;
+
     gap: 15px;
 }
 
@@ -446,7 +541,10 @@ input:focus-visible {
 
     overflow: hidden;
 
-    border: 3px solid var(--hout);
+    border:
+        3px solid
+        var(--hout);
+
     border-radius: var(--radius);
 
     box-shadow: var(--schaduw);
@@ -519,8 +617,15 @@ input:focus-visible {
         14px
         16px;
 
-    border-left: 5px solid var(--hout);
-    border-radius: 0 var(--radius-klein) var(--radius-klein) 0;
+    border-left:
+        5px solid
+        var(--hout);
+
+    border-radius:
+        0
+        var(--radius-klein)
+        var(--radius-klein)
+        0;
 
     background:
         rgba(248, 244, 235, 0.90);
@@ -587,7 +692,9 @@ input:focus-visible {
     background:
         rgba(255, 255, 255, 0.88);
 
-    border: 2px solid var(--hout);
+    border:
+        2px solid
+        var(--hout);
 
     font-size: 23px;
 }
@@ -665,7 +772,8 @@ input:focus-visible {
         11px
         13px;
 
-    border: 2px solid
+    border:
+        2px solid
         rgba(126, 85, 51, 0.48);
 
     border-radius: var(--radius-klein);
@@ -768,16 +876,6 @@ input:focus-visible {
    PERSOONLIJK UITROL-MENU
    ========================================================= */
 
-/*
-   Dit is het belangrijkste nieuwe gedeelte.
-
-   De details blijven IN hetzelfde blok en komen
-   direct onder de knop te staan.
-
-   [hidden] zorgt ervoor dat ze volledig verdwijnen
-   wanneer het menu gesloten is.
-*/
-
 .moeilijk-persoonlijk-trigger {
     margin:
         5px
@@ -799,7 +897,9 @@ input:focus-visible {
             #ece3d5
         );
 
-    border: 2px solid var(--hout);
+    border:
+        2px solid
+        var(--hout);
 
     border-radius: var(--radius-klein);
 
@@ -826,13 +926,16 @@ input:focus-visible {
 
 .moeilijk-persoonlijk-trigger.afgerond {
     background: var(--groen-licht);
+
     border-color: var(--groen);
 }
 
 .persoonlijke-trigger-pijl {
-    flex: 0 0 auto !important;
+    flex:
+        0 0 auto !important;
 
-    width: auto !important;
+    width:
+        auto !important;
 
     margin-left: auto;
 
@@ -846,9 +949,9 @@ input:focus-visible {
 }
 
 
-/*
-   Het daadwerkelijke uitrolgebied.
-*/
+/* =========================================================
+   UITROLGEBIED
+   ========================================================= */
 
 .moeilijk-persoonlijk-details {
     margin:
@@ -877,15 +980,10 @@ input:focus-visible {
         );
 
     box-shadow:
-        inset 0 2px 5px
+        inset
+        0 2px 5px
         rgba(42, 58, 47, 0.08);
 }
-
-
-/*
-   Persoonlijke opties staan dus binnen dit
-   uitrolgebied en niet meer onderaan de pagina.
-*/
 
 .persoonlijke-opties {
     display: flex;
@@ -915,7 +1013,9 @@ input:focus-visible {
         10px
         12px;
 
-    border: 2px solid var(--hout);
+    border:
+        2px solid
+        var(--hout);
 
     border-radius: var(--radius-klein);
 
@@ -979,8 +1079,7 @@ input:focus-visible {
     color: var(--groen-donker);
 }
 
-.persoonlijke-optie.afgerond
-.persoonlijke-optie-tekst {
+.persoonlijke-optie.afgerond .persoonlijke-optie-tekst {
     text-decoration: line-through;
 
     opacity: 0.72;
@@ -1005,36 +1104,55 @@ input:focus-visible {
 .persoonlijke-beheer-knop {
     width: 100%;
 
-    min-height: 43px;
+    min-height: 45px;
 
     padding:
         9px
         12px;
 
-    border: 2px solid var(--hout);
+    border:
+        2px solid
+        var(--hout);
 
     border-radius: var(--radius-klein);
 
     background:
-        rgba(255, 255, 255, 0.78);
+        linear-gradient(
+            145deg,
+            #f6eadb,
+            #eadbc8
+        );
 
     color: var(--groen-donker);
 
     cursor: pointer;
 
-    font-weight: 700;
-
+    font-weight: 750;
     font-size: 14px;
+
+    box-shadow:
+        0 2px 6px
+        rgba(42, 58, 47, 0.08);
 
     transition:
         background 0.14s ease,
-        transform 0.14s ease;
+        transform 0.14s ease,
+        box-shadow 0.14s ease;
 }
 
 .persoonlijke-beheer-knop:hover {
-    background: var(--warm-wit);
+    background:
+        linear-gradient(
+            145deg,
+            #fff4e5,
+            #f0e1cf
+        );
 
     transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 9px
+        rgba(42, 58, 47, 0.12);
 }
 
 .persoonlijke-beheer-knop:active {
@@ -1042,21 +1160,20 @@ input:focus-visible {
 }
 
 .persoonlijke-beheer-knop.secundair {
-    background: transparent;
+    background:
+        rgba(216, 233, 238, 0.70);
 
     border-color:
-        rgba(126, 85, 51, 0.52);
+        var(--blauw);
 
-    color: var(--tekst-zacht);
+    color: var(--blauw-donker);
 
-    font-weight: 600;
+    font-weight: 650;
 }
 
 .persoonlijke-beheer-knop.secundair:hover {
     background:
-        rgba(255, 255, 255, 0.50);
-
-    color: var(--tekst);
+        rgba(216, 233, 238, 0.95);
 }
 
 
@@ -1078,7 +1195,9 @@ input:focus-visible {
 
     margin-bottom: 15px;
 
-    border: 3px solid var(--hout);
+    border:
+        3px solid
+        var(--hout);
 
     border-radius: var(--radius);
 
@@ -1131,7 +1250,9 @@ input:focus-visible {
 
     min-height: 56px;
 
-    border: 3px solid var(--hout-donker);
+    border:
+        3px solid
+        var(--hout-donker);
 
     border-radius: var(--radius);
 
@@ -1169,7 +1290,7 @@ input:focus-visible {
 
 
 /* =========================================================
-   KORTE INVOER / MODALS
+   MODALS
    ========================================================= */
 
 .kort-invoer-container,
@@ -1181,7 +1302,6 @@ input:focus-visible {
     z-index: 100;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -1211,11 +1331,18 @@ input:focus-visible {
 
     padding: 20px;
 
-    border: 3px solid var(--hout);
+    border:
+        3px solid
+        var(--hout);
 
     border-radius: var(--radius);
 
-    background: var(--warm-wit);
+    background:
+        linear-gradient(
+            145deg,
+            #f7f1e6,
+            #e9eee8
+        );
 
     box-shadow: var(--schaduw-groot);
 
@@ -1226,6 +1353,7 @@ input:focus-visible {
 }
 
 @keyframes vensterBinnen {
+
     from {
         opacity: 0;
 
@@ -1251,7 +1379,6 @@ input:focus-visible {
 .kort-invoer-header,
 .persoonlijke-opties-header {
     display: flex;
-
     align-items: flex-start;
     justify-content: space-between;
 
@@ -1263,6 +1390,8 @@ input:focus-visible {
 .kort-invoer-header h3,
 .persoonlijke-opties-header h3 {
     margin: 0;
+
+    color: var(--tekst);
 
     font-size: 20px;
 }
@@ -1277,13 +1406,11 @@ input:focus-visible {
     color: var(--tekst-zacht);
 
     font-size: 13px;
-
     line-height: 1.4;
 }
 
 .klein-sluit-knop {
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -1292,7 +1419,9 @@ input:focus-visible {
 
     flex-shrink: 0;
 
-    border: 2px solid var(--hout);
+    border:
+        2px solid
+        var(--hout);
 
     border-radius: 11px;
 
@@ -1303,81 +1432,167 @@ input:focus-visible {
     cursor: pointer;
 
     font-size: 24px;
-
     line-height: 1;
 }
 
 
 /* =========================================================
-   INVOER
+   MOOIE INVOERBALKEN
    ========================================================= */
 
 .kort-invoer {
     width: 100%;
 
-    min-height: 50px;
+    min-height: 52px;
 
     padding:
         12px
-        14px;
+        15px;
 
-    border: 2px solid var(--hout);
+    border:
+        2px solid
+        var(--hout);
 
-    border-radius: var(--radius-klein);
+    border-radius: 15px;
 
-    background: white;
+    background:
+        linear-gradient(
+            145deg,
+            #fffaf1,
+            #f1eadf
+        );
 
     color: var(--tekst);
 
     outline: none;
+
+    box-shadow:
+        inset
+        0 2px 5px
+        rgba(42, 58, 47, 0.07);
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease;
+}
+
+.kort-invoer::placeholder {
+    color: var(--tekst-licht);
+
+    opacity: 0.85;
 }
 
 .kort-invoer:focus {
-    border-color: var(--groen);
+    border-color: var(--blauw);
+
+    background: #fffdf8;
 
     box-shadow:
         0
         0
         0
         3px
-        rgba(67, 138, 97, 0.15);
+        rgba(63, 127, 150, 0.16);
 }
+
+
+/* =========================================================
+   INVOER KNOPPEN
+   ========================================================= */
 
 .kort-invoer-knoppen {
     display: flex;
 
     gap: 9px;
 
-    margin-top: 13px;
+    margin-top: 14px;
 }
 
 .invoer-annuleren,
 .invoer-opslaan {
     flex: 1;
 
-    min-height: 46px;
+    min-height: 48px;
 
-    border-radius: var(--radius-klein);
+    padding:
+        10px
+        14px;
+
+    border-radius: 14px;
 
     cursor: pointer;
 
-    font-weight: 700;
+    font-weight: 750;
+
+    transition:
+        transform 0.14s ease,
+        filter 0.14s ease,
+        box-shadow 0.14s ease;
 }
 
 .invoer-annuleren {
-    border: 2px solid var(--hout);
+    border:
+        2px solid
+        var(--hout);
 
-    background: transparent;
+    background:
+        linear-gradient(
+            145deg,
+            #f3e9da,
+            #e6dac9
+        );
 
     color: var(--tekst);
+
+    box-shadow:
+        0 2px 6px
+        rgba(42, 58, 47, 0.08);
+}
+
+.invoer-annuleren:hover {
+    background:
+        linear-gradient(
+            145deg,
+            #fff3e3,
+            #eee1cf
+        );
+
+    transform: translateY(-1px);
 }
 
 .invoer-opslaan {
-    border: 2px solid var(--groen-donker);
+    border:
+        2px solid
+        var(--groen-donker);
 
-    background: var(--groen);
+    background:
+        linear-gradient(
+            145deg,
+            #5c9b75,
+            #3f7d59
+        );
 
     color: white;
+
+    box-shadow:
+        0 3px 8px
+        rgba(42, 58, 47, 0.16);
+}
+
+.invoer-opslaan:hover {
+    filter: brightness(1.08);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 11px
+        rgba(42, 58, 47, 0.20);
+}
+
+.invoer-annuleren:active,
+.invoer-opslaan:active {
+    transform: translateY(1px);
 }
 
 
@@ -1396,7 +1611,6 @@ input:focus-visible {
 
 .persoonlijke-beheer-rij {
     display: flex;
-
     align-items: center;
 
     gap: 8px;
@@ -1405,12 +1619,18 @@ input:focus-visible {
         8px
         9px;
 
-    border: 2px solid
+    border:
+        2px solid
         rgba(126, 85, 51, 0.55);
 
     border-radius: var(--radius-klein);
 
-    background: var(--gebroken-wit);
+    background:
+        linear-gradient(
+            145deg,
+            #faf5eb,
+            #eee5d8
+        );
 }
 
 .persoonlijke-beheer-naam {
@@ -1428,44 +1648,68 @@ input:focus-visible {
 .persoonlijke-bewerk-knop,
 .persoonlijke-verwijder-knop {
     display: flex;
-
     align-items: center;
     justify-content: center;
 
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
 
     flex-shrink: 0;
 
-    border-radius: 10px;
+    border-radius: 11px;
 
     cursor: pointer;
 
     font-size: 17px;
+
+    transition:
+        transform 0.14s ease,
+        filter 0.14s ease;
 }
 
 .persoonlijke-bewerk-knop {
-    border: 2px solid var(--hout);
+    border:
+        2px solid
+        var(--blauw);
 
-    background: var(--warm-wit);
+    background:
+        var(--blauw-licht);
 
-    color: var(--tekst);
+    color: var(--blauw-donker);
+}
+
+.persoonlijke-bewerk-knop:hover {
+    filter: brightness(1.06);
+
+    transform: translateY(-1px);
 }
 
 .persoonlijke-verwijder-knop {
-    border: 2px solid #b96b55;
+    border:
+        2px solid
+        #b96b55;
 
-    background: #f4dfd8;
+    background:
+        #f4dfd8;
 
-    color: #8c4535;
+    color:
+        #8c4535;
+}
+
+.persoonlijke-verwijder-knop:hover {
+    filter: brightness(1.05);
+
+    transform: translateY(-1px);
 }
 
 .persoonlijke-nieuw-knop {
     width: 100%;
 
-    min-height: 47px;
+    min-height: 48px;
 
-    border: 2px solid var(--hout);
+    border:
+        2px solid
+        var(--hout-donker);
 
     border-radius: var(--radius-klein);
 
@@ -1484,15 +1728,34 @@ input:focus-visible {
 
     box-shadow:
         0
-        2px
-        7px
-        rgba(42, 58, 47, 0.12);
+        3px
+        8px
+        rgba(42, 58, 47, 0.14);
+
+    transition:
+        transform 0.14s ease,
+        filter 0.14s ease;
+}
+
+.persoonlijke-nieuw-knop:hover {
+    filter: brightness(1.07);
+
+    transform: translateY(-1px);
+}
+
+.persoonlijke-nieuw-knop:active {
+    transform: translateY(1px);
 }
 
 
 /* =========================================================
    POSITIEVE FEEDBACK
    ========================================================= */
+
+/*
+   De feedback verschijnt onderin als een duidelijke,
+   vrolijke bevestiging.
+*/
 
 .beloning {
     position: fixed;
@@ -1516,70 +1779,151 @@ input:focus-visible {
         translateX(-50%);
 
     pointer-events: none;
+
+    opacity: 0;
+    visibility: hidden;
+}
+
+/*
+   Wanneer JavaScript .toon toevoegt,
+   wordt de melding zichtbaar.
+*/
+
+.beloning.toon {
+    visibility: visible;
+
+    animation:
+        beloningLevenscyclus
+        3.4s
+        ease-in-out
+        forwards;
 }
 
 .beloning-tekst {
     padding:
-        17px
-        20px;
+        19px
+        22px;
 
     border:
-        3px
-        solid
+        3px solid
         var(--hout);
 
-    border-radius: 20px;
+    border-radius: 22px;
 
     background:
         linear-gradient(
             145deg,
-            #fff3d7,
-            #f0dfc1
+            #fff5d8,
+            #f4dfb9
         );
 
-    color: var(--tekst);
+    color:
+        var(--groen-donker);
 
     text-align: center;
 
-    font-size: 17px;
+    font-size: 18px;
 
-    font-weight: 800;
+    font-weight: 850;
 
     line-height: 1.35;
 
     box-shadow:
         0
         9px
-        28px
-        rgba(42, 58, 47, 0.28);
+        30px
+        rgba(42, 58, 47, 0.30);
+
+    /*
+       Een klein beetje extra speelsheid.
+    */
+    position: relative;
+}
+
+.beloning-tekst::before {
+    content: "🎉";
+
+    display: inline-block;
+
+    margin-right: 7px;
+
+    font-size: 20px;
 
     animation:
-        beloningBinnen
-        0.28s
+        feedbackSpring
+        0.6s
         ease-out;
 }
 
-@keyframes beloningBinnen {
+@keyframes feedbackSpring {
+
+    0% {
+        transform: scale(0.7) rotate(-8deg);
+    }
+
+    60% {
+        transform: scale(1.18) rotate(5deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0);
+    }
+}
+
+
+/*
+   De complete melding:
+
+   - komt vrolijk binnen
+   - blijft ongeveer 2,5 seconden staan
+   - verdwijnt daarna vanzelf
+*/
+
+@keyframes beloningLevenscyclus {
+
     0% {
         opacity: 0;
 
         transform:
-            translateY(20px)
-            scale(0.94);
+            translateX(-50%)
+            translateY(22px)
+            scale(0.92);
     }
 
-    70% {
-        transform:
-            translateY(-3px)
-            scale(1.02);
-    }
-
-    100% {
+    9% {
         opacity: 1;
 
         transform:
+            translateX(-50%)
+            translateY(-3px)
+            scale(1.03);
+    }
+
+    15% {
+        transform:
+            translateX(-50%)
             translateY(0)
             scale(1);
+    }
+
+    78% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(1);
+    }
+
+    100% {
+        opacity: 0;
+
+        visibility: hidden;
+
+        transform:
+            translateX(-50%)
+            translateY(18px)
+            scale(0.96);
     }
 }
 
@@ -1595,7 +1939,9 @@ input:focus-visible {
 
     margin-top: 2px;
 
-    border: 2px dashed var(--hout);
+    border:
+        2px dashed
+        var(--hout);
 
     border-radius: var(--radius-klein);
 
@@ -1622,7 +1968,6 @@ input:focus-visible {
 
 .extra-rij {
     display: flex;
-
     align-items: center;
 
     gap: 8px;
@@ -1633,7 +1978,8 @@ input:focus-visible {
         7px
         9px;
 
-    border: 2px solid
+    border:
+        2px solid
         rgba(126, 85, 51, 0.45);
 
     border-radius: var(--radius-klein);
@@ -1644,7 +1990,6 @@ input:focus-visible {
 
 .extra-vink {
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -1653,7 +1998,9 @@ input:focus-visible {
 
     flex-shrink: 0;
 
-    border: 2px solid var(--hout);
+    border:
+        2px solid
+        var(--hout);
 
     border-radius: 9px;
 
@@ -1688,7 +2035,6 @@ input:focus-visible {
 
 .extra-verwijder {
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -1770,8 +2116,27 @@ input:focus-visible {
         padding-top: 5px;
     }
 
+    .hoofdkeuzes {
+        gap: 20px;
+    }
+
     .hoofdkeuze {
-        padding: 21px;
+        min-height: 145px;
+
+        padding:
+            28px
+            24px;
+    }
+
+    .keuze-icoon {
+        width: 68px;
+        height: 68px;
+
+        font-size: 32px;
+    }
+
+    .keuze-tekst strong {
+        font-size: 21px;
     }
 
     .blok-header {
@@ -1828,20 +2193,38 @@ input:focus-visible {
     }
 
     .hoofdkeuze {
-        padding: 15px;
+        min-height: 115px;
 
-        gap: 12px;
+        padding:
+            20px
+            15px;
+
+        gap: 9px;
     }
 
     .keuze-icoon {
-        width: 48px;
-        height: 48px;
+        width: 52px;
+        height: 52px;
 
-        font-size: 24px;
+        font-size: 25px;
     }
 
     .keuze-tekst strong {
-        font-size: 16px;
+        font-size: 17px;
+    }
+
+    .keuze-tekst small {
+        font-size: 13px;
+    }
+
+    .hoofdkeuzes + p {
+        margin-top: 20px;
+
+        font-size: 14px;
+    }
+
+    footer {
+        margin-top: 34px;
     }
 
     .blok-titel {
@@ -1861,6 +2244,16 @@ input:focus-visible {
 
     .moeilijk-persoonlijk-details {
         padding: 10px;
+    }
+
+    .kort-invoer-box,
+    .persoonlijke-opties-box {
+        padding: 17px;
+    }
+
+    .invoer-annuleren,
+    .invoer-opslaan {
+        min-height: 46px;
     }
 }
 

@@ -3,11 +3,6 @@
    Terug naar de basis.
    ========================================================= */
 
-
-/* =========================================================
-   OPSLAG
-========================================================= */
-
 const OPSLAG_DAGSTATUS = "ankerDagstatus";
 
 let dagStatus = {
@@ -16,251 +11,307 @@ let dagStatus = {
     antwoorden: {}
 };
 
+let huidigeActiviteit = null;
+
 
 /* =========================================================
    BASIS ACTIVITEITEN
-========================================================= */
+   ========================================================= */
 
-const BASIS_ACTIVITEITEN = {
+const BASIS_ACTIVITEITEN = [
 
-    zelfzorg: [
-        {
-            id: "douchen",
-            titel: "Douchen",
-            icoon: "🚿",
-            invoer: false,
-            extra: [
-                "Haar gewassen",
-                "Geschoren",
-                "Haar gekamd"
-            ]
-        },
-        {
-            id: "tanden-poetsen",
-            titel: "Tanden poetsen",
-            icoon: "🪥",
-            invoer: false
-        },
-        {
-            id: "deodorant",
-            titel: "Deodorant",
-            icoon: "🧴",
-            invoer: false
-        },
-        {
-            id: "schone-kleding",
-            titel: "Schone kleding",
-            icoon: "👕",
-            invoer: false
-        }
-    ],
+    {
+        id: "zelfzorg",
+        titel: "Zelfzorg",
+        icoon: "🧼",
+        activiteiten: [
+            {
+                id: "douchen",
+                titel: "Douchen",
+                icoon: "🚿",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: haar gewassen"
+            },
+            {
+                id: "tanden-poetsen",
+                titel: "Tanden poetsen",
+                icoon: "🪥",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: geflost"
+            },
+            {
+                id: "deodorant",
+                titel: "Deodorant",
+                icoon: "🧴",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: ook parfum gebruikt"
+            },
+            {
+                id: "schone-kleding",
+                titel: "Schone kleding",
+                icoon: "👕",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: werkkleding aangetrokken"
+            }
+        ]
+    },
 
-    eten: [
-        {
-            id: "ontbijt",
-            titel: "Ontbijt",
-            icoon: "🌅",
-            invoer: true,
-            placeholder: "Bijvoorbeeld: boterhammen met kaas"
-        },
-        {
-            id: "lunch",
-            titel: "Lunch",
-            icoon: "🥪",
-            invoer: true,
-            placeholder: "Bijvoorbeeld: broodje kip"
-        },
-        {
-            id: "diner",
-            titel: "Diner",
-            icoon: "🍽️",
-            invoer: true,
-            placeholder: "Bijvoorbeeld: pasta"
-        },
-        {
-            id: "water",
-            titel: "Water gedronken",
-            icoon: "💧",
-            invoer: true,
-            placeholder: "Bijvoorbeeld: 500 ml"
-        },
-        {
-            id: "anders-drinken",
-            titel: "Iets anders gedronken",
-            icoon: "🥤",
-            invoer: true,
-            placeholder: "Bijvoorbeeld: koffie, 2 koppen"
-        }
-    ],
+    {
+        id: "eten-drinken",
+        titel: "Eten & drinken",
+        icoon: "🍽️",
+        activiteiten: [
+            {
+                id: "ontbijt",
+                titel: "Ontbijt",
+                icoon: "🥪",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: boterhammen met kaas"
+            },
+            {
+                id: "lunch",
+                titel: "Lunch",
+                icoon: "🥗",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: broodje gezond"
+            },
+            {
+                id: "diner",
+                titel: "Diner",
+                icoon: "🍝",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: pasta"
+            },
+            {
+                id: "water",
+                titel: "Water gedronken",
+                icoon: "💧",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: 500 ml"
+            },
+            {
+                id: "ander-drinken",
+                titel: "Iets anders gedronken",
+                icoon: "🥤",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: koffie, 2 koppen"
+            }
+        ]
+    },
 
-    omgeving: [
-        {
-            id: "afwas",
-            titel: "Afwas / vaat",
-            icoon: "🍽️",
-            invoer: false
-        },
-        {
-            id: "opruimen",
-            titel: "Even iets opruimen",
-            icoon: "🧹",
-            invoer: true,
-            placeholder: "Wat heb je opgeruimd?"
-        }
-    ],
+    {
+        id: "omgeving",
+        titel: "Omgeving",
+        icoon: "🏠",
+        activiteiten: [
+            {
+                id: "afwas",
+                titel: "Afwas / vaat",
+                icoon: "🍽️",
+                invoer: false
+            },
+            {
+                id: "opruimen",
+                titel: "Even iets opruimen",
+                icoon: "🧹",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: keuken opgeruimd"
+            }
+        ]
+    },
 
-    beweging: [
-        {
-            id: "naar-buiten",
-            titel: "Even naar buiten",
-            icoon: "🌳",
-            invoer: true,
-            placeholder: "Bijvoorbeeld: 5 km gelopen"
-        },
-        {
-            id: "blokje-om",
-            titel: "Klein blokje om",
-            icoon: "🚶",
-            invoer: true,
-            placeholder: "Bijvoorbeeld: 20 minuten gewandeld"
-        },
-        {
-            id: "bewegen",
-            titel: "Even bewegen",
-            icoon: "💪",
-            invoer: true,
-            placeholder: "Bijvoorbeeld: fitness oefeningen gedaan"
-        }
-    ],
+    {
+        id: "beweging-buiten",
+        titel: "Beweging & buiten",
+        icoon: "🚶",
+        activiteiten: [
+            {
+                id: "naar-buiten",
+                titel: "Even naar buiten",
+                icoon: "🌳",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: 5 km gelopen"
+            },
+            {
+                id: "blokje-om",
+                titel: "Klein blokje om",
+                icoon: "🚶",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: 20 minuten gewandeld"
+            },
+            {
+                id: "bewegen",
+                titel: "Even bewegen",
+                icoon: "💪",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: fitness oefeningen gedaan"
+            }
+        ]
+    },
 
-    hoofd: [
-        {
-            id: "rust",
-            titel: "Even rust genomen",
-            icoon: "😌",
-            invoer: false
-        },
-        {
-            id: "muziek",
-            titel: "Muziek geluisterd",
-            icoon: "🎵",
-            invoer: true,
-            placeholder: "Bijvoorbeeld: Metallica"
-        },
-        {
-            id: "plezier",
-            titel: "Iets gedaan waar ik plezier aan beleef",
-            icoon: "✨",
-            invoer: true,
-            placeholder: "Wat heb je gedaan?"
-        }
-    ],
+    {
+        id: "hoofd-ontspanning",
+        titel: "Hoofd & ontspanning",
+        icoon: "🧠",
+        activiteiten: [
+            {
+                id: "rust",
+                titel: "Even rust genomen",
+                icoon: "😌",
+                invoer: false
+            },
+            {
+                id: "muziek",
+                titel: "Muziek geluisterd",
+                icoon: "🎵",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: mijn favoriete playlist"
+            },
+            {
+                id: "plezier",
+                titel: "Iets gedaan waar ik plezier aan beleef",
+                icoon: "😊",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: gegamed"
+            }
+        ]
+    },
 
-    borden: [
-        {
-            id: "borden-bekeken",
-            titel: "Borden bekeken",
-            icoon: "👀",
-            invoer: false
-        },
-        {
-            id: "klein-taakje",
-            titel: "Een klein taakje gedaan",
-            icoon: "🧩",
-            invoer: true,
-            placeholder: "Wat heb je gedaan?"
-        }
-    ]
-};
+    {
+        id: "check-mijn-borden",
+        titel: "Check mijn borden",
+        icoon: "📋",
+        activiteiten: [
+            {
+                id: "borden-bekeken",
+                titel: "Borden bekeken",
+                icoon: "👀",
+                invoer: false
+            },
+            {
+                id: "klein-taakje",
+                titel: "Een klein taakje gedaan",
+                icoon: "✅",
+                invoer: true,
+                placeholder: "Bijvoorbeeld: afspraak gemaakt met gemeente"
+            }
+        ]
+    }
+];
 
 
 /* =========================================================
    MOEILIJKE DAG
    Deze blijft bewust eenvoudig.
-========================================================= */
+   ========================================================= */
 
-const MOEILIJKE_DAG = {
+const MOEILIJKE_DAG = [
 
-    "moeilijk-drinken": [
-        {
-            id: "iets-gedronken",
-            titel: "Iets gedronken",
-            icoon: "🥤"
-        },
-        {
-            id: "water-gedronken",
-            titel: "Water gedronken",
-            icoon: "💧"
-        }
-    ],
+    {
+        id: "moeilijk-drinken",
+        titel: "Drinken",
+        icoon: "💧",
+        activiteiten: [
+            {
+                id: "iets-gedronken",
+                titel: "Iets gedronken",
+                icoon: "🥤"
+            },
+            {
+                id: "water-gedronken",
+                titel: "Water gedronken",
+                icoon: "💧"
+            }
+        ]
+    },
 
-    "moeilijk-eten": [
-        {
-            id: "iets-gegeten",
-            titel: "Iets gegeten",
-            icoon: "🍽️"
-        }
-    ],
+    {
+        id: "moeilijk-eten",
+        titel: "Eten",
+        icoon: "🍽️",
+        activiteiten: [
+            {
+                id: "iets-gegeten",
+                titel: "Iets gegeten",
+                icoon: "🍎"
+            }
+        ]
+    },
 
-    "moeilijk-zelfzorg": [
-        {
-            id: "gedoucht",
-            titel: "Gedoucht",
-            icoon: "🚿"
-        },
-        {
-            id: "gewassen",
-            titel: "Gewassen",
-            icoon: "🧼"
-        },
-        {
-            id: "tanden-gepoetst",
-            titel: "Tanden gepoetst",
-            icoon: "🪥"
-        },
-        {
-            id: "schone-kleding-moeilijk",
-            titel: "Schone kleding aangetrokken",
-            icoon: "👕"
-        }
-    ],
+    {
+        id: "moeilijk-zelfzorg",
+        titel: "Zelfzorg",
+        icoon: "🧼",
+        activiteiten: [
+            {
+                id: "gedoucht",
+                titel: "Gedoucht",
+                icoon: "🚿"
+            },
+            {
+                id: "gewassen",
+                titel: "Gewassen",
+                icoon: "🧼"
+            },
+            {
+                id: "tanden-gepoetst",
+                titel: "Tanden gepoetst",
+                icoon: "🪥"
+            },
+            {
+                id: "schone-kleding-aangetrokken",
+                titel: "Schone kleding aangetrokken",
+                icoon: "👕"
+            }
+        ]
+    },
 
-    "moeilijk-beweging": [
-        {
-            id: "klein-blokje-moeilijk",
-            titel: "Klein blokje om",
-            icoon: "🚶"
-        },
-        {
-            id: "buiten-geweest",
-            titel: "Even buiten geweest",
-            icoon: "🌳"
-        },
-        {
-            id: "bewogen",
-            titel: "Even bewogen",
-            icoon: "💪"
-        }
-    ],
+    {
+        id: "moeilijk-beweging",
+        titel: "Beweging",
+        icoon: "🚶",
+        activiteiten: [
+            {
+                id: "moeilijk-blokje-om",
+                titel: "Klein blokje om",
+                icoon: "🚶"
+            },
+            {
+                id: "even-buiten",
+                titel: "Even buiten geweest",
+                icoon: "🌳"
+            },
+            {
+                id: "even-bewogen",
+                titel: "Even bewogen",
+                icoon: "💪"
+            }
+        ]
+    },
 
-    "moeilijk-prettig": [
-        {
-            id: "muziek-moeilijk",
-            titel: "Muziek geluisterd",
-            icoon: "🎵"
-        },
-        {
-            id: "iets-leuks",
-            titel: "Iets leuks gedaan",
-            icoon: "✨"
-        }
-    ]
-};
+    {
+        id: "moeilijk-prettig",
+        titel: "Prettig",
+        icoon: "💚",
+        activiteiten: [
+            {
+                id: "moeilijk-muziek",
+                titel: "Muziek geluisterd",
+                icoon: "🎵"
+            },
+            {
+                id: "iets-leuks",
+                titel: "Iets leuks gedaan",
+                icoon: "😊"
+            }
+        ]
+    }
+];
 
 
 /* =========================================================
    POSITIEVE FEEDBACK
-========================================================= */
+   ========================================================= */
 
 const BELONINGEN = [
     "🎉 YES! Goed gedaan!",
@@ -276,77 +327,207 @@ const BELONINGEN = [
 
 
 /* =========================================================
-   HUIDIGE ACTIVITEIT
-========================================================= */
+   ELEMENTEN
+   ========================================================= */
 
-let huidigeActiviteit = null;
-let huidigeBlok = null;
-let huidigeModus = null;
+let hoofdScherm;
+let basisScherm;
+let moeilijkScherm;
+let activiteitScherm;
 
+let basisKnoppen;
+let moeilijkKnoppen;
 
-/* =========================================================
-   DOM ELEMENTEN
-========================================================= */
+let activiteitTitel;
+let activiteitSubtitel;
+let activiteitStatus;
+let activiteitStatusIcoon;
+let activiteitStatusTitel;
+let activiteitStatusTekst;
+let activiteitInhoud;
+let activiteitKlaarKnop;
 
-const hoofdScherm = document.getElementById("hoofdScherm");
-const basisScherm = document.getElementById("basisScherm");
-const moeilijkScherm = document.getElementById("moeilijkScherm");
-const activiteitScherm = document.getElementById("activiteitScherm");
+let kortInvoerContainer;
+let kortInvoerTitel;
+let kortInvoerUitleg;
+let kortInvoer;
+let invoerAnnuleren;
+let invoerOpslaan;
 
-const basisKnop = document.getElementById("basisKnop");
-const moeilijkKnop = document.getElementById("moeilijkKnop");
-
-const basisTerugKnop = document.getElementById("basisTerugKnop");
-const moeilijkTerugKnop = document.getElementById("moeilijkTerugKnop");
-const activiteitTerugKnop = document.getElementById("activiteitTerugKnop");
-
-const activiteitTitel = document.getElementById("activiteitTitel");
-const activiteitSubtitel = document.getElementById("activiteitSubtitel");
-const activiteitStatus = document.getElementById("activiteitStatus");
-const activiteitStatusIcoon = document.getElementById("activiteitStatusIcoon");
-const activiteitStatusTitel = document.getElementById("activiteitStatusTitel");
-const activiteitStatusTekst = document.getElementById("activiteitStatusTekst");
-const activiteitInhoud = document.getElementById("activiteitInhoud");
-const activiteitKlaarKnop = document.getElementById("activiteitKlaarKnop");
-
-const kortInvoerContainer = document.getElementById("kortInvoerContainer");
-const kortInvoerTitel = document.getElementById("kortInvoerTitel");
-const kortInvoerUitleg = document.getElementById("kortInvoerUitleg");
-const kortInvoer = document.getElementById("kortInvoer");
-const kortInvoerSluiten = document.getElementById("kortInvoerSluiten");
-const invoerAnnuleren = document.getElementById("invoerAnnuleren");
-const invoerOpslaan = document.getElementById("invoerOpslaan");
-
-const beloning = document.getElementById("beloning");
-const beloningTekst = document.getElementById("beloningTekst");
+let beloning;
+let beloningTekst;
 
 
 /* =========================================================
-   INITIALISATIE
-========================================================= */
+   START
+   ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    elementenOphalen();
+
     dagStatusLaden();
-
-    eventListenersInstellen();
-
-    activiteitKnoppenInstellen();
-
-    moeilijkeDagKnoppenInstellen();
-
-    serviceWorkerRegistreren();
 
     dagControle();
 
+    basisKnoppenMaken();
+    moeilijkKnoppenMaken();
+
+    navigatieInstellen();
+
+    invoerInstellen();
+
+    serviceWorkerRegistreren();
+
+    setInterval(dagControle, 60000);
 });
 
 
 /* =========================================================
-   EVENT LISTENERS
-========================================================= */
+   ELEMENTEN OPHALEN
+   ========================================================= */
 
-function eventListenersInstellen() {
+function elementenOphalen() {
+
+    hoofdScherm = document.getElementById("hoofdScherm");
+    basisScherm = document.getElementById("basisScherm");
+    moeilijkScherm = document.getElementById("moeilijkScherm");
+    activiteitScherm = document.getElementById("activiteitScherm");
+
+    basisKnoppen = document.getElementById("basisKnoppen");
+    moeilijkKnoppen = document.getElementById("moeilijkKnoppen");
+
+    activiteitTitel = document.getElementById("activiteitTitel");
+    activiteitSubtitel = document.getElementById("activiteitSubtitel");
+    activiteitStatus = document.getElementById("activiteitStatus");
+    activiteitStatusIcoon = document.getElementById("activiteitStatusIcoon");
+    activiteitStatusTitel = document.getElementById("activiteitStatusTitel");
+    activiteitStatusTekst = document.getElementById("activiteitStatusTekst");
+    activiteitInhoud = document.getElementById("activiteitInhoud");
+    activiteitKlaarKnop = document.getElementById("activiteitKlaarKnop");
+
+    kortInvoerContainer = document.getElementById("kortInvoerContainer");
+    kortInvoerTitel = document.getElementById("kortInvoerTitel");
+    kortInvoerUitleg = document.getElementById("kortInvoerUitleg");
+    kortInvoer = document.getElementById("kortInvoer");
+    invoerAnnuleren = document.getElementById("invoerAnnuleren");
+    invoerOpslaan = document.getElementById("invoerOpslaan");
+
+    beloning = document.getElementById("beloning");
+    beloningTekst = document.getElementById("beloningTekst");
+}
+
+
+/* =========================================================
+   DAGSTATUS LADEN
+   ========================================================= */
+
+function dagStatusLaden() {
+
+    const opgeslagen = localStorage.getItem(OPSLAG_DAGSTATUS);
+
+    if (!opgeslagen) {
+        dagStatus = {
+            datum: vandaagAlsTekst(),
+            afgerond: {},
+            antwoorden: {}
+        };
+
+        dagStatusOpslaan();
+        return;
+    }
+
+    try {
+
+        const data = JSON.parse(opgeslagen);
+
+        if (data.datum !== vandaagAlsTekst()) {
+
+            dagStatus = {
+                datum: vandaagAlsTekst(),
+                afgerond: {},
+                antwoorden: {}
+            };
+
+            dagStatusOpslaan();
+            return;
+        }
+
+        dagStatus = {
+            datum: data.datum || vandaagAlsTekst(),
+            afgerond: data.afgerond || {},
+            antwoorden: data.antwoorden || {}
+        };
+
+    } catch (fout) {
+
+        dagStatus = {
+            datum: vandaagAlsTekst(),
+            afgerond: {},
+            antwoorden: {}
+        };
+
+        dagStatusOpslaan();
+    }
+}
+
+
+/* =========================================================
+   DAGSTATUS OPSLAAN
+   ========================================================= */
+
+function dagStatusOpslaan() {
+    localStorage.setItem(
+        OPSLAG_DAGSTATUS,
+        JSON.stringify(dagStatus)
+    );
+}
+
+
+/* =========================================================
+   DATUM
+   ========================================================= */
+
+function vandaagAlsTekst() {
+
+    const datum = new Date();
+
+    const jaar = datum.getFullYear();
+    const maand = String(datum.getMonth() + 1).padStart(2, "0");
+    const dag = String(datum.getDate()).padStart(2, "0");
+
+    return `${jaar}-${maand}-${dag}`;
+}
+
+
+function dagControle() {
+
+    const vandaag = vandaagAlsTekst();
+
+    if (dagStatus.datum !== vandaag) {
+
+        dagStatus = {
+            datum: vandaag,
+            afgerond: {},
+            antwoorden: {}
+        };
+
+        dagStatusOpslaan();
+
+        basisKnoppenBijwerken();
+        moeilijkKnoppenBijwerken();
+    }
+}
+
+
+/* =========================================================
+   NAVIGATIE
+   ========================================================= */
+
+function navigatieInstellen() {
+
+    const basisKnop = document.getElementById("basisKnop");
+    const moeilijkKnop = document.getElementById("moeilijkKnop");
 
     if (basisKnop) {
         basisKnop.addEventListener("click", () => {
@@ -354,130 +535,101 @@ function eventListenersInstellen() {
         });
     }
 
-
     if (moeilijkKnop) {
         moeilijkKnop.addEventListener("click", () => {
             schermTonen(moeilijkScherm);
         });
     }
 
+    document.querySelectorAll("[data-terug]").forEach(knop => {
 
-    if (basisTerugKnop) {
-        basisTerugKnop.addEventListener("click", () => {
-            schermTonen(hoofdScherm);
-        });
-    }
+        knop.addEventListener("click", () => {
 
+            const bestemming = knop.dataset.terug;
 
-    if (moeilijkTerugKnop) {
-        moeilijkTerugKnop.addEventListener("click", () => {
-            schermTonen(hoofdScherm);
-        });
-    }
-
-
-    if (activiteitTerugKnop) {
-        activiteitTerugKnop.addEventListener("click", () => {
-            terugNaarVorigeScherm();
-        });
-    }
-
-
-    if (activiteitKlaarKnop) {
-        activiteitKlaarKnop.addEventListener("click", () => {
-
-            if (!huidigeActiviteit) {
-                return;
+            if (bestemming === "hoofd") {
+                schermTonen(hoofdScherm);
             }
 
-            taakAfvinken(
-                huidigeBlok,
-                huidigeActiviteit.id,
-                huidigeModus
-            );
-        });
-    }
-
-
-    if (kortInvoerSluiten) {
-        kortInvoerSluiten.addEventListener("click", invoerSluiten);
-    }
-
-
-    if (invoerAnnuleren) {
-        invoerAnnuleren.addEventListener("click", invoerSluiten);
-    }
-
-
-    if (invoerOpslaan) {
-        invoerOpslaan.addEventListener("click", invoerOpslaanHandler);
-    }
-
-
-    if (kortInvoer) {
-        kortInvoer.addEventListener("keydown", (event) => {
-
-            if (event.key === "Enter") {
-                event.preventDefault();
-                invoerOpslaanHandler();
+            if (bestemming === "basis") {
+                schermTonen(basisScherm);
             }
 
-            if (event.key === "Escape") {
-                invoerSluiten();
+            if (bestemming === "moeilijk") {
+                schermTonen(moeilijkScherm);
             }
-
         });
-    }
-
-
-    if (kortInvoerContainer) {
-
-        kortInvoerContainer.addEventListener("click", (event) => {
-
-            if (event.target === kortInvoerContainer) {
-                invoerSluiten();
-            }
-
-        });
-
-    }
+    });
 }
 
 
 /* =========================================================
-   ACTIVITEIT KNOPPEN
-========================================================= */
+   SCHERM TONEN
+   ========================================================= */
 
-function activiteitKnoppenInstellen() {
+function schermTonen(scherm) {
 
-    const knoppen = document.querySelectorAll(
-        ".basis-blok .activiteit-knop"
-    );
+    document.querySelectorAll(".scherm").forEach(item => {
+        item.classList.remove("actief");
+    });
 
-    knoppen.forEach((knop) => {
+    if (scherm) {
+        scherm.classList.add("actief");
+    }
 
-        knop.addEventListener("click", () => {
+    invoerSluiten();
+}
 
-            const blok = knop.dataset.blok;
-            const activiteitId = knop.dataset.activiteit;
 
-            const activiteit = zoekBasisActiviteit(
-                blok,
-                activiteitId
-            );
+/* =========================================================
+   BASIS KNOPPEN
+   ========================================================= */
 
-            if (!activiteit) {
-                return;
-            }
+function basisKnoppenMaken() {
 
-            activiteitOpenen(
-                activiteit,
-                blok,
-                "basis"
-            );
+    if (!basisKnoppen) return;
 
+    basisKnoppen.innerHTML = "";
+
+    BASIS_ACTIVITEITEN.forEach(blok => {
+
+        const blokElement = document.createElement("div");
+        blokElement.className = "blok basis-blok";
+
+        const titel = document.createElement("h3");
+        titel.className = "blok-titel";
+        titel.innerHTML = `${blok.icoon} ${blok.titel}`;
+
+        blokElement.appendChild(titel);
+
+        const activiteiten = document.createElement("div");
+        activiteiten.className = "activiteiten";
+
+        blok.activiteiten.forEach(activiteit => {
+
+            const knop = document.createElement("button");
+
+            knop.type = "button";
+            knop.className = "activiteit-knop";
+
+            knop.dataset.blok = blok.id;
+            knop.dataset.activiteit = activiteit.id;
+
+            knop.innerHTML = `
+                <span class="activiteit-icoon">${activiteit.icoon}</span>
+                <span class="activiteit-naam">${activiteit.titel}</span>
+                <span class="activiteit-check">✓</span>
+            `;
+
+            knop.addEventListener("click", () => {
+                activiteitOpenen(blok, activiteit);
+            });
+
+            activiteiten.appendChild(knop);
         });
 
+        blokElement.appendChild(activiteiten);
+        basisKnoppen.appendChild(blokElement);
     });
 
     basisKnoppenBijwerken();
@@ -486,84 +638,90 @@ function activiteitKnoppenInstellen() {
 
 /* =========================================================
    MOEILIJKE DAG KNOPPEN
-========================================================= */
+   ========================================================= */
 
-function moeilijkeDagKnoppenInstellen() {
+function moeilijkKnoppenMaken() {
 
-    const knoppen = document.querySelectorAll(
-        ".moeilijk-activiteit"
-    );
+    if (!moeilijkKnoppen) return;
 
-    knoppen.forEach((knop) => {
+    moeilijkKnoppen.innerHTML = "";
 
-        knop.addEventListener("click", () => {
+    MOEILIJKE_DAG.forEach(blok => {
 
-            const blok = knop.dataset.blok;
-            const activiteitId = knop.dataset.activiteit;
+        const blokElement = document.createElement("div");
+        blokElement.className = "blok moeilijk-blok";
 
-            taakAfvinken(
-                blok,
-                activiteitId,
-                "moeilijk"
-            );
+        const titel = document.createElement("h3");
+        titel.className = "blok-titel";
+        titel.innerHTML = `${blok.icoon} ${blok.titel}`;
 
+        blokElement.appendChild(titel);
+
+        const activiteiten = document.createElement("div");
+        activiteiten.className = "activiteiten";
+
+        blok.activiteiten.forEach(activiteit => {
+
+            const knop = document.createElement("button");
+
+            knop.type = "button";
+            knop.className = "activiteit-knop";
+
+            knop.dataset.blok = blok.id;
+            knop.dataset.activiteit = activiteit.id;
+
+            knop.innerHTML = `
+                <span class="activiteit-icoon">${activiteit.icoon}</span>
+                <span class="activiteit-naam">${activiteit.titel}</span>
+                <span class="activiteit-check">✓</span>
+            `;
+
+            knop.addEventListener("click", () => {
+
+                taakAfvinken(
+                    `${blok.id}::${activiteit.id}`
+                );
+
+                beloningTonen();
+            });
+
+            activiteiten.appendChild(knop);
         });
 
+        blokElement.appendChild(activiteiten);
+        moeilijkKnoppen.appendChild(blokElement);
     });
 
-    moeilijkeKnoppenBijwerken();
+    moeilijkKnoppenBijwerken();
 }
 
 
 /* =========================================================
-   ACTIVITEIT OPENEN
-========================================================= */
+   BASIS ACTIVITEIT OPENEN
+   ========================================================= */
 
-function activiteitOpenen(
-    activiteit,
-    blok,
-    modus
-) {
+function activiteitOpenen(blok, activiteit) {
 
-    huidigeActiviteit = activiteit;
-    huidigeBlok = blok;
-    huidigeModus = modus;
+    huidigeActiviteit = {
+        blok,
+        activiteit,
+        sleutel: `${blok.id}::${activiteit.id}`
+    };
 
     activiteitTitel.textContent = activiteit.titel;
+    activiteitSubtitel.textContent = blok.titel;
 
-    activiteitSubtitel.textContent =
-        activiteit.invoer
-            ? "Je kunt er iets korts bij zetten."
-            : "Goed bezig.";
-
-    activiteitStatusTitel.textContent =
-        activiteit.titel;
+    activiteitStatusIcoon.textContent =
+        activiteit.icoon;
 
     activiteitInhoud.innerHTML = "";
 
-
-    const sleutel = taakSleutel(
-        modus,
-        blok,
-        activiteit.id
-    );
-
-    const afgerond =
-        dagStatus.afgerond[sleutel] === true;
-
     const antwoord =
-        dagStatus.antwoorden[sleutel] || "";
+        dagStatus.antwoorden[huidigeActiviteit.sleutel];
 
-
-    if (activiteit.extra && activiteit.extra.length > 0) {
-
-        extraOnderdelenTonen(
-            activiteit.extra,
-            sleutel
-        );
-
-    }
-
+    /*
+     * Eventuele eigen toevoeging tonen.
+     */
 
     if (activiteit.invoer) {
 
@@ -573,317 +731,355 @@ function activiteitOpenen(
         antwoordBlok.className =
             "activiteit-antwoord-blok";
 
-
-        const antwoordLabel =
-            document.createElement("div");
-
-        antwoordLabel.className =
-            "activiteit-antwoord-label";
-
-        antwoordLabel.textContent =
-            antwoord
-                ? "Ingevuld:"
-                : "Nog niets ingevuld.";
-
-
-        antwoordBlok.appendChild(
-            antwoordLabel
-        );
-
-
         if (antwoord) {
 
-            const antwoordTekst =
-                document.createElement("div");
+            antwoordBlok.innerHTML = `
+                <div class="activiteit-antwoord-label">
+                    Mijn toevoeging
+                </div>
 
-            antwoordTekst.className =
-                "activiteit-antwoord";
+                <div class="activiteit-antwoord">
+                    ${escapeHtml(antwoord)}
+                </div>
+            `;
 
-            antwoordTekst.textContent =
-                antwoord;
+        } else {
 
-            antwoordBlok.appendChild(
-                antwoordTekst
-            );
-
+            antwoordBlok.innerHTML = `
+                <div class="activiteit-antwoord-label">
+                    Zelf iets toevoegen?
+                </div>
+            `;
         }
-
 
         const invoerKnop =
             document.createElement("button");
 
         invoerKnop.type = "button";
-
         invoerKnop.className =
             "activiteit-invoer-knop";
 
         invoerKnop.textContent =
             antwoord
                 ? "✏️ Aanpassen"
-                : "＋ Iets invullen";
+                : "＋ Iets toevoegen";
 
+        invoerKnop.addEventListener("click", () => {
+            invoerOpenen(activiteit);
+        });
 
-        invoerKnop.addEventListener(
-            "click",
-            () => {
-
-                invoerOpenen(
-                    activiteit,
-                    sleutel
-                );
-
-            }
-        );
-
-
-        antwoordBlok.appendChild(
-            invoerKnop
-        );
+        antwoordBlok.appendChild(invoerKnop);
 
         activiteitInhoud.appendChild(
             antwoordBlok
         );
     }
 
+    activiteitStatusBijwerken();
 
-    activiteitStatusBijwerken(
-        afgerond
-    );
-
-
-    schermTonen(
-        activiteitScherm
-    );
+    schermTonen(activiteitScherm);
 }
 
 
 /* =========================================================
-   EXTRA ONDERDELEN
-========================================================= */
+   ACTIVITEIT STATUS
+   ========================================================= */
 
-function extraOnderdelenTonen(
-    onderdelen,
-    sleutel
-) {
+function activiteitStatusBijwerken() {
 
-    const blok =
-        document.createElement("div");
+    if (!huidigeActiviteit) return;
 
-    blok.className =
-        "extra-onderdelen";
+    const sleutel =
+        huidigeActiviteit.sleutel;
 
+    const afgerond =
+        !!dagStatus.afgerond[sleutel];
 
-    const titel =
-        document.createElement("h3");
+    if (afgerond) {
 
-    titel.textContent =
-        "Ook gedaan?";
+        activiteitStatus.classList.add("afgerond");
 
-    blok.appendChild(titel);
+        activiteitStatusIcoon.textContent = "✓";
+        activiteitStatusTitel.textContent =
+            "Gedaan!";
+        activiteitStatusTekst.textContent =
+            "Goed bezig. Dit heb je vandaag gedaan.";
 
+        activiteitKlaarKnop.textContent =
+            "✓ Gedaan";
 
-    const uitleg =
-        document.createElement("p");
+        activiteitKlaarKnop.classList.add(
+            "afgerond"
+        );
 
-    uitleg.textContent =
-        "Tik aan wat je nog hebt gedaan.";
+    } else {
 
-    blok.appendChild(uitleg);
+        activiteitStatus.classList.remove("afgerond");
 
+        activiteitStatusIcoon.textContent =
+            huidigeActiviteit.activiteit.icoon;
 
-    onderdelen.forEach(
-        (onderdeel, index) => {
+        activiteitStatusTitel.textContent =
+            "Nog niet afgevinkt";
 
-            const extraSleutel =
-                `${sleutel}::extra::${index}`;
+        activiteitStatusTekst.textContent =
+            "Als je klaar bent, vink je hem hieronder af.";
 
+        activiteitKlaarKnop.textContent =
+            "✓ Klaar";
 
-            const label =
-                document.createElement("label");
-
-            label.className =
-                "extra-onderdeel";
-
-
-            const checkbox =
-                document.createElement("input");
-
-            checkbox.type =
-                "checkbox";
-
-            checkbox.checked =
-                dagStatus.afgerond[
-                    extraSleutel
-                ] === true;
+        activiteitKlaarKnop.classList.remove(
+            "afgerond"
+        );
+    }
+}
 
 
-            const tekst =
-                document.createElement("span");
+/* =========================================================
+   KLAAR-KNOP ACTIVITEIT
+   ========================================================= */
 
-            tekst.textContent =
-                onderdeel;
+if (typeof document !== "undefined") {
 
+    document.addEventListener(
+        "click",
+        event => {
 
-            checkbox.addEventListener(
-                "change",
-                () => {
+            if (
+                event.target &&
+                event.target.id ===
+                "activiteitKlaarKnop"
+            ) {
 
-                    dagStatus.afgerond[
-                        extraSleutel
-                    ] = checkbox.checked;
+                if (!huidigeActiviteit) return;
 
-                    dagStatusOpslaan();
+                taakAfvinken(
+                    huidigeActiviteit.sleutel
+                );
 
-                    if (checkbox.checked) {
-                        beloningTonen();
-                    }
+                activiteitStatusBijwerken();
 
-                }
-            );
+                basisKnoppenBijwerken();
 
-
-            label.appendChild(
-                checkbox
-            );
-
-            label.appendChild(
-                tekst
-            );
-
-            blok.appendChild(
-                label
-            );
-
+                beloningTonen();
+            }
         }
     );
-
-
-    activiteitInhoud.appendChild(
-        blok
-    );
 }
 
 
 /* =========================================================
-   KORTE INVOER OPENEN
-========================================================= */
+   TAAK AFVINKEN
+   ========================================================= */
 
-function invoerOpenen(
-    activiteit,
-    sleutel
-) {
+function taakAfvinken(sleutel) {
 
-    if (!kortInvoerContainer) {
-        return;
+    dagStatus.afgerond[sleutel] =
+        !dagStatus.afgerond[sleutel];
+
+    dagStatusOpslaan();
+
+    basisKnoppenBijwerken();
+    moeilijkKnoppenBijwerken();
+}
+
+
+/* =========================================================
+   BASIS KNOPPEN BIJWERKEN
+   ========================================================= */
+
+function basisKnoppenBijwerken() {
+
+    if (!basisKnoppen) return;
+
+    basisKnoppen
+        .querySelectorAll(".activiteit-knop")
+        .forEach(knop => {
+
+            const sleutel =
+                `${knop.dataset.blok}::${knop.dataset.activiteit}`;
+
+            const afgerond =
+                !!dagStatus.afgerond[sleutel];
+
+            knop.classList.toggle(
+                "afgerond",
+                afgerond
+            );
+
+            const antwoord =
+                dagStatus.antwoorden[sleutel];
+
+            let antwoordElement =
+                knop.querySelector(
+                    ".checklist-antwoord"
+                );
+
+            if (antwoord) {
+
+                if (!antwoordElement) {
+
+                    antwoordElement =
+                        document.createElement("span");
+
+                    antwoordElement.className =
+                        "checklist-antwoord";
+
+                    knop.appendChild(
+                        antwoordElement
+                    );
+                }
+
+                antwoordElement.textContent =
+                    antwoord;
+
+            } else if (antwoordElement) {
+
+                antwoordElement.remove();
+            }
+        });
+}
+
+
+/* =========================================================
+   MOEILIJKE DAG BIJWERKEN
+   ========================================================= */
+
+function moeilijkKnoppenBijwerken() {
+
+    if (!moeilijkKnoppen) return;
+
+    moeilijkKnoppen
+        .querySelectorAll(".activiteit-knop")
+        .forEach(knop => {
+
+            const sleutel =
+                `${knop.dataset.blok}::${knop.dataset.activiteit}`;
+
+            const afgerond =
+                !!dagStatus.afgerond[sleutel];
+
+            knop.classList.toggle(
+                "afgerond",
+                afgerond
+            );
+        });
+}
+
+
+/* =========================================================
+   KORTE INVOER
+   ========================================================= */
+
+function invoerInstellen() {
+
+    if (invoerAnnuleren) {
+
+        invoerAnnuleren.addEventListener(
+            "click",
+            invoerSluiten
+        );
     }
 
-    huidigeActiviteit = activiteit;
+    if (invoerOpslaan) {
+
+        invoerOpslaan.addEventListener(
+            "click",
+            invoerOpslaanHandler
+        );
+    }
+
+    if (kortInvoer) {
+
+        kortInvoer.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Enter" &&
+                    !event.shiftKey
+                ) {
+
+                    event.preventDefault();
+
+                    invoerOpslaanHandler();
+                }
+
+                if (event.key === "Escape") {
+                    invoerSluiten();
+                }
+            }
+        );
+    }
+}
+
+
+/* =========================================================
+   INVOER OPENEN
+   ========================================================= */
+
+function invoerOpenen(activiteit) {
+
+    if (!huidigeActiviteit) return;
 
     kortInvoerTitel.textContent =
         activiteit.titel;
 
-
     kortInvoerUitleg.textContent =
-        "Een paar woorden is genoeg.";
-
+        "Je hoeft alleen kort in te vullen wat je hebt gedaan.";
 
     kortInvoer.placeholder =
         activiteit.placeholder ||
-        "Bijvoorbeeld: 5 km gelopen";
-
+        "Bijvoorbeeld: iets gedaan";
 
     kortInvoer.value =
-        dagStatus.antwoorden[sleutel] ||
-        "";
+        dagStatus.antwoorden[
+            huidigeActiviteit.sleutel
+        ] || "";
 
-
-    kortInvoer.dataset.sleutel =
-        sleutel;
-
-
-    kortInvoerContainer.hidden =
-        false;
-
-
-    document.body.classList.add(
-        "invoer-open"
+    kortInvoerContainer.classList.add(
+        "actief"
     );
 
-
-    requestAnimationFrame(() => {
-
+    setTimeout(() => {
         kortInvoer.focus();
-
-        kortInvoer.select();
-
-    });
+    }, 50);
 }
 
 
 /* =========================================================
    INVOER OPSLAAN
-========================================================= */
+   ========================================================= */
 
 function invoerOpslaanHandler() {
 
-    if (!kortInvoer) {
-        return;
-    }
-
-
-    const sleutel =
-        kortInvoer.dataset.sleutel;
-
-
-    if (!sleutel) {
-        return;
-    }
-
+    if (!huidigeActiviteit) return;
 
     const waarde =
         kortInvoer.value.trim();
 
-
-    if (waarde) {
-
-        dagStatus.antwoorden[
-            sleutel
-        ] = waarde;
-
-    } else {
-
-        delete dagStatus.antwoorden[
-            sleutel
-        ];
-
+    if (!waarde) {
+        invoerSluiten();
+        return;
     }
 
+    const sleutel =
+        huidigeActiviteit.sleutel;
 
-    dagStatus.afgerond[
-        sleutel
-    ] = true;
+    dagStatus.antwoorden[sleutel] =
+        waarde;
 
+    dagStatus.afgerond[sleutel] =
+        true;
 
     dagStatusOpslaan();
 
-
     invoerSluiten();
 
-
-    if (
-        huidigeActiviteit &&
-        activiteitScherm &&
-        activiteitScherm.classList.contains("actief")
-    ) {
-
-        activiteitOpenen(
-            huidigeActiviteit,
-            huidigeBlok,
-            huidigeModus
-        );
-
-    }
-
+    activiteitOpenen(
+        huidigeActiviteit.blok,
+        huidigeActiviteit.activiteit
+    );
 
     beloningTonen();
 }
@@ -891,402 +1087,25 @@ function invoerOpslaanHandler() {
 
 /* =========================================================
    INVOER SLUITEN
-========================================================= */
+   ========================================================= */
 
 function invoerSluiten() {
 
-    if (!kortInvoerContainer) {
-        return;
-    }
+    if (!kortInvoerContainer) return;
 
-    kortInvoerContainer.hidden =
-        true;
-
-
-    document.body.classList.remove(
-        "invoer-open"
+    kortInvoerContainer.classList.remove(
+        "actief"
     );
-
-
-    if (kortInvoer) {
-        kortInvoer.value = "";
-        kortInvoer.dataset.sleutel = "";
-    }
-}
-
-
-/* =========================================================
-   TAAK AFVINKEN
-========================================================= */
-
-function taakAfvinken(
-    blok,
-    activiteitId,
-    modus
-) {
-
-    const sleutel =
-        taakSleutel(
-            modus,
-            blok,
-            activiteitId
-        );
-
-
-    const wasAfgerond =
-        dagStatus.afgerond[sleutel] === true;
-
-
-    dagStatus.afgerond[sleutel] =
-        !wasAfgerond;
-
-
-    dagStatusOpslaan();
-
-
-    if (!wasAfgerond) {
-
-        beloningTonen();
-
-    }
-
-
-    if (modus === "basis") {
-
-        basisKnoppenBijwerken();
-
-        if (huidigeActiviteit) {
-
-            activiteitStatusBijwerken(
-                !wasAfgerond
-            );
-
-        }
-
-    } else {
-
-        moeilijkeKnoppenBijwerken();
-
-    }
-}
-
-
-/* =========================================================
-   ACTIVITEIT STATUS
-========================================================= */
-
-function activiteitStatusBijwerken(
-    afgerond
-) {
-
-    if (!activiteitStatus) {
-        return;
-    }
-
-
-    if (afgerond) {
-
-        activiteitStatus.classList.add(
-            "afgerond"
-        );
-
-
-        activiteitStatusIcoon.textContent =
-            "✓";
-
-
-        activiteitStatusTekst.textContent =
-            "Afgerond";
-
-
-        if (activiteitKlaarKnop) {
-
-            activiteitKlaarKnop.textContent =
-                "✓ Afgerond";
-
-            activiteitKlaarKnop.classList.add(
-                "afgerond"
-            );
-
-        }
-
-    } else {
-
-        activiteitStatus.classList.remove(
-            "afgerond"
-        );
-
-
-        activiteitStatusIcoon.textContent =
-            "○";
-
-
-        activiteitStatusTekst.textContent =
-            "Nog niet afgerond";
-
-
-        if (activiteitKlaarKnop) {
-
-            activiteitKlaarKnop.textContent =
-                "✓ Klaar";
-
-            activiteitKlaarKnop.classList.remove(
-                "afgerond"
-            );
-
-        }
-
-    }
-}
-
-
-/* =========================================================
-   BASIS KNOPPEN BIJWERKEN
-========================================================= */
-
-function basisKnoppenBijwerken() {
-
-    const knoppen =
-        document.querySelectorAll(
-            ".basis-blok .activiteit-knop"
-        );
-
-
-    knoppen.forEach((knop) => {
-
-        const blok =
-            knop.dataset.blok;
-
-        const activiteitId =
-            knop.dataset.activiteit;
-
-
-        const sleutel =
-            taakSleutel(
-                "basis",
-                blok,
-                activiteitId
-            );
-
-
-        const afgerond =
-            dagStatus.afgerond[
-                sleutel
-            ] === true;
-
-
-        knop.classList.toggle(
-            "afgerond",
-            afgerond
-        );
-
-
-        let antwoordElement =
-            knop.querySelector(
-                ".checklist-antwoord"
-            );
-
-
-        const antwoord =
-            dagStatus.antwoorden[
-                sleutel
-            ] || "";
-
-
-        if (antwoord) {
-
-            if (!antwoordElement) {
-
-                antwoordElement =
-                    document.createElement(
-                        "span"
-                    );
-
-                antwoordElement.className =
-                    "checklist-antwoord";
-
-                knop.appendChild(
-                    antwoordElement
-                );
-
-            }
-
-            antwoordElement.textContent =
-                antwoord;
-
-        } else if (antwoordElement) {
-
-            antwoordElement.remove();
-
-        }
-
-    });
-}
-
-
-/* =========================================================
-   MOEILIJKE DAG KNOPPEN BIJWERKEN
-========================================================= */
-
-function moeilijkeKnoppenBijwerken() {
-
-    const knoppen =
-        document.querySelectorAll(
-            ".moeilijk-activiteit"
-        );
-
-
-    knoppen.forEach((knop) => {
-
-        const blok =
-            knop.dataset.blok;
-
-        const activiteitId =
-            knop.dataset.activiteit;
-
-
-        const sleutel =
-            taakSleutel(
-                "moeilijk",
-                blok,
-                activiteitId
-            );
-
-
-        const afgerond =
-            dagStatus.afgerond[
-                sleutel
-            ] === true;
-
-
-        knop.classList.toggle(
-            "afgerond",
-            afgerond
-        );
-
-    });
-}
-
-
-/* =========================================================
-   ACTIVITEIT ZOEKEN
-========================================================= */
-
-function zoekBasisActiviteit(
-    blok,
-    activiteitId
-) {
-
-    const activiteiten =
-        BASIS_ACTIVITEITEN[blok];
-
-
-    if (!activiteiten) {
-        return null;
-    }
-
-
-    return activiteiten.find(
-        (activiteit) =>
-            activiteit.id === activiteitId
-    ) || null;
-}
-
-
-/* =========================================================
-   SLEUTEL
-========================================================= */
-
-function taakSleutel(
-    modus,
-    blok,
-    activiteitId
-) {
-
-    return `${modus}::${blok}::${activiteitId}`;
-}
-
-
-/* =========================================================
-   SCHERMEN
-========================================================= */
-
-function schermTonen(
-    scherm
-) {
-
-    const schermen =
-        document.querySelectorAll(
-            ".scherm"
-        );
-
-
-    schermen.forEach(
-        (item) => {
-
-            item.classList.remove(
-                "actief"
-            );
-
-        }
-    );
-
-
-    if (scherm) {
-
-        scherm.classList.add(
-            "actief"
-        );
-
-    }
-
-
-    window.scrollTo(
-        0,
-        0
-    );
-
-
-    invoerSluiten();
-}
-
-
-/* =========================================================
-   TERUG NAAR VORIGE SCHERM
-========================================================= */
-
-function terugNaarVorigeScherm() {
-
-    if (huidigeModus === "moeilijk") {
-
-        schermTonen(
-            moeilijkScherm
-        );
-
-    } else {
-
-        schermTonen(
-            basisScherm
-        );
-
-    }
-
-
-    huidigeActiviteit = null;
-    huidigeBlok = null;
 }
 
 
 /* =========================================================
    POSITIEVE FEEDBACK
-========================================================= */
+   ========================================================= */
 
 function beloningTonen() {
 
-    if (!beloning || !beloningTekst) {
-        return;
-    }
-
+    if (!beloning || !beloningTekst) return;
 
     const willekeurig =
         Math.floor(
@@ -1294,290 +1113,69 @@ function beloningTonen() {
             BELONINGEN.length
         );
 
-
     beloningTekst.textContent =
         BELONINGEN[willekeurig];
-
-
-    beloning.hidden =
-        false;
-
 
     beloning.classList.remove(
         "beloningPop"
     );
 
-
     void beloning.offsetWidth;
-
 
     beloning.classList.add(
         "beloningPop"
     );
 
+    setTimeout(() => {
 
-    clearTimeout(
-        beloning._timeout
-    );
-
-
-    beloning._timeout =
-        setTimeout(
-            () => {
-
-                beloning.hidden =
-                    true;
-
-            },
-            3000
+        beloning.classList.remove(
+            "beloningPop"
         );
+
+    }, 2500);
 }
 
 
 /* =========================================================
-   DAGSTATUS LADEN
-========================================================= */
+   HTML VEILIG WEERGEVEN
+   ========================================================= */
 
-function dagStatusLaden() {
+function escapeHtml(tekst) {
 
-    const vandaag =
-        vandaagDatum();
+    const div =
+        document.createElement("div");
 
+    div.textContent = tekst;
 
-    try {
-
-        const opgeslagen =
-            localStorage.getItem(
-                OPSLAG_DAGSTATUS
-            );
-
-
-        if (!opgeslagen) {
-
-            dagStatus =
-                nieuwDagStatus(
-                    vandaag
-                );
-
-            dagStatusOpslaan();
-
-            return;
-        }
-
-
-        const data =
-            JSON.parse(
-                opgeslagen
-            );
-
-
-        if (
-            !data ||
-            data.datum !== vandaag
-        ) {
-
-            dagStatus =
-                nieuwDagStatus(
-                    vandaag
-                );
-
-            dagStatusOpslaan();
-
-            return;
-        }
-
-
-        dagStatus = {
-            datum: vandaag,
-            afgerond:
-                data.afgerond || {},
-            antwoorden:
-                data.antwoorden || {}
-        };
-
-
-    } catch (error) {
-
-        console.warn(
-            "Anker: dagstatus kon niet worden geladen.",
-            error
-        );
-
-
-        dagStatus =
-            nieuwDagStatus(
-                vandaag
-            );
-
-        dagStatusOpslaan();
-
-    }
-}
-
-
-/* =========================================================
-   NIEUWE DAGSTATUS
-========================================================= */
-
-function nieuwDagStatus(
-    datum
-) {
-
-    return {
-        datum: datum,
-        afgerond: {},
-        antwoorden: {}
-    };
-}
-
-
-/* =========================================================
-   DAGSTATUS OPSLAAN
-========================================================= */
-
-function dagStatusOpslaan() {
-
-    try {
-
-        localStorage.setItem(
-            OPSLAG_DAGSTATUS,
-            JSON.stringify(
-                dagStatus
-            )
-        );
-
-    } catch (error) {
-
-        console.warn(
-            "Anker: dagstatus kon niet worden opgeslagen.",
-            error
-        );
-
-    }
-}
-
-
-/* =========================================================
-   DATUM
-========================================================= */
-
-function vandaagDatum() {
-
-    const vandaag =
-        new Date();
-
-
-    const jaar =
-        vandaag.getFullYear();
-
-
-    const maand =
-        String(
-            vandaag.getMonth() + 1
-        ).padStart(
-            2,
-            "0"
-        );
-
-
-    const dag =
-        String(
-            vandaag.getDate()
-        ).padStart(
-            2,
-            "0"
-        );
-
-
-    return `${jaar}-${maand}-${dag}`;
-}
-
-
-/* =========================================================
-   DAG CONTROLEREN
-========================================================= */
-
-function dagControle() {
-
-    const vandaag =
-        vandaagDatum();
-
-
-    if (
-        dagStatus.datum !==
-        vandaag
-    ) {
-
-        dagStatus =
-            nieuwDagStatus(
-                vandaag
-            );
-
-        dagStatusOpslaan();
-
-    }
-
-
-    basisKnoppenBijwerken();
-
-    moeilijkeKnoppenBijwerken();
-
+    return div.innerHTML;
 }
 
 
 /* =========================================================
    SERVICE WORKER
-========================================================= */
+   ========================================================= */
 
 function serviceWorkerRegistreren() {
 
     if (
-        !("serviceWorker" in navigator)
+        "serviceWorker" in navigator
     ) {
-        return;
-    }
 
+        window.addEventListener(
+            "load",
+            () => {
 
-    window.addEventListener(
-        "load",
-        () => {
-
-            navigator.serviceWorker
-                .register(
-                    "sw.js"
-                )
-                .then(
-                    (registration) => {
-
-                        console.log(
-                            "Anker service worker actief:",
-                            registration.scope
-                        );
-
-                    }
-                )
-                .catch(
-                    (error) => {
+                navigator.serviceWorker
+                    .register("sw.js")
+                    .catch(fout => {
 
                         console.warn(
-                            "Anker service worker kon niet worden geregistreerd:",
-                            error
+                            "Service worker kon niet worden geregistreerd:",
+                            fout
                         );
 
-                    }
-                );
-
-        }
-    );
+                    });
+            }
+        );
+    }
 }
-
-
-/* =========================================================
-   MIDDERNACHT
-   Controleert automatisch of er een nieuwe dag is.
-========================================================= */
-
-setInterval(
-    dagControle,
-    60 * 1000
-);

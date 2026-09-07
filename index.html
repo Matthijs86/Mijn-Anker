@@ -22,80 +22,64 @@
 
     <title>Anker</title>
 
-    <link
-        rel="manifest"
-        href="manifest.json"
-    >
+    <link rel="manifest" href="manifest.json">
 
-    <link
-        rel="icon"
-        type="image/png"
-        sizes="192x192"
-        href="anker-icon-192x192.png"
-    >
-
-    <link
-        rel="apple-touch-icon"
-        href="anker-icon-192x192.png"
-    >
-
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 
 <body>
 
-    <main class="anker-app">
+    <!-- =====================================================
+         APP
+         ===================================================== -->
+
+    <main id="app">
 
 
-        <!-- ==================================
+        <!-- =================================================
              HOOFDSCHERM
-             ================================== -->
+             ================================================= -->
 
         <section
             id="hoofdScherm"
             class="scherm actief"
         >
 
-            <header class="app-header">
+            <div class="app-header">
 
-                <div class="anker-symbool">
+                <div class="anker-logo">
                     ⚓
                 </div>
 
-                <h1>ANKER</h1>
+                <h1>Anker</h1>
 
                 <p>
                     Terug naar de basis.
                 </p>
 
-            </header>
+            </div>
 
 
-            <div class="hoofdkeuzes">
+            <div class="keuze-container">
 
                 <button
-                    id="basisKnop"
-                    class="hoofdkeuze basis"
                     type="button"
+                    id="basisKnop"
+                    class="modus-knop basis-knop"
                 >
 
-                    <span class="keuze-icoon">
-                        🌱
+                    <span class="modus-icoon">
+                        🌿
                     </span>
 
-                    <span class="keuze-tekst">
+                    <span class="modus-tekst">
 
-                        <strong>
-                            BASIS
-                        </strong>
+                        <strong>BASIS</strong>
 
                         <small>
-                            Mijn dagelijkse zelfzorg
+                            Als het vandaag wel lukt
                         </small>
 
                     </span>
@@ -104,23 +88,21 @@
 
 
                 <button
-                    id="moeilijkeDagKnop"
-                    class="hoofdkeuze moeilijke-dag"
                     type="button"
+                    id="moeilijkKnop"
+                    class="modus-knop moeilijk-knop"
                 >
 
-                    <span class="keuze-icoon">
+                    <span class="modus-icoon">
                         🫶
                     </span>
 
-                    <span class="keuze-tekst">
+                    <span class="modus-tekst">
 
-                        <strong>
-                            MOEILIJKE DAG
-                        </strong>
+                        <strong>MOEILIJKE DAG</strong>
 
                         <small>
-                            Alleen wat nu echt nodig is
+                            Alleen wat echt nodig is
                         </small>
 
                     </span>
@@ -130,76 +112,105 @@
             </div>
 
 
-            <footer>
+            <div class="rust-tekst">
 
-                <span>
+                <p>
                     Je hoeft niet alles te doen.
-                </span>
+                </p>
 
-            </footer>
+                <p>
+                    Eén ding is ook iets.
+                </p>
+
+            </div>
 
         </section>
 
 
 
-        <!-- ==================================
-             BASIS SCHERM
-             ================================== -->
+        <!-- =================================================
+             BASIS
+             ================================================= -->
 
         <section
             id="basisScherm"
             class="scherm"
         >
 
-            <header class="pagina-header">
+            <div class="scherm-header basis-header">
 
                 <button
-                    id="basisTerugKnop"
-                    class="terug-knop"
                     type="button"
-                    aria-label="Terug naar hoofdscherm"
+                    class="terug-knop"
+                    data-terug="hoofdScherm"
+                    aria-label="Terug naar het hoofdscherm"
                 >
                     ←
                 </button>
 
+
                 <div>
 
-                    <h2>
+                    <span class="scherm-label">
                         BASIS
+                    </span>
+
+                    <h2>
+                        Vandaag
                     </h2>
 
                     <p>
-                        Zorg goed voor jezelf.
+                        Kies wat op dit moment bij je past.
                     </p>
 
                 </div>
 
-            </header>
+            </div>
 
 
-            <div class="blokken">
+            <!--
+                BASIS CATEGORIEËN
+
+                De categorieën blijven voorlopig als vaste
+                onderdelen in HTML staan.
+
+                De opties binnen iedere categorie worden
+                straks vanuit script.js opgebouwd.
+
+                Hierdoor kunnen we later de categorieën zelf
+                ook bewerkbaar maken zonder de hele app opnieuw
+                te bouwen.
+            -->
 
 
-                <!-- ZELFZORG -->
+            <div
+                id="basisCategorieen"
+                class="blokken-container"
+            >
+
+
+                <!-- ==============================
+                     ZELFZORG
+                     ============================== -->
 
                 <button
-                    class="blok"
-                    data-blok="zelfzorg"
                     type="button"
+                    class="blok basis-blok"
+                    data-blok="zelfzorg"
                 >
 
                     <span class="blok-icoon">
                         🚿
                     </span>
 
-                    <span class="blok-tekst">
+                    <span class="blok-inhoud">
 
                         <strong>
                             Zelfzorg
                         </strong>
 
                         <small>
-                            Je lichaam verzorgen
+                            Even voor jezelf zorgen
                         </small>
 
                     </span>
@@ -211,26 +222,29 @@
                 </button>
 
 
-                <!-- ETEN & DRINKEN -->
+
+                <!-- ==============================
+                     ETEN & DRINKEN
+                     ============================== -->
 
                 <button
-                    class="blok"
-                    data-blok="eten"
                     type="button"
+                    class="blok basis-blok"
+                    data-blok="eten"
                 >
 
                     <span class="blok-icoon">
                         🍽️
                     </span>
 
-                    <span class="blok-tekst">
+                    <span class="blok-inhoud">
 
                         <strong>
                             Eten & drinken
                         </strong>
 
                         <small>
-                            Geef je lichaam wat het nodig heeft
+                            Je lichaam iets geven
                         </small>
 
                     </span>
@@ -242,26 +256,29 @@
                 </button>
 
 
-                <!-- OMGEVING -->
+
+                <!-- ==============================
+                     OMGEVING
+                     ============================== -->
 
                 <button
-                    class="blok"
-                    data-blok="omgeving"
                     type="button"
+                    class="blok basis-blok"
+                    data-blok="omgeving"
                 >
 
                     <span class="blok-icoon">
                         🏠
                     </span>
 
-                    <span class="blok-tekst">
+                    <span class="blok-inhoud">
 
                         <strong>
                             Omgeving
                         </strong>
 
                         <small>
-                            Een beetje orde om je heen
+                            Een klein beetje orde
                         </small>
 
                     </span>
@@ -273,26 +290,29 @@
                 </button>
 
 
-                <!-- BEWEGING -->
+
+                <!-- ==============================
+                     BEWEGING & BUITEN
+                     ============================== -->
 
                 <button
-                    class="blok"
-                    data-blok="beweging"
                     type="button"
+                    class="blok basis-blok"
+                    data-blok="beweging"
                 >
 
                     <span class="blok-icoon">
-                        🚶
+                        🌳
                     </span>
 
-                    <span class="blok-tekst">
+                    <span class="blok-inhoud">
 
                         <strong>
                             Beweging & buiten
                         </strong>
 
                         <small>
-                            Even bewegen of naar buiten
+                            Even in beweging komen
                         </small>
 
                     </span>
@@ -304,26 +324,29 @@
                 </button>
 
 
-                <!-- HOOFD & ONTSPANNING -->
+
+                <!-- ==============================
+                     HOOFD & ONTSPANNING
+                     ============================== -->
 
                 <button
-                    class="blok"
-                    data-blok="hoofd"
                     type="button"
+                    class="blok basis-blok"
+                    data-blok="hoofd"
                 >
 
                     <span class="blok-icoon">
-                        🎧
+                        🧠
                     </span>
 
-                    <span class="blok-tekst">
+                    <span class="blok-inhoud">
 
                         <strong>
                             Hoofd & ontspanning
                         </strong>
 
                         <small>
-                            Rust, plezier en ontspanning
+                            Ruimte maken in je hoofd
                         </small>
 
                     </span>
@@ -335,26 +358,29 @@
                 </button>
 
 
-                <!-- BORDEN -->
+
+                <!-- ==============================
+                     CHECK MIJN BORDEN
+                     ============================== -->
 
                 <button
-                    class="blok"
-                    data-blok="borden"
                     type="button"
+                    class="blok basis-blok"
+                    data-blok="borden"
                 >
 
                     <span class="blok-icoon">
-                        📌
+                        📋
                     </span>
 
-                    <span class="blok-tekst">
+                    <span class="blok-inhoud">
 
                         <strong>
                             Check mijn borden
                         </strong>
 
                         <small>
-                            Misschien staat er iets voor vandaag
+                            Even kijken wat er ligt
                         </small>
 
                     </span>
@@ -365,84 +391,89 @@
 
                 </button>
 
+
+            </div>
+
+
+            <div class="scherm-ondertekst">
+
+                <p>
+                    Je hoeft niet alles aan te klikken.
+                    Kies gewoon wat vandaag lukt.
+                </p>
+
             </div>
 
         </section>
 
 
 
-        <!-- ==================================
-             MOEILIJKE DAG SCHERM
-             ================================== -->
+        <!-- =================================================
+             MOEILIJKE DAG
+             ================================================= -->
 
         <section
-            id="moeilijkeDagScherm"
+            id="moeilijkScherm"
             class="scherm"
         >
 
-            <header class="pagina-header">
+            <div class="scherm-header moeilijk-header">
 
                 <button
-                    id="moeilijkeDagTerugKnop"
-                    class="terug-knop"
                     type="button"
-                    aria-label="Terug naar hoofdscherm"
+                    class="terug-knop"
+                    data-terug="hoofdScherm"
+                    aria-label="Terug naar het hoofdscherm"
                 >
                     ←
                 </button>
 
+
                 <div>
 
-                    <h2>
+                    <span class="scherm-label">
                         MOEILIJKE DAG
+                    </span>
+
+                    <h2>
+                        Alleen het nodige
                     </h2>
 
                     <p>
-                        Vandaag alleen de basis.
+                        Vandaag hoeft het niet meer te zijn.
                     </p>
 
                 </div>
 
-            </header>
-
-
-            <div class="moeilijke-dag-intro">
-
-                <span>
-                    🫶
-                </span>
-
-                <p>
-                    Je hoeft vandaag niet alles te doen.
-                    Eén ding tegelijk is genoeg.
-                </p>
-
             </div>
 
 
-            <div class="blokken moeilijke-blokken">
+
+            <div class="blokken-container">
 
 
-                <!-- DRINKEN -->
+                <!-- ==============================
+                     DRINKEN
+                     ============================== -->
 
                 <button
-                    class="blok"
-                    data-blok="moeilijk-drinken"
                     type="button"
+                    class="blok moeilijk-blok"
+                    data-blok="moeilijk-drinken"
                 >
 
                     <span class="blok-icoon">
-                        🥤
+                        💧
                     </span>
 
-                    <span class="blok-tekst">
+                    <span class="blok-inhoud">
 
                         <strong>
                             Drinken
                         </strong>
 
                         <small>
-                            Iets drinken is goed
+                            Iets drinken is genoeg
                         </small>
 
                     </span>
@@ -454,26 +485,29 @@
                 </button>
 
 
-                <!-- ETEN -->
+
+                <!-- ==============================
+                     ETEN
+                     ============================== -->
 
                 <button
-                    class="blok"
-                    data-blok="moeilijk-eten"
                     type="button"
+                    class="blok moeilijk-blok"
+                    data-blok="moeilijk-eten"
                 >
 
                     <span class="blok-icoon">
-                        🍽️
+                        🍞
                     </span>
 
-                    <span class="blok-tekst">
+                    <span class="blok-inhoud">
 
                         <strong>
                             Eten
                         </strong>
 
                         <small>
-                            Iets eten is genoeg
+                            Iets kleins is ook goed
                         </small>
 
                     </span>
@@ -485,26 +519,29 @@
                 </button>
 
 
-                <!-- ZELFZORG -->
+
+                <!-- ==============================
+                     ZELFZORG
+                     ============================== -->
 
                 <button
-                    class="blok"
-                    data-blok="moeilijk-zelfzorg"
                     type="button"
+                    class="blok moeilijk-blok"
+                    data-blok="moeilijk-zelfzorg"
                 >
 
                     <span class="blok-icoon">
-                        🚿
+                        🧼
                     </span>
 
-                    <span class="blok-tekst">
+                    <span class="blok-inhoud">
 
                         <strong>
                             Zelfzorg
                         </strong>
 
                         <small>
-                            Een beetje voor jezelf zorgen
+                            Alleen wat echt nodig is
                         </small>
 
                     </span>
@@ -516,26 +553,29 @@
                 </button>
 
 
-                <!-- BEWEGING -->
+
+                <!-- ==============================
+                     BEWEGING
+                     ============================== -->
 
                 <button
-                    class="blok"
-                    data-blok="moeilijk-beweging"
                     type="button"
+                    class="blok moeilijk-blok"
+                    data-blok="moeilijk-beweging"
                 >
 
                     <span class="blok-icoon">
                         🚶
                     </span>
 
-                    <span class="blok-tekst">
+                    <span class="blok-inhoud">
 
                         <strong>
-                            Een beetje bewegen
+                            Even bewegen
                         </strong>
 
                         <small>
-                            Klein stukje is ook goed
+                            Een klein beetje is genoeg
                         </small>
 
                     </span>
@@ -547,26 +587,29 @@
                 </button>
 
 
-                <!-- IETS PRETTIGS -->
+
+                <!-- ==============================
+                     IETS PRETTIGS
+                     ============================== -->
 
                 <button
-                    class="blok"
-                    data-blok="moeilijk-prettig"
                     type="button"
+                    class="blok moeilijk-blok"
+                    data-blok="moeilijk-prettig"
                 >
 
                     <span class="blok-icoon">
-                        🎧
+                        💜
                     </span>
 
-                    <span class="blok-tekst">
+                    <span class="blok-inhoud">
 
                         <strong>
                             Iets prettigs
                         </strong>
 
                         <small>
-                            Muziek, plezier of iets anders fijns
+                            Een klein momentje voor jezelf
                         </small>
 
                     </span>
@@ -577,13 +620,18 @@
 
                 </button>
 
+
             </div>
 
 
-            <div class="moeilijke-dag-afsluiting">
+            <div class="scherm-ondertekst">
 
                 <p>
-                    Meer hoeft vandaag niet. ❤️
+                    Een moeilijke dag is geen mislukte dag.
+                </p>
+
+                <p>
+                    Vandaag mag klein zijn.
                 </p>
 
             </div>
@@ -592,57 +640,360 @@
 
 
 
-        <!-- ==================================
-             CHECKLIST SCHERM
-             ================================== -->
+        <!-- =================================================
+             CHECKLIST
+             ================================================= -->
 
         <section
             id="checklistScherm"
             class="scherm"
         >
 
-            <header class="pagina-header">
+            <div class="scherm-header checklist-header">
 
                 <button
-                    id="checklistTerugKnop"
-                    class="terug-knop"
                     type="button"
-                    aria-label="Terug"
+                    class="terug-knop"
+                    id="checklistTerugKnop"
+                    aria-label="Terug naar de categorieën"
                 >
                     ←
                 </button>
 
-                <div>
+
+                <div class="checklist-header-tekst">
+
+                    <span
+                        id="checklistLabel"
+                        class="scherm-label"
+                    >
+                        BASIS
+                    </span>
 
                     <h2 id="checklistTitel">
-                        Zelfzorg
+                        Checklist
                     </h2>
 
                     <p id="checklistSubtitel">
-                        Eén ding tegelijk.
+                        Kies wat vandaag lukt.
                     </p>
 
                 </div>
 
-            </header>
+            </div>
 
+
+
+            <!--
+                BASIS OPTIES BEWERKEN
+
+                Deze knop wordt door script.js alleen zichtbaar
+                gemaakt wanneer we een BASIS-categorie bekijken.
+
+                MOEILIJKE DAG gebruikt deze knop niet.
+            -->
+
+            <div
+                id="basisBewerkContainer"
+                class="basis-bewerk-container"
+                hidden
+            >
+
+                <button
+                    type="button"
+                    id="basisBewerkKnop"
+                    class="basis-bewerk-knop"
+                >
+
+                    <span>
+                        ✏️
+                    </span>
+
+                    <span>
+                        Opties aanpassen
+                    </span>
+
+                </button>
+
+            </div>
+
+
+
+            <!--
+                CHECKLIST
+
+                script.js vult deze container dynamisch.
+
+                Een optie kan straks bijvoorbeeld worden:
+
+                Iets gegeten
+                → soep
+
+                Water gedronken
+                ✓
+
+                Iets anders gedronken
+                → koffie
+
+                De daadwerkelijke invoer wordt door
+                script.js toegevoegd.
+            -->
 
             <div
                 id="checklist"
                 class="checklist"
+                aria-live="polite"
+            ></div>
+
+
+
+            <!-- =================================================
+                 KORTE INVOER
+                 ================================================= -->
+
+            <div
+                id="kortInvoerContainer"
+                class="kort-invoer-container"
+                hidden
             >
-                <!--
-                    De checklist wordt door script.js gevuld.
-                -->
+
+                <div class="kort-invoer-box">
+
+                    <div class="kort-invoer-header">
+
+                        <span
+                            id="kortInvoerIcoon"
+                            class="kort-invoer-icoon"
+                        >
+                            ✏️
+                        </span>
+
+                        <div>
+
+                            <strong id="kortInvoerTitel">
+                                Kort invullen
+                            </strong>
+
+                            <p id="kortInvoerUitleg">
+                                Eén kort woord is genoeg.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <label
+                        for="kortInvoer"
+                        class="visueel-verborgen"
+                    >
+                        Kort antwoord
+                    </label>
+
+                    <input
+                        type="text"
+                        id="kortInvoer"
+                        class="kort-invoer"
+                        maxlength="40"
+                        autocomplete="off"
+                        placeholder="Bijvoorbeeld: soep"
+                    >
+
+
+                    <div class="kort-invoer-knoppen">
+
+                        <button
+                            type="button"
+                            id="kortInvoerAnnuleren"
+                            class="invoer-annuleren"
+                        >
+                            Annuleren
+                        </button>
+
+                        <button
+                            type="button"
+                            id="kortInvoerOpslaan"
+                            class="invoer-opslaan"
+                        >
+                            Opslaan
+                        </button>
+
+                    </div>
+
+                </div>
+
             </div>
 
+
+
+            <!-- =================================================
+                 OPTIES BEWERKEN
+                 ================================================= -->
+
+            <div
+                id="optiesBewerkScherm"
+                class="opties-bewerk-scherm"
+                hidden
+            >
+
+                <div class="opties-bewerk-header">
+
+                    <div>
+
+                        <span class="scherm-label">
+                            AANPASSEN
+                        </span>
+
+                        <h3>
+                            Mijn opties
+                        </h3>
+
+                        <p>
+                            Maak deze lijst passend voor jou.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        id="optiesBewerkSluiten"
+                        class="klein-sluit-knop"
+                        aria-label="Opties aanpassen sluiten"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+
+                <!--
+                    script.js vult hier de huidige opties.
+                -->
+
+                <div
+                    id="optiesEditor"
+                    class="opties-editor"
+                ></div>
+
+
+
+                <!-- ==========================================
+                     NIEUWE OPTIE
+                     ========================================== -->
+
+                <div class="nieuwe-optie">
+
+                    <h4>
+                        Nieuwe optie
+                    </h4>
+
+
+                    <label
+                        for="nieuweOptieNaam"
+                        class="visueel-verborgen"
+                    >
+                        Naam van nieuwe optie
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nieuweOptieNaam"
+                        maxlength="60"
+                        autocomplete="off"
+                        placeholder="Bijvoorbeeld: Fruit gegeten"
+                    >
+
+
+                    <label class="invoer-keuze">
+
+                        <input
+                            type="checkbox"
+                            id="nieuweOptieInvoer"
+                        >
+
+                        <span>
+                            Kort antwoord vragen
+                        </span>
+
+                    </label>
+
+
+                    <button
+                        type="button"
+                        id="nieuweOptieToevoegen"
+                        class="nieuwe-optie-knop"
+                    >
+
+                        <span>
+                            ＋
+                        </span>
+
+                        <span>
+                            Optie toevoegen
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <div class="bewerk-uitleg">
+
+                    <p>
+                        💡 Een optie met <strong>“Kort antwoord vragen”</strong>
+                        geeft je bij het afvinken een klein veldje.
+                    </p>
+
+                    <p>
+                        Bijvoorbeeld:
+                        <strong>Iets gegeten → soep</strong>
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 BELONING
+                 ================================================= -->
 
             <div
                 id="beloning"
                 class="beloning"
-                aria-live="polite"
+                hidden
             >
-                <!-- Random positieve boodschap -->
+
+                <div class="beloning-ster">
+                    ✨
+                </div>
+
+                <div class="beloning-tekst">
+                    <strong>
+                        YES!
+                    </strong>
+
+                    <span id="beloningTekst">
+                        Goed gedaan!
+                    </span>
+                </div>
+
+            </div>
+
+
+
+            <div class="checklist-ondertekst">
+
+                <p>
+                    Je hoeft niet alles af te maken.
+                </p>
+
+                <p>
+                    Eén stap telt ook.
+                </p>
+
             </div>
 
         </section>
@@ -651,7 +1002,13 @@
     </main>
 
 
+
+    <!-- =====================================================
+         SCRIPT
+         ===================================================== -->
+
     <script src="script.js"></script>
+
 
 </body>
 

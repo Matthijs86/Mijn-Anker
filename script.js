@@ -5,78 +5,162 @@
 
 
 // ======================================
-// CHECKLISTS
+// BASIS STRUCTUUR
 // ======================================
+//
+// De structuur van BASIS wordt apart opgeslagen.
+// Hierdoor kunnen opties worden aangepast zonder
+// dat de dagelijkse vinkjes worden meegenomen.
+//
+// "invoer: true"
+// = bij aanklikken wordt gevraagd om een kort woord.
+//
+// "invoer: false"
+// = direct afvinken.
+//
 
-const CHECKLISTS = {
-
-    // ==================================
-    // BASIS
-    // ==================================
+const BASIS_CHECKLISTS = {
 
     zelfzorg: {
         titel: "Zelfzorg",
         subtitel: "Zorg goed voor jezelf.",
-        taken: [
-            "Douchen",
-            "Tanden poetsen",
-            "Deodorant",
-            "Schone kleding"
+        opties: [
+            {
+                id: "douchen",
+                tekst: "Douchen",
+                invoer: false
+            },
+            {
+                id: "tanden-poetsen",
+                tekst: "Tanden poetsen",
+                invoer: false
+            },
+            {
+                id: "deodorant",
+                tekst: "Deodorant",
+                invoer: false
+            },
+            {
+                id: "schone-kleding",
+                tekst: "Schone kleding",
+                invoer: false
+            }
         ]
     },
 
     eten: {
         titel: "Eten & drinken",
         subtitel: "Geef je lichaam wat het nodig heeft.",
-        taken: [
-            "Iets gegeten",
-            "Water gedronken",
-            "Iets anders gedronken"
+        opties: [
+            {
+                id: "iets-gegeten",
+                tekst: "Iets gegeten",
+                invoer: true
+            },
+            {
+                id: "water-gedronken",
+                tekst: "Water gedronken",
+                invoer: false
+            },
+            {
+                id: "iets-anders-gedronken",
+                tekst: "Iets anders gedronken",
+                invoer: true
+            }
         ]
     },
 
     omgeving: {
         titel: "Omgeving",
         subtitel: "Een beetje orde om je heen.",
-        taken: [
-            "Afwas / vaat",
-            "Even iets opruimen"
+        opties: [
+            {
+                id: "afwas-vaat",
+                tekst: "Afwas / vaat",
+                invoer: false
+            },
+            {
+                id: "even-opruimen",
+                tekst: "Even iets opruimen",
+                invoer: false
+            }
         ]
     },
 
     beweging: {
         titel: "Beweging & buiten",
         subtitel: "Even bewegen of naar buiten.",
-        taken: [
-            "Even naar buiten",
-            "Klein blokje om",
-            "Even bewegen"
+        opties: [
+            {
+                id: "naar-buiten",
+                tekst: "Even naar buiten",
+                invoer: false
+            },
+            {
+                id: "klein-blokje-om",
+                tekst: "Klein blokje om",
+                invoer: false
+            },
+            {
+                id: "even-bewegen",
+                tekst: "Even bewegen",
+                invoer: false
+            }
         ]
     },
 
     hoofd: {
         titel: "Hoofd & ontspanning",
         subtitel: "Rust, plezier en ontspanning.",
-        taken: [
-            "Even rust genomen",
-            "Muziek geluisterd",
-            "Iets gedaan waar ik plezier aan beleef"
+        opties: [
+            {
+                id: "rust-genomen",
+                tekst: "Even rust genomen",
+                invoer: false
+            },
+            {
+                id: "muziek-geluisterd",
+                tekst: "Muziek geluisterd",
+                invoer: false
+            },
+            {
+                id: "iets-leuks",
+                tekst: "Iets gedaan waar ik plezier aan beleef",
+                invoer: false
+            }
         ]
     },
 
     borden: {
         titel: "Check mijn borden",
         subtitel: "Misschien staat er iets voor vandaag.",
-        taken: [
-            "Mijn borden bekeken",
-            "Een klein taakje van een bord gedaan"
+        opties: [
+            {
+                id: "borden-bekeken",
+                tekst: "Mijn borden bekeken",
+                invoer: false
+            },
+            {
+                id: "klein-taakje-bord",
+                tekst: "Een klein taakje van een bord gedaan",
+                invoer: false
+            }
         ]
-    },
+    }
+
+};
 
 
-    // ==================================
-    // MOEILIJKE DAG
-    // ==================================
+// ======================================
+// MOEILIJKE DAG
+// ======================================
+//
+// Deze structuur blijft bewust apart.
+// De gebruiker kan hier voorlopig niets
+// aanpassen.
+//
+
+const MOEILIJKE_DAG_CHECKLISTS = {
 
     "moeilijk-drinken": {
         titel: "Drinken",
@@ -129,6 +213,34 @@ const CHECKLISTS = {
 
 
 // ======================================
+// OPSLAG BASIS STRUCTUUR
+// ======================================
+
+const OPSLAG_BASIS_STRUCTUUR =
+    "ankerBasisStructuur";
+
+
+// ======================================
+// OPSLAG DAGSTATUS
+// ======================================
+//
+// Alleen vandaag wordt bewaard.
+//
+
+const OPSLAG_DAGSTATUS =
+    "ankerDagstatus";
+
+
+let basisStructuur = {};
+
+let dagStatus = {
+    datum: "",
+    afgerond: {},
+    invulling: {}
+};
+
+
+// ======================================
 // POSITIEVE BOODSCHAPPEN
 // ======================================
 
@@ -169,21 +281,6 @@ const BELONINGEN = [
 
 
 // ======================================
-// DAGSTATUS
-// ======================================
-
-// Alleen de vinkjes van VANDAAG worden bewaard.
-// Zodra een nieuwe dag begint, wordt alles automatisch blanco.
-
-const OPSLAG_DAGSTATUS = "ankerDagstatus";
-
-let dagStatus = {
-    datum: "",
-    afgerond: {}
-};
-
-
-// ======================================
 // SCHERMEN
 // ======================================
 
@@ -193,35 +290,22 @@ const hoofdScherm =
 const basisScherm =
     document.getElementById("basisScherm");
 
-const moeilijkeDagScherm =
-    document.getElementById("moeilijkeDagScherm");
+const moeilijkScherm =
+    document.getElementById("moeilijkScherm");
 
 const checklistScherm =
     document.getElementById("checklistScherm");
 
 
 // ======================================
-// KNOPPEN
+// HOOFDSCHERM KNOPPEN
 // ======================================
 
 const basisKnop =
     document.getElementById("basisKnop");
 
-const moeilijkeDagKnop =
-    document.getElementById("moeilijkeDagKnop");
-
-const basisTerugKnop =
-    document.getElementById("basisTerugKnop");
-
-const moeilijkeDagTerugKnop =
-    document.getElementById(
-        "moeilijkeDagTerugKnop"
-    );
-
-const checklistTerugKnop =
-    document.getElementById(
-        "checklistTerugKnop"
-    );
+const moeilijkKnop =
+    document.getElementById("moeilijkKnop");
 
 
 // ======================================
@@ -235,12 +319,104 @@ const checklistTitel =
     document.getElementById("checklistTitel");
 
 const checklistSubtitel =
-    document.getElementById(
-        "checklistSubtitel"
-    );
+    document.getElementById("checklistSubtitel");
+
+const checklistLabel =
+    document.getElementById("checklistLabel");
+
+const checklistTerugKnop =
+    document.getElementById("checklistTerugKnop");
+
+
+// ======================================
+// BELONING
+// ======================================
 
 const beloning =
     document.getElementById("beloning");
+
+const beloningTekst =
+    document.getElementById("beloningTekst");
+
+
+// ======================================
+// BASIS BEWERKEN
+// ======================================
+
+const basisBewerkContainer =
+    document.getElementById(
+        "basisBewerkContainer"
+    );
+
+const basisBewerkKnop =
+    document.getElementById(
+        "basisBewerkKnop"
+    );
+
+const optiesBewerkScherm =
+    document.getElementById(
+        "optiesBewerkScherm"
+    );
+
+const optiesBewerkSluiten =
+    document.getElementById(
+        "optiesBewerkSluiten"
+    );
+
+const optiesEditor =
+    document.getElementById(
+        "optiesEditor"
+    );
+
+const nieuweOptieNaam =
+    document.getElementById(
+        "nieuweOptieNaam"
+    );
+
+const nieuweOptieInvoer =
+    document.getElementById(
+        "nieuweOptieInvoer"
+    );
+
+const nieuweOptieToevoegen =
+    document.getElementById(
+        "nieuweOptieToevoegen"
+    );
+
+
+// ======================================
+// KORTE INVOER
+// ======================================
+
+const kortInvoerContainer =
+    document.getElementById(
+        "kortInvoerContainer"
+    );
+
+const kortInvoer =
+    document.getElementById(
+        "kortInvoer"
+    );
+
+const kortInvoerTitel =
+    document.getElementById(
+        "kortInvoerTitel"
+    );
+
+const kortInvoerUitleg =
+    document.getElementById(
+        "kortInvoerUitleg"
+    );
+
+const kortInvoerAnnuleren =
+    document.getElementById(
+        "kortInvoerAnnuleren"
+    );
+
+const kortInvoerOpslaan =
+    document.getElementById(
+        "kortInvoerOpslaan"
+    );
 
 
 // ======================================
@@ -253,6 +429,8 @@ let vorigeScherm = "hoofd";
 
 let huidigeChecklist = null;
 
+let huidigeOptieVoorInvoer = null;
+
 
 // ======================================
 // START
@@ -261,6 +439,8 @@ let huidigeChecklist = null;
 document.addEventListener(
     "DOMContentLoaded",
     () => {
+
+        basisStructuurLaden();
 
         dagStatusLaden();
 
@@ -278,17 +458,148 @@ function vandaag() {
 
     const datum = new Date();
 
-    const jaar = datum.getFullYear();
+    const jaar =
+        datum.getFullYear();
 
-    const maand = String(
-        datum.getMonth() + 1
-    ).padStart(2, "0");
+    const maand =
+        String(
+            datum.getMonth() + 1
+        ).padStart(2, "0");
 
-    const dag = String(
-        datum.getDate()
-    ).padStart(2, "0");
+    const dag =
+        String(
+            datum.getDate()
+        ).padStart(2, "0");
 
     return `${jaar}-${maand}-${dag}`;
+
+}
+
+
+// ======================================
+// BASIS STRUCTUUR LADEN
+// ======================================
+
+function basisStructuurLaden() {
+
+    const standaard =
+        structuredClone(
+            BASIS_CHECKLISTS
+        );
+
+    try {
+
+        const opgeslagen =
+            localStorage.getItem(
+                OPSLAG_BASIS_STRUCTUUR
+            );
+
+        if (!opgeslagen) {
+
+            basisStructuur =
+                standaard;
+
+            basisStructuurOpslaan();
+
+            return;
+
+        }
+
+
+        const gegevens =
+            JSON.parse(opgeslagen);
+
+
+        if (
+            !gegevens ||
+            typeof gegevens !== "object"
+        ) {
+
+            basisStructuur =
+                standaard;
+
+            basisStructuurOpslaan();
+
+            return;
+
+        }
+
+
+        basisStructuur =
+            gegevens;
+
+
+        /*
+         * Eventuele nieuwe standaardcategorieën
+         * worden toegevoegd zonder bestaande
+         * persoonlijke aanpassingen te verwijderen.
+         */
+
+        Object.keys(standaard).forEach(
+            (categorie) => {
+
+                if (
+                    !basisStructuur[categorie]
+                ) {
+
+                    basisStructuur[categorie] =
+                        standaard[categorie];
+
+                }
+
+            }
+        );
+
+
+        /*
+         * Oude opties die al bestonden blijven
+         * gewoon bestaan.
+         *
+         * We vervangen dus niets automatisch.
+         */
+
+        basisStructuurOpslaan();
+
+    } catch (fout) {
+
+        console.warn(
+            "Basisstructuur kon niet worden geladen.",
+            fout
+        );
+
+        basisStructuur =
+            standaard;
+
+        basisStructuurOpslaan();
+
+    }
+
+}
+
+
+// ======================================
+// BASIS STRUCTUUR OPSLAAN
+// ======================================
+
+function basisStructuurOpslaan() {
+
+    try {
+
+        localStorage.setItem(
+            OPSLAG_BASIS_STRUCTUUR,
+            JSON.stringify(
+                basisStructuur
+            )
+        );
+
+    } catch (fout) {
+
+        console.warn(
+            "Basisstructuur kon niet worden opgeslagen.",
+            fout
+        );
+
+    }
 
 }
 
@@ -299,7 +610,8 @@ function vandaag() {
 
 function dagStatusLaden() {
 
-    const datumVandaag = vandaag();
+    const datumVandaag =
+        vandaag();
 
     try {
 
@@ -308,16 +620,18 @@ function dagStatusLaden() {
                 OPSLAG_DAGSTATUS
             );
 
+
         if (!opgeslagen) {
 
-            dagStatus = {
-                datum: datumVandaag,
-                afgerond: {}
-            };
+            dagStatus =
+                nieuweDagStatus(
+                    datumVandaag
+                );
 
             dagStatusOpslaan();
 
             return;
+
         }
 
 
@@ -325,45 +639,77 @@ function dagStatusLaden() {
             JSON.parse(opgeslagen);
 
 
-        // Is dit een nieuwe dag?
+        /*
+         * Nieuwe dag?
+         *
+         * Dan ALLE dagelijkse vinkjes
+         * en korte antwoorden wissen.
+         */
 
         if (
             !gegevens ||
             gegevens.datum !== datumVandaag
         ) {
 
-            dagStatus = {
-                datum: datumVandaag,
-                afgerond: {}
-            };
+            dagStatus =
+                nieuweDagStatus(
+                    datumVandaag
+                );
 
             dagStatusOpslaan();
 
             return;
+
         }
 
 
-        // Status van vandaag gebruiken
-
         dagStatus = {
+
             datum: datumVandaag,
+
             afgerond:
-                gegevens.afgerond || {}
+                gegevens.afgerond || {},
+
+            invulling:
+                gegevens.invulling || {}
+
         };
+
 
     } catch (fout) {
 
-        // Bij een fout altijd veilig
-        // met een lege dag beginnen.
+        console.warn(
+            "Dagstatus kon niet worden geladen.",
+            fout
+        );
 
-        dagStatus = {
-            datum: datumVandaag,
-            afgerond: {}
-        };
+        dagStatus =
+            nieuweDagStatus(
+                datumVandaag
+            );
 
         dagStatusOpslaan();
 
     }
+
+}
+
+
+// ======================================
+// NIEUWE DAGSTATUS
+// ======================================
+
+function nieuweDagStatus(datum) {
+
+    return {
+
+        datum: datum,
+
+        afgerond: {},
+
+        invulling: {}
+
+    };
 
 }
 
@@ -378,7 +724,9 @@ function dagStatusOpslaan() {
 
         localStorage.setItem(
             OPSLAG_DAGSTATUS,
-            JSON.stringify(dagStatus)
+            JSON.stringify(
+                dagStatus
+            )
         );
 
     } catch (fout) {
@@ -394,119 +742,166 @@ function dagStatusOpslaan() {
 
 
 // ======================================
-// UNIEKE SLEUTEL VOOR EEN TAAK
+// DAGSTATUS CONTROLEREN
 // ======================================
 
-// We bewaren niet alleen "Douchen",
-// maar bijvoorbeeld:
-//
-// zelfzorg::Douchen
-//
-// Hierdoor kunnen dezelfde taaknamen
-// veilig in verschillende checklists bestaan.
+function dagStatusControleren() {
 
-function taakSleutel(
-    checklistNaam,
-    taak
-) {
+    const datumVandaag =
+        vandaag();
 
-    return `${checklistNaam}::${taak}`;
+    if (
+        dagStatus.datum !== datumVandaag
+    ) {
+
+        dagStatus =
+            nieuweDagStatus(
+                datumVandaag
+            );
+
+        dagStatusOpslaan();
+
+    }
 
 }
 
 
 // ======================================
-// CONTROLEREN OF TAAK AFGEROND IS
+// UNIEKE SLEUTEL
 // ======================================
 
-function taakIsAfgerond(
+function taakSleutel(
     checklistNaam,
-    taak
+    optieId
+) {
+
+    return `${checklistNaam}::${optieId}`;
+
+}
+
+
+// ======================================
+// CONTROLEREN OF OPTIE AFGEROND IS
+// ======================================
+
+function optieIsAfgerond(
+    checklistNaam,
+    optieId
 ) {
 
     const sleutel =
         taakSleutel(
             checklistNaam,
-            taak
+            optieId
         );
 
-    return dagStatus.afgerond[sleutel] === true;
+    return (
+        dagStatus.afgerond[sleutel] === true
+    );
 
 }
 
 
 // ======================================
-// GEBEURTENISSEN INSTELLEN
+// INVULLING OPHALEN
+// ======================================
+
+function optieInvulling(
+    checklistNaam,
+    optieId
+) {
+
+    const sleutel =
+        taakSleutel(
+            checklistNaam,
+            optieId
+        );
+
+    return (
+        dagStatus.invulling[sleutel] || ""
+    );
+
+}
+
+
+// ======================================
+// GEBEURTENISSEN
 // ======================================
 
 function gebeurtenissenInstellen() {
 
 
     // ==================================
-    // HOOFDSCHERM
+    // BASIS
     // ==================================
 
-    basisKnop.addEventListener(
-        "click",
-        () => {
+    if (basisKnop) {
 
-            schermTonen("basis");
+        basisKnop.addEventListener(
+            "click",
+            () => {
 
-        }
-    );
+                schermTonen(
+                    "basis"
+                );
 
+            }
+        );
 
-    moeilijkeDagKnop.addEventListener(
-        "click",
-        () => {
-
-            schermTonen("moeilijkeDag");
-
-        }
-    );
+    }
 
 
     // ==================================
-    // TERUGKNOPPEN
+    // MOEILIJKE DAG
     // ==================================
 
-    basisTerugKnop.addEventListener(
-        "click",
-        () => {
+    if (moeilijkKnop) {
 
-            schermTonen("hoofd");
+        moeilijkKnop.addEventListener(
+            "click",
+            () => {
 
-        }
-    );
+                schermTonen(
+                    "moeilijk"
+                );
 
+            }
+        );
 
-    moeilijkeDagTerugKnop.addEventListener(
-        "click",
-        () => {
-
-            schermTonen("hoofd");
-
-        }
-    );
-
-
-    checklistTerugKnop.addEventListener(
-        "click",
-        () => {
-
-            schermTonen(vorigeScherm);
-
-        }
-    );
+    }
 
 
     // ==================================
-    // BLOKKEN
+    // CHECKLIST TERUG
+    // ==================================
+
+    if (checklistTerugKnop) {
+
+        checklistTerugKnop.addEventListener(
+            "click",
+            () => {
+
+                optiesBewerkSluitenFunctie();
+
+                sluitKorteInvoer();
+
+                schermTonen(
+                    vorigeScherm
+                );
+
+            }
+        );
+
+    }
+
+
+    // ==================================
+    // BASIS CATEGORIEËN
     // ==================================
 
     const blokken =
         document.querySelectorAll(
-            ".blok"
+            "#basisScherm .blok"
         );
 
 
@@ -530,6 +925,185 @@ function gebeurtenissenInstellen() {
         }
     );
 
+
+    // ==================================
+    // MOEILIJKE DAG CATEGORIEËN
+    // ==================================
+
+    const moeilijkeBlokken =
+        document.querySelectorAll(
+            "#moeilijkScherm .blok"
+        );
+
+
+    moeilijkeBlokken.forEach(
+        (blok) => {
+
+            blok.addEventListener(
+                "click",
+                () => {
+
+                    const blokNaam =
+                        blok.dataset.blok;
+
+                    moeilijkeChecklistOpenen(
+                        blokNaam
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    // ==================================
+    // OPTIES AANPASSEN
+    // ==================================
+
+    if (basisBewerkKnop) {
+
+        basisBewerkKnop.addEventListener(
+            "click",
+            () => {
+
+                optiesBewerkOpenen();
+
+            }
+        );
+
+    }
+
+
+    if (optiesBewerkSluiten) {
+
+        optiesBewerkSluiten.addEventListener(
+            "click",
+            () => {
+
+                optiesBewerkSluitenFunctie();
+
+            }
+        );
+
+    }
+
+
+    // ==================================
+    // NIEUWE OPTIE
+    // ==================================
+
+    if (nieuweOptieToevoegen) {
+
+        nieuweOptieToevoegen.addEventListener(
+            "click",
+            () => {
+
+                nieuweOptieToevoegenFunctie();
+
+            }
+        );
+
+    }
+
+
+    // ==================================
+    // ENTER BIJ NIEUWE OPTIE
+    // ==================================
+
+    if (nieuweOptieNaam) {
+
+        nieuweOptieNaam.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    event.preventDefault();
+
+                    nieuweOptieToevoegenFunctie();
+
+                }
+
+            }
+        );
+
+    }
+
+
+    // ==================================
+    // KORTE INVOER OPSLAAN
+    // ==================================
+
+    if (kortInvoerOpslaan) {
+
+        kortInvoerOpslaan.addEventListener(
+            "click",
+            () => {
+
+                korteInvullingOpslaan();
+
+            }
+        );
+
+    }
+
+
+    // ==================================
+    // KORTE INVOER ANNULEREN
+    // ==================================
+
+    if (kortInvoerAnnuleren) {
+
+        kortInvoerAnnuleren.addEventListener(
+            "click",
+            () => {
+
+                sluitKorteInvoer();
+
+            }
+        );
+
+    }
+
+
+    // ==================================
+    // ENTER BIJ KORTE INVOER
+    // ==================================
+
+    if (kortInvoer) {
+
+        kortInvoer.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    event.preventDefault();
+
+                    korteInvullingOpslaan();
+
+                }
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    event.preventDefault();
+
+                    sluitKorteInvoer();
+
+                }
+
+            }
+        );
+
+    }
+
 }
 
 
@@ -539,9 +1113,6 @@ function gebeurtenissenInstellen() {
 
 function schermTonen(scherm) {
 
-
-    // Alle schermen verbergen
-
     hoofdScherm.classList.remove(
         "actief"
     );
@@ -550,7 +1121,7 @@ function schermTonen(scherm) {
         "actief"
     );
 
-    moeilijkeDagScherm.classList.remove(
+    moeilijkScherm.classList.remove(
         "actief"
     );
 
@@ -558,8 +1129,6 @@ function schermTonen(scherm) {
         "actief"
     );
 
-
-    // Gewenst scherm tonen
 
     if (scherm === "hoofd") {
 
@@ -579,9 +1148,9 @@ function schermTonen(scherm) {
     }
 
 
-    if (scherm === "moeilijkeDag") {
+    if (scherm === "moeilijk") {
 
-        moeilijkeDagScherm.classList.add(
+        moeilijkScherm.classList.add(
             "actief"
         );
 
@@ -597,19 +1166,25 @@ function schermTonen(scherm) {
     }
 
 
-    huidigScherm = scherm;
+    huidigScherm =
+        scherm;
 
 }
 
 
 // ======================================
-// CHECKLIST OPENEN
+// BASIS CHECKLIST OPENEN
 // ======================================
 
-function checklistOpenen(blokNaam) {
+function checklistOpenen(
+    blokNaam
+) {
+
+    dagStatusControleren();
+
 
     const gegevens =
-        CHECKLISTS[blokNaam];
+        basisStructuur[blokNaam];
 
 
     if (!gegevens) {
@@ -619,168 +1194,56 @@ function checklistOpenen(blokNaam) {
     }
 
 
-    // ==================================
-    // DAGSTATUS CONTROLEREN
-    // ==================================
-
-    // Voor de zekerheid controleren we
-    // opnieuw of het nog dezelfde dag is.
-
-    const datumVandaag = vandaag();
-
-    if (dagStatus.datum !== datumVandaag) {
-
-        dagStatus = {
-            datum: datumVandaag,
-            afgerond: {}
-        };
-
-        dagStatusOpslaan();
-
-    }
-
-
-    // ==================================
-    // ONTHOUDEN WAAR WE VANDAAN KWAMEN
-    // ==================================
-
     vorigeScherm =
-        huidigScherm;
+        "basis";
 
     huidigeChecklist =
         blokNaam;
 
 
-    // ==================================
-    // TITEL INSTELLEN
-    // ==================================
+    checklistLabel.textContent =
+        "BASIS";
+
 
     checklistTitel.textContent =
         gegevens.titel;
+
 
     checklistSubtitel.textContent =
         gegevens.subtitel;
 
 
-    // ==================================
-    // OUDE INHOUD VERWIJDEREN
-    // ==================================
+    /*
+     * Bewerkknop alleen bij BASIS.
+     */
 
-    checklist.innerHTML = "";
+    if (basisBewerkContainer) {
 
+        basisBewerkContainer.hidden =
+            false;
 
-    // ==================================
-    // OUDE BELONING VERWIJDEREN
-    // ==================================
-
-    beloning.textContent = "";
-
-    beloning.classList.remove(
-        "zichtbaar"
-    );
+    }
 
 
-    // ==================================
-    // TAKEN MAKEN
-    // ==================================
+    optiesBewerkScherm.hidden =
+        true;
 
-    gegevens.taken.forEach(
-        (taak) => {
+
+    checklist.innerHTML =
+        "";
+
+
+    beloningVerbergen();
+
+
+    gegevens.opties.forEach(
+        (optie) => {
 
             const item =
-                document.createElement(
-                    "button"
-                );
-
-
-            item.type = "button";
-
-            item.className =
-                "checklist-item";
-
-
-            // ==================================
-            // CHECKBOX
-            // ==================================
-
-            const checkbox =
-                document.createElement(
-                    "span"
-                );
-
-            checkbox.className =
-                "checklist-checkbox";
-
-            checkbox.textContent = " ";
-
-
-            // ==================================
-            // TEKST
-            // ==================================
-
-            const tekst =
-                document.createElement(
-                    "span"
-                );
-
-            tekst.className =
-                "checklist-tekst";
-
-            tekst.textContent =
-                taak;
-
-
-            // ==================================
-            // EERDER AFGEROND?
-            // ==================================
-
-            if (
-                taakIsAfgerond(
+                checklistItemMaken(
                     blokNaam,
-                    taak
-                )
-            ) {
-
-                item.classList.add(
-                    "afgerond"
+                    optie
                 );
-
-                checkbox.textContent = "✓";
-
-            }
-
-
-            // ==================================
-            // ONDERDELEN TOEVOEGEN
-            // ==================================
-
-            item.appendChild(
-                checkbox
-            );
-
-            item.appendChild(
-                tekst
-            );
-
-
-            // ==================================
-            // KLIKGEBEURTENIS
-            // ==================================
-
-            item.addEventListener(
-                "click",
-                () => {
-
-                    taakAfvinken(
-                        item,
-                        checkbox,
-                        blokNaam,
-                        taak
-                    );
-
-                }
-            );
-
 
             checklist.appendChild(
                 item
@@ -790,9 +1253,96 @@ function checklistOpenen(blokNaam) {
     );
 
 
-    // ==================================
-    // CHECKLIST TONEN
-    // ==================================
+    schermTonen(
+        "checklist"
+    );
+
+}
+
+
+// ======================================
+// MOEILIJKE DAG CHECKLIST OPENEN
+// ======================================
+
+function moeilijkeChecklistOpenen(
+    blokNaam
+) {
+
+    dagStatusControleren();
+
+
+    const gegevens =
+        MOEILIJKE_DAG_CHECKLISTS[
+            blokNaam
+        ];
+
+
+    if (!gegevens) {
+
+        return;
+
+    }
+
+
+    vorigeScherm =
+        "moeilijk";
+
+
+    huidigeChecklist =
+        blokNaam;
+
+
+    checklistLabel.textContent =
+        "MOEILIJKE DAG";
+
+
+    checklistTitel.textContent =
+        gegevens.titel;
+
+
+    checklistSubtitel.textContent =
+        gegevens.subtitel;
+
+
+    /*
+     * Bewerkfunctie verbergen.
+     */
+
+    if (basisBewerkContainer) {
+
+        basisBewerkContainer.hidden =
+            true;
+
+    }
+
+
+    optiesBewerkScherm.hidden =
+        true;
+
+
+    checklist.innerHTML =
+        "";
+
+
+    beloningVerbergen();
+
+
+    gegevens.taken.forEach(
+        (taak) => {
+
+            const item =
+                moeilijkeTaakMaken(
+                    blokNaam,
+                    taak
+                );
+
+            checklist.appendChild(
+                item
+            );
+
+        }
+    );
+
 
     schermTonen(
         "checklist"
@@ -802,27 +1352,270 @@ function checklistOpenen(blokNaam) {
 
 
 // ======================================
-// TAAK AFVINKEN
+// BASIS CHECKLIST ITEM MAKEN
 // ======================================
 
-function taakAfvinken(
-    item,
-    checkbox,
-    checklistNaam,
-    taak
+function checklistItemMaken(
+    blokNaam,
+    optie
 ) {
+
+    const item =
+        document.createElement(
+            "button"
+        );
+
+
+    item.type =
+        "button";
+
+
+    item.className =
+        "checklist-item";
+
+
+    const checkbox =
+        document.createElement(
+            "span"
+        );
+
+
+    checkbox.className =
+        "checklist-checkbox";
+
+
+    const tekst =
+        document.createElement(
+            "span"
+        );
+
+
+    tekst.className =
+        "checklist-tekst";
+
+
+    tekst.textContent =
+        optie.tekst;
 
 
     const sleutel =
         taakSleutel(
-            checklistNaam,
+            blokNaam,
+            optie.id
+        );
+
+
+    const afgerond =
+        dagStatus.afgerond[
+            sleutel
+        ] === true;
+
+
+    const invulling =
+        dagStatus.invulling[
+            sleutel
+        ] || "";
+
+
+    if (afgerond) {
+
+        item.classList.add(
+            "afgerond"
+        );
+
+        checkbox.textContent =
+            "✓";
+
+    } else {
+
+        checkbox.textContent =
+            "";
+
+    }
+
+
+    item.appendChild(
+        checkbox
+    );
+
+
+    item.appendChild(
+        tekst
+    );
+
+
+    /*
+     * Wanneer er vandaag een korte
+     * invulling is opgeslagen, tonen
+     * we die onder / naast de optie.
+     */
+
+    if (
+        afgerond &&
+        invulling
+    ) {
+
+        const antwoord =
+            document.createElement(
+                "span"
+            );
+
+
+        antwoord.className =
+            "checklist-antwoord";
+
+
+        antwoord.textContent =
+            invulling;
+
+
+        item.appendChild(
+            antwoord
+        );
+
+    }
+
+
+    item.addEventListener(
+        "click",
+        () => {
+
+            basisOptieKlik(
+                item,
+                checkbox,
+                blokNaam,
+                optie
+            );
+
+        }
+    );
+
+
+    return item;
+
+}
+
+
+// ======================================
+// MOEILIJKE DAG ITEM MAKEN
+// ======================================
+
+function moeilijkeTaakMaken(
+    blokNaam,
+    taak
+) {
+
+    const item =
+        document.createElement(
+            "button"
+        );
+
+
+    item.type =
+        "button";
+
+
+    item.className =
+        "checklist-item";
+
+
+    const checkbox =
+        document.createElement(
+            "span"
+        );
+
+
+    checkbox.className =
+        "checklist-checkbox";
+
+
+    const tekst =
+        document.createElement(
+            "span"
+        );
+
+
+    tekst.className =
+        "checklist-tekst";
+
+
+    tekst.textContent =
+        taak;
+
+
+    const sleutel =
+        taakSleutel(
+            blokNaam,
             taak
         );
 
 
-    // ==================================
-    // TAAK AL AFGEROND?
-    // ==================================
+    if (
+        dagStatus.afgerond[sleutel]
+    ) {
+
+        item.classList.add(
+            "afgerond"
+        );
+
+        checkbox.textContent =
+            "✓";
+
+    }
+
+
+    item.appendChild(
+        checkbox
+    );
+
+
+    item.appendChild(
+        tekst
+    );
+
+
+    item.addEventListener(
+        "click",
+        () => {
+
+            moeilijkeTaakAfvinken(
+                item,
+                checkbox,
+                blokNaam,
+                taak
+            );
+
+        }
+    );
+
+
+    return item;
+
+}
+
+
+// ======================================
+// BASIS OPTIE KLIKKEN
+// ======================================
+
+function basisOptieKlik(
+    item,
+    checkbox,
+    blokNaam,
+    optie
+) {
+
+    const sleutel =
+        taakSleutel(
+            blokNaam,
+            optie.id
+        );
+
+
+    /*
+     * Staat hij al aan?
+     * Dan weer uitzetten.
+     */
 
     if (
         item.classList.contains(
@@ -830,18 +1623,134 @@ function taakAfvinken(
         )
     ) {
 
-        // Taak weer openzetten
+        item.classList.remove(
+            "afgerond"
+        );
+
+        checkbox.textContent =
+            "";
+
+
+        delete dagStatus.afgerond[
+            sleutel
+        ];
+
+
+        delete dagStatus.invulling[
+            sleutel
+        ];
+
+
+        dagStatusOpslaan();
+
+
+        /*
+         * Opnieuw tekenen zodat een eventueel
+         * opgeslagen steekwoord verdwijnt.
+         */
+
+        checklistOpnieuwTekenen();
+
+
+        return;
+
+    }
+
+
+    /*
+     * Heeft deze optie een korte invoer?
+     */
+
+    if (optie.invoer) {
+
+        huidigeOptieVoorInvoer = {
+
+            blokNaam:
+                blokNaam,
+
+            optie:
+                optie,
+
+            item:
+                item,
+
+            checkbox:
+                checkbox
+
+        };
+
+
+        korteInvoerOpenen(
+            optie
+        );
+
+
+        return;
+
+    }
+
+
+    /*
+     * Gewoon afvinken.
+     */
+
+    item.classList.add(
+        "afgerond"
+    );
+
+    checkbox.textContent =
+        "✓";
+
+
+    dagStatus.afgerond[
+        sleutel
+    ] = true;
+
+
+    dagStatusOpslaan();
+
+
+    beloningTonen();
+
+}
+
+
+// ======================================
+// MOEILIJKE DAG AFVINKEN
+// ======================================
+
+function moeilijkeTaakAfvinken(
+    item,
+    checkbox,
+    blokNaam,
+    taak
+) {
+
+    const sleutel =
+        taakSleutel(
+            blokNaam,
+            taak
+        );
+
+
+    if (
+        item.classList.contains(
+            "afgerond"
+        )
+    ) {
 
         item.classList.remove(
             "afgerond"
         );
 
-        checkbox.textContent = " ";
+        checkbox.textContent =
+            "";
 
 
-        // Ook uit de dagstatus verwijderen
+        delete dagStatus.afgerond[
+            sleutel
+        ];
 
-        delete dagStatus.afgerond[sleutel];
 
         dagStatusOpslaan();
 
@@ -851,27 +1760,22 @@ function taakAfvinken(
     }
 
 
-    // ==================================
-    // TAAK AFRONDEN
-    // ==================================
-
     item.classList.add(
         "afgerond"
     );
 
-    checkbox.textContent = "✓";
+
+    checkbox.textContent =
+        "✓";
 
 
-    // In de dagstatus zetten
+    dagStatus.afgerond[
+        sleutel
+    ] = true;
 
-    dagStatus.afgerond[sleutel] = true;
 
     dagStatusOpslaan();
 
-
-    // ==================================
-    // POSITIEVE BOODSCHAP
-    // ==================================
 
     beloningTonen();
 
@@ -879,10 +1783,896 @@ function taakAfvinken(
 
 
 // ======================================
-// RANDOM BELONING
+// KORTE INVOER OPENEN
+// ======================================
+
+function korteInvoerOpenen(
+    optie
+) {
+
+    if (!kortInvoerContainer) {
+
+        return;
+
+    }
+
+
+    kortInvoerTitel.textContent =
+        optie.tekst;
+
+
+    kortInvoerUitleg.textContent =
+        "Eén kort woord is genoeg.";
+
+
+    kortInvoer.value =
+        "";
+
+
+    kortInvoerContainer.hidden =
+        false;
+
+
+    /*
+     * Kleine vertraging zodat de browser
+     * eerst het veld zichtbaar maakt.
+     */
+
+    setTimeout(
+        () => {
+
+            kortInvoer.focus();
+
+        },
+        50
+    );
+
+}
+
+
+// ======================================
+// KORTE INVOER SLUITEN
+// ======================================
+
+function sluitKorteInvoer() {
+
+    if (!kortInvoerContainer) {
+
+        return;
+
+    }
+
+
+    kortInvoerContainer.hidden =
+        true;
+
+
+    if (kortInvoer) {
+
+        kortInvoer.value =
+            "";
+
+    }
+
+
+    huidigeOptieVoorInvoer =
+        null;
+
+}
+
+
+// ======================================
+// KORTE INVULLING OPSLAAN
+// ======================================
+
+function korteInvullingOpslaan() {
+
+    if (
+        !huidigeOptieVoorInvoer
+    ) {
+
+        return;
+
+    }
+
+
+    const waarde =
+        kortInvoer.value.trim();
+
+
+    const blokNaam =
+        huidigeOptieVoorInvoer.blokNaam;
+
+
+    const optie =
+        huidigeOptieVoorInvoer.optie;
+
+
+    const sleutel =
+        taakSleutel(
+            blokNaam,
+            optie.id
+        );
+
+
+    /*
+     * Een leeg veld mag ook.
+     *
+     * Zo kan iemand alsnog gewoon aangeven:
+     * "dit heb ik gedaan", zonder verplicht
+     * iets te moeten invullen.
+     */
+
+    dagStatus.afgerond[
+        sleutel
+    ] = true;
+
+
+    if (waarde) {
+
+        dagStatus.invulling[
+            sleutel
+        ] = waarde;
+
+    } else {
+
+        delete dagStatus.invulling[
+            sleutel
+        ];
+
+    }
+
+
+    dagStatusOpslaan();
+
+
+    sluitKorteInvoer();
+
+
+    checklistOpnieuwTekenen();
+
+
+    beloningTonen();
+
+}
+
+
+// ======================================
+// CHECKLIST OPNIEUW TEKENEN
+// ======================================
+
+function checklistOpnieuwTekenen() {
+
+    if (!huidigeChecklist) {
+
+        return;
+
+    }
+
+
+    if (
+        basisStructuur[
+            huidigeChecklist
+        ]
+    ) {
+
+        const gegevens =
+            basisStructuur[
+                huidigeChecklist
+            ];
+
+
+        checklist.innerHTML =
+            "";
+
+
+        gegevens.opties.forEach(
+            (optie) => {
+
+                checklist.appendChild(
+                    checklistItemMaken(
+                        huidigeChecklist,
+                        optie
+                    )
+                );
+
+            }
+        );
+
+
+        return;
+
+    }
+
+
+    if (
+        MOEILIJKE_DAG_CHECKLISTS[
+            huidigeChecklist
+        ]
+    ) {
+
+        const gegevens =
+            MOEILIJKE_DAG_CHECKLISTS[
+                huidigeChecklist
+            ];
+
+
+        checklist.innerHTML =
+            "";
+
+
+        gegevens.taken.forEach(
+            (taak) => {
+
+                checklist.appendChild(
+                    moeilijkeTaakMaken(
+                        huidigeChecklist,
+                        taak
+                    )
+                );
+
+            }
+        );
+
+    }
+
+}
+
+
+// ======================================
+// OPTIES BEWERKEN OPENEN
+// ======================================
+
+function optiesBewerkOpenen() {
+
+    if (
+        !basisStructuur[
+            huidigeChecklist
+        ]
+    ) {
+
+        return;
+
+    }
+
+
+    optiesEditorVullen();
+
+
+    optiesBewerkScherm.hidden =
+        false;
+
+
+    if (nieuweOptieNaam) {
+
+        nieuweOptieNaam.value =
+            "";
+
+    }
+
+
+    if (nieuweOptieInvoer) {
+
+        nieuweOptieInvoer.checked =
+            false;
+
+    }
+
+
+    setTimeout(
+        () => {
+
+            if (nieuweOptieNaam) {
+
+                nieuweOptieNaam.focus();
+
+            }
+
+        },
+        50
+    );
+
+}
+
+
+// ======================================
+// OPTIES BEWERKEN SLUITEN
+// ======================================
+
+function optiesBewerkSluitenFunctie() {
+
+    if (!optiesBewerkScherm) {
+
+        return;
+
+    }
+
+
+    optiesBewerkScherm.hidden =
+        true;
+
+}
+
+
+// ======================================
+// OPTIES EDITOR VULLEN
+// ======================================
+
+function optiesEditorVullen() {
+
+    if (!optiesEditor) {
+
+        return;
+
+    }
+
+
+    const gegevens =
+        basisStructuur[
+            huidigeChecklist
+        ];
+
+
+    if (!gegevens) {
+
+        return;
+
+    }
+
+
+    optiesEditor.innerHTML =
+        "";
+
+
+    gegevens.opties.forEach(
+        (optie, index) => {
+
+            const rij =
+                document.createElement(
+                    "div"
+                );
+
+
+            rij.className =
+                "optie-editor-rij";
+
+
+            /*
+             * Nummer
+             */
+
+            const nummer =
+                document.createElement(
+                    "span"
+                );
+
+
+            nummer.className =
+                "optie-editor-nummer";
+
+
+            nummer.textContent =
+                `${index + 1}.`;
+
+
+            /*
+             * Inhoud
+             */
+
+            const inhoud =
+                document.createElement(
+                    "div"
+                );
+
+
+            inhoud.className =
+                "optie-editor-inhoud";
+
+
+            /*
+             * Naam
+             */
+
+            const input =
+                document.createElement(
+                    "input"
+                );
+
+
+            input.type =
+                "text";
+
+
+            input.className =
+                "optie-editor-input";
+
+
+            input.value =
+                optie.tekst;
+
+
+            input.maxLength =
+                60;
+
+
+            input.autocomplete =
+                "off";
+
+
+            input.setAttribute(
+                "aria-label",
+                "Naam van optie"
+            );
+
+
+            /*
+             * Kort antwoord
+             */
+
+            const invoerLabel =
+                document.createElement(
+                    "label"
+                );
+
+
+            invoerLabel.className =
+                "optie-editor-invoer";
+
+
+            const invoerCheckbox =
+                document.createElement(
+                    "input"
+                );
+
+
+            invoerCheckbox.type =
+                "checkbox";
+
+
+            invoerCheckbox.checked =
+                optie.invoer === true;
+
+
+            const invoerTekst =
+                document.createElement(
+                    "span"
+                );
+
+
+            invoerTekst.textContent =
+                "Kort antwoord vragen";
+
+
+            invoerLabel.appendChild(
+                invoerCheckbox
+            );
+
+
+            invoerLabel.appendChild(
+                invoerTekst
+            );
+
+
+            /*
+             * Opslaan knop
+             */
+
+            const opslaan =
+                document.createElement(
+                    "button"
+                );
+
+
+            opslaan.type =
+                "button";
+
+
+            opslaan.className =
+                "optie-opslaan-knop";
+
+
+            opslaan.textContent =
+                "Opslaan";
+
+
+            /*
+             * Verwijderen
+             */
+
+            const verwijderen =
+                document.createElement(
+                    "button"
+                );
+
+
+            verwijderen.type =
+                "button";
+
+
+            verwijderen.className =
+                "optie-verwijder-knop";
+
+
+            verwijderen.textContent =
+                "Verwijder";
+
+
+            /*
+             * Opslaan actie
+             */
+
+            opslaan.addEventListener(
+                "click",
+                () => {
+
+                    const nieuweNaam =
+                        input.value.trim();
+
+
+                    if (!nieuweNaam) {
+
+                        input.focus();
+
+                        return;
+
+                    }
+
+
+                    const oudeId =
+                        optie.id;
+
+
+                    optie.tekst =
+                        nieuweNaam;
+
+
+                    optie.invoer =
+                        invoerCheckbox.checked;
+
+
+                    /*
+                     * De ID blijft gelijk.
+                     *
+                     * Hierdoor blijven eventuele
+                     * dagelijkse gegevens technisch
+                     * gekoppeld aan dezelfde optie.
+                     */
+
+                    basisStructuurOpslaan();
+
+
+                    /*
+                     * Eventueel opgeslagen dagstatus
+                     * blijft behouden.
+                     */
+
+                    checklistOpnieuwTekenen();
+
+
+                    optiesEditorVullen();
+
+
+                }
+            );
+
+
+            /*
+             * Ook direct opslaan met Enter.
+             */
+
+            input.addEventListener(
+                "keydown",
+                (event) => {
+
+                    if (
+                        event.key === "Enter"
+                    ) {
+
+                        event.preventDefault();
+
+                        opslaan.click();
+
+                    }
+
+                }
+            );
+
+
+            /*
+             * Verwijderen
+             */
+
+            verwijderen.addEventListener(
+                "click",
+                () => {
+
+                    if (
+                        gegevens.opties.length <= 1
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    gegevens.opties =
+                        gegevens.opties.filter(
+                            (item) =>
+                                item.id !==
+                                optie.id
+                        );
+
+
+                    basisStructuurOpslaan();
+
+
+                    /*
+                     * Oude dagelijkse status
+                     * van deze optie opruimen.
+                     */
+
+                    verwijderDaggegevensVoorOptie(
+                        huidigeChecklist,
+                        oudeId
+                    );
+
+
+                    checklistOpnieuwTekenen();
+
+
+                    optiesEditorVullen();
+
+                }
+            );
+
+
+            inhoud.appendChild(
+                input
+            );
+
+
+            inhoud.appendChild(
+                invoerLabel
+            );
+
+
+            const acties =
+                document.createElement(
+                    "div"
+                );
+
+
+            acties.className =
+                "optie-editor-acties";
+
+
+            acties.appendChild(
+                opslaan
+            );
+
+
+            acties.appendChild(
+                verwijderen
+            );
+
+
+            rij.appendChild(
+                nummer
+            );
+
+
+            rij.appendChild(
+                inhoud
+            );
+
+
+            rij.appendChild(
+                acties
+            );
+
+
+            optiesEditor.appendChild(
+                rij
+            );
+
+        }
+    );
+
+}
+
+
+// ======================================
+// NIEUWE OPTIE TOEVOEGEN
+// ======================================
+
+function nieuweOptieToevoegenFunctie() {
+
+    if (!huidigeChecklist) {
+
+        return;
+
+    }
+
+
+    const gegevens =
+        basisStructuur[
+            huidigeChecklist
+        ];
+
+
+    if (!gegevens) {
+
+        return;
+
+    }
+
+
+    const naam =
+        nieuweOptieNaam.value.trim();
+
+
+    if (!naam) {
+
+        nieuweOptieNaam.focus();
+
+        return;
+
+    }
+
+
+    /*
+     * Unieke ID maken.
+     */
+
+    const id =
+        uniekeOptieId(
+            huidigeChecklist,
+            naam
+        );
+
+
+    gegevens.opties.push({
+
+        id: id,
+
+        tekst: naam,
+
+        invoer:
+            nieuweOptieInvoer.checked
+
+    });
+
+
+    basisStructuurOpslaan();
+
+
+    nieuweOptieNaam.value =
+        "";
+
+
+    nieuweOptieInvoer.checked =
+        false;
+
+
+    checklistOpnieuwTekenen();
+
+
+    optiesEditorVullen();
+
+
+    nieuweOptieNaam.focus();
+
+}
+
+
+// ======================================
+// UNIEKE OPTIE ID
+// ======================================
+
+function uniekeOptieId(
+    categorie,
+    tekst
+) {
+
+    let basis =
+        tekst
+            .toLowerCase()
+            .trim()
+            .replace(
+                /[^a-z0-9À-ÿ]+/gi,
+                "-"
+            )
+            .replace(
+                /^-+|-+$/g,
+                ""
+            );
+
+
+    if (!basis) {
+
+        basis =
+            "optie";
+
+    }
+
+
+    let id =
+        basis;
+
+    let teller =
+        2;
+
+
+    const bestaande =
+        basisStructuur[
+            categorie
+        ]?.opties || [];
+
+
+    while (
+        bestaande.some(
+            (optie) =>
+                optie.id === id
+        )
+    ) {
+
+        id =
+            `${basis}-${teller}`;
+
+        teller++;
+
+    }
+
+
+    return id;
+
+}
+
+
+// ======================================
+// DAGGEGEVENS VAN VERWIJDERDE OPTIE
+// OPRUIMEN
+// ======================================
+
+function verwijderDaggegevensVoorOptie(
+    categorie,
+    optieId
+) {
+
+    const sleutel =
+        taakSleutel(
+            categorie,
+            optieId
+        );
+
+
+    delete dagStatus.afgerond[
+        sleutel
+    ];
+
+
+    delete dagStatus.invulling[
+        sleutel
+    ];
+
+
+    dagStatusOpslaan();
+
+}
+
+
+// ======================================
+// POSITIEVE FEEDBACK TONEN
 // ======================================
 
 function beloningTonen() {
+
+    if (!beloning) {
+
+        return;
+
+    }
+
 
     const index =
         Math.floor(
@@ -895,8 +2685,21 @@ function beloningTonen() {
         BELONINGEN[index];
 
 
-    beloning.textContent =
-        boodschap;
+    if (beloningTekst) {
+
+        beloningTekst.textContent =
+            boodschap;
+
+    } else {
+
+        beloning.textContent =
+            boodschap;
+
+    }
+
+
+    beloning.hidden =
+        false;
 
 
     beloning.classList.remove(
@@ -904,9 +2707,9 @@ function beloningTonen() {
     );
 
 
-    // Forceer een nieuwe animatie
-    // wanneer de gebruiker meerdere
-    // taken achter elkaar afvinkt.
+    /*
+     * Forceer nieuwe animatie.
+     */
 
     void beloning.offsetWidth;
 
@@ -915,10 +2718,92 @@ function beloningTonen() {
         "zichtbaar"
     );
 
+
+    /*
+     * Feedback verdwijnt niet meteen.
+     *
+     * Hij blijft zichtbaar zodat het
+     * positieve moment echt even blijft staan.
+     */
+
 }
+
+
+// ======================================
+// POSITIEVE FEEDBACK VERBERGEN
+// ======================================
+
+function beloningVerbergen() {
+
+    if (!beloning) {
+
+        return;
+
+    }
+
+
+    beloning.classList.remove(
+        "zichtbaar"
+    );
+
+
+    beloning.hidden =
+        true;
+
+}
+
+
+// ======================================
+// SERVICE WORKER
+// ======================================
+
+function serviceWorkerRegistreren() {
+
+    if (
+        "serviceWorker" in navigator
+    ) {
+
+        navigator.serviceWorker
+            .register("sw.js")
+            .then(
+                () => {
+
+                    console.log(
+                        "Anker service worker geregistreerd."
+                    );
+
+                }
+            )
+            .catch(
+                (fout) => {
+
+                    console.warn(
+                        "Service worker kon niet worden geregistreerd.",
+                        fout
+                    );
+
+                }
+            );
+
+    }
+
+}
+
+
+// ======================================
+// SERVICE WORKER STARTEN
+// ======================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        serviceWorkerRegistreren();
+
+    }
+);
 
 
 // ======================================
 // EINDE
 // ======================================
-

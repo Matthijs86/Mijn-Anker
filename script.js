@@ -96,6 +96,8 @@ let huidigScherm = "hoofdScherm";
 let huidigeActiviteit = null;
 let huidigeBlok = null;
 
+let huidigBasisNiveau = "lijst";
+
 let inlineBewerking = null;
 
 let beloningTimeout = null;
@@ -436,25 +438,77 @@ function gebeurtenissenInstellen() {
     );
 
     activiteitTerugKnop?.addEventListener(
-        "click",
-        () => {
+    "click",
+    () => {
 
-            if (huidigScherm === "activiteitScherm") {
-
-                if (huidigeBlok) {
-
-                    basisBlokOpenen(huidigeBlok);
-
-                } else {
-
-                    schermTonen("hoofdScherm");
-
-                }
-
-            }
-
+        if (huidigScherm !== "activiteitScherm") {
+            return;
         }
-    );
+
+
+        /* -----------------------------------------
+           Vanuit een activiteit terug naar de
+           lijst met activiteiten
+           ----------------------------------------- */
+
+        if (
+            huidigBasisNiveau === "detail" &&
+            huidigeBlok &&
+            huidigeActiviteit
+        ) {
+
+            const match =
+                huidigeActiviteit.match(
+                    /^basis:([^:]+):(.+)$/
+                );
+
+
+            if (match) {
+
+                const blokId =
+                    match[1];
+
+                const activiteitId =
+                    match[2];
+
+                const activiteit =
+                    basisBlokken[
+                        blokId
+                    ]?.activiteiten.find(
+                        item =>
+                            item.id === activiteitId
+                    );
+
+
+                if (activiteit) {
+
+                    huidigBasisNiveau =
+                        "lijst";
+
+                    basisBlokOpenen(
+                        blokId
+                    );
+
+                    return;
+                }
+            }
+        }
+
+
+        /* -----------------------------------------
+           Vanuit de activiteitenlijst terug naar
+           Basis
+           ----------------------------------------- */
+
+        huidigeActiviteit = null;
+        huidigeBlok = null;
+        huidigBasisNiveau = "lijst";
+
+        schermTonen(
+            "basisScherm"
+        );
+    }
+);
 
 
     document
@@ -732,8 +786,7 @@ function naarMoeilijkeDag() {
 /* =========================================================
    BASIS BLOK OPENEN
    ========================================================= */
-
-function basisBlokOpenen(blokId) {
+    function basisBlokOpenen(blokId) {
 
     const blok =
         basisBlokken[blokId];
@@ -743,6 +796,8 @@ function basisBlokOpenen(blokId) {
     huidigeBlok = blokId;
 
     huidigeActiviteit = null;
+
+    huidigBasisNiveau = "lijst";
 
     activiteitTitel.textContent =
         blok.titel;
@@ -856,6 +911,7 @@ function basisActiviteitOpenen(
     huidigeActiviteit =
         `basis:${blokId}:${activiteit.id}`;
 
+        huidigBasisNiveau = "detail";
 
     activiteitTitel.textContent =
         activiteit.tekst;

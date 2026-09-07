@@ -5,55 +5,55 @@
    ========================================================= */
 
 :root {
-    /* WARME BASIS */
-    --achtergrond: #6f8275;
-    --achtergrond-donker: #596c60;
-    --achtergrond-licht: #829486;
+    /* WARME GROENE BASIS */
+    --achtergrond: #66856f;
+    --achtergrond-donker: #506f5b;
+    --achtergrond-licht: #78977f;
 
-    /* BLOKKEN - WARM BLAUW */
-    --kaart: #6f8791;
-    --kaart-licht: #8199a2;
-    --kaart-donker: #5e7782;
+    /* WARME BLAUWE BLOKKEN */
+    --kaart: #4f7885;
+    --kaart-licht: #608b98;
+    --kaart-donker: #3f6672;
 
     /* GROEN */
-    --groen: #496f5b;
-    --groen-donker: #355744;
-    --groen-licht: #d6e1d8;
+    --groen: #3f7656;
+    --groen-donker: #2e5c42;
+    --groen-licht: #d5e6d9;
 
-    /* BLAUW */
-    --blauw: #456879;
-    --blauw-donker: #314f5e;
-    --blauw-licht: #d6e1e5;
+    /* WARM BLAUW / PETROL */
+    --blauw: #397286;
+    --blauw-donker: #2d5969;
+    --blauw-licht: #d4e4e8;
 
     /* HOUT */
-    --hout: #a97b4f;
-    --hout-licht: #c39a70;
-    --hout-donker: #795535;
-    --hout-zacht: #b58b61;
+    --hout: #ad7948;
+    --hout-licht: #c59667;
+    --hout-donker: #795333;
+    --hout-zacht: #b9895b;
 
-    /* WARME GRIJZE TEKST */
-    --tekst: #393c38;
-    --tekst-zacht: #555953;
-    --tekst-licht: #777a72;
+    /* WARM GRIJS */
+    --tekst: #3f403b;
+    --tekst-zacht: #5d6058;
+    --tekst-licht: #777970;
 
     /* WARME LICHTE VLAKKEN */
-    --warm-wit: #f1eee6;
-    --warm-wit-donker: #e4dfd4;
-    --gebroken-wit: #f7f4ed;
+    --warm-wit: #f1ece2;
+    --warm-wit-donker: #e2dace;
+    --gebroken-wit: #f8f4eb;
 
     /* ORANJE */
-    --oranje: #b87543;
-    --oranje-donker: #8f5730;
-    --oranje-licht: #ead6c2;
+    --oranje: #c1773f;
+    --oranje-donker: #95582e;
+    --oranje-licht: #ecd6c0;
 
     --wit: #ffffff;
 
     /* SCHADUWEN */
     --schaduw:
-        0 5px 14px rgba(47, 55, 49, 0.18);
+        0 5px 14px rgba(42, 58, 47, 0.20);
 
     --schaduw-groot:
-        0 9px 25px rgba(47, 55, 49, 0.24);
+        0 9px 25px rgba(42, 58, 47, 0.27);
 
     --radius: 18px;
     --radius-klein: 13px;
@@ -80,9 +80,9 @@ body {
     background:
         linear-gradient(
             145deg,
-            #718579 0%,
-            #667b6e 48%,
-            #5d7469 100%
+            #6f9278 0%,
+            #64886f 48%,
+            #587b65 100%
         );
 
     color: var(--tekst);
@@ -99,7 +99,6 @@ body {
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 }
-
 button,
 input {
     font: inherit;
@@ -488,8 +487,8 @@ input:focus-visible {
     background:
         linear-gradient(
             145deg,
-            #78939d,
-            #6c8791
+            #5f8a78,
+            #527c6d
         );
 }
 
@@ -497,11 +496,10 @@ input:focus-visible {
     background:
         linear-gradient(
             145deg,
-            #708b96,
-            #637f8a
+            #5b8290,
+            #4e7582
         );
 }
-
 
 /* =========================================================
    BLOK HEADER

@@ -2969,6 +2969,12 @@ async function firebaseMeldingenInstellen() {
               "firebase-messaging-sw.js"
     );
 
+       console.log(
+    "Firebase service worker:",
+    registratie.scope,
+    registratie.active?.scriptURL
+);
+
 
         const token =
             await getToken(

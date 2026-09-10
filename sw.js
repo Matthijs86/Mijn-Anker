@@ -3,7 +3,7 @@
 // SERVICE WORKER
 // ======================================
 
-const CACHE_NAME = "anker-v26";
+const CACHE_NAME = "anker-v27";
 
 const APP_BESTANDEN = [
     "./",

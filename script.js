@@ -2728,10 +2728,37 @@ function beloningTonen(
     subtekst
 ) {
 
+    const bemoedigendeTeksten = [
+        "Dit heb je gewoon gedaan! 💪",
+        "Goed bezig, één stap tegelijk. 🌱",
+        "Dit telt. Echt. ✨",
+        "Je hebt het gedaan! 🎉",
+        "Goed dat je even aan jezelf dacht. 💚",
+        "Kijk jou eens goed voor jezelf zorgen. 🌿",
+        "Mooi, weer een klein stukje voor jezelf. 💛",
+        "Lekker bezig! 🙌",
+        "Een kleine stap is ook een stap. 🌱",
+        "Je mag hier best trots op zijn. ⭐"
+    ];
+
+    const willekeurigeTekst =
+        bemoedigendeTeksten[
+            Math.floor(
+                Math.random() *
+                bemoedigendeTeksten.length
+            )
+        ];
+
+    hoofdtekst =
+        hoofdtekst ||
+        "YES! Goed gedaan! 🎉";
+
+    subtekst =
+        willekeurigeTekst;
+
     if (!beloning) {
         return;
     }
-
 
     if (beloningTimeout) {
 

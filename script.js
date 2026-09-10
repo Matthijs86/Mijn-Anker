@@ -7,11 +7,13 @@
 /* =========================================================
    OPSLAG
    ========================================================= */
-
 const OPSLAG_DAGSTATUS = "ankerDagstatus";
 
-const OPSLAG_SAFEFOODS =
-    "ankerSafeFoods";
+// Oude opslag blijft tijdelijk bestaan voor de eenmalige migratie
+const OPSLAG_SAFEFOODS = "ankerSafeFoods";
+
+const OPSLAG_OCHTEND_SAFEFOODS = "ankerOchtendSafeFoods";
+const OPSLAG_AVOND_SAFEFOODS = "ankerAvondSafeFoods";
 
 const OPSLAG_PRETTIGE_ACTIVITEITEN =
     "ankerPrettigeActiviteiten";
@@ -84,7 +86,9 @@ let dagStatus = {
    PERSOONLIJKE OPTIES
    ========================================================= */
 
-let safeFoods = [];
+let ochtendSafeFoods = [];
+let avondSafeFoods = [];
+
 let prettigeActiviteiten = [];
 
 
@@ -184,17 +188,29 @@ const invoerOpslaan =
     document.getElementById("invoerOpslaan");
 
 
-const moeilijkIetsGegeten =
-    document.getElementById("moeilijkIetsGegeten");
+const moeilijkOchtend =
+    document.getElementById("moeilijkOchtend");
 
-const moeilijkEtenDetails =
-    document.getElementById("moeilijkEtenDetails");
+const moeilijkOchtendDetails =
+    document.getElementById("moeilijkOchtendDetails");
 
-const moeilijkEtenOpties =
-    document.getElementById("moeilijkEtenOpties");
+const moeilijkOchtendOpties =
+    document.getElementById("moeilijkOchtendOpties");
 
-const etenOptieToevoegen =
-    document.getElementById("etenOptieToevoegen");
+const ochtendOptieToevoegen =
+    document.getElementById("ochtendOptieToevoegen");
+
+const moeilijkAvond =
+    document.getElementById("moeilijkAvond");
+
+const moeilijkAvondDetails =
+    document.getElementById("moeilijkAvondDetails");
+
+const moeilijkAvondOpties =
+    document.getElementById("moeilijkAvondOpties");
+
+const avondOptieToevoegen =
+    document.getElementById("avondOptieToevoegen");
 
 
 const moeilijkIetsPrettigs =
@@ -551,26 +567,37 @@ function gebeurtenissenInstellen() {
         );
 
 
-    moeilijkIetsGegeten?.addEventListener(
-        "click",
-        () => {
+   moeilijkOchtend?.addEventListener(
+    "click",
+    () => {
+        persoonlijkeSectieOpenen(
+            moeilijkOchtendDetails,
+            moeilijkOchtend,
+            "ochtend"
+        );
+    }
+);
 
-            persoonlijkeSectieOpenen(
-                moeilijkEtenDetails,
-                moeilijkIetsGegeten
-            );
-
-        }
-    );
+moeilijkAvond?.addEventListener(
+    "click",
+    () => {
+        persoonlijkeSectieOpenen(
+            moeilijkAvondDetails,
+            moeilijkAvond,
+            "avond"
+        );
+    }
+);
 
 
     moeilijkIetsPrettigs?.addEventListener(
         "click",
         () => {
 
-            persoonlijkeSectieOpenen(
-                moeilijkPrettigDetails,
-                moeilijkIetsPrettigs
+          persoonlijkeSectieOpenen(
+           moeilijkPrettigDetails,
+            moeilijkIetsPrettigs,
+              "prettig"
             );
 
         }
@@ -626,31 +653,6 @@ function gebeurtenissenInstellen() {
                 );
 
             }
-
-        }
-    );
-
-
-    etenOptieToevoegen?.addEventListener(
-        "click",
-        event => {
-
-            const knop =
-                event.target.closest(
-                    ".persoonlijke-toevoegen-knop"
-                );
-
-            if (!knop) return;
-
-            const invoer =
-                etenOptieToevoegen.querySelector(
-                    ".persoonlijke-toevoegen-invoer"
-                );
-
-            persoonlijkeOptieToevoegen(
-                "eten",
-                invoer
-            );
 
         }
     );
@@ -745,20 +747,85 @@ function naarBasis() {
 }
 
 
+function moeilijkeOptiesWeergeven() {
+    persoonlijkeOptiesWeergeven("ochtend");
+    persoonlijkeOptiesWeergeven("avond");
+    persoonlijkeOptiesWeergeven("prettig");
+}
+
+function persoonlijkeOptiesWeergeven(
+    categorie
+) {
+    let lijst;
+    let toevoegContainer;
+    let opties;
+
+    if (categorie === "ochtend") {
+
+        lijst = moeilijkOchtendOpties;
+        toevoegContainer = ochtendOptieToevoegen;
+        opties = ochtendSafeFoods;
+
+    } else if (categorie === "avond") {
+
+        lijst = moeilijkAvondOpties;
+        toevoegContainer = avondOptieToevoegen;
+        opties = avondSafeFoods;
+
+    } else {
+
+        lijst = moeilijkPrettigOpties;
+        toevoegContainer = prettigOptieToevoegen;
+        opties = prettigeActiviteiten;
+    }
+
+    if (!lijst || !toevoegContainer) return;
+
+    lijst.innerHTML = "";
+
+    opties.forEach(option => {
+
+        const rij =
+            persoonlijkeOptieKnop(
+                option,
+                categorie
+            );
+
+        lijst.appendChild(rij);
+    });
+
+    persoonlijkeToevoegRijMaken(
+        categorie,
+        toevoegContainer
+    );
+}
+
+
 function naarMoeilijkeDag() {
 
-    if (
-        moeilijkEtenDetails &&
-        !moeilijkEtenDetails.hidden
-    ) {
+ if (
+    moeilijkOchtendDetails &&
+    !moeilijkOchtendDetails.hidden
+) {
+    moeilijkOchtendDetails.hidden = true;
 
-        moeilijkEtenDetails.hidden = true;
+    persoonlijkePijlBijwerken(
+        moeilijkOchtend,
+        false
+    );
+}
 
-        persoonlijkePijlBijwerken(
-            moeilijkIetsGegeten,
-            false
-        );
-    }
+if (
+    moeilijkAvondDetails &&
+    !moeilijkAvondDetails.hidden
+) {
+    moeilijkAvondDetails.hidden = true;
+
+    persoonlijkePijlBijwerken(
+        moeilijkAvond,
+        false
+    );
+}
 
 
     if (
@@ -1455,17 +1522,23 @@ function moeilijkeStatusBijwerken() {
         );
 
 
-    if (
-        moeilijkIetsGegeten
-    ) {
+   if (moeilijkOchtend) {
+    moeilijkOchtend.classList.toggle(
+        "afgerond",
+        !!dagStatus.afgerond[
+            "moeilijk-ochtend"
+        ]
+    );
+}
 
-        moeilijkIetsGegeten.classList.toggle(
-            "afgerond",
-            !!dagStatus.afgerond[
-                "moeilijk-iets-gegeten"
-            ]
-        );
-    }
+if (moeilijkAvond) {
+    moeilijkAvond.classList.toggle(
+        "afgerond",
+        !!dagStatus.afgerond[
+            "moeilijk-avond"
+        ]
+    );
+}
 
 
     if (
@@ -1488,144 +1561,25 @@ function moeilijkeStatusBijwerken() {
 
 function persoonlijkeSectieOpenen(
     details,
-    trigger
+    trigger,
+    categorie
 ) {
+    if (!details || !trigger) return;
 
-    if (!details || !trigger) {
-        return;
-    }
+    const openen = details.hidden;
 
-
-    const openen =
-        details.hidden;
-
-
-    details.hidden =
-        !openen;
-
+    details.hidden = !openen;
 
     persoonlijkePijlBijwerken(
         trigger,
         openen
     );
 
-
     if (openen) {
-
-        if (
-            trigger ===
-            moeilijkIetsGegeten
-        ) {
-
-            persoonlijkeOptiesWeergeven(
-                "eten"
-            );
-
-        } else if (
-            trigger ===
-            moeilijkIetsPrettigs
-        ) {
-
-            persoonlijkeOptiesWeergeven(
-                "prettig"
-            );
-
-        }
-    }
-}
-
-
-function persoonlijkePijlBijwerken(
-    trigger,
-    open
-) {
-
-    const pijl =
-        trigger.querySelector(
-            ".persoonlijke-trigger-pijl"
+        persoonlijkeOptiesWeergeven(
+            categorie
         );
-
-    if (!pijl) return;
-
-    pijl.textContent =
-        open ? "↑" : "↓";
-
-
-    trigger.setAttribute(
-        "aria-expanded",
-        String(open)
-    );
-}
-
-
-/* =========================================================
-   PERSOONLIJKE OPTIES WEERGEVEN
-   ========================================================= */
-
-function moeilijkeOptiesWeergeven() {
-
-    persoonlijkeOptiesWeergeven(
-        "eten"
-    );
-
-    persoonlijkeOptiesWeergeven(
-        "prettig"
-    );
-}
-
-
-function persoonlijkeOptiesWeergeven(
-    categorie
-) {
-
-    const isEten =
-        categorie === "eten";
-
-
-    const lijst =
-        isEten
-            ? moeilijkEtenOpties
-            : moeilijkPrettigOpties;
-
-
-    const toevoegContainer =
-        isEten
-            ? etenOptieToevoegen
-            : prettigOptieToevoegen;
-
-
-    const opties =
-        isEten
-            ? safeFoods
-            : prettigeActiviteiten;
-
-
-    if (!lijst || !toevoegContainer) {
-        return;
     }
-
-
-    lijst.innerHTML = "";
-
-
-    opties.forEach(
-        optie => {
-
-            const rij =
-                persoonlijkeOptieKnop(
-                    optie,
-                    categorie
-                );
-
-            lijst.appendChild(rij);
-        }
-    );
-
-
-    persoonlijkeToevoegRijMaken(
-        categorie,
-        toevoegContainer
-    );
 }
 
 
@@ -1781,29 +1735,36 @@ function persoonlijkeOptieKlik(
         true;
 
 
-    if (categorie === "eten") {
+    if (
+    categorie === "ochtend" ||
+    categorie === "avond"
+) {
 
-        dagStatus.afgerond[
-            "moeilijk-iets-gegeten"
-        ] = true;
+    const ouderSleutel =
+        categorie === "ochtend"
+            ? "moeilijk-ochtend"
+            : "moeilijk-avond";
 
-        beloningTonen(
-            "YES! Goed gedaan! 🎉",
-            `${optie.tekst} gegeten. 🍽️`
-        );
+    dagStatus.afgerond[
+        ouderSleutel
+    ] = true;
 
-    } else {
+    beloningTonen(
+        "YES! Goed gedaan! 🎉",
+        `${optie.tekst} gegeten. 🍽️`
+    );
 
-        dagStatus.afgerond[
-            "moeilijk-iets-prettigs"
-        ] = true;
+} else {
 
-        beloningTonen(
-            "YES! Goed gedaan! 🎉",
-            `${optie.tekst}! ❤️`
-        );
-    }
+    dagStatus.afgerond[
+        "moeilijk-iets-prettigs"
+    ] = true;
 
+    beloningTonen(
+        "YES! Goed gedaan! 🎉",
+        `${optie.tekst}! ❤️`
+    );
+}
 
     dagStatusOpslaan();
 
@@ -1844,27 +1805,28 @@ function persoonlijkeToevoegRijMaken(
 
     invoer.autocomplete = "off";
 
+    if (
+    categorie === "ochtend" ||
+    categorie === "avond"
+) {
+    invoer.placeholder =
+        "Nieuwe Safe Food...";
 
-    if (categorie === "eten") {
+    invoer.setAttribute(
+        "aria-label",
+        "Nieuwe Safe Food"
+    );
 
-        invoer.placeholder =
-            "Nieuwe Safe Food...";
+} else {
 
-        invoer.setAttribute(
-            "aria-label",
-            "Nieuwe Safe Food"
-        );
+    invoer.placeholder =
+        "Nieuwe leuke activiteit...";
 
-    } else {
-
-        invoer.placeholder =
-            "Nieuwe leuke activiteit...";
-
-        invoer.setAttribute(
-            "aria-label",
-            "Nieuwe leuke activiteit"
-        );
-    }
+    invoer.setAttribute(
+        "aria-label",
+        "Nieuwe leuke activiteit"
+    );
+}
 
 
     const knop =
@@ -1947,10 +1909,17 @@ function persoonlijkeOptieToevoegen(
     }
 
 
-    const lijst =
-        categorie === "eten"
-            ? safeFoods
-            : prettigeActiviteiten;
+  let lijst;
+
+if (categorie === "ochtend") {
+    lijst = ochtendSafeFoods;
+
+} else if (categorie === "avond") {
+    lijst = avondSafeFoods;
+
+} else {
+    lijst = prettigeActiviteiten;
+}
 
 
     const nieuweOptie = {
@@ -1962,10 +1931,11 @@ function persoonlijkeOptieToevoegen(
 
         tekst,
 
-        icoon:
-            categorie === "eten"
-                ? "🍽️"
-                : "❤️"
+     icoon:
+    categorie === "ochtend" ||
+    categorie === "avond"
+        ? "🍽️"
+        : "❤️" 
     };
 
 
@@ -1985,14 +1955,27 @@ function persoonlijkeOptieToevoegen(
     );
 
 
+   if (categorie === "ochtend") {
+
     invoer =
-        categorie === "eten"
-            ? etenOptieToevoegen.querySelector(
-                ".persoonlijke-toevoegen-invoer"
-            )
-            : prettigOptieToevoegen.querySelector(
-                ".persoonlijke-toevoegen-invoer"
-            );
+        ochtendOptieToevoegen.querySelector(
+            ".persoonlijke-toevoegen-invoer"
+        );
+
+} else if (categorie === "avond") {
+
+    invoer =
+        avondOptieToevoegen.querySelector(
+            ".persoonlijke-toevoegen-invoer"
+        );
+
+} else {
+
+    invoer =
+        prettigOptieToevoegen.querySelector(
+            ".persoonlijke-toevoegen-invoer"
+        );
+} 
 
 
     invoer?.focus();
@@ -2040,10 +2023,17 @@ function persoonlijkeOptieBewerkenInline(
     optie
 ) {
 
-    const lijst =
-        categorie === "eten"
-            ? moeilijkEtenOpties
-            : moeilijkPrettigOpties;
+  let lijst;
+
+if (categorie === "ochtend") {
+    lijst = moeilijkOchtendOpties;
+
+} else if (categorie === "avond") {
+    lijst = moeilijkAvondOpties;
+
+} else {
+    lijst = moeilijkPrettigOpties;
+}
 
 
     const rijen =
@@ -2053,25 +2043,21 @@ function persoonlijkeOptieBewerkenInline(
 
 
     const index =
-        Array.from(
-            categorie === "eten"
-                ? moeilijkEtenOpties.children
-                : moeilijkPrettigOpties.children
-        ).findIndex(
-            rij => {
+    rijen.findIndex(
+        rij => {
 
-                const tekst =
-                    rij.querySelector(
-                        ".persoonlijke-optie-tekst"
-                    );
-
-                return (
-                    tekst &&
-                    tekst.textContent ===
-                    optie.tekst
+            const tekst =
+                rij.querySelector(
+                    ".persoonlijke-optie-tekst"
                 );
-            }
-        );
+
+            return (
+                tekst &&
+                tekst.textContent ===
+                optie.tekst
+            );
+        }
+    );
 
 
     if (index < 0) {
@@ -2389,10 +2375,17 @@ function persoonlijkeOptieVerwijderen(
     optie
 ) {
 
-    const lijst =
-        categorie === "eten"
-            ? safeFoods
-            : prettigeActiviteiten;
+   let lijst;
+
+if (categorie === "ochtend") {
+    lijst = ochtendSafeFoods;
+
+} else if (categorie === "avond") {
+    lijst = avondSafeFoods;
+
+} else {
+    lijst = prettigeActiviteiten;
+} 
 
 
     const index =
@@ -2440,7 +2433,21 @@ function persoonlijkeOptiesLaden() {
 
     try {
 
-        const opgeslagenSafeFoods =
+        const opgeslagenOchtend =
+            JSON.parse(
+                localStorage.getItem(
+                    OPSLAG_OCHTEND_SAFEFOODS
+                )
+            );
+
+        const opgeslagenAvond =
+            JSON.parse(
+                localStorage.getItem(
+                    OPSLAG_AVOND_SAFEFOODS
+                )
+            );
+
+        const oudeSafeFoods =
             JSON.parse(
                 localStorage.getItem(
                     OPSLAG_SAFEFOODS
@@ -2448,20 +2455,55 @@ function persoonlijkeOptiesLaden() {
             );
 
 
+        /*
+         * Ochtend:
+         * nieuwe opslag gebruiken als die bestaat.
+         * Anders oude Safe Foods eenmalig overnemen.
+         */
+
         if (
             Array.isArray(
-                opgeslagenSafeFoods
+                opgeslagenOchtend
             )
         ) {
 
-            safeFoods =
-                opgeslagenSafeFoods;
+            ochtendSafeFoods =
+                opgeslagenOchtend;
+
+        } else if (
+            Array.isArray(
+                oudeSafeFoods
+            )
+        ) {
+
+            ochtendSafeFoods =
+                oudeSafeFoods;
 
         } else {
 
-            safeFoods =
-                [...STANDAARD_SAFEFOODS];
+            ochtendSafeFoods =
+                [
+                    ...STANDAARD_SAFEFOODS
+                ];
+        }
 
+
+        /*
+         * Avond begint met een eigen lege lijst.
+         */
+
+        if (
+            Array.isArray(
+                opgeslagenAvond
+            )
+        ) {
+
+            avondSafeFoods =
+                opgeslagenAvond;
+
+        } else {
+
+            avondSafeFoods = [];
         }
 
 
@@ -2488,11 +2530,11 @@ function persoonlijkeOptiesLaden() {
                 [
                     ...STANDAARD_PRETTIGE_ACTIVITEITEN
                 ];
-
         }
 
 
         persoonlijkeOptiesOpslaan();
+
 
     } catch (fout) {
 
@@ -2501,10 +2543,12 @@ function persoonlijkeOptiesLaden() {
             fout
         );
 
-        safeFoods =
+        ochtendSafeFoods =
             [
                 ...STANDAARD_SAFEFOODS
             ];
+
+        avondSafeFoods = [];
 
         prettigeActiviteiten =
             [
@@ -2519,9 +2563,17 @@ function persoonlijkeOptiesOpslaan() {
     try {
 
         localStorage.setItem(
-            OPSLAG_SAFEFOODS,
+            OPSLAG_OCHTEND_SAFEFOODS,
             JSON.stringify(
-                safeFoods
+                ochtendSafeFoods
+            )
+        );
+
+
+        localStorage.setItem(
+            OPSLAG_AVOND_SAFEFOODS,
+            JSON.stringify(
+                avondSafeFoods
             )
         );
 
@@ -2532,6 +2584,7 @@ function persoonlijkeOptiesOpslaan() {
                 prettigeActiviteiten
             )
         );
+
 
     } catch (fout) {
 

@@ -2937,6 +2937,8 @@ function serviceWorkerRegistreren() {
 
 async function firebaseMeldingenInstellen() {
 
+    console.log("NIEUWE FIREBASE FUNCTIE");
+
     if (
         !("Notification" in window)
     ) {

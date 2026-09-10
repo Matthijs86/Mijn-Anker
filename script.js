@@ -17,7 +17,39 @@ const OPSLAG_AVOND_SAFEFOODS = "ankerAvondSafeFoods";
 
 const OPSLAG_PRETTIGE_ACTIVITEITEN =
     "ankerPrettigeActiviteiten";
+/* =========================================================
+   FIREBASE CLOUD MESSAGING
+   ========================================================= */
 
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getMessaging,
+    getToken
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-messaging.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBTneLdtJfL20g14RBj94Uk_FMjWxNeokI",
+    authDomain: "anker-b857d.firebaseapp.com",
+    projectId: "anker-b857d",
+    storageBucket: "anker-b857d.firebasestorage.app",
+    messagingSenderId: "347607750286",
+    appId: "1:347607750286:web:c6df43738850dfd81e1bdf"
+};
+
+
+const firebaseApp =
+    initializeApp(
+        firebaseConfig
+    );
+
+const messaging =
+    getMessaging(
+        firebaseApp
+    );
 
 /* =========================================================
    STANDAARD PERSOONLIJKE OPTIES
@@ -421,6 +453,8 @@ document.addEventListener(
         schermTonen("hoofdScherm");
 
         serviceWorkerRegistreren();
+
+        firebaseMeldingenInstellen();
 
         gebeurtenissenInstellen();
     }
@@ -2892,6 +2926,71 @@ function serviceWorkerRegistreren() {
                     );
 
             }
+        );
+
+    }
+}
+
+/* =========================================================
+   FIREBASE PUSHMELDINGEN INSTELLEN
+   ========================================================= */
+
+async function firebaseMeldingenInstellen() {
+
+    if (
+        !("Notification" in window)
+    ) {
+        return;
+    }
+
+
+    if (
+        !("serviceWorker" in navigator)
+    ) {
+        return;
+    }
+
+
+    const toestemming =
+        await Notification.requestPermission();
+
+
+    if (
+        toestemming !== "granted"
+    ) {
+        return;
+    }
+
+
+    try {
+
+        const registratie =
+            await navigator.serviceWorker.ready;
+
+
+        const token =
+            await getToken(
+                messaging,
+                {
+                    vapidKey:
+                        "BAx_nTX8DZt1hqI36xOrtke_ABCWqeTDulTGhWs_d3cSfyZeJsQ1TJebPAamIxUi1fuI2Z_qiD4Fz48_mv5Xkuw",
+
+                    serviceWorkerRegistration:
+                        registratie
+                }
+            );
+
+
+        console.log(
+            "Anker push-token:",
+            token
+        );
+
+    } catch (fout) {
+
+        console.warn(
+            "Firebase meldingen konden niet worden ingesteld.",
+            fout
         );
 
     }

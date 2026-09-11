@@ -27,7 +27,8 @@ import {
 
 import {
     getMessaging,
-    getToken
+    getToken,
+    deleteToken
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-messaging.js";
 
 
@@ -2939,6 +2940,41 @@ async function firebaseMeldingenInstellen() {
 
     console.log("NIEUWE FIREBASE FUNCTIE");
 
+
+    const isAnkerApp =
+        window.matchMedia("(display-mode: standalone)").matches ||
+        window.navigator.standalone === true;
+
+
+    // Gewone Chrome-webpagina:
+    // bestaande Firebase-token verwijderen
+    if (!isAnkerApp) {
+
+        try {
+
+            await deleteToken(
+                messaging
+            );
+
+            console.log(
+                "Firebase push voor gewone webpagina verwijderd."
+            );
+
+        } catch (fout) {
+
+            console.warn(
+                "Firebase-token kon niet worden verwijderd.",
+                fout
+            );
+
+        }
+
+        return;
+    }
+
+
+    // Alleen de geïnstalleerde Anker-app gaat hieronder verder
+
     if (
         !("Notification" in window)
     ) {
@@ -2966,10 +3002,10 @@ async function firebaseMeldingenInstellen() {
 
     try {
 
-   const registratie =
-    await navigator.serviceWorker.register(
-        "./sw.js"
-    );
+        const registratie =
+            await navigator.serviceWorker.register(
+                "./sw.js"
+            );
 
 
         const token =

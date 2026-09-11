@@ -2966,33 +2966,11 @@ async function firebaseMeldingenInstellen() {
 
     try {
 
-      const registratie =
+   const registratie =
     await navigator.serviceWorker.register(
         "./sw.js"
     );
 
-       await registratie.showNotification(
-    "Anker testmelding",
-    {
-        body: "Als je dit ziet, werken Android + Chrome + de Anker service worker.",
-        icon: "./anker-icon-192x192.png"
-    }
-);
-       alert(
-    "Actieve service worker:\n\n" +
-    (
-        registratie.active
-            ? registratie.active.scriptURL
-            : "GEEN ACTIEVE SERVICE WORKER"
-    )
-);
-       if (registratie.active) {
-
-    registratie.active.postMessage(
-        "ANKER_TEST"
-    );
-
-}
 
         const token =
             await getToken(

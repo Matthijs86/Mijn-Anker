@@ -2971,6 +2971,14 @@ async function firebaseMeldingenInstellen() {
         "./sw.js"
     );
 
+       await registratie.showNotification(
+    "Anker testmelding",
+    {
+        body: "Als je dit ziet, werken Android + Chrome + de Anker service worker.",
+        icon: "./anker-icon-192x192.png"
+    }
+);
+
         const token =
             await getToken(
                 messaging,

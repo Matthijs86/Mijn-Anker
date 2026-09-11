@@ -2978,6 +2978,14 @@ async function firebaseMeldingenInstellen() {
         icon: "./anker-icon-192x192.png"
     }
 );
+       alert(
+    "Actieve service worker:\n\n" +
+    (
+        registratie.active
+            ? registratie.active.scriptURL
+            : "GEEN ACTIEVE SERVICE WORKER"
+    )
+);
 
         const token =
             await getToken(

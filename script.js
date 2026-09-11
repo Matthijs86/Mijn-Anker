@@ -2986,6 +2986,13 @@ async function firebaseMeldingenInstellen() {
             : "GEEN ACTIEVE SERVICE WORKER"
     )
 );
+       if (registratie.active) {
+
+    registratie.active.postMessage(
+        "ANKER_TEST"
+    );
+
+}
 
         const token =
             await getToken(

@@ -2984,12 +2984,6 @@ async function firebaseMeldingenInstellen() {
                 }
             );
 
-
-        console.log(
-    "Anker push-token:",
-    token
-);
-
     } catch (fout) {
 
         console.warn(

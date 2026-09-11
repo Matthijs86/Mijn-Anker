@@ -28,7 +28,6 @@ import {
 import {
     getMessaging,
     getToken,
-    deleteToken
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-messaging.js";
 
 
@@ -2947,31 +2946,10 @@ async function firebaseMeldingenInstellen() {
 
 
     // Gewone Chrome-webpagina:
-    // bestaande Firebase-token verwijderen
-    if (!isAnkerApp) {
-
-        try {
-
-            await deleteToken(
-                messaging
-            );
-
-            console.log(
-                "Firebase push voor gewone webpagina verwijderd."
-            );
-
-        } catch (fout) {
-
-            console.warn(
-                "Firebase-token kon niet worden verwijderd.",
-                fout
-            );
-
-        }
-
-        return;
-    }
-
+// geen Firebase pushmeldingen instellen
+if (!isAnkerApp) {
+    return;
+}
 
     // Alleen de geïnstalleerde Anker-app gaat hieronder verder
 

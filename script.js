@@ -2966,9 +2966,9 @@ async function firebaseMeldingenInstellen() {
 
     try {
 
-     const registratie =
+      const registratie =
     await navigator.serviceWorker.register(
-        "./firebase-messaging-sw.js"
+        "./sw.js"
     );
 
         const token =

@@ -3,7 +3,7 @@
 // SERVICE WORKER
 // ======================================
 
-const CACHE_NAME = "anker-v36";
+const CACHE_NAME = "anker-v37";
 
 const APP_BESTANDEN = [
     "./",
@@ -191,6 +191,25 @@ self.addEventListener(
                 })
 
         );
+
+        self.addEventListener(
+    "message",
+    (event) => {
+
+        if (event.data === "ANKER_TEST") {
+
+            self.registration.showNotification(
+                "Anker service-worker test",
+                {
+                    body: "De Anker service worker kan meldingen tonen.",
+                    icon: "./anker-icon-192x192.png"
+                }
+            );
+
+        }
+
+    }
+);
 
     }
 );

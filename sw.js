@@ -3,7 +3,7 @@
 // SERVICE WORKER
 // ======================================
 
-const CACHE_NAME = "anker-v40";
+const CACHE_NAME = "anker-v41";
 
 const APP_BESTANDEN = [
     "./",
@@ -34,7 +34,7 @@ importScripts(
 // ======================================
 
 firebase.initializeApp({
-    apiKey: "AIzaSyBTneLdtJfL20g14RBj94Uk_FMjNeokI",
+    apiKey: "AIzaSyBTneLdtJf20g14RBJ94Uk_FMjNeokI",
     authDomain: "anker-b857d.firebaseapp.com",
     projectId: "anker-b857d",
     storageBucket: "anker-b857d.firebasestorage.app",
@@ -171,8 +171,7 @@ self.addEventListener(
 
         }
 
-
-        event.respondWith(
+                event.respondWith(
 
             caches.match(event.request)
                 .then((response) => {
@@ -192,4 +191,5 @@ self.addEventListener(
 
         );
 
-    
+    }
+);

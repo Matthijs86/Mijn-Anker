@@ -3,7 +3,7 @@
 // SERVICE WORKER
 // ======================================
 
-const CACHE_NAME = "anker-v45";
+const CACHE_NAME = "anker-v46";
 
 const APP_BESTANDEN = [
     "./",
@@ -34,7 +34,7 @@ importScripts(
 // ======================================
 
 firebase.initializeApp({
-    apiKey: "AIzaSyBTneLdtJf20g14RBJ94Uk_FMjNeokI",
+    apiKey: "AIzaSyBTneLdtJfL20g14RBj94Uk_FMjWxNeokI",
     authDomain: "anker-b857d.firebaseapp.com",
     projectId: "anker-b857d",
     storageBucket: "anker-b857d.firebasestorage.app",

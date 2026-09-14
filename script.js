@@ -2998,6 +2998,8 @@ if (!isAnkerApp) {
                 }
             );
 
+       console.log("ANKER FCM TOKEN:", token);
+
     } catch (fout) {
 
         console.warn(

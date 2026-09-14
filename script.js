@@ -2981,10 +2981,8 @@ if (!isAnkerApp) {
 
     try {
 
-        const registratie =
-            await navigator.serviceWorker.register(
-                "./sw.js"
-            );
+      const registratie =
+    await navigator.serviceWorker.ready;
 
 
         const token =

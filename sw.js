@@ -3,7 +3,7 @@
 // SERVICE WORKER
 // ======================================
 
-const CACHE_NAME = "anker-v48";
+const CACHE_NAME = "anker-v49";
 
 const APP_BESTANDEN = [
     "./",
@@ -155,23 +155,6 @@ self.addEventListener(
 // ======================================
 // FETCH
 // ======================================
-self.addEventListener(
-    "push",
-    (event) => {
-
-        event.waitUntil(
-            self.registration.showNotification(
-                "Anker push test",
-                {
-                    body: "Als je dit ziet, werkt mobiele push naar Anker.",
-                    icon: "./anker-icon-192x192.png",
-                    badge: "./anker-icon-192x192.png"
-                }
-            )
-        );
-
-    }
-);
 self.addEventListener(
     "fetch",
     (event) => {

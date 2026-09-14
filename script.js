@@ -27,7 +27,9 @@ import {
 
 import {
     getMessaging,
-    getToken
+    getToken,
+    register,
+    onRegistered
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-messaging.js";
 
 
@@ -2985,19 +2987,29 @@ if (!isAnkerApp) {
     await navigator.serviceWorker.ready;
 
 
-        const token =
-            await getToken(
-                messaging,
-                {
-                    vapidKey:
-                        "BAx_nTX8DZt1hqI36xOrtke_ABCWqeTDulTGhWs_d3cSfyZeJsQ1TJebPAamIxUi1fuI2Z_qiD4Fz48_mv5Xkuw",
+      onRegistered(
+    messaging,
+    (installationId) => {
 
-                    serviceWorkerRegistration:
-                        registratie
-                }
-            );
+        console.log(
+            "ANKER FIREBASE INSTALLATION ID:",
+            installationId
+        );
 
-      alert("Anker FCM token ontvangen:\n\n" + (token || "GEEN TOKEN"));
+    }
+);
+
+await register(
+    messaging,
+    {
+        vapidKey:
+            "BAx_nTX8DZt1hqI36xOrtke_ABCWqeTDulTGhWs_d3cSfyZeJsQ1TJebPAamIxUi1fuI2Z_qiD4Fz48_mv5Xkuw",
+
+        serviceWorkerRegistration:
+            registratie
+    }
+);
+
 
     } catch (fout) {
 

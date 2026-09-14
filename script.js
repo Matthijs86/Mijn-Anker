@@ -27,8 +27,7 @@ import {
 
 import {
     getMessaging,
-    register,
-    onRegistered
+    getToken
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-messaging.js";
 
 

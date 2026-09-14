@@ -2999,7 +2999,7 @@ if (!isAnkerApp) {
                 }
             );
 
-       alert("Anker FCM token ontvangen:\n\n" + (token ? token.substring(0, 8) + "..." : "GEEN TOKEN"));
+      alert("Anker FCM token ontvangen:\n\n" + (token || "GEEN TOKEN"));
 
     } catch (fout) {
 

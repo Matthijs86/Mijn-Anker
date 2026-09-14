@@ -3,7 +3,7 @@
 // SERVICE WORKER
 // ======================================
 
-const CACHE_NAME = "anker-v46";
+const CACHE_NAME = "anker-v47";
 
 const APP_BESTANDEN = [
     "./",
@@ -57,6 +57,8 @@ messaging.onBackgroundMessage(
         const titel =
             payload.notification?.title ||
             "Anker";
+
+        console.log("ANKER FCM ACHTERGRONDMELDING ONTVANGEN", payload);
 
 
         const opties = {

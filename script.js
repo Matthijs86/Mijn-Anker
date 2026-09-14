@@ -2943,6 +2943,7 @@ async function firebaseMeldingenInstellen() {
     const isAnkerApp =
         window.matchMedia("(display-mode: standalone)").matches ||
         window.navigator.standalone === true;
+   console.log("ANKER APP MODUS:", isAnkerApp);
 
 
     // Gewone Chrome-webpagina:
